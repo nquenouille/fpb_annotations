@@ -1,0 +1,27 @@
+<collection xmlns="http://exist.sourceforge.net/NS/exist" name="/db/apps/annotations/resources/odd" version="1" owner="admin" group="tei" mode="755" created="2024-05-17T14:05:40.607+02:00">
+    <acl entries="0" version="1"/>
+    <resource type="XMLResource" name="configuration.xml" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:40.609+02:00" modified="2024-05-17T14:05:40.609+02:00" filename="configuration.xml" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="docx.odd" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:40.611+02:00" modified="2024-05-17T14:05:40.611+02:00" filename="docx.odd" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="teipublisher_odds.xsd" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:40.631+02:00" modified="2024-05-17T14:05:40.631+02:00" filename="teipublisher_odds.xsd" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="annotations.odd" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:40.97+02:00" modified="2024-12-10T23:10:33.078+01:00" filename="annotations.odd" mimetype="text/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="teipublisher.odd" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:40.991+02:00" modified="2024-12-17T20:27:41.653+01:00" filename="teipublisher.odd" mimetype="text/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="FPB.odd" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:41.041+02:00" modified="2024-12-18T10:58:51.225+01:00" filename="FPB.odd" mimetype="text/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="annotations_customization.css" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:40.965+02:00" modified="2024-10-18T14:47:55.263+02:00" filename="annotations_customization.css" mimetype="text/css">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="fpb.css" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:40.985+02:00" modified="2024-11-13T15:58:36.519+01:00" filename="fpb.css" mimetype="text/css">
+        <acl entries="0" version="1"/>
+    </resource>
+</collection>

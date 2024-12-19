@@ -1,0 +1,225 @@
+<collection xmlns="http://exist.sourceforge.net/NS/exist" name="/db/apps/annotations/resources/fonts" version="1" owner="admin" group="tei" mode="755" created="2024-05-17T14:05:38.553+02:00">
+    <acl entries="0" version="1"/>
+    <resource type="XMLResource" name="Junicode-Bold.svg" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.66+02:00" modified="2024-05-17T14:05:38.66+02:00" filename="Junicode-Bold.svg" mimetype="image/svg+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="Junicode.svg" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.875+02:00" modified="2024-05-17T14:05:38.875+02:00" filename="Junicode.svg" mimetype="image/svg+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="open-sans-v40-latin-ext-300.svg" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.433+02:00" modified="2024-05-17T14:05:39.433+02:00" filename="open-sans-v40-latin-ext-300.svg" mimetype="image/svg+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="ubuntu-v20-latin-ext-300italic.svg" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.466+02:00" modified="2024-05-17T14:05:39.466+02:00" filename="ubuntu-v20-latin-ext-300italic.svg" mimetype="image/svg+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="open-sans-v40-latin-ext-regular.svg" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.486+02:00" modified="2024-05-17T14:05:39.486+02:00" filename="open-sans-v40-latin-ext-regular.svg" mimetype="image/svg+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="open-sans-v40-latin-ext-italic.svg" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.566+02:00" modified="2024-05-17T14:05:39.566+02:00" filename="open-sans-v40-latin-ext-italic.svg" mimetype="image/svg+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="roboto-v30-latin-ext_latin-300italic.svg" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.586+02:00" modified="2024-05-17T14:05:39.586+02:00" filename="roboto-v30-latin-ext_latin-300italic.svg" mimetype="image/svg+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="ubuntu-v20-latin-ext-300.svg" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.638+02:00" modified="2024-05-17T14:05:39.638+02:00" filename="ubuntu-v20-latin-ext-300.svg" mimetype="image/svg+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="ubuntu-v20-latin-ext-regular.svg" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.66+02:00" modified="2024-05-17T14:05:39.66+02:00" filename="ubuntu-v20-latin-ext-regular.svg" mimetype="image/svg+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="roboto-v30-latin-ext_latin-300.svg" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.726+02:00" modified="2024-05-17T14:05:39.725+02:00" filename="roboto-v30-latin-ext_latin-300.svg" mimetype="image/svg+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="oswald-v49-latin-ext_latin-regular.svg" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.814+02:00" modified="2024-05-17T14:05:39.814+02:00" filename="oswald-v49-latin-ext_latin-regular.svg" mimetype="image/svg+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="Junicode-BoldItalic.svg" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.848+02:00" modified="2024-05-17T14:05:39.848+02:00" filename="Junicode-BoldItalic.svg" mimetype="image/svg+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="Junicode-Italic.svg" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:40.004+02:00" modified="2024-05-17T14:05:40.004+02:00" filename="Junicode-Italic.svg" mimetype="image/svg+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="ubuntu-v20-latin-ext-italic.svg" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:40.462+02:00" modified="2024-05-17T14:05:40.462+02:00" filename="ubuntu-v20-latin-ext-italic.svg" mimetype="image/svg+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="roboto-v30-latin-ext_latin-italic.svg" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:40.489+02:00" modified="2024-05-17T14:05:40.488+02:00" filename="roboto-v30-latin-ext_latin-italic.svg" mimetype="image/svg+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="open-sans-v40-latin-ext-300italic.svg" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:40.512+02:00" modified="2024-05-17T14:05:40.512+02:00" filename="open-sans-v40-latin-ext-300italic.svg" mimetype="image/svg+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="roboto-v30-latin-ext_latin-regular.svg" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:40.546+02:00" modified="2024-05-17T14:05:40.546+02:00" filename="roboto-v30-latin-ext_latin-regular.svg" mimetype="image/svg+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="font.css" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.557+02:00" modified="2024-05-17T14:05:38.557+02:00" filename="font.css" mimetype="text/css">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="Junicode.eot" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.561+02:00" modified="2024-05-17T14:05:38.561+02:00" filename="Junicode.eot" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="open-sans-v40-latin-ext-300.woff" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.589+02:00" modified="2024-05-17T14:05:38.589+02:00" filename="open-sans-v40-latin-ext-300.woff" mimetype="application/font-woff">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="Junicode-Italic.ttf" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.593+02:00" modified="2024-05-17T14:05:38.593+02:00" filename="Junicode-Italic.ttf" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="ubuntu-v20-latin-ext-regular.ttf" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.617+02:00" modified="2024-05-17T14:05:38.617+02:00" filename="ubuntu-v20-latin-ext-regular.ttf" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="roboto-v30-latin-ext_latin-300italic.woff2" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.624+02:00" modified="2024-05-17T14:05:38.624+02:00" filename="roboto-v30-latin-ext_latin-300italic.woff2" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="open-sans-v40-latin-ext-300.woff2" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.629+02:00" modified="2024-05-17T14:05:38.629+02:00" filename="open-sans-v40-latin-ext-300.woff2" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="roboto-v30-latin-ext_latin-300.eot" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.633+02:00" modified="2024-05-17T14:05:38.633+02:00" filename="roboto-v30-latin-ext_latin-300.eot" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="Junicode-BoldItalic.woff" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.637+02:00" modified="2024-05-17T14:05:38.637+02:00" filename="Junicode-BoldItalic.woff" mimetype="application/font-woff">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="ubuntu-v20-latin-ext-300.woff" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.65+02:00" modified="2024-05-17T14:05:38.65+02:00" filename="ubuntu-v20-latin-ext-300.woff" mimetype="application/font-woff">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="roboto-v30-latin-ext_latin-italic.eot" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.655+02:00" modified="2024-05-17T14:05:38.655+02:00" filename="roboto-v30-latin-ext_latin-italic.eot" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="open-sans-v40-latin-ext-regular.woff" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.863+02:00" modified="2024-05-17T14:05:38.863+02:00" filename="open-sans-v40-latin-ext-regular.woff" mimetype="application/font-woff">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="oswald-v49-latin-ext_latin-regular.woff" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.87+02:00" modified="2024-05-17T14:05:38.87+02:00" filename="oswald-v49-latin-ext_latin-regular.woff" mimetype="application/font-woff">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="oswald-v49-latin-ext_latin-regular.woff2" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.873+02:00" modified="2024-05-17T14:05:38.873+02:00" filename="oswald-v49-latin-ext_latin-regular.woff2" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="open-sans-v40-latin-ext-300.ttf" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.419+02:00" modified="2024-05-17T14:05:39.419+02:00" filename="open-sans-v40-latin-ext-300.ttf" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="ubuntu-v20-latin-ext-regular.woff2" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.428+02:00" modified="2024-05-17T14:05:39.428+02:00" filename="ubuntu-v20-latin-ext-regular.woff2" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="open-sans-v40-latin-ext-italic.woff2" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.507+02:00" modified="2024-05-17T14:05:39.507+02:00" filename="open-sans-v40-latin-ext-italic.woff2" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="roboto-v30-latin-ext_latin-italic.woff" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.513+02:00" modified="2024-05-17T14:05:39.513+02:00" filename="roboto-v30-latin-ext_latin-italic.woff" mimetype="application/font-woff">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="Junicode-Italic.eot" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.517+02:00" modified="2024-05-17T14:05:39.517+02:00" filename="Junicode-Italic.eot" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="roboto-v30-latin-ext_latin-italic.ttf" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.53+02:00" modified="2024-05-17T14:05:39.53+02:00" filename="roboto-v30-latin-ext_latin-italic.ttf" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="roboto-v30-latin-ext_latin-300italic.ttf" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.534+02:00" modified="2024-05-17T14:05:39.534+02:00" filename="roboto-v30-latin-ext_latin-300italic.ttf" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="roboto-v30-latin-ext_latin-italic.woff2" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.537+02:00" modified="2024-05-17T14:05:39.537+02:00" filename="roboto-v30-latin-ext_latin-italic.woff2" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="Junicode-Bold.woff" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.539+02:00" modified="2024-05-17T14:05:39.539+02:00" filename="Junicode-Bold.woff" mimetype="application/font-woff">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="oswald-v49-latin-ext_latin-regular.ttf" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.544+02:00" modified="2024-05-17T14:05:39.544+02:00" filename="oswald-v49-latin-ext_latin-regular.ttf" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="roboto-v30-latin-ext_latin-300.woff" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.547+02:00" modified="2024-05-17T14:05:39.547+02:00" filename="roboto-v30-latin-ext_latin-300.woff" mimetype="application/font-woff">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="Junicode.ttf" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.551+02:00" modified="2024-05-17T14:05:39.551+02:00" filename="Junicode.ttf" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="Junicode-BoldItalic.ttf" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.604+02:00" modified="2024-05-17T14:05:39.604+02:00" filename="Junicode-BoldItalic.ttf" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="Junicode.woff" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.611+02:00" modified="2024-05-17T14:05:39.611+02:00" filename="Junicode.woff" mimetype="application/font-woff">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="roboto-v30-latin-ext_latin-300italic.eot" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.62+02:00" modified="2024-05-17T14:05:39.62+02:00" filename="roboto-v30-latin-ext_latin-300italic.eot" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="roboto-v30-latin-ext_latin-regular.woff2" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.623+02:00" modified="2024-05-17T14:05:39.623+02:00" filename="roboto-v30-latin-ext_latin-regular.woff2" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="ubuntu-v20-latin-ext-italic.ttf" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.626+02:00" modified="2024-05-17T14:05:39.626+02:00" filename="ubuntu-v20-latin-ext-italic.ttf" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="oswald-v49-latin-ext_latin-regular.eot" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.629+02:00" modified="2024-05-17T14:05:39.629+02:00" filename="oswald-v49-latin-ext_latin-regular.eot" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="roboto-v30-latin-ext_latin-300italic.woff" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.633+02:00" modified="2024-05-17T14:05:39.633+02:00" filename="roboto-v30-latin-ext_latin-300italic.woff" mimetype="application/font-woff">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="open-sans-v40-latin-ext-300italic.ttf" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.636+02:00" modified="2024-05-17T14:05:39.636+02:00" filename="open-sans-v40-latin-ext-300italic.ttf" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="ubuntu-v20-latin-ext-300italic.woff" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.68+02:00" modified="2024-05-17T14:05:39.68+02:00" filename="ubuntu-v20-latin-ext-300italic.woff" mimetype="application/font-woff">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="Junicode-Bold.ttf" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.686+02:00" modified="2024-05-17T14:05:39.686+02:00" filename="Junicode-Bold.ttf" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="roboto-v30-latin-ext_latin-regular.eot" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.693+02:00" modified="2024-05-17T14:05:39.693+02:00" filename="roboto-v30-latin-ext_latin-regular.eot" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="ubuntu-v20-latin-ext-regular.woff" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.696+02:00" modified="2024-05-17T14:05:39.696+02:00" filename="ubuntu-v20-latin-ext-regular.woff" mimetype="application/font-woff">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="ubuntu-v20-latin-ext-300italic.ttf" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.699+02:00" modified="2024-05-17T14:05:39.699+02:00" filename="ubuntu-v20-latin-ext-300italic.ttf" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="ubuntu-v20-latin-ext-italic.woff" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.707+02:00" modified="2024-05-17T14:05:39.707+02:00" filename="ubuntu-v20-latin-ext-italic.woff" mimetype="application/font-woff">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="roboto-v30-latin-ext_latin-regular.ttf" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.712+02:00" modified="2024-05-17T14:05:39.712+02:00" filename="roboto-v30-latin-ext_latin-regular.ttf" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="ubuntu-v20-latin-ext-300.woff2" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.721+02:00" modified="2024-05-17T14:05:39.721+02:00" filename="ubuntu-v20-latin-ext-300.woff2" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="open-sans-v40-latin-ext-regular.woff2" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.753+02:00" modified="2024-05-17T14:05:39.753+02:00" filename="open-sans-v40-latin-ext-regular.woff2" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="ubuntu-v20-latin-ext-italic.woff2" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.76+02:00" modified="2024-05-17T14:05:39.76+02:00" filename="ubuntu-v20-latin-ext-italic.woff2" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="open-sans-v40-latin-ext-italic.ttf" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.764+02:00" modified="2024-05-17T14:05:39.764+02:00" filename="open-sans-v40-latin-ext-italic.ttf" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="roboto-v30-latin-ext_latin-regular.woff" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.77+02:00" modified="2024-05-17T14:05:39.77+02:00" filename="roboto-v30-latin-ext_latin-regular.woff" mimetype="application/font-woff">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="open-sans-v40-latin-ext-regular.ttf" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.775+02:00" modified="2024-05-17T14:05:39.775+02:00" filename="open-sans-v40-latin-ext-regular.ttf" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="roboto-v30-latin-ext_latin-300.woff2" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.783+02:00" modified="2024-05-17T14:05:39.783+02:00" filename="roboto-v30-latin-ext_latin-300.woff2" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="ubuntu-v20-latin-ext-300.ttf" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.788+02:00" modified="2024-05-17T14:05:39.788+02:00" filename="ubuntu-v20-latin-ext-300.ttf" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="open-sans-v40-latin-ext-300italic.woff2" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.798+02:00" modified="2024-05-17T14:05:39.798+02:00" filename="open-sans-v40-latin-ext-300italic.woff2" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="Junicode-Italic.woff" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.802+02:00" modified="2024-05-17T14:05:39.802+02:00" filename="Junicode-Italic.woff" mimetype="application/font-woff">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="ubuntu-v20-latin-ext-300italic.woff2" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:39.843+02:00" modified="2024-05-17T14:05:39.843+02:00" filename="ubuntu-v20-latin-ext-300italic.woff2" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="Junicode-BoldItalic.eot" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:40.452+02:00" modified="2024-05-17T14:05:40.452+02:00" filename="Junicode-BoldItalic.eot" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="Junicode-Bold.eot" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:40.534+02:00" modified="2024-05-17T14:05:40.534+02:00" filename="Junicode-Bold.eot" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="open-sans-v40-latin-ext-300italic.woff" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:40.543+02:00" modified="2024-05-17T14:05:40.543+02:00" filename="open-sans-v40-latin-ext-300italic.woff" mimetype="application/font-woff">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="roboto-v30-latin-ext_latin-300.ttf" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:40.573+02:00" modified="2024-05-17T14:05:40.573+02:00" filename="roboto-v30-latin-ext_latin-300.ttf" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="open-sans-v40-latin-ext-italic.woff" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:40.577+02:00" modified="2024-05-17T14:05:40.577+02:00" filename="open-sans-v40-latin-ext-italic.woff" mimetype="application/font-woff">
+        <acl entries="0" version="1"/>
+    </resource>
+</collection>

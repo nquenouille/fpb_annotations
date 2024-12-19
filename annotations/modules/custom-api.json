@@ -1,0 +1,654 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Custom API",
+        "description": "This is the place to add your own path endpoints"
+    },
+    "servers": [
+        {
+            "description": "Endpoint for testing on localhost",
+            "url": "/exist/apps/annotations"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "basicAuth": {
+                "type": "http",
+                "scheme": "basic"
+            },
+            "cookieAuth": {
+                "type": "apiKey",
+                "name": "teipublisher.com.login",
+                "in": "cookie"
+            }
+        }
+    },
+    "paths": {"/api/status/{path}": {
+			"post": {
+				"summary": "Merge status into source TEI",
+				"tags": ["status"],
+				"operationId": "custom:status-save",
+				"requestBody": {
+					"description": "Status of work of the document will be saved into metadata",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"context": {
+											"type": "string"
+										},
+										"start": {
+											"type": "number"
+										},
+										"end": {
+											"type": "number"
+										},
+										"type": {
+											"type": "string"
+										},
+										"text": {
+											"type": "string"
+										},
+										"properties": {
+											"type": "object"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"parameters": [
+					{
+						"name": "path",
+						"in": "path",
+						"description": "Relative path to the TEI document to be changed",
+						"schema": {
+							"type": "string",
+							"example": "annotate/bach_test2.xml"
+						},
+						"required": true
+					},
+					{
+						"name": "status",
+						"in": "query",
+						"description": "Status of the document.",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Returns the merged TEI XML",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				}
+			},
+			"put": {
+				"summary": "Merge status into source TEI and store the resulting document",
+				"tags": ["status"],
+				"operationId": "custom:status-save",
+				"x-constraints": {
+					"groups": ["tei"]
+				},
+				"requestBody": {
+					"description": "Status of work to be applied in metadata",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"context": {
+											"type": "string"
+										},
+										"start": {
+											"type": "number"
+										},
+										"end": {
+											"type": "number"
+										},
+										"type": {
+											"type": "string"
+										},
+										"text": {
+											"type": "string"
+										},
+										"properties": {
+											"type": "object"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"parameters": [
+					{
+						"name": "path",
+						"in": "path",
+						"description": "Relative path to the TEI document to be changed",
+						"schema": {
+							"type": "string",
+							"example": "annotate/bach_test2.xml"
+						},
+						"required": true
+					},
+					{
+						"name": "status",
+						"in": "query",
+						"description": "Status of the document.",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Returns the merged TEI XML",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				}
+			}
+    	},
+    	
+		
+    	"/api/status/meta/{path}": {
+			"get": {
+				"summary": "Returns some metadata about the document",
+				"tags": ["status"],
+				"operationId": "custom:status-metadata",
+				"parameters": [
+					{
+						"name": "path",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "annotate/bach_test2.xml"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Metadata about the document as JSON object",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Document not found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+	
+	
+	"/api/finished/save/{id}": {
+			"get": {
+				"summary": "Gets the finished document and save it into edition's app",
+				"description": "Get the source of a document, either as XML, text or binary and save it into edition's app.",
+				"tags": ["finished-documents"],
+				"operationId": "custom:save-doc",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Content of the document",
+						"content": {
+							"application/xml": {
+								"schema": {
+									"type": "string"
+								}
+							},
+							"text/markdown": {
+								"schema": {
+									"type": "string"
+								}
+							},
+							"text/text": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"410": {
+						"description": "Document deleted"
+					}
+				}
+			}
+		},
+		
+    	"/api/finished/{id}": {
+			"get": {
+				"summary": "Get the source of a document",
+				"description": "Get the source of a document, either as XML, text or binary.",
+				"tags": ["finished-documents"],
+				"operationId": "custom:get-doc",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Content of the document",
+						"content": {
+							"application/xml": {
+								"schema": {
+									"type": "string"
+								}
+							},
+							"text/markdown": {
+								"schema": {
+									"type": "string"
+								}
+							},
+							"text/text": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"410": {
+						"description": "Document deleted"
+					}
+				}
+			}
+		},
+		
+		"/api/finished": {
+			"get": {
+				"summary": "List available finished documents",
+				"description": "Lists all finished documents.",
+				"tags": ["finished-documents"],
+				"operationId": "custom:list-finished-documents",
+				"parameters": [
+					{
+						"name": "date",
+						"in": "query",
+						"description": "Date",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Array of documents",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"name": {
+												"type": "string"
+											},
+											"title": {
+												"type": "string"
+											},
+											"status": {
+												"type": "string"
+											},
+											"path": {
+												"type": "string"
+											},
+											"lastModified": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"410": {
+						"description": "Document NOT copied"
+				}
+			}
+		},
+		"/api/finished/copy/{id}": {
+			"get": {
+				"summary": "Copy finished documents to BACH",
+				"description": "Copy finished documents to BACH.",
+				"tags": ["finished-documents"],
+				"operationId": "custom:copy-doc",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Document copied.",
+						"content": {
+							"text/html": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
+			
+		},
+		"/api/note/{path}": {
+			"put": {
+				"summary": "Set notes to right position",
+				"description": "Set notes to right position",
+				"tags": ["notes"],
+				"operationId": "custom:setNotes",
+				"x-constraints": {
+					"groups": ["tei"]
+				},
+				"requestBody": {
+					"description": "Replace notes with anchor elements and put notes at the end of the document.",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"context": {
+											"type": "string"
+										},
+										"start": {
+											"type": "number"
+										},
+										"end": {
+											"type": "number"
+										},
+										"type": {
+											"type": "string"
+										},
+										"text": {
+											"type": "string"
+										},
+										"properties": {
+											"type": "object"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"parameters": [
+					{
+						"name": "path",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Notes set.",
+						"content": {
+							"text/html": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
+			
+		},
+		"/api/getUser": {
+			"get": {
+				"summary": "Get user",
+				"description": "Get user",
+				"operationId": "custom:getUser",
+				"tags": ["getUser"],
+                "responses": {
+					"200": {
+						"description": "User",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"userName": {
+											"type": "string"
+										},
+										"fullName": {
+											"type": "string"
+										},
+										"date": {
+											"type": "string"
+										}
+									}
+								}
+							}
+							
+						}
+					},
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "XQuery error",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/tags/{id}": {
+			"put": {
+				"summary": "Gets the finished document and save it into edition's app",
+				"description": "Get the source of a document, either as XML, text or binary and save it into edition's app.",
+				"tags": ["finished-documents"],
+				"operationId": "custom:setTags",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Content of the document",
+						"content": {
+							"application/xml": {
+								"schema": {
+									"type": "string"
+								}
+							},
+							"text/markdown": {
+								"schema": {
+									"type": "string"
+								}
+							},
+							"text/text": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"410": {
+						"description": "Document deleted"
+					}
+				}
+			}
+		},
+		"/api/validation/{id}": {
+			"get": {
+				"summary": "Check if document is valid XML",
+				"description": "Check if document is valid XML.",
+				"tags": ["finished-documents"],
+				"operationId": "custom:validate",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Content of the document",
+						"content": {
+							"application/xml": {
+								"schema": {
+									"type": "string"
+								}
+							},
+							"text/markdown": {
+								"schema": {
+									"type": "string"
+								}
+							},
+							"text/text": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"410": {
+						"description": "Document deleted"
+					}
+				}
+			}
+		},
+		"/api/permission/{collection}": {
+            "put": {
+                "summary": "Set permission to files in the collection.",
+                "description": "The collection path is part of the URL. Empty name means data collection.",
+                "operationId": "custom:permission",
+                "x-constraints": {
+					"groups": ["tei", "dba"]
+				},
+                "tags": ["permission"],
+                "parameters": [
+                    {
+                        "name": "collection",
+                        "in": "path",
+                        "required": true,
+                        "description": "Use / for the root of the data collection",
+                        "schema":{
+                             "type": "string",
+                             "default" : "/"
+                            },
+                        "example" : "registers"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Permission applied",
+                        "content": {
+                            "application/xml": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Collection not found",
+                        "content": {
+                            "application/xml": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        {
+            "cookieAuth": []
+        },
+        {
+            "basicAuth": []
+        }
+    ]
+}

@@ -1,0 +1,758 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes"/>
+        <link rel="shortcut icon" type="image/x-icon" href="resources/images/favicon.ico"/>
+        <link rel="shortcut icon" type="image/png" href="resources/images/fpb_3.png" sizes="16x16"/>
+        <link rel="shortcut icon" type="image/png" href="resources/images/fpb_3.png" sizes="24x24"/>
+        <link rel="shortcut icon" type="image/png" href="resources/images/fpb_3.png" sizes="32x32"/>
+        <link rel="shortcut icon" type="image/png" href="resources/images/fpb_3.png" sizes="64x64"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+
+        <title data-template="config:app-title"/>
+        <meta name="description" content="Annotation Editing"/>
+        <meta name="pb-template" content="annotate.html"/>
+
+        <link rel="stylesheet" href="resources/css/theme.css"/>
+        <link rel="stylesheet" href="templates/pages/annotate.css"/>
+        <script type="module" src="pb-components-bundle.js" data-template="pages:load-components"/>
+        <script type="text/javascript" src="resources/scripts/annotations/annotations.js"/>
+        <custom-style>
+            <style include="pb-common-styles">
+                body {
+                --pb-menubar-background-color: #417690;
+                --pb-menubar-color: #f5dd5d;
+                --pb-lang-label-color: #f5dd5d;
+                --pb-toolbar-background-color: #edf4f7;
+                }
+                
+                 main {
+                    --pb-popover-min-width: none;
+                    --pb-popover-placement: right;
+                }
+                
+                .expl {
+                    line-height: 50%;
+                    font-size:10pt
+                }
+                ul {
+                  list-style: none;
+                  margin: 0;
+                }
+                li {
+                    font-size: 10pt;
+                }
+                .drpbtn {
+                  background-color: #04AA6D;
+                  color: white;
+                  padding: 16px;
+                  font-size: 16px;
+                  border: none !important;
+                }
+                
+                .drpdwn {
+                  position: relative;
+                  display: inline-block;
+                  border: none !important;
+                }
+                .drpdwn-cntnt {
+                      display: none;
+                      position: absolute;
+                      min-width: fit-content;
+                      background-color: #f1f1f1;
+                      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                      z-index: 1;
+                    }
+                    
+                    .drpdwn-cntnt paper-icon-button {
+                      color: black;
+                      padding: 8px 12px;
+                      text-decoration: none;
+                      display: block;
+                    }
+                .drpdwn-cntnt paper-icon-button:hover {background-color: #ddd;}
+
+                .drpdwn:hover .drpdwn-cntnt {display: block;}
+                
+                .drpdwn:hover .drpbtn {background-color: #3e8e41;}
+            </style>
+        </custom-style>
+    </head>
+
+    <body>
+        <pb-page data-template="pages:pb-page" unresolved="unresolved" require-language="require-language" locales="resources/i18n/{{ns}}/{{lng}}.json">
+            <pb-document id="document1" data-template="pages:pb-document"/>
+            <app-drawer-layout force-narrow="force-narrow">
+                <app-drawer data-template="lib:include" data-template-path="templates/drawer.html"/>
+                <app-header-layout>
+                    <app-header slot="header" reveals="reveals" fixed="fixed" effects="waterfall">
+                        <app-toolbar data-template="lib:include" data-template-path="templates/menu.html"/>
+                        <app-toolbar data-template="lib:include" data-template-path="templates/toolbar.html"/>
+                    </app-header>
+
+                    <main>
+                        <aside class="annotation-editor">
+                            <button id="toggle-toolbar" style="margin-bottom: 1em;">Switch between Layout and Content</button>
+                            <div class="toolbar" id="toolbar-layout">
+                            <div style="margin-left: 1em;">
+                                    <span style="font-weight: bold">Strukturelle Tags</span> <span style="font-size:10pt"> (immer von außen nach innen taggen, danach abspeichern)</span>
+                                    <p style="font-size:10pt">Strukturelle Reihenfolge (immer einzuhalten, sofern zutreffend!):</p>
+                                </div>
+                                <ul>
+                                <li>
+                                        <span data-i18n="[title]annotations.memo">
+                                            <paper-icon-button class="annotation-action" title="Memo" data-type="memo" icon="icons:alarm" disabled="disabled"/>Vermerk (Präsentations-, Eingangsvermerk, etc.)</span>
+                                    </li>
+                                <li>
+                                        <span data-i18n="[title]annotations.head">
+                                            <paper-icon-button class="annotation-action" title="Head" data-type="head" icon="icons:face" disabled="disabled"/>1. Überschrift</span>
+                                    </li>
+                                <li>
+                                        <span data-i18n="[title]annotations.opener">
+                                            <paper-icon-button class="annotation-action" title="Opener" data-type="opener" icon="icons:flight-takeoff" disabled="disabled"/>2. Eröffnung, enthält:</span>
+                                    </li>
+                                <ul>
+                                <li>
+                                        <span data-i18n="[title]annotations.address">
+                                                <paper-icon-button class="annotation-action" title="Address" data-type="address" icon="icons:home" disabled="disabled"/>
+                                        Adresse (falls über dem Text stehend)</span>
+                                        </li>
+                                <li>
+                                        <span data-i18n="[title]annotations.salute">
+                                                <paper-icon-button class="annotation-action" title="Salute" data-type="salute" icon="social:mood" disabled="disabled"/>Gruß (falls am Anfang stehend)</span>
+                                        </li>
+                                </ul>
+                                <li>
+                                        <span data-i18n="[title]annotations.paragraph">
+                                            <paper-icon-button class="annotation-action" title="Paragraph" data-type="paragraph" icon="icons:reorder" disabled="disabled"/>3. Paragraph = Textkörper</span>
+                                    </li>
+                                <li>
+                                        <span data-i18n="[title]annotations.closer">
+                                            <paper-icon-button class="annotation-action" title="Closer" data-type="closer" icon="icons:flight-land" disabled="disabled"/>4. Schluß, enthält:</span>
+                                    </li>
+                                <ul>
+                                 <li>
+                                        <span data-i18n="[title]annotations.salute">
+                                                <paper-icon-button class="annotation-action" title="Salute" data-type="salute" icon="social:mood" disabled="disabled"/>Gruß (falls irgendwo am Ende stehend)</span>
+                                        </li>
+                                <li>
+                                        <span data-i18n="[title]annotations.dateline">
+                                                <paper-icon-button class="annotation-action" title="Dateline" data-type="dateline" icon="icons:view-day" disabled="disabled"/>Datumsbereich (unter inhaltl. Tags Ort und Datum präzisieren!)</span>
+                                        </li>
+                                <li>
+                                        <span data-i18n="[title]annotations.signed">
+                                                <paper-icon-button class="annotation-action" title="Signature" data-type="signed" icon="icons:gesture" disabled="disabled"/>Unterschrift</span>
+                                        </li>
+                                <li>
+                                        <span data-i18n="[title]annotations.address">
+                                                <paper-icon-button class="annotation-action" title="Address" data-type="address" icon="icons:home" disabled="disabled"/>
+                                        Adresse (falls unter dem Text stehend)</span>
+                                        </li>
+                                </ul>
+                                <li>
+                                        <span data-i18n="[title]annotations.postscript">
+                                            <paper-icon-button class="annotation-action" title="PostScript" data-type="postscript" icon="icons:more-horiz" disabled="disabled"/>5. Postscriptum</span>
+                                    </li>
+                                </ul>
+                                <p style="font-size:10pt; margin-left:1em;">Weitere strukturelle Tags, die überall vorkommen können:</p>
+                                <ul>
+                                <li>
+                                        <span data-i18n="[title]annotations.keepLineBreaks">
+                                            <paper-icon-button class="annotation-action" title="keepLineBreaks" data-type="keepLineBreaks" icon="icons:receipt" disabled="disabled"/>Zeilenfall beibehalten</span>
+                                    </li>
+                                <li>
+                                        <span data-i18n="[title]annotations.indentation">
+                                            <paper-icon-button class="annotation-action" title="Indentation" data-type="indentation" icon="icons:arrow-forward" disabled="disabled"/>Einrückung</span>
+                                    </li>
+                                <li>
+                                        <span data-i18n="[title]annotations.pb">
+                                            <paper-icon-button class="annotation-action" title="PageBreak" data-type="pb" icon="icons:remove" disabled="disabled"/>Korrektur der Seitennummer</span>
+                                    </li>
+                                <li>
+                                        <span data-i18n="[title]annotations.handShift">
+                                            <paper-icon-button class="annotation-action" title="handShift" data-type="handShift" icon="icons:label-outline" disabled="disabled"/>Schreiberwechsel</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="toolbar" id="toolbar-content" style="display: none;">
+                            <div style="margin-left: 1em">
+                                    <span style="font-weight: bold">Inhalt</span>
+                                    <span style="font-size:10pt"> (immer von außen nach innen taggen)</span>
+                                </div>
+                                <!--paper-icon-button id="clear-all" icon="icons:refresh"></paper-icon-button-->
+                                <span data-i18n="[title]annotations.person">
+                                    <paper-icon-button class="annotation-action authority" title="Person" data-type="person" icon="social:person" disabled="disabled"/>
+                                </span>
+                                <span data-i18n="[title]annotations.organisation">
+                                    <paper-icon-button class="annotation-action authority" title="organization" data-type="organization" icon="social:people" disabled="disabled"/>
+                                </span>
+                                <span data-i18n="[title]annotations.place">
+                                    <paper-icon-button class="annotation-action authority" title="Place" data-type="place" icon="maps:place" disabled="disabled"/>
+                                </span>
+                                <span data-i18n="[title]annotations.date">
+                                    <paper-icon-button class="annotation-action" title="Date" data-type="date" icon="icons:today" disabled="disabled"/>
+                                </span>
+                                <span data-i18n="[title]annotations.ref">
+                                    <paper-icon-button class="annotation-action" title="Reference" data-type="ref" icon="icons:link" disabled="disabled"/>
+                                </span>
+                                <span data-i18n="[title]annotations.abbreviation">
+                                    <paper-icon-button class="annotation-action" title="Abbreviation" data-type="abbr" icon="icons:translate" disabled="disabled"/>
+                                </span>
+                                <span data-i18n="[title]annotations.sic">
+                                    <paper-icon-button class="annotation-action" title="Sic" data-type="sic" icon="editor:strikethrough-s" disabled="disabled"/>
+                                </span>
+                               <span data-i18n="[title]annotations.latintype">
+                                    <paper-icon-button class="annotation-action" title="Latintype" data-type="latintype" icon="editor:format-italic" disabled="disabled"/>
+                                </span>
+                                <div class="drpdwn">
+                                    <button class="drpbttn" title="Schriftart" style="border: none;">
+                                        <paper-icon-button icon="image:wb-sunny" disabled="true"/>
+                                    </button>
+                                    <div class="drpdwn-cntnt">
+                                        <span data-i18n="[title]annotations.hi">
+                                            <paper-icon-button class="annotation-action" title="Highlight" data-type="hi" icon="image:wb-sunny" disabled="disabled"/>
+                                        </span>
+                                        <span data-i18n="[title]annotations.semibold">
+                                            <paper-icon-button class="annotation-action" title="Semibold" data-type="semibold" icon="editor:format-bold" disabled="disabled"/>
+                                        </span>
+                                        <span data-i18n="[title]annotations.underline">
+                                            <paper-icon-button class="annotation-action" title="Underline" data-type="underline" icon="editor:format-underlined" disabled="disabled"/>
+                                        </span>
+                                        <span data-i18n="[title]annotations.superscript">
+                                            <paper-icon-button class="annotation-action" title="Superscript" data-type="superscript" icon="maps:terrain" isabled="disabled"/>
+                                        </span>
+                                    </div>
+                                </div>
+                                <span data-i18n="[title]annotations.emph">
+                                    <paper-icon-button class="annotation-action" title="emph" data-type="emph" icon="icons:view-week" disabled="disabled"/>
+                                </span>
+                                <span data-i18n="[title]annotations.term">
+                                    <paper-icon-button class="annotation-action" title="term" data-type="term" icon="icons:bookmark" disabled="disabled"/>
+                                </span>
+                                <span data-i18n="[title]annotations.gloss">
+                                    <paper-icon-button class="annotation-action" title="gloss" data-type="gloss" icon="icons:class" disabled="disabled"/>
+                                </span>
+                                <span data-i18n="[title]annotations.commentary">
+                                    <paper-icon-button class="annotation-action" title="Commentary" data-type="commentary" icon="icons:speaker-notes" disabled="disabled"/>
+                                </span>
+                                <span data-i18n="[title]annotations.del">
+                                    <paper-icon-button class="annotation-action" title="Deletion" data-type="del" icon="editor:format-strikethrough" disabled="disabled"/>
+                                </span>
+                                <span data-i18n="[title]annotations.rs">
+                                    <paper-icon-button class="annotation-action" title="ReferringString" data-type="rs" icon="icons:redo" disabled="disabled"/>
+                                </span>
+                                <span data-i18n="[title]annotations.add">
+                                    <paper-icon-button class="annotation-action" title="Add" data-type="add" icon="icons:add-circle" disabled="disabled"/>
+                                </span>
+                                <span data-i18n="[title]annotations.supplied">
+                                    <paper-icon-button class="annotation-action" title="Supplied" data-type="supplied" icon="icons:add-circle-outline" disabled="disabled"/>
+                                </span>
+                                <span data-i18n="[title]annotations.unclear">
+                                    <paper-icon-button class="annotation-action" title="Unclear" data-type="unclear" icon="icons:help" disabled="disabled"/>
+                                </span>
+                                <span data-i18n="[title]annotations.mp">
+                                    <paper-icon-button class="annotation-action" title="mp" data-type="mp" icon="image:brush" disabled="disabled"/>
+                                </span>
+                                <span data-i18n="[title]annotations.perge">
+                                    <paper-icon-button class="annotation-action" title="perge" data-type="perge" icon="icons:more-horiz" disabled="disabled"/>
+                                </span>
+                                <span data-i18n="[title]annotations.seg">
+                                    <paper-icon-button class="annotation-action" title="seg" data-type="seg" icon="icons:explore" disabled="disabled"/>
+                                </span>
+                                <span data-i18n="[title]annotations.modify">
+                                    <paper-icon-button class="annotation-action" title="Edit" data-type="edit" icon="editor:mode-edit" disabled="disabled"/>
+                                </span>
+                                <paper-icon-button id="ner-action" icon="social:group-add" data-i18n="[title]annotations.ner.title"/>
+                            </div>
+                            
+                            <iron-form id="edit-form">
+                                <form action="">
+                                    <paper-icon-button id="form-save" icon="icons:save" data-i18n="[label]annotations.apply"/>
+                                    <div class="annotation-form person organization place">
+                                        <paper-input class="form-ref" name="ref" data-i18n="[label]annotations.reference" label="Reference">
+                                            <paper-icon-button slot="prefix" icon="search" data-i18n="[label]annotations.lookup"/>
+                                        </paper-input>
+                                        <div class="authority-info">
+                                            <pb-i18n key="dialogs.loading">Loading ...</pb-i18n>
+                                        </div>
+                                    </div>
+                                    <div class="annotation-form date">
+                                        <paper-input name="when" label="when" type="date"/>
+                                        <paper-input name="from" label="from" type="date"/>
+                                        <paper-input name="to" label="to" type="date"/>
+                                        <paper-input name="notBefore" label="notBefore" type="date"/>
+                                        <paper-input name="notAfter" label="notAfter" type="date"/>
+                                    </div>
+                                    <div class="annotation-form hi" data-i18n="[label]annotations.hi">
+                                        <paper-input name="rend" label="rend"/>
+                                        <p>Hervorhebung der Schriftart. Hier kann die Hervorhebung des Fonts noch einmal korrigiert werden. Auch kann eine nicht hier stehende Hervorhebung eingefügt werden.</p>
+                                    </div>
+                                    <div class="annotation-form latintype" data-i18n="[label]annotations.latintype">
+                                        <p>
+                                            Latintype / Kursiv - Text wird kursiv angezeigt. Hierbei wird das "hi"-Tag verwendet, welches unter dem Tag "Schriftart" (s.o.) geändert werden kann.
+                                        </p>
+                                    </div>
+                                    <div class="annotation-form underline" data-i18n="[label]annotations.underline">
+                                        <p>
+                                            Unterstrichen - Text wird unterstrichen angezeigt. Hierbei wird das "hi"-Tag verwendet, welches unter dem Tag "Schriftart" (s.o.) geändert werden kann.
+                                        </p>
+                                    </div>
+                                    <div class="annotation-form semibold" data-i18n="[label]annotations.semibold">
+                                        <p>
+                                            Halbfett - Text wird halb-fett angezeigt (von Schriftart des Browsers abhängig). Hierbei wird das "hi"-Tag verwendet, welches unter dem Tag "Schriftart" (s.o.) geändert werden kann.
+                                        </p>
+                                    </div>
+                                    <div class="annotation-form superscript" data-i18n="[label]annotations.superscript">
+                                        <p>
+                                            Hochgestellt - Text wird hochgestellt angezeigt. Hierbei wird das "hi"-Tag verwendet, welches unter dem Tag "Schriftart" (s.o.) geändert werden kann.
+                                        </p>
+                                    </div>
+                                    <div class="annotation-form emph" data-i18n="[label]annotations.emph">
+                                        <p>Gesperrt - Text wird gesperrt angezeigt. Hierbei wird das "hi"-Tag verwendet, welches unter dem Tag "Schriftart" (s.o.) geändert werden kann.</p>
+                                    </div>
+                                    <div class="annotation-form ref" data-i18n="[label]annotations.reference">
+                                        <paper-input id="ref" name="target" label="target"/>
+                                    </div>
+                                    <div class="annotation-form abbr" data-i18n="[label]annotations.abbreviation">
+                                        <paper-input name="expan" data-i18n="[label]annotations.expansion" label="Expansion"/>
+                                        <p>Hier können Abkürzungen markiert und aufgelöst werden. Diese werden im Allgemeinen als Mouseover dargestellt. <br/> <b>Erweiterung:</b> Auflösung der Abkürzung</p>
+                                    </div>
+                                   <div class="annotation-form rs" data-i18n="[label]annotations.rs">
+                                        <paper-dropdown-menu name="typers" id="ddrs" style="padding-left: 10px;" data-i18n="[title]rs.title" label="Type">
+                                            <paper-listbox id="rslistbox" slot="dropdown-content">
+                                                <paper-item value="default" style="display:none;"/>
+                                                <paper-item value="person">
+                                                    <pb-i18n key="rs.person"/>
+                                                </paper-item>
+                                                <paper-item value="place">
+                                                    <pb-i18n key="rs.place"/>
+                                                </paper-item>
+                                                <paper-item value="organization">
+                                                    <pb-i18n key="rs.organization"/>
+                                                </paper-item>
+                                            </paper-listbox>
+                                        </paper-dropdown-menu>
+                                        <paper-input class="form-rs" name="key" data-i18n="[label]annotations.reference" label="Reference">
+                                            <paper-icon-button slot="prefix" icon="search" data-i18n="[label]annotations.lookup"/>
+                                        </paper-input>
+                                        <p>Indirekte Erwähnung - Falls hier Bezug auf eine bekannte Person / einen bekannten Ort etc. genommen wird, die nicht namentlich genannt wird, kann hier diese mit ihrer Id annotiert werden. <br/> <b>Typ:</b> z.B.: person, place, org. <br/> <b>Key:</b> Id zu Person, Ort, Organisation, etc. </p>
+                                    </div>
+                                    <div class="annotation-form term" data-i18n="[label]annotations.term">
+                                        <paper-input class="form-term" name="xmlid" data-i18n="[label]annotations.xmlid" label="xml:id">
+                                            <paper-icon-button slot="prefix" icon="search" data-i18n="[label]annotations.lookup"/>
+                                        </paper-input>
+                                        <paper-dropdown-menu name="types" id="ddterm" style="padding-left: 10px;" data-i18n="[title]rs.title" label="Type">
+                                            <paper-listbox id="termlistbox" slot="dropdown-content">
+                                                <paper-item value="default" style="display:none;"/>
+                                                <paper-item value="term">
+                                                    <pb-i18n key="term.term"/>
+                                                </paper-item>
+                                                <paper-item value="gloss">
+                                                    <pb-i18n key="term.gloss"/>
+                                                </paper-item>
+                                            </paper-listbox>
+                                        </paper-dropdown-menu>
+                                        <p>Type = term &gt; Fachwort aus Glossar. <br/> Type = gloss &gt; Fachwort, auf das sich z.B. eine Glosse bezieht. Hier bitte die ID manuell eintragen.</p>
+                                    </div>
+                                    <div class="annotation-form gloss" data-i18n="[label]annotations.gloss">
+                                        <paper-input name="targets" label="Target-Id"/>
+                                        <paper-dropdown-menu name="types" id="ddgloss" style="padding-left: 10px;" data-i18n="[title]rs.title" label="Type">
+                                            <paper-listbox id="glosslistbox" slot="dropdown-content">
+                                                <paper-item value="default" style="display:none;"/>
+                                                <paper-item value="top">
+                                                    <pb-i18n key="add.top"/>
+                                                </paper-item>
+                                                <paper-item value="margin-left">
+                                                    <pb-i18n key="add.margin-left"/>
+                                                </paper-item>
+                                                <paper-item value="margin-right">
+                                                    <pb-i18n key="add.margin-right"/>
+                                                </paper-item>
+                                                <paper-item value="bottom">
+                                                    <pb-i18n key="add.bottom"/>
+                                                </paper-item>
+                                            </paper-listbox>
+                                        </paper-dropdown-menu>
+                                        <p>Glosse. Diese muß in Kombination mit dem Bezugswort, welches als "Term" annotiert wird, stehen. Hierbei ist das Attribut "target" das verbindende Element zwischen Glosse und Fachwort. <br/>
+                                            <br/>
+                                            <b>target:</b>Id des Fachwortes, auf die sich die Glosse bezieht. Hierbei ist die genaue Id in das "target" Attribut der Glosse einzutragen, damit ein Bezug hergestellt werden kann. <br/>
+                                            <br/>
+                                            <b>type:</b> Hier sollte eine Positionsangabe stehen, wo die Glosse sich auf dem Dokument befindet. Mögliche Werte: margin-left, margin-right, top, bottom</p>
+                                    </div>
+                                    <div class="annotation-form add" data-i18n="[label]annotations.add">
+                                        <paper-input name="xmlid" label="xml:id"/>
+                                        <paper-input class="form-add" name="hand" data-i18n="[label]annotations.hand" label="Hand">
+                                            <paper-icon-button slot="prefix" icon="search" data-i18n="[label]annotations.lookup"/>
+                                        </paper-input>
+                                        <paper-dropdown-menu name="types" id="ddaddtype" style="padding-left: 10px;" data-i18n="[title]add.type.title" label="Type">
+                                            <paper-listbox id="addtypelistbox" slot="dropdown-content">
+                                                <paper-item value="default" style="display:none;"/>
+                                                <paper-item value="correction">
+                                                    <pb-i18n key="add.correction"/>
+                                                </paper-item>
+                                                <paper-item value="Addition">
+                                                    <pb-i18n key="add.addition"/>
+                                                </paper-item>
+                                            </paper-listbox>
+                                        </paper-dropdown-menu>
+                                        <paper-dropdown-menu name="place" id="ddaddplace" style="padding-left: 10px;" data-i18n="[title]add.place.title" label="Place">
+                                            <paper-listbox id="addplacelistbox" slot="dropdown-content">
+                                                <paper-item value="default" style="display:none;"/>
+                                                <paper-item value="top">
+                                                    <pb-i18n key="add.top"/>
+                                                </paper-item>
+                                                <paper-item value="above">
+                                                    <pb-i18n key="add.above"/>
+                                                </paper-item>
+                                                <paper-item value="below">
+                                                    <pb-i18n key="add.below"/>
+                                                </paper-item>
+                                                <paper-item value="bottom">
+                                                    <pb-i18n key="add.bottom"/>
+                                                </paper-item>
+                                                <paper-item value="inspace">
+                                                    <pb-i18n key="add.inspace"/>
+                                                </paper-item>
+                                                <paper-item value="margin-left">
+                                                    <pb-i18n key="add.margin-left"/>
+                                                </paper-item>
+                                                <paper-item value="margin-right">
+                                                    <pb-i18n key="add.margin-right"/>
+                                                </paper-item>
+                                                <paper-item value="bottom">
+                                                    <pb-i18n key="add.bottom"/>
+                                                </paper-item>
+                                                <paper-item value="opposite">
+                                                    <pb-i18n key="add.opposite"/>
+                                                </paper-item>
+                                                <paper-item value="overleaf">
+                                                    <pb-i18n key="add.overleaf"/>
+                                                </paper-item>
+                                                <paper-item value="end">
+                                                    <pb-i18n key="add.end"/>
+                                                </paper-item>
+                                            </paper-listbox>
+                                        </paper-dropdown-menu>
+                                        <p>Originale Ergänzung - Eine originale Ergänzung im Dokument (keine Ergänzung durch einen Editor, etc.). <br/>
+                                            <b>hand:</b> "Autor" oder Name des Ergänzenden <br/> <b>type:</b> "correction", falls die Ergänzung auf eine Durchstreichung folgt. Ansonsten sind auch andere Typen möglich. <br/> <b>place</b>: margin-left, margin-right, below, bottom, above, top möglich. </p>
+                                    </div>
+                                    <div class="annotation-form supplied" data-i18n="[label]annotations.supplied">
+                                        <paper-input name="supplied" label="Supplied"/>
+                                        <paper-dropdown-menu name="reason" id="ddsupplied" style="padding-left: 10px;" data-i18n="[title]supplied.title" label="Reason">
+                                            <paper-listbox id="suppliedlistbox" slot="dropdown-content">
+                                                <paper-item value="default" style="display:none;"/>
+                                                <paper-item value="overbinding">
+                                                    <pb-i18n key="supplied.overbinding"/>
+                                                </paper-item>
+                                                <paper-item value="faded-ink">
+                                                    <pb-i18n key="supplied.fadedInk"/>
+                                                </paper-item>
+                                                <paper-item value="lost-folio">
+                                                    <pb-i18n key="supplied.lost-folio"/>
+                                                </paper-item>
+                                                <paper-item value="omitted-in-original">
+                                                    <pb-i18n key="supplied.omitted-in-original"/>
+                                                </paper-item>
+                                            </paper-listbox>
+                                        </paper-dropdown-menu>
+                                        <paper-input name="resp" data-i18n="[title]supplied.responsible" label="Responsible"/>
+                                        <p>Moderne Ergänzung durch einen Editor etc. - <br/>
+                                            <b>supplied:</b> Wort, welches ergänzt wurde, weil es beispielsweise fehlte. Wird nach dem markierten Wort eingesetzt. <br/> <b>reason:</b> Grund der modernen Ergänzung</p>
+                                    </div>
+                                    <div class="annotation-form unclear" data-i18n="[label]annotations.unclear">
+                                        <p>Unleserliche Stelle oder unsichere Lesart. Bei unleserlicher Stelle das Attribut 'reason' mit 'unclear' versehen, sonst kann es leer bleiben.</p>
+                                        <paper-dropdown-menu name="reasons" id="ddunclear" style="padding-left: 10px;" data-i18n="[title]unclear.title" label="Reason">
+                                            <paper-listbox id="unclearlistbox" slot="dropdown-content">
+                                                <paper-item value="default" style="display:none;"/>
+                                                <paper-item value="illegible">
+                                                    <pb-i18n key="unclear.illegible"/>
+                                                </paper-item>
+                                                <paper-item value="damage">
+                                                    <pb-i18n key="unclear.damage"/>
+                                                </paper-item>
+                                            </paper-listbox>
+                                        </paper-dropdown-menu>
+                                    </div>
+                                    <div class="annotation-form memo" data-i18n="[label]annotations.memo">
+                                    <paper-input class="form-memo" name="hands" data-i18n="[label]annotations.hand" label="Hand">
+                                            <paper-icon-button slot="prefix" icon="search" data-i18n="[label]annotations.lookup"/>
+                                        </paper-input>
+                                    <paper-input class="form-memo" name="subtype" data-i18n="[label]annotations.subtype" label="Subtype" style="display:none;"> </paper-input>
+                                    <paper-dropdown-menu name="types" id="ddmemo" style="padding-left: 10px;" data-i18n="[title]memo.title" label="Type">
+                                    <paper-listbox id="memolistbox" slot="dropdown-content">
+                                        <paper-item value="default" style="display:none;"/>
+                                        <paper-item value="presentation">
+                                            <pb-i18n key="memo.presentation"/>
+                                        </paper-item>
+                                        <paper-item value="received">
+                                            <pb-i18n key="memo.received"/>
+                                        </paper-item>
+                                        <paper-item value="possesor">
+                                            <pb-i18n key="memo.possessor"/>
+                                        </paper-item>
+                                        <paper-item value="address">
+                                            <pb-i18n key="memo.address"/>
+                                        </paper-item>
+                                        <paper-item value="numbering">
+                                            <pb-i18n key="memo.numbering"/>
+                                        </paper-item>
+                                        <paper-item value="postalNote">
+                                            <pb-i18n key="memo.postalNote"/>
+                                        </paper-item>
+                                        <paper-item value="other">
+                                            <pb-i18n key="memo.other"/>
+                                        </paper-item>
+                                        </paper-listbox>
+                                        </paper-dropdown-menu>
+                                        <p>Memo - Hier kann ein Eingangs- oder Präsentationsvermerk in Form einer Note (automatisch eingefügt) stehen. Wichtig ist, daß ein Type ausgewählt wird, damit es nicht wie eine 'normale' Fußnote behandelt wird. Das Tag kann auch für eine Adresse außerhalb der Struktur, z.B. nach einer Unterschrift, verwendet werden.</p>
+                                    </div>
+                                    <div class="annotation-form note" data-i18n="[label]annotations.note">
+                                        <paper-input name="note" label="Note"/>
+                                    </div>
+                                    <div class="annotation-form commentary" data-i18n="[label]annotations.commentary">
+                                        <paper-input name="commentary" label="Commentary"/>
+                                    </div>
+                                    <div class="annotation-form handShift" data-i18n="[label]annotations.handShift">
+                                        <paper-input class="form-handShift" name="scribe" data-i18n="[label]annotations.scribe" label="Scribe">
+                                            <paper-icon-button slot="prefix" icon="search" data-i18n="[label]annotations.lookup"/>
+                                        </paper-input>
+                                         <p>
+                                            <b>Dieses Tag wird automatisch direkt vor das markierte Wort gesetzt, </b>da es leer ist. Daran denken, daß beim nächsten Schreiberwechsel (z.B. falls der Text mit der ursprünglichen Hand weitergeführt wird) dieses Tag nochmals gesetzt wird. <br/>Scribe: Schreibername (bei Schreiberwechsel). <br/> Diese Änderung wird nur im TEI angezeigt.</p>
+                                    </div>
+                                    <div class="annotation-form pb" data-i18n="[label]annotations.pb">
+                                        <paper-input name="n" label="Pagenumber"/>
+                                        <paper-input name="facs" label="Facsimile-ID" style="display:none"/>
+                                        <p>Dieses Tag dient dazu, die originale Seitennumerierung einzufügen. Die Facsimile-ID bitte <b>nicht</b> ändern.</p>
+                                    </div>
+                                    <div class="annotation-form sic" data-i18n="[label]annotations.correction">
+                                        <paper-input name="corr" label="Correction"/>
+                                        <p>Korrektur des Textes - Hier kann der Text korrigiert werden, wenn der Schreiber einen Fehler gemacht haben sollte. Im Mouseover wird die ursprüngliche Fassung angezeigt.</p>
+                                    </div>
+                                    <div class="annotation-form head">
+                                        <p>
+                                            Head - Überschrift <br/> Diese Änderung wird nur im TEI angezeigt.
+                                        </p>
+                                    </div>
+                                    <div class="annotation-form opener" data-i18n="[label]annotations.opener">
+                                        <p>
+                                            Opener - Brief- oder Dokumenteröffnung. <br/> Der Opener kann eine dateline, eine Unterschrift, einen Gruß oder auch eine Adresse enthalten. Diese Änderung wird nur im TEI angezeigt.
+                                        </p>
+                                    </div>
+                                    <div class="annotation-form closer" data-i18n="[label]annotations.closer">
+                                        <p>
+                                            Closer - Schlußformulierung / Briefschluss <br/> Kann u.a. die Adresse, Unterschrift und Grußformal enthalten. Diese Änderung wird nur im TEI angezeigt.
+                                        </p>
+                                    </div>
+                                    <div class="annotation-form salute" data-i18n="[label]annotations.salute">
+                                        <p>
+                                            Salute - Gruß. <br/> Diese Änderung wird nur im TEI angezeigt.
+                                        </p>
+                                    </div>
+                                    <div class="annotation-form address" data-i18n="[label]annotations.address">
+                                        <p>
+                                            Adresse <br/> Das Tag setzt sich hier zusammen aus: &lt;address&gt;&lt;addrLine /&gt;&lt;/address&gt;, so daß TEI konform die Adresse umschlossen wird. Diese Änderung wird nur im TEI angezeigt.
+                                        </p>
+                                    </div>
+                                    <div class="annotation-form signed" data-i18n="[label]annotations.signed">
+                                        <p>
+                                            Signed - Unterschrift(en). <br/> Diese Änderung wird nur im TEI angezeigt.
+                                        </p>
+                                    </div>
+                                    <div class="annotation-form mp" data-i18n="[label]annotations.mp">
+                                        <p>Manu propria Kürzel</p>
+                                    </div>
+                                    <div class="annotation-form perge" data-i18n="[label]annotations.perge">
+                                        <p>Perge Kürzel</p>
+                                    </div>
+                                    <div class="annotation-form postscript" data-i18n="[label]annotations.postscript">
+                                        <p>
+                                            Postscriptum - P.S. <br/> Diese Änderung wird nur im TEI angezeigt.
+                                        </p>
+                                    </div>
+                                    <div class="annotation-form dateline" data-i18n="[label]annotations.dateline">
+                                        <p>
+                                            Dateline - Umgibt die Zeilen, die das Datum (und z.B. auch Ort) enthalten. Bitte daran denken, daß hier auch Inhalt-Tags (date, placeName,...) gesetzt werden müssen. <br/> Diese Änderung wird nur im TEI angezeigt.
+                                        </p>
+                                    </div>
+                                    <div class="annotation-form keepLineBreaks" data-i18n="[label]annotations.keepLineBreaks">
+                                        <p>
+                                            Der Zeilenfall wird für die Zeile, in der das Tag steht, in der Leseansicht beibehalten. <b>Nicht in eine Adresse, einen Opener oder Closer setzen.</b> <br/> Diese Änderung wird nur im TEI angezeigt.
+                                        </p>
+                                    </div>
+                                    <div class="annotation-form paragraph" data-i18n="[label]annotations.paragraph">
+                                        <p>
+                                            Textkörper (&lt;p&gt;-Tag)
+                                        </p>
+                                    </div>
+                                    <div class="annotation-form seg" data-i18n="[label]annotations.seg">
+                                        <p>
+                                            Dieses Element kann für unsicheres Tagging eingesetzt werden, wenn es später durch einen anderen Tag ausgetauscht werden soll. Diese Änderung wird nur im TEI angezeigt.
+                                        </p>
+                                    </div>
+                                    <div class="annotation-form del" data-i18n="[label]annotations.del">
+                                        <paper-input class="form-del" name="hand" data-i18n="[label]annotations.hand" label="Hand">
+                                            <paper-icon-button slot="prefix" icon="search" data-i18n="[label]annotations.lookup"/>
+                                        </paper-input>
+                                        <paper-input name="cause" data-i18n="[label]annotations.cause" label="Cause"/>
+                                        <p>
+                                            Deletion - Durchstreichung durch den Original-Autor
+                                        </p>
+                                    </div>
+                                    <div class="annotation-form indentation" data-i18n="[label]annotations.indentation">
+                                        <p>
+                                            Segment. Hiermit wird eine Einrückung eines Textabschnitts angegeben. Dieser endet mit dem Zeilenende. Das Tag wird vor das einzurückende Wort gesetzt, welches schließlich zusammen mit dem Rest der Zeile eingerückt erscheint.
+                                        </p>
+                                    </div>
+                                    <div class="annotation-form anchor" data-i18n="[label]annotations.anchor">
+                                        <p>Nur zur Korrektur einer ID. <b>Anker werden über Transkribus automatisch gesetzt!</b>
+                                        </p>
+                                        <paper-input name="xmlid" label="xml:id"/>
+                                        <paper-input name="nn" label="n"/>
+                                        <paper-dropdown-menu name="typez" id="ddanchor" style="padding-left: 10px;" data-i18n="[title]anchor.title" label="Type">
+                                    <paper-listbox id="anchorlistbox" slot="dropdown-content">
+                                        <paper-item value="default" style="display:none;"/>
+                                        <paper-item value="add">
+                                            <pb-i18n key="anchor.add"/>
+                                        </paper-item>
+                                        <paper-item value="anchor">
+                                            <pb-i18n key="anchor.anchor"/>
+                                        </paper-item>
+                                        </paper-listbox>
+                                    </paper-dropdown-menu>
+                                    </div>
+                                    <div class="annotation-form edit">
+                                        <paper-input name="content" data-i18n="[label]annotations.correction" label="Correction"/>
+                                        <p>
+                                            <pb-i18n key="annotations.modify-info"/>
+                                        </p>
+                                    </div>
+                                </form>
+                            </iron-form>
+                            <div id="occurrences">
+                                <h4>
+                                    <div>
+                                        <pb-i18n key="annotations.occurrences">Occurrences in text</pb-i18n>
+                                    </div> <paper-icon-button id="mark-all" icon="icons:done-all" data-i18n="[label]annotations.apply-all"/>
+                                </h4>
+                                <ul/>
+                            </div>
+                        </aside>
+                        <div class="text">
+                            <pb-view id="title-view1" src="document1" xpath="//teiHeader/fileDesc/titleStmt/title[@xml:lang='de']" view="single">
+                                <pb-param name="header" value="short"/>
+                            </pb-view>
+                            <pb-view-annotate id="view1" src="document1" odd="annotations" append-footnotes="append-footnotes" suppress-highlight="suppress-highlight" subscribe="transcription" emit="transcription">
+                                <pb-param name="track-ids" value="yes"/>
+                            </pb-view-annotate>
+                        </div>
+                        <aside class="preview">
+                            <header>
+                                <div class="toolbar">
+                                    <paper-icon-button id="reload-all" icon="icons:restore" data-i18n="[title]annotations.reload"/>
+                                    <paper-icon-button id="document-save" icon="icons:save" data-i18n="[title]annotations.save" data-shortcut="⌘+⇧+s,ctrl+⇧+s"/>
+                                    <paper-icon-button id="document-download" icon="icons:cloud-download" data-i18n="[title]annotations.download" hidden="true"/>
+                                    <paper-icon-button id="undo-history" icon="icons:undo" data-i18n="[title]annotations.undo"/>
+                                    <paper-icon-button id="reload-preview" icon="icons:refresh" data-i18n="[title]annotations.preview"/>
+                                    <paper-icon-button id="set-anchor" icon="maps:directions-boat" data-i18n="[title]annotations.anchor"/>
+                                </div>
+                                <pb-select-odd emit="preview" odd="FPB"/>
+                                <paper-dropdown-menu id="ddmenu" style="padding-left: 10px;" data-i18n="[title]status.title" label="Status">
+                                    <paper-listbox id="listbox" slot="dropdown-content" selected="0" onchange="choose()">
+                                        <paper-item value="default" style="display:none;"/>
+                                        <paper-item value="new">
+                                            <pb-i18n key="status.new"/>
+                                        </paper-item>
+                                        <paper-item value="inprogress">
+                                            <pb-i18n key="status.inprogress"/>
+                                        </paper-item>
+                                        <paper-item value="review">
+                                            <pb-i18n key="status.review"/>
+                                        </paper-item>
+                                        <paper-item value="final">
+                                            <pb-i18n key="status.final"/>
+                                        </paper-item>
+                                    </paper-listbox>
+                                </paper-dropdown-menu>
+                            </header>
+                            <pb-tabs>
+                                <paper-tab slot="tab">Zeilenfall ein</paper-tab>
+                                <paper-tab slot="tab">Zeilenfall aus</paper-tab>
+                                <paper-tab slot="tab">TEI</paper-tab>
+                                <paper-tab slot="tab">Facsimile</paper-tab>
+                                <paper-tab slot="tab">
+                                    <pb-i18n key="annotations.legend">Legende</pb-i18n>
+                                </paper-tab>
+                                <paper-tab slot="tab">Validierung</paper-tab>
+                                <iframe slot="page" id="html" src="about:blank"/>
+                                <iframe slot="page" id="html2" src="about:blank"/>
+                                <pb-code-highlight slot="page" id="output" language="xml" theme="default" line-numbers="true" style="max-width: 95%"/>
+                                // Add facsimile and legend to view
+                                <pb-facsimile slot="page" id="facsimile" base-uri="" default-zoom-level="0" show-navigation-control="show-navigation-control" show-home-control="" show-sequence-control=""/>
+                                <iframe slot="page" id="legend" src="../pages/legend.html" frameBorder="0" style="width: 90%"/>
+                                <div slot="page" id="validation" class="validation"/>
+                                <pre slot="page" id="json"/>
+                                <div slot="page" id="changes"/>
+                            </pb-tabs>
+                        </aside>
+                    </main>
+                </app-header-layout>
+            </app-drawer-layout>
+            <paper-dialog id="authority-dialog">
+                <paper-dialog-scrollable>
+                    <pb-authority-lookup subscribe="transcription" emit="transcription">
+                        <pb-authority connector="Custom" name="organization">
+                            <pb-authority connector="FPB_Institutions" prefix="fpb"/>
+                        </pb-authority>
+                        <pb-authority connector="Custom" name="term">
+                            <pb-authority connector="FPB_Glossary" prefix="fpb"/>
+                        </pb-authority>
+                        <pb-authority connector="Custom" name="place">
+                            <pb-authority connector="FPB_Places" prefix="fpb"/>
+                        </pb-authority>
+            
+                        <pb-authority connector="Custom" name="person">
+                            <pb-authority connector="FPB_Persons" prefix="fpb"/>
+                        </pb-authority>
+                    </pb-authority-lookup>
+                </paper-dialog-scrollable>
+                <div class="buttons">
+                    <paper-button dialog-confirm="dialog-confirm" autofocus="autofocus">
+                        <pb-i18n key="dialogs.close">Close</pb-i18n>
+                    </paper-button>
+                </div>
+            </paper-dialog>
+            <paper-dialog id="ner-dialog">
+                <paper-dialog-scrollable>
+                    <h2>
+                        <pb-i18n key="annotations.ner.title">Named Entity Extraction</pb-i18n>
+                    </h2>
+                    <p>
+                        <pb-i18n key="annotations.ner.description">Try to automatically find named entities in the text and mark them as annotations.</pb-i18n>
+                    </p>
+                    <paper-dropdown-menu data-i18n="[label]annotations.ner.model" label="Select a model">
+                        <paper-listbox slot="dropdown-content" selected="0"/>
+                    </paper-dropdown-menu>
+                    <!--p>OR</p>
+                    <paper-checkbox>Use rule-based matching</paper-checkbox>
+                    <paper-input id="lang" data-i18n="[label]ner.language"></paper-input-->
+                </paper-dialog-scrollable>
+                <div class="buttons">
+                    <paper-button id="ner-run" dialog-confirm="dialog-confirm" autofocus="autofocus">
+                        <pb-i18n key="annotations.ner.run">Find entities</pb-i18n>
+                    </paper-button>
+                    <paper-button dialog-confirm="dialog-confirm">
+                        <pb-i18n key="dialogs.close">Close</pb-i18n>
+                    </paper-button>
+                </div>
+            </paper-dialog>
+            <pb-message id="restore-dialog" data-i18n="[title]annotations.confirm-restore-title;[message]annotations.restore"/>
+            <pb-message id="confirm-reload-dialog" data-i18n="[title]annotations.confirm-reload-title;[message]annotations.confirm-reload"/>
+            <pb-message id="permission-denied-dialog" data-i18n="[title]dialogs.error;[message]annotations.permission"/>
+            <pb-message id="ner-denied-dialog" data-i18n="[title]dialogs.error;[message]annotations.ner.denied"/>
+            <pb-message id="error-dialog" data-i18n="[title]dialogs.error;[message]dialogs.serverError"/>
+            <pb-message id="runtime-error-dialog" data-i18n="[title]dialogs.error;[message]dialogs.serverError"/>
+        </pb-page>
+        <div class="splash"/>
+    </body>
+</html>

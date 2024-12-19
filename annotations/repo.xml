@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<meta xmlns="http://exist-db.org/xquery/repo"><description>FPB Annotationstool</description><author/><status>beta</status><license>GNU-LGPL</license><copyright>true</copyright><type>application</type><prepare>pre-install.xql</prepare><finish>post-install.xql</finish><target>annotations</target><permissions user="admin" group="tei" mode="rw-r--r--"/><deployed>2024-05-17T14:05:41.082+02:00</deployed></meta>

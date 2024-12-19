@@ -1,0 +1,6 @@
+<collection xmlns="http://exist.sourceforge.net/NS/exist" name="/db/apps/annotations/resources/css/pagedjs" version="1" owner="quenouille" group="tei" mode="751" created="2024-05-27T18:29:23.764+02:00">
+    <acl entries="0" version="1"/>
+    <resource type="BinaryResource" name="interface.css" skip="no" owner="quenouille" group="tei" mode="644" created="2024-05-27T18:29:23.772+02:00" modified="2024-05-27T18:29:23.772+02:00" filename="interface.css" mimetype="text/css">
+        <acl entries="0" version="1"/>
+    </resource>
+</collection>

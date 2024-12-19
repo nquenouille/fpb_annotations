@@ -1,0 +1,37 @@
+<collection xmlns="http://exist.sourceforge.net/NS/exist" name="/db/apps/annotations/templates" version="1" owner="admin" group="tei" mode="755" created="2024-05-17T14:05:37.908+02:00">
+    <acl entries="0" version="1"/>
+    <resource type="XMLResource" name="search.html" skip="no" owner="admin" group="tei" mode="640" created="2024-05-17T14:05:37.912+02:00" modified="2024-05-29T21:46:09.3+02:00" filename="search.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="odd-editor.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.121+02:00" modified="2024-05-27T18:47:18.314+02:00" filename="odd-editor.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="drawer.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.126+02:00" modified="2024-05-29T18:17:46.914+02:00" filename="drawer.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="error-page.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.134+02:00" modified="2024-05-29T21:53:08.934+02:00" filename="error-page.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="api.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.14+02:00" modified="2024-05-17T14:05:38.14+02:00" filename="api.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="index.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.145+02:00" modified="2024-06-27T18:01:25.968+02:00" filename="index.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="menu.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.16+02:00" modified="2024-05-29T18:21:20.129+02:00" filename="menu.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="menu-drawer.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.168+02:00" modified="2024-05-29T18:20:34.175+02:00" filename="menu-drawer.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="toolbar.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.175+02:00" modified="2024-05-30T14:29:14.765+02:00" filename="toolbar.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="documents.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.18+02:00" modified="2024-05-29T18:29:02.403+02:00" filename="documents.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="print-preview.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.188+02:00" modified="2024-05-17T14:05:38.188+02:00" filename="print-preview.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <subcollection name="pages" filename="pages"/>
+</collection>

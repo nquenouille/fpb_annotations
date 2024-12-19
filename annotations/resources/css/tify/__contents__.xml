@@ -1,0 +1,6 @@
+<collection xmlns="http://exist.sourceforge.net/NS/exist" name="/db/apps/annotations/resources/css/tify" version="1" owner="quenouille" group="tei" mode="751" created="2024-05-27T18:29:26.198+02:00">
+    <acl entries="0" version="1"/>
+    <resource type="BinaryResource" name="tify.css" skip="no" owner="quenouille" group="tei" mode="644" created="2024-05-27T18:29:26.205+02:00" modified="2024-05-27T18:29:26.205+02:00" filename="tify.css" mimetype="text/css">
+        <acl entries="0" version="1"/>
+    </resource>
+</collection>

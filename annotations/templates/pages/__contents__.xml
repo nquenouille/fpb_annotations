@@ -1,0 +1,87 @@
+<collection xmlns="http://exist.sourceforge.net/NS/exist" name="/db/apps/annotations/templates/pages" version="1" owner="admin" group="tei" mode="755" created="2024-05-17T14:05:38.196+02:00">
+    <acl entries="0" version="1"/>
+    <resource type="XMLResource" name="cortez-with-translation.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.198+02:00" modified="2024-05-17T14:05:38.198+02:00" filename="cortez-with-translation.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="translation.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.206+02:00" modified="2024-05-17T14:05:38.206+02:00" filename="translation.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="osinski.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.215+02:00" modified="2024-05-17T14:05:38.215+02:00" filename="osinski.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="facsimile.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.224+02:00" modified="2024-05-17T14:05:38.224+02:00" filename="facsimile.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="adagia.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.231+02:00" modified="2024-05-17T14:05:38.231+02:00" filename="adagia.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="mei.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.237+02:00" modified="2024-05-17T14:05:38.237+02:00" filename="mei.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="fpb.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.246+02:00" modified="2024-05-17T14:58:58.924+02:00" filename="fpb.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="documentation.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.255+02:00" modified="2024-05-17T14:05:38.255+02:00" filename="documentation.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="dta.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.265+02:00" modified="2024-05-17T14:05:38.265+02:00" filename="dta.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="vangogh.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.272+02:00" modified="2024-05-17T14:05:38.272+02:00" filename="vangogh.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="letter.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.28+02:00" modified="2024-05-17T14:05:38.28+02:00" filename="letter.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="lelewel.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.289+02:00" modified="2024-05-17T14:05:38.289+02:00" filename="lelewel.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="annotate.html" skip="no" owner="admin" group="tei" mode="640" created="2024-05-17T14:05:38.3+02:00" modified="2024-12-17T20:47:07.092+01:00" filename="annotate.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="shakespeare.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.343+02:00" modified="2024-05-17T14:05:38.343+02:00" filename="shakespeare.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="dantiscus.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.351+02:00" modified="2024-05-17T14:05:38.351+02:00" filename="dantiscus.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="ebbe.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.357+02:00" modified="2024-05-17T14:05:38.357+02:00" filename="ebbe.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="cortez.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.368+02:00" modified="2024-05-17T14:05:38.368+02:00" filename="cortez.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="time-us.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.373+02:00" modified="2024-05-17T14:05:38.373+02:00" filename="time-us.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="view-grid.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.392+02:00" modified="2024-05-17T14:05:38.392+02:00" filename="view-grid.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="tei-lex.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.403+02:00" modified="2024-05-17T14:05:38.403+02:00" filename="tei-lex.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="jats.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.409+02:00" modified="2024-05-17T14:05:38.409+02:00" filename="jats.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="legend.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.414+02:00" modified="2024-12-18T10:57:46.773+01:00" filename="legend.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="potocki.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.431+02:00" modified="2024-05-17T14:05:38.431+02:00" filename="potocki.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="view.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.444+02:00" modified="2024-05-17T14:05:38.444+02:00" filename="view.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="offset-alignment.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.449+02:00" modified="2024-05-17T14:05:38.449+02:00" filename="offset-alignment.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="markdown.html" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.458+02:00" modified="2024-05-17T14:05:38.458+02:00" filename="markdown.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="annotate.css" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.439+02:00" modified="2024-05-17T14:05:38.439+02:00" filename="annotate.css" mimetype="text/css">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="documentation.css" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.455+02:00" modified="2024-05-17T14:05:38.455+02:00" filename="documentation.css" mimetype="text/css">
+        <acl entries="0" version="1"/>
+    </resource>
+</collection>

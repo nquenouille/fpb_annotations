@@ -1,0 +1,109 @@
+.content {
+  margin-bottom: 40px;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.metadata {
+  max-width: 400px;
+}
+
+.list dt {
+  font-size: 75%;
+  vertical-align: top;
+}
+
+.metadata h3 {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.metadata div {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a, a:link {
+  color: inherit;
+}
+
+
+table {
+    line-height: 2em;
+}
+
+tr {
+    height: 1px;
+}
+
+td {
+    height: 100%;
+}
+
+
+.cbr-li {
+  border-left: 10px solid;
+  border-image-source: url('..//resources/images/bracket_li.svg');
+  border-image-slice: 0 0 0 100;
+  border-image-width: 0 0 0 40px;
+  padding: 2vw;
+}
+
+.cbr-ri {
+  border-left: 10px solid;
+  border-image-source: url('..//resources/images/bracket_li.svg');
+  border-image-slice: 0 100 0 0;
+  border-image-width: 0 40px 0 0;
+  padding: 2vw;
+}
+
+.cbr-ti {
+    border-image-source: url('..//resources/images/bracket_ti.svg');
+    border-image-slice: 100 0 0 0;
+    border-image-width: 30% 0 0 0;
+    padding-top: 1vw;
+    display: table ;
+    margin-top: 1vw;
+}
+
+.cbr-bi {
+    border-image-source: url('..//resources/images/bracket_bi.svg');
+    border-image-slice: 0 0 100 0;
+    border-image-width: 0 0 30% 0;
+    padding-bottom: 1vw;
+}
+
+.cbr-lo {
+  border-left: 10px solid;
+  border-image-source: url('..//resources/images/bracket_ri.svg');
+  border-image-slice: 0 0 0 100;
+  border-image-width: 0 0 0 40px;
+  padding-left: 2vw;
+}
+
+.cbr-ro {
+    border-left: 10px solid;
+    border-image-source: url('..//resources/images/bracket_ri.svg');
+    border-image-slice: 0 100 0 ;
+    border-image-width: 0 40px 0 0;
+    padding: 3vw;
+}
+
+.cbr-to {
+    border-image-source: url('..//resources/images/bracket_bi.svg');
+    border-image-slice: 100 0 0 0;
+    border-image-width: 30% 0 0 0;
+    padding-top: 1vw;
+    display: table ;
+    margin-top: 1vw;
+}
+
+.cbr-bo {
+    border-image-source: url('..//resources/images/bracket_ti.svg');
+    border-image-slice: 0 0 100 0;
+    border-image-width: 0 0 30% 0;
+    padding-bottom: 1vw;
+}

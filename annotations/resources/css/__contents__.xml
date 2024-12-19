@@ -1,0 +1,18 @@
+<collection xmlns="http://exist.sourceforge.net/NS/exist" name="/db/apps/annotations/resources/css" version="1" owner="admin" group="tei" mode="755" created="2024-05-17T14:05:41.074+02:00">
+    <acl entries="0" version="1"/>
+    <resource type="BinaryResource" name="theme.css" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:41.08+02:00" modified="2024-05-29T13:19:28.475+02:00" filename="theme.css" mimetype="text/css">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="components.css" skip="no" owner="quenouille" group="tei" mode="644" created="2024-05-27T18:28:24.919+02:00" modified="2024-05-27T18:28:24.919+02:00" filename="components.css" mimetype="text/css">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="epub.css" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:41.077+02:00" modified="2024-05-17T14:05:41.077+02:00" filename="epub.css" mimetype="text/css">
+        <acl entries="0" version="1"/>
+    </resource>
+    <subcollection name="gridjs" filename="gridjs"/>
+    <subcollection name="leaflet" filename="leaflet"/>
+    <subcollection name="pagedjs" filename="pagedjs"/>
+    <subcollection name="prismjs" filename="prismjs"/>
+    <subcollection name="tify" filename="tify"/>
+    <subcollection name="tom-select" filename="tom-select"/>
+</collection>

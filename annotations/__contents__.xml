@@ -1,0 +1,41 @@
+<collection xmlns="http://exist.sourceforge.net/NS/exist" name="/db/apps/annotations" version="1" owner="admin" group="tei" mode="755" created="2024-05-17T14:05:36.409+02:00">
+    <acl entries="0" version="1"/>
+    <resource type="XMLResource" name="build.xml" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:36.422+02:00" modified="2024-05-17T14:05:36.422+02:00" filename="build.xml" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="collection.xconf" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:36.443+02:00" modified="2024-06-27T17:27:34.806+02:00" filename="collection.xconf" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="expath-pkg.xml" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:36.461+02:00" modified="2024-05-17T14:05:36.461+02:00" filename="expath-pkg.xml" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="repo.xml" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:41.083+02:00" modified="2024-05-17T14:05:41.083+02:00" filename="repo.xml" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="package.json" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:36.413+02:00" modified="2024-05-17T14:05:36.413+02:00" filename="package.json" mimetype="application/json">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="icon.png" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:36.418+02:00" modified="2024-05-17T14:05:36.418+02:00" filename="icon.png" mimetype="image/png">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="controller.xql" skip="no" owner="admin" group="tei" mode="755" created="2024-05-17T14:05:36.449+02:00" modified="2024-05-17T14:05:36.449+02:00" filename="controller.xql" mimetype="application/xquery">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="pre-install.xql" skip="no" owner="admin" group="tei" mode="755" created="2024-05-17T14:05:36.456+02:00" modified="2024-05-17T14:05:36.456+02:00" filename="pre-install.xql" mimetype="application/xquery">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name=".gitignore" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:36.458+02:00" modified="2024-05-17T14:05:36.458+02:00" filename=".gitignore" mimetype="application/octet-stream">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="post-install.xql" skip="no" owner="admin" group="tei" mode="755" created="2024-05-17T14:05:36.466+02:00" modified="2024-05-17T14:05:36.466+02:00" filename="post-install.xql" mimetype="application/xquery">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="index.xql" skip="no" owner="admin" group="tei" mode="755" created="2024-05-17T14:05:36.44+02:00" modified="2024-06-27T17:27:08.879+02:00" filename="index.xql" mimetype="application/xquery">
+        <acl entries="0" version="1"/>
+    </resource>
+    <subcollection name="modules" filename="modules"/>
+    <subcollection name="data" filename="data"/>
+    <subcollection name="templates" filename="templates"/>
+    <subcollection name="resources" filename="resources"/>
+    <subcollection name="transform" filename="transform"/>
+</collection>

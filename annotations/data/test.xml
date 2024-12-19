@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tei:TEI xmlns:tei="http://www.tei-c.org/ns/1.0">
+    <teiHeader xmlns="http://www.tei-c.org/ns/1.0" xml:id="fpb-test">
+        <fileDesc>
+            <titleStmt>
+                <title type="modern" xml:lang="de">Testfile</title>
+                <title type="modern" xml:lang="en">Dok 836 [I, 16]</title>
+                <title type="modern" xml:lang="fr">Dok 836 [I, 16]</title>
+                <title type="modern" xml:lang="it">Dok 836 [I, 16]</title>
+            </titleStmt>
+            <publicationStmt>
+                <publisher xml:lang="de">Forschungsportal BACH</publisher>
+                <availability status="restricted">
+                    <licence target="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</licence>
+                </availability>
+                <date when="2024-08-22">Aug. 22, 2024</date>
+                <pubPlace xml:lang="de">Leipzig</pubPlace>
+            </publicationStmt>
+            <sourceDesc>
+                <msDesc>
+                    <msIdentifier>
+                        <settlement>
+                            <name xml:lang="de">Plauen</name>
+                            <name xml:lang="en">Plauen</name>
+                            <name xml:lang="fr">Plauen</name>
+                            <name xml:lang="it">Plauen</name>
+                        </settlement>
+                        <repository>
+                            <name xml:lang="de">Stadtarchiv</name>
+                            <name xml:lang="en">Stadtarchiv</name>
+                            <name xml:lang="fr">Stadtarchiv</name>
+                            <name xml:lang="it">Stadtarchiv</name>
+                        </repository>
+                        <collection>
+                            <name xml:lang="de">Autographensammlung</name>
+                            <name xml:lang="en">Autographensammlung</name>
+                            <name xml:lang="fr">Autographensammlung</name>
+                            <name xml:lang="it">Autographensammlung</name>
+                        </collection>
+                        <idno type="id">Nr. 1</idno>
+                        <altIdentifier>
+                            <idno type="rism">D-PLsta</idno>
+                        </altIdentifier>
+                        <altIdentifier>
+                            <idno type="olim">Nr. 1</idno>
+                        </altIdentifier>
+                    </msIdentifier>
+                    <msContents>
+                        <summary>
+                            <date when="1726-10-21">Oct. 21, 1726</date>
+                            <desc xml:lang="de">Brief von Johann Sebastian Bach (24) an den Rat der Stadt Plauen, 21.10.1726</desc>
+                            <desc xml:lang="en">Brief an den Rat der Stadt Plauen, 21.10.1726</desc>
+                            <desc xml:lang="fr">Brief an den Rat der Stadt Plauen, 21.10.1726</desc>
+                            <desc xml:lang="it">Brief an den Rat der Stadt Plauen, 21.10.1726</desc>
+                            <noteGrp>
+                                <note xml:lang="de">Präsentationsvermerk</note>
+                                <note xml:lang="en">Presentation note</note>
+                                <note xml:lang="fr">Note de présentation</note>
+                                <note xml:lang="it">Nota di presentazione</note>
+                            </noteGrp>
+                        </summary>
+                    </msContents>
+                    <physDesc>
+                        <objectDesc>
+                            <supportDesc>
+                                <support>
+                                    <objectType xml:lang="de">Handschrift</objectType>
+                                    <objectType xml:lang="en">Manuscript</objectType>
+                                    <objectType xml:lang="fr">Manuscript</objectType>
+                                    <objectType xml:lang="it">Manoscritto</objectType>
+                                    <objectType xml:lang="de">Brief</objectType>
+                                    <objectType xml:lang="en">Letter</objectType>
+                                    <objectType xml:lang="fr">Lettre</objectType>
+                                    <objectType xml:lang="de">Niederschrift</objectType>
+                                    <objectType xml:lang="en">Minutes</objectType>
+                                    <objectType xml:lang="fr">Minutes</objectType>
+                                    <objectType xml:lang="it">Minutes</objectType>
+                                </support>
+                                <extent>
+                                    <name xml:lang="de">4 sheets</name>
+                                    <name xml:lang="en">4 sheets</name>
+                                    <name xml:lang="fr">4 sheets</name>
+                                    <name xml:lang="it">4 sheets</name>
+                                    <dimensions scope="all" type="leaf" unit="cm">
+                                        <height unit="cm">26.0</height>
+                                        <width unit="cm">17.5</width>
+                                    </dimensions>
+                                </extent>
+                                <condition>
+                                    <p xml:lang="de">Faltung, Heftspuren, Riss</p>
+                                    <p xml:lang="en">Folding, Stitching traces, Crack</p>
+                                    <p xml:lang="fr">Pieghevole, Tracce di cucitura, Crepa</p>
+                                    <p xml:lang="it">Pliage, Traces de couture, Fissure</p>
+                                </condition>
+                            </supportDesc>
+                        </objectDesc>
+                        <scriptDesc>
+                            <scriptNote xml:lang="de" medium="Tinte"/>
+                            <scriptNote xml:lang="en" medium="Ink"/>
+                            <scriptNote xml:lang="fr" medium="Encre"/>
+                            <scriptNote xml:lang="it" medium="Inchiostro"/>
+                            <scriptNote scribeRef="BachDigitalPerson_agent_00000809"/>
+                        </scriptDesc>
+                    </physDesc>
+                    <additional>
+                        <listBibl>
+                            <bibl type="Book">
+                                <title>Schriftstücke von der Hand Johann Sebastian Bachs</title>
+                                <editor>
+                                    <name>
+                                        <forename>Werner</forename>
+                                        <surname>Neumann</surname>
+                                    </name>
+                                </editor>
+                                <editor>
+                                    <name>
+                                        <forename>Hans-Joachim</forename>
+                                        <surname>Schulze</surname>
+                                    </name>
+                                </editor>
+                                <date when="1963">1963</date>
+                                <publisher>Bärenreiter-Verlag</publisher>
+                            </bibl>
+                        </listBibl>
+                    </additional>
+                    <msPart>
+                        <msIdentifier>
+                            <idno>lw7zx</idno>
+                            <msName type="modern" xml:lang="de">Handschriften und Briefe</msName>
+                            <msName type="modern" xml:lang="en">Handschriften und Briefe</msName>
+                            <msName type="modern" xml:lang="fr">Handschriften und Briefe</msName>
+                            <msName type="modern" xml:lang="it">Handschriften und Briefe</msName>
+                        </msIdentifier>
+                    </msPart>
+                </msDesc>
+            </sourceDesc>
+        </fileDesc>
+        <encodingDesc>
+            <projectDesc>
+                <p xml:lang="de">Forschungsportal BACH - Digitale Edition der Dokumente der Musikerfamilie Bach.</p>
+            </projectDesc>
+        </encodingDesc>
+        <profileDesc>
+            <langUsage>
+                <language ident="deu">German</language>
+            </langUsage>
+        </profileDesc>
+    <revisionDesc status="undefined">
+            <change who="Bernd Koska" when="2024-09-09">Ersterfassung von Annotationen am 9.9.2024</change>
+        <change who="Nadine Quenouille" when="2024-09-10">Annotationen gesetzt</change>
+        <change who="Bernd Koska" when="2024-09-11">Annotationen gesetzt</change>
+        <change who="Test Q" when="2024-09-12">Annotationen gesetzt</change>
+        <change who="Bernd Koska" when="2024-09-13">Annotationen gesetzt</change>
+        <change who="Test Q" when="2024-09-13">Annotationen gesetzt</change>
+        <change who="Nadine Quenouille" when="2024-12-05">Annotationen gesetzt</change>
+        <change who="Nadine Quenouille" when="2024-12-10">Annotationen gesetzt</change>
+        <change who="Nadine Quenouille" when="2024-12-11">Annotationen gesetzt</change>
+        <change who="Nadine Quenouille" when="2024-12-12">Annotationen gesetzt</change>
+        <change who="Nadine Quenouille" when="2024-12-13">Annotationen gesetzt</change>
+        <change who="Nadine Quenouille" when="2024-12-16">Annotationen gesetzt</change>
+        <change who="Nadine Quenouille" when="2024-12-17">Annotationen gesetzt</change>
+        <change who="Nadine Quenouille" when="2024-12-18">Annotationen gesetzt</change>
+        </revisionDesc>
+    </teiHeader>
+    <facsimile xmlns="http://www.tei-c.org/ns/1.0" xml:id="facs_1">
+        <surface ulx="0" uly="0" lrx="1505" lry="2169">
+            <graphic url="https://iiif.saw-leipzig.de/iiif/3/fpb%2FD-PLsta%2Flw7zx%2Fd_plsta_autographensammlung_nr_1_00009.tif" width="1505px" height="2169px" rend="facstab"/>
+            <zone ulx="348" uly="114" lrx="1471" lry="1973" rendition="TextRegion" xml:id="facs_1_tr_1" subtype="front">
+                <zone ulx="898" uly="106" lrx="1406" lry="253" rendition="Line" xml:id="facs_1_tr_1_tl_2"/>
+                <zone ulx="406" uly="401" lrx="1401" lry="555" rendition="Line" xml:id="facs_1_tr_1_tl_3"/>
+                <zone ulx="499" uly="508" lrx="1455" lry="631" rendition="Line" xml:id="facs_1_tr_1_tl_4"/>
+                <zone ulx="736" uly="596" lrx="970" lry="704" rendition="Line" xml:id="facs_1_tr_1_tl_5"/>
+                <zone ulx="527" uly="684" lrx="1440" lry="822" rendition="Line" xml:id="facs_1_tr_1_tl_6"/>
+                <zone ulx="359" uly="907" lrx="1420" lry="1040" rendition="Line" xml:id="facs_1_tr_1_tl_7"/>
+                <zone ulx="413" uly="1006" lrx="1446" lry="1116" rendition="Line" xml:id="facs_1_tr_1_tl_8"/>
+                <zone ulx="421" uly="1092" lrx="1452" lry="1213" rendition="Line" xml:id="facs_1_tr_1_tl_9"/>
+                <zone ulx="425" uly="1154" lrx="1419" lry="1277" rendition="Line" xml:id="facs_1_tr_1_tl_10"/>
+                <zone ulx="437" uly="1236" lrx="1451" lry="1358" rendition="Line" xml:id="facs_1_tr_1_tl_11"/>
+                <zone ulx="442" uly="1308" lrx="1463" lry="1432" rendition="Line" xml:id="facs_1_tr_1_tl_12"/>
+                <zone ulx="437" uly="1389" lrx="1399" lry="1502" rendition="Line" xml:id="facs_1_tr_1_tl_14"/>
+                <zone ulx="936" uly="1376" lrx="1260" lry="1428" rendition="Line" xml:id="facs_1_tr_1_tl_13"/>
+                <zone ulx="445" uly="1446" lrx="1450" lry="1547" rendition="Line" xml:id="facs_1_tr_1_tl_15"/>
+                <zone ulx="455" uly="1508" lrx="1456" lry="1618" rendition="Line" xml:id="facs_1_tr_1_tl_16"/>
+                <zone ulx="449" uly="1581" lrx="1455" lry="1688" rendition="Line" xml:id="facs_1_tr_1_tl_17"/>
+                <zone ulx="465" uly="1641" lrx="1447" lry="1758" rendition="Line" xml:id="facs_1_tr_1_tl_18"/>
+                <zone ulx="455" uly="1717" lrx="1440" lry="1816" rendition="Line" xml:id="facs_1_tr_1_tl_19"/>
+                <zone ulx="477" uly="1783" lrx="1443" lry="1897" rendition="Line" xml:id="facs_1_tr_1_tl_20"/>
+                <zone ulx="479" uly="1845" lrx="1111" lry="1962" rendition="Line" xml:id="facs_1_tr_1_tl_21"/>
+            </zone>
+        </surface>
+    </facsimile>
+    <facsimile xmlns="http://www.tei-c.org/ns/1.0" xml:id="facs_2">
+        <surface ulx="0" uly="0" lrx="1506" lry="2174">
+            <graphic url="https://iiif.saw-leipzig.de/iiif/3/fpb%2FD-PLsta%2Flw7zx%2Fd_plsta_autographensammlung_nr_1_00010.tif" width="1506px" height="2174px" rend="facstab"/>
+            <zone ulx="106" uly="719" lrx="1496" lry="2114" rendition="TextRegion" xml:id="facs_2_tr_1">
+                <zone ulx="415" uly="660" lrx="1435" lry="821" rendition="Line" xml:id="facs_2_tr_1_tl_1"/>
+                <zone ulx="467" uly="757" lrx="1443" lry="876" rendition="Line" xml:id="facs_2_tr_1_tl_2"/>
+                <zone ulx="462" uly="838" lrx="1440" lry="964" rendition="Line" xml:id="facs_2_tr_1_tl_3"/>
+                <zone ulx="680" uly="839" lrx="742" lry="873" rendition="Line" xml:id="facs_2_l"/>
+                <zone ulx="462" uly="905" lrx="1495" lry="1043" rendition="Line" xml:id="facs_2_tr_1_tl_4"/>
+                <zone ulx="483" uly="981" lrx="1432" lry="1096" rendition="Line" xml:id="facs_2_tr_1_tl_5"/>
+                <zone ulx="487" uly="1051" lrx="1453" lry="1169" rendition="Line" xml:id="facs_2_tr_1_tl_6"/>
+                <zone ulx="479" uly="1113" lrx="1457" lry="1250" rendition="Line" xml:id="facs_2_tr_1_tl_7"/>
+                <zone ulx="496" uly="1187" lrx="1397" lry="1309" rendition="Line" xml:id="facs_2_tr_1_tl_8"/>
+                <zone ulx="476" uly="1259" lrx="1432" lry="1374" rendition="Line" xml:id="facs_2_tr_1_tl_9"/>
+                <zone ulx="472" uly="1325" lrx="1440" lry="1448" rendition="Line" xml:id="facs_2_tr_1_tl_10"/>
+                <zone ulx="486" uly="1397" lrx="1424" lry="1507" rendition="Line" xml:id="facs_2_tr_1_tl_11"/>
+                <zone ulx="354" uly="1484" lrx="1444" lry="1630" rendition="Line" xml:id="facs_2_tr_1_tl_12"/>
+                <zone ulx="442" uly="1585" lrx="1344" lry="1705" rendition="Line" xml:id="facs_2_tr_1_tl_13"/>
+                <zone ulx="522" uly="1645" lrx="1400" lry="1777" rendition="Line" xml:id="facs_2_tr_1_tl_14"/>
+                <zone ulx="571" uly="1733" lrx="791" lry="1854" rendition="Line" xml:id="facs_2_tr_1_tl_15"/>
+                <zone ulx="812" uly="1862" lrx="944" lry="1952" rendition="Line" xml:id="facs_2_tr_1_tl_16"/>
+                <zone ulx="1020" uly="1900" lrx="1439" lry="2017" rendition="Line" xml:id="facs_2_tr_1_tl_19"/>
+                <zone ulx="1062" uly="1984" lrx="1401" lry="2086" rendition="Line" xml:id="facs_2_tr_1_tl_21"/>
+                <zone ulx="99" uly="1836" lrx="722" lry="1983" rendition="Line" xml:id="facs_2_tr_1_tl_17"/>
+                <zone ulx="262" uly="1934" lrx="434" lry="2043" rendition="Line" xml:id="facs_2_tr_1_tl_20"/>
+                <zone ulx="387" uly="2033" lrx="1443" lry="2133" rendition="Line" xml:id="facs_2_tr_1_tl_22"/>
+            </zone>
+        </surface>
+    </facsimile>
+    <facsimile xmlns="http://www.tei-c.org/ns/1.0" xml:id="facs_3">
+        <surface ulx="0" uly="0" lrx="1521" lry="2174">
+            <graphic url="https://iiif.saw-leipzig.de/iiif/3/fpb%2FD-PLsta%2Flw7zx%2Fd_plsta_autographensammlung_nr_1_00011.tif" width="1521px" height="2174px" rend="facstab"/>
+        </surface>
+    </facsimile>
+    <facsimile xmlns="http://www.tei-c.org/ns/1.0" xml:id="facs_4">
+        <surface ulx="0" uly="0" lrx="2249" lry="1570">
+            <graphic url="https://iiif.saw-leipzig.de/iiif/3/fpb%2FD-PLsta%2Flw7zx%2Fd_plsta_autographensammlung_nr_1_00012.tif" width="2249px" height="1570px" rend="facstab"/>
+            <zone ulx="617" uly="719" lrx="1766" lry="1268" rendition="TextRegion" xml:id="facs_4_tr_1" subtype="back">
+                <zone ulx="1631" uly="702" lrx="1673" lry="732" rendition="Line" xml:id="facs_4_l"/>
+                <zone ulx="647" uly="682" lrx="1735" lry="843" rendition="Line" xml:id="facs_4_tr_1_tl_1"/>
+                <zone ulx="668" uly="765" lrx="1764" lry="912" rendition="Line" xml:id="facs_4_tr_1_tl_2"/>
+                <zone ulx="699" uly="854" lrx="1764" lry="997" rendition="Line" xml:id="facs_4_tr_1_tl_3"/>
+                <zone ulx="699" uly="936" lrx="1563" lry="1075" rendition="Line" xml:id="facs_4_tr_1_tl_4"/>
+                <zone ulx="609" uly="1010" lrx="1749" lry="1142" rendition="Line" xml:id="facs_4_tr_1_tl_5"/>
+                <zone ulx="694" uly="1100" lrx="1063" lry="1230" rendition="Line" xml:id="facs_4_tr_1_tl_6"/>
+                <zone ulx="1444" uly="1142" lrx="1697" lry="1288" rendition="Line" xml:id="facs_4_tr_1_tl_7"/>
+            </zone>
+        </surface>
+    </facsimile>
+    <text xmlns="http://www.tei-c.org/ns/1.0">
+        <body>
+            <div type="original">
+                <pb n="1" facs="#facs_1"/>
+                <milestone unit="section" facs="#facs_1_tr_1"/>
+                
+                    <lb facs="iiif:d_plsta_autographensammlung_nr_1_00009/898,106,508,147" n="N001"/>
+                    
+                        
+                            
+                                
+                        
+                        <note subtype="person" hand="fpb-dgbhd" type="presentation">
+                    <hi rend="latintype">
+                        
+                            <choice>
+                            <abbr>praes.</abbr>
+                            <expan>praesentatum</expan>
+                        </choice>
+                            
+                        
+                    </hi>
+                            
+                            
+                         den <date when="1726-10-28">28 
+<hi rend="latintype">
+                                <choice>
+                                <abbr>Oct.</abbr>
+                                <expan>Octobris</expan>
+                            </choice>
+                            </hi>
+                            
+                         1726.</date>
+                </note>
+                    
+                    
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00009/406,401,995,154" n="N002"/>
+            
+                        <opener>
+                    <salute>
+                        Hoch- und 
+                                <span>
+                                <choice>
+                                    <sic>WohEdle</sic>
+                                    <corr>WohlEdle</corr>
+                                </choice>
+                            
+                            </span>
+                         Hoch- und
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00009/499,508,956,123" n="N003"/>Wohlgelahrte, auch Hoch- und <del rend="strikethrough" hand="Autor">WohW</del>
+                    <add hand="Autor" xml:id="add1" type="addition" place="inspace">Wohlweise</add>
+                    <lb facs="iiif:d_plsta_autographensammlung_nr_1_00009/736,596,234,108" n="N004"/>
+                        
+                            <hi rend="latintype">Herren</hi>,
+                            
+                        
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00009/527,684,913,138" n="N005"/>Hoch- und Wohlgeneigte
+                         Gönner.</salute>
+                </opener>
+      
+                    
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00009/359,907,1061,133" n="N006"/>
+                    <p>
+                    
+                        Vermuthlich
+                    
+                     wird bey <hi rend="latintype">Ihnen</hi>, die <del rend="strikethrough" hand="Autor">vom</del>
+                    <add hand="Author" xml:id="add1" type="addition" place="inspace">von</add>
+                    <lb facs="iiif:d_plsta_autographensammlung_nr_1_00009/413,1006,1033,110" n="N007"/>mir vorgeschlagene Persohn, nahmens
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00009/421,1092,1031,121" n="N008"/>
+                    
+                        <add xml:id="add3" place="inspace" hand="N.N." type="addition">Georg</add>, <add xml:id="add4" place="inspace" hand="N.N." type="addition">Gottfried</add>, <persName ref="fpb-77rkr">Wagner</persName>, des noch lebenden
+                    
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00009/425,1154,994,123" n="N009"/>
+                    Cantoris von Wurtzen
+                     ältester Sohn,
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00009/437,1236,1014,122" n="N010"/>so sich von seinen ersten Jahren an, biß hie<span type="hyphen">-</span>
+                    <lb facs="iiif:d_plsta_autographensammlung_nr_1_00009/442,1308,1021,124" n="N011"/>her meist in <placeName ref="fpb-i4ygz">Leipzig</placeName>, und zwar gantz honett,
+                    
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00009/437,1389,962,113" n="N012"/>aufgehalten,<anchor n="1" type="anchor" xml:id="n-1"/> und <del rend="strikethrough" hand="Autor">die</del>
+                    <add xml:id="add5" place="inspace" hand="Autor" type="correction">den</add>
+                    
+                    <del rend="strikethrough" hand="Autor">Humaniora</del>
+                    <add xml:id="add6" place="inspace" hand="Autor" type="correction">Humanioribus</add> in
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00009/936,1376,324,52" n="N013"/>
+                    <add xml:id="ta1" place="above" hand="Autor" type="addition">Grund zu denen</add>
+                    <lb facs="iiif:d_plsta_autographensammlung_nr_1_00009/445,1446,1005,101" n="N014"/>unserer Thomas Schule als <del rend="strikethrough" hand="Autor">Alumne</del>
+                    <add xml:id="add7" place="inspace" hand="Autor" type="correction">Alumnus</add> gele<span type="hyphen">-</span>
+                    <lb facs="iiif:d_plsta_autographensammlung_nr_1_00009/455,1508,1001,110" n="N015"/>get, auch nachhero ad altiora studia alhier
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00009/449,1581,1006,107" n="N016"/>vermittelst fleißiger Besuchung der Collegiorum,
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00009/465,1641,982,117" n="N017"/>geschritten, dahero nicht unbillig vermuthe,
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00009/455,1717,985,99" n="N018"/>daß Er auch darinne das seinige gethan,
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00009/477,1783,966,114" n="N019"/>sich albereit mit einem <choice>
+                        <abbr>unterdienstl.</abbr>
+                        <expan>unterdienstlichen</expan>
+                    </choice> Schrei<span type="hyphen">-</span>
+                    <lb facs="iiif:d_plsta_autographensammlung_nr_1_00009/479,1845,632,117" n="N020"/>ben gemeldet haben.</p>
+            
+                <pb facs="#facs_2" n="2"/>
+                <milestone unit="section" facs="#facs_2_tr_1"/>
+                
+                    <lb facs="iiif:d_plsta_autographensammlung_nr_1_00010/415,660,1020,161" n="N001"/>
+                <p>Wenn dann Hoch und WohWeise Herren
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00010/467,757,976,119" n="N002"/>es pure bey Ihnen beruhet, zu ordoni<span type="hyphen">-</span>
+                    <lb facs="iiif:d_plsta_autographensammlung_nr_1_00010/462,838,978,126" n="N003"/>ren, wie  auf was Arth Dieselben erwehnten
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00010/680,839,62,34" n="N004"/>
+                    <add xml:id="ta2" place="above" hand="Autor" type="addition">und</add>
+                    <lb facs="iiif:d_plsta_autographensammlung_nr_1_00010/462,905,1033,138" n="N005"/>
+                    <choice>
+                        <abbr>Mons.</abbr>
+                        <expan>Monsieur</expan>
+                    </choice> Wagnern zur Probe zu admittieren,
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00010/483,981,949,115" n="N006"/>Hochgeneigt belieben; Als erwarte deß<span type="hyphen">-</span>
+                    <lb facs="iiif:d_plsta_autographensammlung_nr_1_00010/487,1051,966,118" n="N007"/>fals <choice>
+                        <abbr>großg.</abbr>
+                        <expan>großgünstige</expan>
+                    </choice> Nachricht, üm einiges Merck<span type="hyphen">-</span>
+                    <lb facs="iiif:d_plsta_autographensammlung_nr_1_00010/479,1113,978,137" n="N008"/>mahl meiner habenden Sorgfalt und
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00010/496,1187,901,122" n="N009"/>geneigten Dienstgeflißenheit in
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00010/476,1259,956,115" n="N010"/>der That bezeigen zu können; Wie mich
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00010/472,1325,968,123" n="N011"/>denn hiermit nochmahln bestens empfhele,
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00010/486,1397,938,110" n="N012"/>und mit aller Ergebenheit verharre</p>
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00010/354,1484,1090,146" n="N013"/>
+                    
+                        
+                            <closer>Hoch- und WohlEdle, Veste, Hoch- und Wohlge<span type="hyphen">-</span>
+                    <lb facs="iiif:d_plsta_autographensammlung_nr_1_00010/442,1585,902,120" n="N014"/>lahrte, auch Hoch- und WohlWeise
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00010/522,1645,878,132" n="N015"/>
+                Herren, Hoch- und Wohlgeneigte
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00010/571,1733,220,121" n="N016"/>Gönner
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00010/812,1862,132,90" n="N017"/>Dero
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00010/1020,1900,419,117" n="N018"/>
+                        <signed>
+                        gehorsamster Diener
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00010/1062,1984,339,102" n="N019"/>
+                            
+                                
+                                    <persName ref="fpb-dgbhd">
+                            <choice>
+                                <abbr>Joh.</abbr>
+                                <expan>Johann</expan>
+                            </choice>
+                                    
+                                
+                         <choice>
+                                    <abbr>Seb.</abbr>
+                                    <expan>Sebastian</expan>
+                                </choice> Bach</persName>
+                    </signed>
+                        
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00010/99,1836,623,147" n="N020"/>
+                        <dateline>
+                            <placeName ref="fpb-i4ygz">Leipzig.</placeName> <choice>
+                                <abbr>d.</abbr>
+                                <expan>den</expan>
+                            </choice> <date when="1726-10-21">21. 
+<choice>
+                                    <abbr>
+                                                                
+                                
+                                
+                                    
+                                    
+                                    Oct.</abbr>
+                                    <expan>Octobris</expan>
+                                </choice>
+                                    
+                                
+                                    
+                                
+                                    
+                                
+                                
+                            
+                                
+                            
+                                
+                            
+            
+                       
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00010/262,1934,172,109" n="N021"/>1726</date>.
+                        </dateline>
+                </closer>
+                
+                    
+                        
+                    
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00010/387,2033,1056,100" n="N022"/>
+                    <postscript>
+                        <p>
+                            <choice>
+                                <abbr>P. S.</abbr>
+                                <expan>Post Scriptum</expan>
+                            </choice> Erwehnter <choice>
+                                <abbr>H.</abbr>
+                                <expan>Herr</expan>
+                            </choice> <persName ref="fpb-77rkr">Wagner</persName> ist annoch ledig, <choice>
+                                <abbr>u.</abbr>
+                                <expan>und</expan>
+                            </choice> unbeweibet <choice>
+                                <abbr type="perge">p.</abbr>
+                                <expan>perge = et cetera</expan>
+                            </choice>
+                        </p>
+                    </postscript>
+            </div>
+            <div type="commentary">
+                <p>
+                    
+                
+                
+                </p>
+            </div>
+                <pb facs="#facs_3" n="3"/>
+                <div type="original_back">
+                <pb facs="#facs_4" n="4"/>
+                <milestone unit="section" facs="#facs_4_tr_1"/>
+                <p>
+                <lb facs="iiif:d_plsta_autographensammlung_nr_1_00012/1631,702,42,30" n="N001"/>
+                    
+                    
+                        <address>
+                    <addrLine>
+                        <add xml:id="add8" place="inspace" hand="N.N." type="addition">1.</add>
+                    <lb facs="iiif:d_plsta_autographensammlung_nr_1_00012/647,682,1088,161" n="N002"/>
+                    
+                        Denen Hoch- und WohlEdlen, Vesten,
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00012/668,765,1096,147" n="N003"/>Hoch- und Wohlgelahrten, auch Hoch und
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00012/699,854,1065,143" n="N004"/>WohlWeisen Herren Bürgermeistern
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00012/699,936,864,139" n="N005"/>und Rathe der Stadt <placeName ref="fpb-htawi">Plauen.</placeName>
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00012/609,1010,1140,132" n="N006"/>Meinen insonders Hoch- und Wohlgeneigten
+               <lb facs="iiif:d_plsta_autographensammlung_nr_1_00012/694,1100,369,130" n="N007"/>Patronis.
+               
+                
+                <lb facs="iiif:d_plsta_autographensammlung_nr_1_00012/1444,1142,253,146" n="N008"/>
+                            <placeName ref="fpb-htawi">Plauen.</placeName>
+                    </addrLine>
+                </address>
+                        
+                    </p>
+            
+            </div>
+            <div type="commentary_back">
+                <p/>
+            </div>
+        </body>
+    </text>
+</tei:TEI>

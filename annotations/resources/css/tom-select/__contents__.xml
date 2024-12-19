@@ -1,0 +1,15 @@
+<collection xmlns="http://exist.sourceforge.net/NS/exist" name="/db/apps/annotations/resources/css/tom-select" version="1" owner="quenouille" group="tei" mode="751" created="2024-05-27T18:29:26.403+02:00">
+    <acl entries="0" version="1"/>
+    <resource type="BinaryResource" name="tom-select.bootstrap4.min.css" skip="no" owner="quenouille" group="tei" mode="644" created="2024-05-27T18:29:26.406+02:00" modified="2024-05-27T18:29:26.406+02:00" filename="tom-select.bootstrap4.min.css" mimetype="text/css">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="tom-select.bootstrap5.min.css" skip="no" owner="quenouille" group="tei" mode="644" created="2024-05-27T18:29:26.661+02:00" modified="2024-05-27T18:29:26.661+02:00" filename="tom-select.bootstrap5.min.css" mimetype="text/css">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="tom-select.default.min.css" skip="no" owner="quenouille" group="tei" mode="644" created="2024-05-27T18:29:26.857+02:00" modified="2024-05-27T18:29:26.857+02:00" filename="tom-select.default.min.css" mimetype="text/css">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="tom-select.min.css" skip="no" owner="quenouille" group="tei" mode="644" created="2024-05-27T18:29:27.069+02:00" modified="2024-05-27T18:29:27.069+02:00" filename="tom-select.min.css" mimetype="text/css">
+        <acl entries="0" version="1"/>
+    </resource>
+</collection>

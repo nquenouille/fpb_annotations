@@ -1,0 +1,56 @@
+<collection xmlns="http://exist.sourceforge.net/NS/exist" name="/db/apps/annotations/resources/images" version="1" owner="admin" group="tei" mode="755" created="2024-05-17T14:05:38.481+02:00">
+    <acl entries="0" version="1"/>
+    <resource type="XMLResource" name="tei-publisher-logo-color.svg" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.488+02:00" modified="2024-05-17T14:05:38.488+02:00" filename="tei-publisher-logo-color.svg" mimetype="image/svg+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="wm_no_bg.svg" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.494+02:00" modified="2024-05-17T14:05:38.494+02:00" filename="wm_no_bg.svg" mimetype="image/svg+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="icon.svg" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.507+02:00" modified="2024-05-17T14:05:38.507+02:00" filename="icon.svg" mimetype="image/svg+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="tei-publisher-logo-contrast-color.svg" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.524+02:00" modified="2024-05-17T14:05:38.524+02:00" filename="tei-publisher-logo-contrast-color.svg" mimetype="image/svg+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="bracket_ti.svg" skip="no" owner="quenouille" group="dba" mode="640" created="2024-11-12T19:35:55.164+01:00" modified="2024-11-12T19:35:55.164+01:00" filename="bracket_ti.svg" mimetype="image/svg+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="bracket_bi.svg" skip="no" owner="quenouille" group="dba" mode="640" created="2024-11-12T19:35:55.228+01:00" modified="2024-11-12T19:35:55.228+01:00" filename="bracket_bi.svg" mimetype="image/svg+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="bracket_ri.svg" skip="no" owner="quenouille" group="dba" mode="640" created="2024-11-12T19:35:55.282+01:00" modified="2024-11-12T19:35:55.282+01:00" filename="bracket_ri.svg" mimetype="image/svg+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="bracket_li.svg" skip="no" owner="quenouille" group="dba" mode="640" created="2024-11-12T19:35:55.453+01:00" modified="2024-11-12T19:35:55.453+01:00" filename="bracket_li.svg" mimetype="image/svg+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="fpb_3.png" skip="no" owner="admin" group="tei" mode="644" created="2024-05-18T21:07:49.85+02:00" modified="2024-05-18T21:07:49.85+02:00" filename="fpb_3.png" mimetype="image/png">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="favicon.ico" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.483+02:00" modified="2024-05-17T14:05:38.483+02:00" filename="favicon.ico" mimetype="image/vnd.microsoft.icon">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="body-bg.png" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.485+02:00" modified="2024-05-17T14:05:38.485+02:00" filename="body-bg.png" mimetype="image/png">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="favicon-16.png" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.501+02:00" modified="2024-05-17T14:05:38.501+02:00" filename="favicon-16.png" mimetype="image/png">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="favicon-24.png" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.503+02:00" modified="2024-05-17T14:05:38.503+02:00" filename="favicon-24.png" mimetype="image/png">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="favicon-32.png" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.516+02:00" modified="2024-05-17T14:05:38.516+02:00" filename="favicon-32.png" mimetype="image/png">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="favicon-48.png" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.53+02:00" modified="2024-05-17T14:05:38.53+02:00" filename="favicon-48.png" mimetype="image/png">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="favicon-64.png" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.534+02:00" modified="2024-05-17T14:05:38.534+02:00" filename="favicon-64.png" mimetype="image/png">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="triangle-background.jpg" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:38.537+02:00" modified="2024-05-17T14:05:38.537+02:00" filename="triangle-background.jpg" mimetype="image/jpeg">
+        <acl entries="0" version="1"/>
+    </resource>
+    <subcollection name="openseadragon" filename="openseadragon"/>
+    <subcollection name="leaflet" filename="leaflet"/>
+</collection>

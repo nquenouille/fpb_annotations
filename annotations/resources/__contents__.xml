@@ -1,0 +1,10 @@
+<collection xmlns="http://exist.sourceforge.net/NS/exist" name="/db/apps/annotations/resources" version="1" owner="admin" group="tei" mode="755" created="2024-05-17T14:05:38.464+02:00">
+    <acl entries="0" version="1"/>
+    <subcollection name="i18n" filename="i18n"/>
+    <subcollection name="images" filename="images"/>
+    <subcollection name="fonts" filename="fonts"/>
+    <subcollection name="scripts" filename="scripts"/>
+    <subcollection name="odd" filename="odd"/>
+    <subcollection name="css" filename="css"/>
+    <subcollection name="lib" filename="lib"/>
+</collection>

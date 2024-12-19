@@ -1,0 +1,57 @@
+<collection xmlns="http://exist.sourceforge.net/NS/exist" name="/db/apps/annotations/data" version="1" owner="admin" group="tei" mode="775" created="2024-05-17T14:05:36.65+02:00">
+    <acl entries="0" version="1"/>
+    <resource type="XMLResource" name="ajqzu.xml" skip="no" owner="admin" group="tei" mode="664" created="2024-10-24T13:21:40.516+02:00" modified="2024-12-17T21:02:27.036+01:00" filename="ajqzu.xml" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="v5uqf.xml" skip="no" owner="admin" group="tei" mode="664" created="2024-08-22T13:43:31.389+02:00" modified="2024-12-18T11:10:10.525+01:00" filename="v5uqf.xml" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="tvjex.xml" skip="no" owner="admin" group="tei" mode="664" created="2024-06-25T17:30:34.819+02:00" modified="2024-12-18T11:09:19.042+01:00" filename="tvjex.xml" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="test.xml" skip="no" owner="quenouille" group="tei" mode="664" created="2024-12-05T19:55:17.186+01:00" modified="2024-12-18T11:00:55.631+01:00" filename="test.xml" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="taxonomy.xml" skip="no" owner="admin" group="tei" mode="664" created="2024-05-17T14:05:37.814+02:00" modified="2024-05-17T14:05:37.814+02:00" filename="taxonomy.xml" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="ekors.xml" skip="no" owner="admin" group="tei" mode="664" created="2024-08-05T09:14:48.154+02:00" modified="2024-12-18T11:10:47.701+01:00" filename="ekors.xml" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="4ry9q.xml" skip="no" owner="admin" group="tei" mode="664" created="2024-08-05T09:28:44.888+02:00" modified="2024-12-18T11:06:40.597+01:00" filename="4ry9q.xml" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="uydnf.xml" skip="no" owner="admin" group="tei" mode="664" created="2024-08-06T08:59:32.797+02:00" modified="2024-12-18T11:11:10.703+01:00" filename="uydnf.xml" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="9tnxz.xml" skip="no" owner="admin" group="tei" mode="664" created="2024-08-06T09:12:35.266+02:00" modified="2024-12-17T21:02:13.94+01:00" filename="9tnxz.xml" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="e9rjh.xml" skip="no" owner="quenouille" group="tei" mode="664" created="2024-08-14T20:04:42.703+02:00" modified="2024-12-15T11:29:17.537+01:00" filename="e9rjh.xml" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="vd07y.xml" skip="no" owner="admin" group="tei" mode="664" created="2024-06-27T14:24:35.452+02:00" modified="2024-12-18T11:11:24.938+01:00" filename="vd07y.xml" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="register.xml" skip="no" owner="quenouille" group="tei" mode="664" created="2024-12-02T19:38:46.339+01:00" modified="2024-12-17T21:07:47.811+01:00" filename="register.xml" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="khpjg.xml" skip="no" owner="admin" group="tei" mode="664" created="2024-11-12T17:15:23.246+01:00" modified="2024-12-18T11:05:17.868+01:00" filename="khpjg.xml" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="qr59s.xml" skip="no" owner="tei" group="tei" mode="664" created="2024-12-12T22:51:20.623+01:00" modified="2024-12-18T11:08:43.87+01:00" filename="qr59s.xml" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="pe1ee.xml" skip="no" owner="tei" group="tei" mode="664" created="2024-11-28T14:29:28.839+01:00" modified="2024-12-18T11:04:16.207+01:00" filename="pe1ee.xml" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="no1ml.xml" skip="no" owner="tei" group="tei" mode="664" created="2024-11-28T14:29:38.09+01:00" modified="2024-12-18T11:03:55.144+01:00" filename="no1ml.xml" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="pyzde.xml" skip="no" owner="tei" group="tei" mode="664" created="2024-11-29T08:18:23.259+01:00" modified="2024-12-18T11:08:10.69+01:00" filename="pyzde.xml" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="dozb0.xml" skip="no" owner="admin" group="tei" mode="664" created="2024-08-29T10:38:46.238+02:00" modified="2024-12-18T11:09:45.656+01:00" filename="dozb0.xml" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+</collection>

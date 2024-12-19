@@ -1,0 +1,70 @@
+<collection xmlns="http://exist.sourceforge.net/NS/exist" name="/db/apps/annotations/resources/scripts" version="1" owner="admin" group="tei" mode="755" created="2024-05-17T14:05:40.581+02:00">
+    <acl entries="0" version="1"/>
+    <resource type="BinaryResource" name="vaadin-element-mixin-eebf7393.js" skip="no" owner="admin" group="tei" mode="644" created="2024-05-27T18:36:46.846+02:00" modified="2024-05-30T14:20:35.029+02:00" filename="vaadin-element-mixin-eebf7393.js" mimetype="application/javascript">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="vaadin-element-mixin-36932c5b.js" skip="no" owner="admin" group="tei" mode="644" created="2024-05-27T18:12:11.461+02:00" modified="2024-05-27T18:12:11.461+02:00" filename="vaadin-element-mixin-36932c5b.js" mimetype="application/javascript">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="polymer-hack.js" skip="no" owner="admin" group="tei" mode="644" created="2024-05-27T18:12:11.39+02:00" modified="2024-12-10T19:35:56.018+01:00" filename="polymer-hack.js" mimetype="application/javascript">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="vaadin-element-mixin-5d018bdc.js" skip="no" owner="admin" group="tei" mode="644" created="2024-07-08T18:15:15.735+02:00" modified="2024-12-10T19:35:56.108+01:00" filename="vaadin-element-mixin-5d018bdc.js" mimetype="application/javascript">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="es-global-bridge-4240f389.js" skip="no" owner="admin" group="tei" mode="644" created="2024-05-27T18:12:11.534+02:00" modified="2024-12-10T19:35:56.182+01:00" filename="es-global-bridge-4240f389.js" mimetype="application/javascript">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="iron-form-a25b58de.js" skip="no" owner="admin" group="tei" mode="644" created="2024-05-27T18:12:11.599+02:00" modified="2024-12-10T19:35:56.257+01:00" filename="iron-form-a25b58de.js" mimetype="application/javascript">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="jinn-codemirror-dc6c3c7c.js" skip="no" owner="admin" group="tei" mode="644" created="2024-05-27T18:12:11.668+02:00" modified="2024-12-10T19:35:56.346+01:00" filename="jinn-codemirror-dc6c3c7c.js" mimetype="application/javascript">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="paper-checkbox-c9177e35.js" skip="no" owner="admin" group="tei" mode="644" created="2024-05-27T18:12:11.737+02:00" modified="2024-12-10T19:35:56.433+01:00" filename="paper-checkbox-c9177e35.js" mimetype="application/javascript">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="paper-icon-button-c3b31503.js" skip="no" owner="admin" group="tei" mode="644" created="2024-05-27T18:12:11.799+02:00" modified="2024-12-10T19:35:56.49+01:00" filename="paper-icon-button-c3b31503.js" mimetype="application/javascript">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="paper-listbox-1fc346ac.js" skip="no" owner="admin" group="tei" mode="644" created="2024-05-27T18:12:11.863+02:00" modified="2024-12-10T19:35:56.577+01:00" filename="paper-listbox-1fc346ac.js" mimetype="application/javascript">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="pb-code-editor.js" skip="no" owner="admin" group="tei" mode="644" created="2024-05-27T18:12:11.935+02:00" modified="2024-12-10T19:35:56.638+01:00" filename="pb-code-editor.js" mimetype="application/javascript">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="pb-component-docs.js" skip="no" owner="admin" group="tei" mode="644" created="2024-05-27T18:12:10.396+02:00" modified="2024-12-10T19:35:56.713+01:00" filename="pb-component-docs.js" mimetype="application/javascript">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="pb-components-bundle.js" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:40.584+02:00" modified="2024-12-10T19:35:56.806+01:00" filename="pb-components-bundle.js" mimetype="application/javascript">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="pb-edit-app.js" skip="no" owner="admin" group="tei" mode="644" created="2024-05-27T18:12:10.581+02:00" modified="2024-12-10T19:35:56.901+01:00" filename="pb-edit-app.js" mimetype="application/javascript">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="pb-elements.json" skip="no" owner="admin" group="tei" mode="644" created="2024-05-27T18:12:10.659+02:00" modified="2024-12-10T19:35:56.974+01:00" filename="pb-elements.json" mimetype="application/json">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="pb-i18n-35aa2da3.js" skip="no" owner="admin" group="tei" mode="644" created="2024-05-27T18:12:10.742+02:00" modified="2024-12-10T19:35:57.051+01:00" filename="pb-i18n-35aa2da3.js" mimetype="application/javascript">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="pb-leaflet-map.js" skip="no" owner="admin" group="tei" mode="644" created="2024-05-27T18:12:10.806+02:00" modified="2024-12-10T19:35:57.136+01:00" filename="pb-leaflet-map.js" mimetype="application/javascript">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="pb-mei.js" skip="no" owner="admin" group="tei" mode="644" created="2024-05-27T18:12:11.01+02:00" modified="2024-12-10T19:35:57.381+01:00" filename="pb-mei.js" mimetype="application/javascript">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="pb-mixin-4c3e6ab2.js" skip="no" owner="admin" group="tei" mode="644" created="2024-05-27T18:12:11.166+02:00" modified="2024-12-10T19:35:57.529+01:00" filename="pb-mixin-4c3e6ab2.js" mimetype="application/javascript">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="pb-odd-editor.js" skip="no" owner="admin" group="tei" mode="644" created="2024-05-27T18:12:11.243+02:00" modified="2024-12-10T19:35:57.599+01:00" filename="pb-odd-editor.js" mimetype="application/javascript">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="pb-tify.js" skip="no" owner="admin" group="tei" mode="644" created="2024-05-27T18:12:11.321+02:00" modified="2024-12-10T19:35:57.663+01:00" filename="pb-tify.js" mimetype="application/javascript">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="browse.js" skip="no" owner="admin" group="tei" mode="644" created="2024-05-17T14:05:40.597+02:00" modified="2024-05-17T14:05:40.597+02:00" filename="browse.js" mimetype="application/javascript">
+        <acl entries="0" version="1"/>
+    </resource>
+    <subcollection name="annotations" filename="annotations"/>
+</collection>
