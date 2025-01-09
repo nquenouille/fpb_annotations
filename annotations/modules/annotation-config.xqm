@@ -59,7 +59,7 @@ declare function anno:annotations($type as xs:string, $properties as map(*)?, $c
         case "pb" return
             <pb xmlns="http://www.tei-c.org/ns/1.0" n="{$properties?pb}" facs="{$properties?facs}" />
         case "term" return
-            <term xmlns="http://www.tei-c.org/ns/1.0" xml:id="{$properties?ref}{$properties?xmlid}" type="{$properties?types}">{$content()}</term>
+            <term xmlns="http://www.tei-c.org/ns/1.0" key="{$properties?ref}{$properties?key}" type="{$properties?typeterms}">{$content()}</term>
         case "gloss" return
             <gloss xmlns="http://www.tei-c.org/ns/1.0">
                 {
@@ -143,7 +143,7 @@ declare function anno:occurrences($type as xs:string, $key as xs:string) {
         case "place" return
             collection($config:data-default)//tei:placeName[@ref = $key]
         case "term" return
-            collection($config:data-default)//tei:term[@xml:id = $key]
+            collection($config:data-default)//tei:term[@key = $key]
         case "organization" return
             collection($config:data-default)//tei:orgName[@ref = $key]
          default return ()

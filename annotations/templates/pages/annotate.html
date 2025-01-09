@@ -339,10 +339,10 @@
                                         <p>Indirekte Erwähnung - Falls hier Bezug auf eine bekannte Person / einen bekannten Ort etc. genommen wird, die nicht namentlich genannt wird, kann hier diese mit ihrer Id annotiert werden. <br/> <b>Typ:</b> z.B.: person, place, org. <br/> <b>Key:</b> Id zu Person, Ort, Organisation, etc. </p>
                                     </div>
                                     <div class="annotation-form term" data-i18n="[label]annotations.term">
-                                        <paper-input class="form-term" name="xmlid" data-i18n="[label]annotations.xmlid" label="xml:id">
+                                        <paper-input class="form-term" name="key" data-i18n="[label]annotations.xmlid" label="key">
                                             <paper-icon-button slot="prefix" icon="search" data-i18n="[label]annotations.lookup"/>
                                         </paper-input>
-                                        <paper-dropdown-menu name="types" id="ddterm" style="padding-left: 10px;" data-i18n="[title]rs.title" label="Type">
+                                        <paper-dropdown-menu name="typeterms" id="ddterm" style="padding-left: 10px;" data-i18n="[title]rs.title" label="Type">
                                             <paper-listbox id="termlistbox" slot="dropdown-content">
                                                 <paper-item value="default" style="display:none;"/>
                                                 <paper-item value="term">

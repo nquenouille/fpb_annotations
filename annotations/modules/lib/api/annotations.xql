@@ -500,11 +500,11 @@ declare %private function anno:modify($nodes as node()*, $target as node(), $ann
                 if ($node is $target) then
                     element { node-name($node) } {
                         map:for-each($annotation?properties, function($key, $value) {
-                            if ($value != '' and $key='xmlid') then
-                                attribute {'xml:id'} {$value}
+                            if ($value != '' and $key='key') then
+                                attribute {'key'} {$value}
                             else if ($value != '' and $key='ref') then
-                                attribute {'xml:id'} {$value}
-                            else if ($value != '' and $key='types') then
+                                attribute {'key'} {$value}
+                            else if ($value != '' and $key='typeterms') then
                                 attribute {'type'} {$value}
                             else
                                 ()
