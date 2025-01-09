@@ -135,7 +135,7 @@
                 <param name="level" value="3"/>
             </model>
             <model behaviour="block">
-                <param name="content" value="concat('*',./birth/date/@when, ' ✝', ./death/date/@when, ' (',string-join(occupation, ' '), ')')"/>
+                <param name="content" value="if(./birth/date/@when and ./death/date/@when and occupation) then concat('*',./birth/date/@when, ' ✝', ./death/date/@when, ' (',string-join(occupation, ', '), ')') else if (./birth/date/@when and ./death/date/@when and not(occupation)) then concat('*',./birth/date/@when, ' ✝', ./death/date/@when) else if (./birth/date/@when and not(./death/date/@when) and not(occupation)) then concat('*',./birth/date/@when) else if (not(./birth/date/@when) and ./death/date/@when and not(occupation)) then concat('✝', ./death/date/@when) else if (not(./birth/date/@when) and ./death/date/@when and occupation) then concat('✝', ./death/date/@when, ' (',string-join(occupation, ', '), ')') else if (./birth/date/@when and not(./death/date/@when) and occupation) then concat('*',./birth/date/@when, '(',string-join(occupation, ', '), ')')  else if (not(./birth/date/@when) and not(./death/date/@when) and occupation) then concat('(',string-join(occupation, ', '), ')') else ()"/>
             </model>
             <model behaviour="paragraph">
                 <param name="content" value="./note/node()"/>
