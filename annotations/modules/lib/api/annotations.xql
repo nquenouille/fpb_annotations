@@ -625,7 +625,7 @@ declare %private function anno:find-offset($nodes as node()*, $offset as xs:int,
                             anno:find-offset(tail($nodes), $offset - anno:string-length($primary), $pos, ())
                 case element(tei:app) return
                     let $primary := $node/tei:lem
-                    let $found := anno:find-offset($primary, $offset, $pos, ())
+                    let $found := anno:find-offset($primary, $offset + anno:string-length($node), $pos, ()) (: added + anno:string-length($node) for better offset :)
                     return
                         if (exists($found)) then
                             $found
@@ -648,6 +648,12 @@ declare %private function anno:find-offset($nodes as node()*, $offset as xs:int,
                     return
                         if ($offset <= $len) then
                             [$node, $offset]
+                        (: prevents from setting a tag into a tei:abbr element :)
+                        else if ($offset > $len and $node/parent::element(tei:abbr)) then
+                            anno:find-offset(tail($nodes), $offset - $len, $pos, ())
+                        (: if the start is at the beginning of line and begins with a <choice> tag, tagging of it and the next word is possible :)
+                        else if ($pos = "start" and $offset = $len + 1) then
+                            [$node, $len + 2]
                         (: end is immediately after the node :)
                         else if ($pos = "end" and $offset = $len + 1) then
                             [$node, $len + 1]
