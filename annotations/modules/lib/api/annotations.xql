@@ -649,7 +649,7 @@ declare %private function anno:find-offset($nodes as node()*, $offset as xs:int,
                         if ($offset <= $len) then
                             [$node, $offset]
                         (: prevents from setting a tag into a tei:abbr element :)
-                        else if ($offset > $len and $node/parent::element(tei:abbr)) then
+                         else if ($offset > $len and ($node/parent::element(tei:abbr) | $node/parent::element(tei:sic) | $node/parent::element(tei:orig)) | $node/parent::element(tei:lem)) then
                             anno:find-offset(tail($nodes), $offset - $len, $pos, ())
                         (: if the start is at the beginning of line and begins with a <choice> tag, tagging of it and the next word is possible :)
                         else if ($pos = "start" and $offset = $len + 1) then
