@@ -63,9 +63,13 @@
         </model>
                 </elementSpec>
                 <elementSpec ident="choice" mode="change">
-                    <model predicate="sic and corr" behaviour="alternate">
-            <param name="default" value="sic[1]"/>
+                    <model predicate="sic and corr" behaviour="webcomponent">
+            <param name="name" value="'pb-popover'"/>
+            <param name="content" value="sic[1]"/>
             <param name="alternate" value="concat('recte: ', corr[1])"/>
+            <param name="placement" value="'top'"/>
+            <param name="fallback-placement" value="'bottom'"/>
+            <pb:template xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
             <outputRendition xml:space="preserve">
             text-decoration:underline dotted;
             </outputRendition>
@@ -79,9 +83,13 @@
                 text-decoration:underline dotted;
             </outputRendition>
         </model>
-        <model predicate="abbr and expan" behaviour="alternate">
+        <model predicate="abbr and expan" behaviour="webcomponent">
+            <param name="name" value="'pb-popover'"/>
+            <param name="content" value="abbr[1]"/>
             <param name="alternate" value="expan[1]"/>
-            <param name="default" value="abbr[1]"/>
+            <param name="placement" value="'top'"/>
+            <param name="fallback-placement" value="'bottom'"/>
+            <pb:template xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
             <outputRendition xml:space="preserve">
             text-decoration:underline dotted;
             </outputRendition>
@@ -90,9 +98,13 @@
             <model predicate="orig and reg[@type='modern']" behaviour="inline">
             <param name="content" value="reg"/>
         </model>
-                    <model predicate="orig and reg" behaviour="alternate">
-            <param name="default" value="reg[1]"/>
+                    <model predicate="orig and reg" behaviour="webcomponent">
+            <param name="name" value="'pb-popover'"/>
+            <param name="content" value="reg[1]"/>
             <param name="alternate" value="orig[1]"/>
+            <param name="placement" value="'top'"/>
+            <param name="fallback-placement" value="'bottom'"/>
+            <pb:template xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
             <outputRendition xml:space="preserve">
             text-decoration:underline dotted;
             </outputRendition>
@@ -106,9 +118,13 @@
         </model>
                 </elementSpec>
                 <elementSpec ident="date" mode="change">
-                    <model output="web" predicate="@when" behaviour="alternate">
-            <param name="default" value="."/>
+                    <model output="web" predicate="@when" behaviour="webcomponent">
+            <param name="name" value="'pb-popover'"/>
+            <param name="content" value="."/>
             <param name="alternate" value="@when"/>
+            <param name="placement" value="'bottom'"/>
+            <param name="fallback-placement" value="'right'"/>
+            <pb:template xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
             <outputRendition xml:space="preserve">
             text-decoration: underline dotted;
             </outputRendition>
@@ -153,10 +169,14 @@
         </model>
                 </elementSpec>
                 <elementSpec ident="rs" mode="add">
-                    <model behaviour="alternate">
-                        <param name="default" value="."/>
+                    <model behaviour="webcomponent">
+                        <param name="name" value="'pb-popover'"/>
+                        <param name="content" value="."/>
                         <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
                         <param name="alternate" value="if(@type='person' and starts-with(@key, 'fpb-')) then id(@key, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(@type='place' and starts-with(@key, 'fpb-')) then id(@key, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/placeName/text() else if(@type='organization' and starts-with(@key, 'fpb-')) then id(@key, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/orgName/text() else ./@key"/>
+                        <param name="placement" value="'right'"/>
+                        <param name="fallback-placement" value="'left'"/>
+                        <pb:template xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
                         <outputRendition xml:space="preserve">
                             text-decoration: underline dotted;
                         </outputRendition>
@@ -175,64 +195,92 @@
         </model>
                 </elementSpec>
                 <elementSpec ident="note" mode="change">
-                    <model behaviour="alternate" predicate="@type='presentation'">
-                        <param name="default" value="."/>
+                    <model behaviour="webcomponent" predicate="@type='presentation'">
+                        <param name="name" value="'pb-popover'"/>
+                        <param name="content" value="."/>
                         <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
                         <param name="alternate" value="if(@subtype='person' and starts-with(@hand, 'fpb-')) then concat('Präsentationsvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Präsentationsvermerk, ergänzt von: ', ./@hand)"/>
+                        <param name="placement" value="'left'"/>
+                        <param name="fallback-placement" value="'right'"/>
+                        <pb:template xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
                         <outputRendition xml:space="preserve">
                             color: grey;
                             text-decoration: underline dotted;
                         </outputRendition>
                     </model>
-                    <model behaviour="inline" predicate="@type='received'">
-                        <param name="default" value="."/>
+                    <model behaviour="webcomponent" predicate="@type='received'">
+                        <param name="name" value="'pb-popover'"/>
+                        <param name="content" value="."/>
                         <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
                         <param name="alternate" value="if(@subtype='person' and starts-with(@hand, 'fpb-')) then concat('Empfangsvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Empfangsvermerk, ergänzt von: ', ./@hand)"/>
+                        <param name="placement" value="'left'"/>
+                        <param name="fallback-placement" value="'right'"/>
+                        <pb:template xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template> 
                         <outputRendition xml:space="preserve">
                             color: grey;
                             text-decoration: underline dotted;
                         </outputRendition>
                     </model>
-                    <model behaviour="inline" predicate="@type='possessor'">
-                        <param name="default" value="."/>
+                    <model behaviour="webcomponent" predicate="@type='possessor'">
+                        <param name="name" value="'pb-popover'"/>
+                        <param name="content" value="."/>
                         <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
                         <param name="alternate" value="if(@subtype='person' and starts-with(@hand, 'fpb-')) then concat('Besitzvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Besitzvermerk, ergänzt von: ', ./@hand)"/>
+                        <param name="placement" value="'left'"/>
+                        <param name="fallback-placement" value="'right'"/>
+                        <pb:template xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
                         <outputRendition xml:space="preserve">
                             color: grey;
                             text-decoration: underline dotted;
                         </outputRendition>
                     </model>
-                    <model behaviour="inline" predicate="@type='address'">
-                        <param name="default" value="."/>
+                    <model behaviour="webcomponent" predicate="@type='address'">
+                        <param name="name" value="'pb-popover'"/>
+                        <param name="content" value="."/>
                         <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
                         <param name="alternate" value="if(starts-with(@hand, 'fpb-')) then concat('Adressvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Adressvermerk, ergänzt von: ', ./@hand)"/>
+                        <param name="placement" value="'left'"/>
+                        <param name="fallback-placement" value="'right'"/>
+                        <pb:template xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
                         <outputRendition xml:space="preserve">
                             color: grey;
                             text-decoration: underline dotted;
                         </outputRendition>
                     </model>
-                     <model behaviour="inline" predicate="@type='numbering'">
-                        <param name="default" value="."/>
+                     <model behaviour="webcomponent" predicate="@type='numbering'">
+                        <param name="name" value="'pb-popover'"/>
+                        <param name="content" value="."/>
                         <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
                         <param name="alternate" value="if(starts-with(@hand, 'fpb-')) then concat('Numerierungsvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Numerierungsvermerk, ergänzt von: ', ./@hand)"/>
+                        <param name="placement" value="'left'"/>
+                        <param name="fallback-placement" value="'right'"/>
+                        <pb:template xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
                         <outputRendition xml:space="preserve">
                             color: grey;
                             text-decoration: underline dotted;
                         </outputRendition>
                     </model>
-                     <model behaviour="inline" predicate="@type='postalNote'">
-                        <param name="default" value="."/>
+                     <model behaviour="webcomponent" predicate="@type='postalNote'">
+                        <param name="name" value="'pb-popover'"/>
+                        <param name="content" value="."/>
                         <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
                         <param name="alternate" value="if(starts-with(@hand, 'fpb-')) then concat('Postvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Postvermerk, ergänzt von: ', ./@hand)"/>
+                        <param name="placement" value="'left'"/>
+                        <param name="fallback-placement" value="'right'"/>
+                        <pb:template xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
                         <outputRendition xml:space="preserve">
                             color: grey;
                             text-decoration: underline dotted;
                         </outputRendition>
                     </model>
-                     <model behaviour="inline" predicate="@type='other'">
-                        <param name="default" value="."/>
+                     <model behaviour="webcomponent" predicate="@type='other'">
+                        <param name="name" value="'pb-popover'"/>
+                        <param name="content" value="."/>
                         <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
                         <param name="alternate" value="if(starts-with(@hand, 'fpb-')) then concat('Sonstiger Vermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Sonstiger Vermerk, ergänzt von: ', ./@hand)"/>
+                        <param name="placement" value="'left'"/>
+                        <param name="fallback-placement" value="'right'"/>
+                        <pb:template xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
                         <outputRendition xml:space="preserve">
                             color: grey;
                             text-decoration: underline dotted;
@@ -317,9 +365,13 @@
                 </elementSpec>
                 <elementSpec ident="anchor" mode="change">
 <!--                <model behaviour="alternate" predicate="$parameters?mode='normalized'">-->
-                    <model behaviour="alternate" predicate="contains(@xml:id, 'a')">
-                    <param name="default" value="for $a in . return if(concat('t', $a/@xml:id) = $a/following::add/@xml:id) then $a/following::add[@xml:id = concat('t', $a/@xml:id)]/node() else ()"/>
+                    <model behaviour="webcomponent" predicate="contains(@xml:id, 'a') and not(preceding-sibling::del[1] and concat('t', ./@xml:id) = ./following::add/@xml:id)">
+                    <param name="name" value="'pb-popover'"/>
+                    <param name="content" value="for $a in . return if(concat('t', $a/@xml:id) = $a/following::add/@xml:id) then $a/following::add[@xml:id = concat('t', $a/@xml:id)]/node() else ()"/>
                     <param name="alternate" value="if (preceding-sibling::add[1]/del[1]) then concat('Ergänzt von: ', for $a in . return if(concat('t', $a/@xml:id) = $a/following::add/@xml:id) then $a/following::add[@xml:id = concat('t', $a/@xml:id)]/@hand else (), ' Ursprüngliche Lesart: ', preceding-sibling::add[1]/del[1]/text()) else concat('Ergänzt von: ', for $a in . return if(concat('t', $a/@xml:id) = $a/following::add/@xml:id) then $a/following::add[@xml:id = concat('t', $a/@xml:id)]/@hand else ())"/>
+                    <param name="placement" value="'bottom'"/>
+                    <param name="fallback-placement" value="'top'"/>
+                    <pb:template xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
                     <outputRendition xml:space="preserve">
                         text-decoration: underline dotted;
                     </outputRendition>
@@ -338,18 +390,28 @@
 <!--        </model>-->
                 </elementSpec>
                 <elementSpec ident="term" mode="add">
-                    <model predicate="@type='term'" behaviour="alternate">
-            <param name="alternate" value="if(@type='term') then let $s := id(@key, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/def/string() return  concat(id(@key, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/orth/term/string(), ': ', $s) else ()"/>
-            <param name="default" value="."/>
+                    <model predicate="@type='term'" behaviour="webcomponent">
+                    <param name="name" value="'pb-popover'"/>
+                    <param name="content" value="."/>
+                    <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
+                    <param name="alternate" value="if(@type='term') then let $s := id(@key, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/def/string() return  concat(id(@key, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/orth/term/string(), ': ', $s) else ()"/>
+                    <param name="placement" value="'bottom'"/>
+                    <param name="fallback-placement" value="'top'"/>
+                    <pb:template xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
             <outputRendition xml:space="preserve">
             text-decoration: underline dotted;
             </outputRendition>
         </model>
                 </elementSpec>
                 <elementSpec ident="gap" mode="change">
-                    <model behaviour="alternate">
-            <param name="default" value="'[ ]'"/>
-            <param name="alternate" value="concat('Textverlust durch ', @reason)"/>
+                                        <model behaviour="webcomponent">
+                    <param name="name" value="'pb-popover'"/>
+                    <param name="content" value="'[ ]'"/>
+                    <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
+                    <param name="alternate" value="concat('Textverlust durch ', @reason)"/>
+                    <param name="placement" value="'top'"/>
+                    <param name="fallback-placement" value="'bottom'"/>
+                    <pb:template xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
         </model>
                     <model predicate="desc" behaviour="inline">
             <outputRendition xml:space="preserve">
@@ -448,7 +510,7 @@
                 <elementSpec ident="add" mode="change">
 <!--                <model behaviour="omit" predicate="not(@place='inspace') and $parameters?mode='normalized'"/>-->
 <!--                    <model predicate="@place='bottom' and $parameters?mode='normalized'" behaviour="inline">-->                    
-        <model predicate="@type='correction' and @hand='Autor'" behaviour="alternate">
+<!--         <model predicate="@type='correction' and @hand='Autor'" behaviour="alternate">
             <param name="default" value="."/>
             <param name="alternate" value="if(preceding::del[1]) then (if(@hand) then concat('Korrigiert von: ', @hand, '; Ursprüngliche Lesart: ', preceding::del[1]) else concat('Ursprüngliche Lesart: ', preceding::del[1])) else (if(@hand) then concat('Korrigiert von: ', @hand, '; Ursprüngliche Lesart: ', ancestor::*/preceding::del[1]) else concat('Ursprüngliche Lesart: ', ancestor::*/preceding::del[1]))"/>
             <outputRendition xml:space="preserve">
@@ -461,17 +523,22 @@
             <outputRendition xml:space="preserve">
             text-decoration: underline dotted;
             </outputRendition>
-        </model>
-                    <model behaviour="alternate" predicate="@hand='Autor' and @type='addition'">
+        </model> -->
+            <!-- <model behaviour="alternate" predicate="@hand='Autor' and @type='addition'">
             <param name="default" value="."/>
             <param name="alternate" value="concat('Ergänzt von: ', @hand)"/>
             <outputRendition xml:space="preserve">
             text-decoration: underline dotted;
             </outputRendition>
-        </model>
-         <model behaviour="alternate" predicate="not(@hand='Autor') and @type='addition'">
-            <param name="default" value="."/>
-            <param name="alternate" value="concat('Ergänzt von: ', @hand)"/>
+        </model> -->
+         <model predicate="not(@hand='Autor') and @type='addition'" behaviour="webcomponent">
+                    <param name="name" value="'pb-popover'"/>
+                    <param name="content" value="."/>
+                    <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
+                    <param name="alternate" value="concat('Ergänzt von: ', @hand)"/>
+                    <param name="placement" value="'right'"/>
+                    <param name="fallback-placement" value="'left'"/>
+                    <pb:template xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
             <outputRendition xml:space="preserve">
                 color: grey;
             </outputRendition>
@@ -522,16 +589,25 @@
                 </elementSpec>
                 <elementSpec ident="span" mode="add">
 <!--                    <model predicate="$parameters?mode='normalized' and @type='hyphen'" behaviour="omit"/>-->
-                     <model predicate="child::anchor" behaviour="alternate">
-                        <param name="default" value="."/>
-                        <param name="alternate" value="for $anchor in child::anchor/@n return  root($parameters?root)//div//note[@type='note'][@n=$anchor]/node()"/>
+                     <model predicate="child::anchor" behaviour="webcomponent">
+                    <param name="name" value="'pb-popover'"/>
+                    <param name="content" value="."/>
+                    <param name="alternate" value="for $anchor in child::anchor/@n return root($parameters?root)//div//note[@type='note'][@n=$anchor]/node()"/>
+                    <param name="placement" value="'right'"/>
+                    <param name="fallback-placement" value="'left'"/>
+                    <pb:template xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
                         <outputRendition xml:space="preserve">
                         text-decoration: underline dotted;
                         </outputRendition>
                     </model>
-                    <model predicate="child::note" behaviour="alternate">
-            <param name="default" value="."/>
-            <param name="alternate" value="note/text()"/>
+                    <model predicate="child::note" behaviour="webcomponent">
+                    <param name="name" value="'pb-popover'"/>
+                    <param name="content" value="."/>
+                    <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
+                    <param name="alternate" value="note/node()"/>
+                    <param name="placement" value="'right'"/>
+                    <param name="fallback-placement" value="'left'"/>
+                    <pb:template xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
             <outputRendition xml:space="preserve">
             text-decoration: underline dotted;
             </outputRendition>
@@ -647,23 +723,48 @@
             </outputRendition>
         </model>
                 </elementSpec>
-                <elementSpec ident="del" mode="change">
-<!--                    <model predicate="$parameters?mode='normalized' and (following-sibling::add[1] or following-sibling::*/add[1])" behaviour="omit">-->
-                    <model predicate="(following-sibling::add[1] or following-sibling::*/add[1])" behaviour="omit">
-            <param name="content" value="' '"/>
-        </model>
+<elementSpec ident="del" mode="change">
+                    <model predicate="(following-sibling::add[1][@type='correction'] and following-sibling::add[1][not(@hand='Autor')]) or (following-sibling::*/add[1][@type='correction'] and following-sibling::*/add[1][not(@hand='Autor')])" behaviour="webcomponent">
+                        <param name="name" value="'pb-popover'"/>
+                        <param name="content" value="."/>
+                        <param name="alternate" value="if(following-sibling::add[1]) then (if(following-sibling::add[1]/@hand) then concat('Korrigiert von: ', following-sibling::add[1]/@hand, ' zu: ', .) else concat('Korrigiert zu: ', following-sibling::add[1]/text())) else ()"/>
+                        <param name="placement" value="'right'"/>
+                        <param name="fallback-placement" value="'left'"/>
+                        <pb:template xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                        <outputRendition xml:space="preserve">
+                            color: grey;
+                        </outputRendition>
+                    </model>
+                    <model predicate="(following-sibling::add[1][@type='correction'] and following-sibling::add[1][@hand='Autor']) or (following-sibling::*/add[1][@type='correction'] and following-sibling::*/add[1][@hand='Autor'])" behaviour="webcomponent">
+                        <param name="name" value="'pb-popover'"/>
+                        <param name="content" value="following-sibling::add[1]/text()"/>
+                        <param name="alternate" value="if(following-sibling::add[1]) then (if(following-sibling::add[1]/@hand) then concat('Korrigiert von: ', following-sibling::add[1]/@hand, ' Ursprüngliche Lesart: ', .) else concat('Ursprüngliche Lesart: ', following-sibling::add[1]/text())) else ()"/>
+                        <param name="placement" value="'right'"/>
+                        <param name="fallback-placement" value="'left'"/>
+                        <pb:template xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                        <outputRendition xml:space="preserve">
+                            text-decoration: underline dotted;
+                        </outputRendition>
+                    </model>
         <model predicate="parent::add[1] and parent::add[1]/following::anchor" behaviour="omit"/>
-<!--                    <model predicate="$parameters?mode='normalized' and not(following-sibling::add[1]) and not(following-sibling::*/add[1])" behaviour="alternate">-->
-            <model predicate="not(following-sibling::add[1]) and not(following-sibling::*/add[1]) and @hand='Autor'" behaviour="alternate">
-            <param name="default" value="'〈…〉'"/>
-            <param name="alternate" value="if(contains(child::span/text(), '-')) then concat('Ursprüngliche Lesart: ', replace(., '-', '')) else concat('Ursprüngliche Lesart: ', .)"/>
+            <model predicate="not(following-sibling::add[1]) and not(following-sibling::*/add[1]) and @hand='Autor'" behaviour="webcomponent">
+                <param name="name" value="'pb-popover'"/>
+                <param name="content" value="'〈…〉'"/>
+                <param name="alternate" value="if(contains(child::span/text(), '-')) then concat('Ursprüngliche Lesart: ', replace(., '-', '')) else concat('Ursprüngliche Lesart: ', .)"/>
+                <param name="placement" value="'right'"/>
+                <param name="fallback-placement" value="'left'"/>
+                <pb:template xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
             <outputRendition xml:space="preserve">
             text-decoration: underline dotted;
             </outputRendition>
         </model>
-        <model predicate="not(following-sibling::add[1]) and not(following-sibling::*/add[1]) and not(@hand='Autor')" behaviour="alternate">
-            <param name="default" value="."/>
+        <model predicate="not(following-sibling::add[1]) and not(following-sibling::*/add[1]) and not(@hand='Autor')" behaviour="webcomponent">
+            <param name="name" value="'pb-popover'"/>
+            <param name="content" value="."/>
             <param name="alternate" value="concat('Gestrichen von: ', @hand)"/>
+            <param name="placement" value="'right'"/>
+            <param name="fallback-placement" value="'left'"/>
+            <pb:template xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
             <outputRendition xml:space="preserve">
             text-decoration: underline dotted;
             </outputRendition>
@@ -779,16 +880,24 @@
                     <model behaviour="inline"/>
                 </elementSpec>
                 <elementSpec ident="unclear" mode="change">
-                    <model predicate="not(@reason='illegible')" behaviour="alternate">
-            <param name="default" value="if (child::note[@type='commentary']) then replace(., child::note/text(), '') else ."/>
-            <param name="alternate" value="if (child::note[@type='commentary']) then note/text() else 'Lesart unsicher.'"/>
+                    <model predicate="not(@reason='illegible')" behaviour="webcomponent">
+                    <param name="name" value="'pb-popover'"/>
+                    <param name="content" value="if (child::note[@type='commentary']) then replace(., child::note/text(), '') else ."/>
+                    <param name="alternate" value="if (child::note[@type='commentary']) then note/text() else 'Lesart unsicher.'"/>
+                    <param name="placement" value="'bottom'"/>
+                    <param name="fallback-placement" value="'top'"/>
+                    <pb:template xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
             <outputRendition xml:space="preserve">
             text-decoration: underline dotted;
             </outputRendition>
         </model>
-                    <model predicate="@reason='illegible'" behaviour="alternate">
-            <param name="default" value="' 〈…〉 '"/>
-            <param name="alternate" value="if (child::note[@type='commentary']) then note/text() else 'Unleserlich.'"/>
+                    <model predicate="@reason='illegible'" behaviour="webcomponent">
+                    <param name="name" value="'pb-popover'"/>
+                    <param name="content" value="' 〈…〉 '"/>
+                    <param name="alternate" value="if (child::note[@type='commentary']) then note/text() else 'Unleserlich.'"/>
+                    <param name="placement" value="'bottom'"/>
+                    <param name="fallback-placement" value="'top'"/>
+                    <pb:template xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
         </model>
                 </elementSpec>
                 <elementSpec ident="emph" mode="change">
@@ -844,18 +953,26 @@
                     <model behaviour="block"/>
                 </elementSpec>
             <elementSpec ident="num" mode="add">
-                    <model predicate="child::note" behaviour="alternate">
-            <param name="default" value="."/>
-            <param name="alternate" value="note/text()"/>
+                    <model predicate="child::note" behaviour="webcomponent">
+                    <param name="name" value="'pb-popover'"/>
+                    <param name="content" value="."/>
+                    <param name="alternate" value="note/node()"/>
+                    <param name="placement" value="'right'"/>
+                    <param name="fallback-placement" value="'left'"/>
+                    <pb:template xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
             <outputRendition xml:space="preserve">
             text-decoration: underline dotted; display: flex;
             </outputRendition>
         </model>
                 </elementSpec>
             <elementSpec ident="metamark" mode="add">
-                    <model behaviour="alternate">
-            <param name="default" value="'......'"/>
-            <param name="alternate" value="'Fehlstelle'"/>
+                    <model behaviour="webcomponent">
+                    <param name="name" value="'pb-popover'"/>
+                    <param name="content" value="'......'"/>
+                    <param name="alternate" value="'Fehlstelle'"/>
+                    <param name="placement" value="'top'"/>
+                    <param name="fallback-placement" value="'bottom'"/>
+                    <pb:template xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
             <outputRendition xml:space="preserve">
             color: transparent;
             </outputRendition>
