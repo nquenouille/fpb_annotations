@@ -469,6 +469,7 @@
         </model>
                 </elementSpec>
                 <elementSpec ident="lb" mode="change">
+                    <model predicate="following-sibling::*[1][self::add[contains(@xml:id, 'ta')]]" behaviour="omit"/>
                     <model predicate="$parameters?mode='normalized' and not(ancestor::closer) and not(ancestor::opener) and not(ancestor::address) and not(following-sibling::seg[@type='keepLB'][1]) and not(ancestor::head) and not(ancestor::signed)" behaviour="omit"/>
                     <modelSequence>
             <model predicate="not($parameters?mode='normalized') and not(parent::cell)" behaviour="break">
@@ -586,6 +587,12 @@
         </model>
                     <model predicate="parent::body or parent::front or parent::back" behaviour="section"/>
                     <model behaviour="block"/>
+                </elementSpec>
+                <!-- If the hyphenated words are wrapped with <w> tags, the words are shown normally in normalized view without a gap -->
+                 <elementSpec ident="w" mode="change">
+                      <model predicate="$parameters?mode='normalized'" behaviour="inline">
+                      <param name="content" value="(node() except (lb, span[@type='hyphen']))/normalize-space()[.] => string-join()"/>
+                      </model>
                 </elementSpec>
                 <elementSpec ident="span" mode="add">
 <!--                    <model predicate="$parameters?mode='normalized' and @type='hyphen'" behaviour="omit"/>-->
