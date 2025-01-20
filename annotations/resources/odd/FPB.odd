@@ -720,16 +720,7 @@
         </modelSequence>
                 </elementSpec>
                 <elementSpec ident="signed" mode="change">
-                    <model predicate="parent::closer" behaviour="inline">
-            <outputRendition xml:space="preserve">
-            
-            </outputRendition>
-        </model>
-                    <model behaviour="inline">
-            <outputRendition xml:space="preserve">
-            font-style: italic;
-            </outputRendition>
-        </model>
+                    <model predicate="parent::closer" behaviour="inline" />
                 </elementSpec>
         <elementSpec ident="del" mode="change">
                     <model predicate="(following-sibling::add[1][@type='correction' and not(@hand='Autor')]) or (following-sibling::*/add[1][@type='correction'and not(@hand='Autor')])" behaviour="inline">

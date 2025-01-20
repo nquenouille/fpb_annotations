@@ -23,7 +23,7 @@ declare function anno:annotations($type as xs:string, $properties as map(*)?, $c
         case "hi" return
             <hi xmlns="http://www.tei-c.org/ns/1.0" rend="{$properties?rend}">{$content()}</hi>
         case "del" return
-            <del xmlns="http://www.tei-c.org/ns/1.0" rend="strikethrough" hand="{$properties?ref}{$properties?hand}" cause="{$properties?cause}">
+            <del xmlns="http://www.tei-c.org/ns/1.0" rend="strikethrough" hand="{$properties?ref}{$properties?hand}">
               {$content()}
             </del>
         case "abbr" return
