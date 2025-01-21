@@ -460,6 +460,26 @@ declare %private function anno:modify($nodes as node()*, $target as node(), $ann
                         $node/@*,
                         anno:modify($node/node(), $target, $annotation)
                     }
+            case element(tei:del) return
+                if ($node is $target) then
+                    element { node-name($node) } {
+                        map:for-each($annotation?properties, function($key, $value) {
+                            if ($value != '' and $key='handdel') then
+                                attribute {'hand'} {$value}
+                            else if ($value != '' and $key='ref') then
+                                attribute {'hand'} {$value}
+                            else if ($value != '' and $key='rend') then
+                                attribute {'rend'} {'strikethrough'}
+                            else
+                                ()
+                        }),
+                        anno:modify($node/node(), $target, $annotation)
+                    }
+                else
+                    element { node-name($node) } {
+                        $node/@*,
+                        anno:modify($node/node(), $target, $annotation)
+                    }
             case element(tei:rs) return
                 if ($node is $target) then
                     element { node-name($node) } {
