@@ -365,30 +365,30 @@
                 </elementSpec>
                 <elementSpec ident="anchor" mode="change">
 <!--                <model behaviour="alternate" predicate="$parameters?mode='normalized'">-->
-                    <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = ./following::add[@type='addition']/@xml:id) and not((concat('t', ./@xml:id) = ./following::add[@type='addition'][@hand='Autor']/@xml:id))" behaviour="inline">
-                    <param name="name" value="'pb-popover'"/>
-                    <param name="content" value="for $a in . return if(concat('t', $a/@xml:id) = $a/following::add/@xml:id) then $a/following::add[@xml:id = concat('t', $a/@xml:id)]/node() else ()"/>
-                    <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
-                    <param name="alternate" value="if (preceding-sibling::add[1]/del[1]) then concat('Ergänzt von: ', for $a in . return if(concat('t', $a/@xml:id) = $a/following::add/@xml:id) then $a/following::add[@xml:id = concat('t', $a/@xml:id)]/@hand else (), ' Ursprüngliche Lesart: ', preceding-sibling::add[1]/del[1]/text()) else concat('Ergänzt von: ', for $a in . return if(concat('t', $a/@xml:id) = $a/following::add/@xml:id) then $a/following::add[@xml:id = concat('t', $a/@xml:id)]/@hand else ())"/>
-                    <param name="placement" value="'left'"/>
-                    <param name="fallback-placement" value="'right'"/>
-                    <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-                    <outputRendition xml:space="preserve">
-                        color: grey;
-                    </outputRendition>
-                </model>
-                    <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = ./following::add[@type='addition'][@hand='Autor']/@xml:id)" behaviour="inline">
-                    <param name="name" value="'pb-popover'"/>
-                    <param name="content" value="for $a in . return if(concat('t', $a/@xml:id) = $a/following::add/@xml:id) then $a/following::add[@xml:id = concat('t', $a/@xml:id)]/node() else ()"/>
-                    <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
-                    <param name="alternate" value="if (preceding-sibling::add[1]/del[1]) then concat('Ergänzt von: ', for $a in . return if(concat('t', $a/@xml:id) = $a/following::add/@xml:id) then $a/following::add[@xml:id = concat('t', $a/@xml:id)]/@hand else (), ' Ursprüngliche Lesart: ', preceding-sibling::add[1]/del[1]/text()) else concat('Ergänzt von: ', for $a in . return if(concat('t', $a/@xml:id) = $a/following::add/@xml:id) then $a/following::add[@xml:id = concat('t', $a/@xml:id)]/@hand else ())"/>
-                    <param name="placement" value="'left'"/>
-                    <param name="fallback-placement" value="'right'"/>
-                    <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-            <outputRendition xml:space="preserve">
-            text-decoration: underline dotted;
-            </outputRendition>
-        </model>
+                    <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = ./following::add[@type='addition']/@xml:id) and not((concat('t', ./@xml:id) = ./following::add[@type='addition'][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]/@xml:id))" behaviour="inline">
+                        <param name="name" value="'pb-popover'"/>
+                        <param name="content" value="for $a in . return if(concat('t', $a/@xml:id) = $a/following::add/@xml:id) then $a/following::add[@xml:id = concat('t', $a/@xml:id)]/node() else ()"/>
+                        <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
+                        <param name="alternate" value="if (following::add[1]/del[1]) then concat('Ergänzt von: ', for $a in . return if(concat('t', $a/@xml:id) = $a/following::add/@xml:id) then (if(starts-with($a/following::add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then $a/following::add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not($a/following::add[@xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace($a/following::add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'involved', 'Unbekannter Schreiber')  else()) else (), ' Ursprüngliche Lesart: ', ./following::add[1]/string()) else concat('Ergänzt von: ', for $a in . return if(concat('t', $a/@xml:id) = $a/following::add/@xml:id) then (if(starts-with($a/following::add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then $a/following::add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not($a/following::add[@xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace($a/following::add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'involved', 'Unbekannter Schreiber')  else()) else ()    )"/>
+                        <param name="placement" value="'left'"/>
+                        <param name="fallback-placement" value="'right'"/>
+                        <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                        <outputRendition xml:space="preserve">
+                            color: grey;
+                        </outputRendition>
+                    </model>
+                    <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = ./following::add[@type='addition'][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]/@xml:id)" behaviour="inline">
+                        <param name="name" value="'pb-popover'"/>
+                        <param name="content" value="for $a in . return if(concat('t', $a/@xml:id) = $a/following::add/@xml:id) then $a/following::add[@xml:id = concat('t', $a/@xml:id)]/node() else ()"/>
+                        <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
+                        <param name="alternate" value="if (following::add[1]/del[1]) then concat('Ergänzt von: ', for $a in . return if(concat('t', $a/@xml:id) = $a/following::add/@xml:id) then $a/following::add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else (), ' Ursprüngliche Lesart: ', ./following::add[1]/string()) else concat('Ergänzt von: ', for $a in . return if(concat('t', $a/@xml:id) = $a/following::add/@xml:id) then $a/following::add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else ())"/>
+                        <param name="placement" value="'left'"/>
+                        <param name="fallback-placement" value="'right'"/>
+                        <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                        <outputRendition xml:space="preserve">
+                        text-decoration: underline dotted;
+                        </outputRendition>
+                    </model>
 <!--                    <model behaviour="note" predicate="@type='anchor'">-->
 <!--            <param name="label" value="@n/string()"/>-->
 <!--            <param name="content" value="let $n := @n return $get(.)/ancestor::TEI//div[@type='commentary']//note[@n=$n]/node()"/>-->
@@ -531,21 +531,45 @@
 <!--            text-decoration: underline dotted;-->
 <!--            </outputRendition>-->
 <!--        </model>-->
-                <model predicate="contains(@xml:id, 'ta')" behaviour="omit"/>
-                <model predicate="@type='correction' and preceding-sibling::del[1]" behaviour="omit"/>
-                <model predicate="not(@hand='Autor') and @type='addition'" behaviour="inline">
-                    <param name="name" value="'pb-popover'"/>
-                    <param name="content" value="."/>
-                    <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
-                    <param name="alternate" value="concat('Ergänzt von: ', @hand)"/>
-                    <param name="placement" value="'right'"/>
-                    <param name="fallback-placement" value="'left'"/>
-                    <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-            <outputRendition xml:space="preserve">
-                color: grey;
-            </outputRendition>
-        </model>
-        <model behaviour="inline"/>
+                    <model predicate="contains(@xml:id, 'ta')" behaviour="omit"/>
+                    <model predicate="@type='correction' and preceding-sibling::del[1]" behaviour="omit"/>
+                    <model predicate="not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef) and @type='addition' and not(contains(@xml:id, 'ta'))" behaviour="inline">
+                        <param name="name" value="'pb-popover'"/>
+                        <param name="content" value="."/>
+                        <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
+                        <param name="alternate" value="if(starts-with(@hand, 'fpb-') and not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef)) then concat('Ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else if(not(@hand='')) then concat('Ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber')) else 'Ergänzung'"/>
+                        <param name="placement" value="'right'"/>
+                        <param name="fallback-placement" value="'left'"/>
+                        <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                        <outputRendition xml:space="preserve">
+                            color: grey;
+                        </outputRendition>
+                    </model>
+                    <model predicate="(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef) and @type='addition' and not(contains(@xml:id, 'ta'))" behaviour="inline">
+                        <param name="name" value="'pb-popover'"/>
+                        <param name="content" value="."/>
+                        <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
+                        <param name="alternate" value="concat('Ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text())"/>
+                        <param name="placement" value="'right'"/>
+                        <param name="fallback-placement" value="'left'"/>
+                        <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                        <outputRendition xml:space="preserve">
+                            text-decoration: underline dotted;
+                        </outputRendition>
+                    </model>
+                    <model predicate="@type='addition' and not(contains(@xml:id, 'ta'))" behaviour="inline">
+                        <param name="name" value="'pb-popover'"/>
+                        <param name="content" value="."/>
+                        <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
+                        <param name="alternate" value="concat('Ergänzt von: ', @hand)"/>
+                        <param name="placement" value="'right'"/>
+                        <param name="fallback-placement" value="'left'"/>
+                        <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                        <outputRendition xml:space="preserve">
+                            text-decoration: underline dotted;
+                        </outputRendition>
+                    </model>
+                    <model behaviour="inline"/>
                 </elementSpec>
                 <elementSpec ident="salute" mode="change">
                     <model predicate="parent::closer" behaviour="inline"/>
@@ -722,31 +746,31 @@
                 <elementSpec ident="signed" mode="change">
                     <model predicate="parent::closer" behaviour="inline" />
                 </elementSpec>
-        <elementSpec ident="del" mode="change">
-                    <model predicate="(following-sibling::add[1][@type='correction' and not(@hand='Autor')]) or (following-sibling::*/add[1][@type='correction'and not(@hand='Autor')])" behaviour="inline">
-                    <param name="name" value="'pb-popover'"/>
-                    <param name="content" value="."/>
-                    <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
-                    <param name="alternate" value="if(following-sibling::add[1][@type='correction' and not(@hand='Autor')]) then (if(following-sibling::add[1][@type='correction' and not(@hand='Autor')]/@hand) then concat('Korrigiert von: ', following-sibling::add[1][@type='correction' and not(@hand='Autor')]/@hand, ' zu: ', following-sibling::add[1][@type='correction' and not(@hand='Autor')]/string()) else concat('Korrigiert zu: ', following-sibling::add[1][@type='correction' and not(@hand='Autor')]/text())) else if(following-sibling::*/add[1][@type='correction' and not(@hand='Autor')]) then (if(following-sibling::*/add[1][@type='correction' and not(@hand='Autor')]/@hand) then concat('Korrigiert von: ', following-sibling::*/add[1][@type='correction' and not(@hand='Autor')]/@hand, ' zu: ', following-sibling::*/add[1][@type='correction' and not(@hand='Autor')]/string()) else concat('Korrigiert zu: ', following-sibling::*/add[1][@type='correction' and not(@hand='Autor')]/text())) else ()"/>
-                    <param name="placement" value="'right'"/>
-                    <param name="fallback-placement" value="'left'"/>
-                    <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-            <outputRendition xml:space="preserve">
-                color: grey;
-            </outputRendition>
-        </model>
-        <model predicate="(following-sibling::add[1][@type='correction' and @hand='Autor']) or (following-sibling::*/add[1][@type='correction' and @hand='Autor'])" behaviour="inline">
-                    <param name="name" value="'pb-popover'"/>
-                    <param name="content" value="if(following-sibling::add[1][@type='correction' and @hand='Autor']) then following-sibling::add[1][@type='correction' and @hand='Autor']/node() else if(following-sibling::*/add[1][@type='correction' and @hand='Autor']) then following-sibling::*/add[1][@type='correction' and @hand='Autor']/node() else () "/>
-                    <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
-                    <param name="alternate" value="if(following-sibling::add[1][@type='correction' and @hand='Autor']) then (if(following-sibling::add[1][@type='correction' and @hand='Autor']) then concat('Korrigiert von: Autor; Ursprüngliche Lesart: ', .) else concat('Ursprüngliche Lesart: ', .)) else if(following-sibling::*/add[1][@type='correction' and @hand='Autor']) then (if(following-sibling::*/add[1][@type='correction' and @hand='Autor']) then concat('Korrigiert von: Autor; Ursprüngliche Lesart: ', .) else concat('Ursprüngliche Lesart: ', .)) else ()"/>
-                    <param name="placement" value="'right'"/>
-                    <param name="fallback-placement" value="'left'"/>
-                    <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-            <outputRendition xml:space="preserve">
-                text-decoration: underline dotted;
-            </outputRendition>
-        </model>
+                <elementSpec ident="del" mode="change">
+                    <model predicate="(following-sibling::add[1][@type='correction' and not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef)]) or (following-sibling::*/add[1][@type='correction'and not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef)])" behaviour="inline">
+                        <param name="name" value="'pb-popover'"/>
+                        <param name="content" value="."/>
+                        <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
+                        <param name="alternate" value="let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef return (if(following-sibling::add[1][@type='correction' and not(@hand = $refPers)]) then (if(following-sibling::add[1][@type='correction' and not(@hand = $refPers)]/@hand and starts-with(following-sibling::add[1][@type='correction' and not(@hand = $refPers)]/@hand, 'fpb-')) then concat('Korrigiert von: ', following-sibling::add[1][@type='correction' and not(@hand = $refPers)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text(), ' zu: ', following-sibling::add[1][@type='correction' and not(@hand = $refPers)]/string()) else if(following-sibling::add[1][@type='correction' and not(@hand = $refPers)]/@hand and not(following-sibling::add[1][@type='correction' and not(@hand = $refPers)]/@hand = '')) then concat('Korrigiert von: ', following-sibling::add[1][@type='correction' and not(@hand = $refPers)]/@hand, ' zu: ', following-sibling::add[1][@type='correction' and not(@hand = $refPers)]/string()) else concat('Korrigiert zu: ', following-sibling::add[1][@type='correction' and not(@hand = $refPers)]/text())) else ('Korrigiert'))"/>
+                        <param name="placement" value="'right'"/>
+                        <param name="fallback-placement" value="'left'"/>
+                        <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                        <outputRendition xml:space="preserve">
+                            color: grey;
+                        </outputRendition>
+                    </model>
+                    <model predicate="(following-sibling::add[1][@type='correction' and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]) or (following-sibling::*/add[1][@type='correction' and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef])" behaviour="inline">
+                        <param name="name" value="'pb-popover'"/>
+                        <param name="content" value=" let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef return (if(following-sibling::add[1][@type='correction' and @hand = $refPers]) then following-sibling::add[1][@type='correction' and @hand = $refPers]/node() else if(following-sibling::*/add[1][@type='correction' and @hand = $refPers]) then following-sibling::*/add[1][@type='correction' and @hand = $refPers]/node() else ()) "/>
+                        <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
+                        <param name="alternate" value="let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef return (if(following-sibling::add[1][@type='correction' and @hand = $refPers]) then (if(following-sibling::add[1][@type='correction' and @hand = $refPers]) then concat('Korrigiert von: ', following-sibling::add[1][@type='correction' and @hand = $refPers]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text(),'; Ursprüngliche Lesart: ', .) else concat('Ursprüngliche Lesart: ', .)) else if(following-sibling::*/add[1][@type='correction' and @hand = $refPers]) then (if(following-sibling::*/add[1][@type='correction' and @hand = $refPers]) then concat('Korrigiert von: ', following-sibling::add[1][@type='correction' and @hand = $refPers]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text(),'; Ursprüngliche Lesart: ', .) else concat('Ursprüngliche Lesart: ', .)) else ())"/>
+                        <param name="placement" value="'right'"/>
+                        <param name="fallback-placement" value="'left'"/>
+                        <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                        <outputRendition xml:space="preserve">
+                            text-decoration: underline dotted;
+                        </outputRendition>
+                    </model>
         <model predicate="parent::add[1] and parent::add[1]/following::anchor" behaviour="omit">
             
         </model>
