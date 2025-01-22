@@ -774,7 +774,7 @@
         <model predicate="parent::add[1] and parent::add[1]/following::anchor" behaviour="omit">
             
         </model>
-                    <model predicate="not(following-sibling::add[1][@type='correction']) and not(following-sibling::*/add[1][@type='correction']) and @hand='Autor'" behaviour="inline">
+                    <model predicate="not(following-sibling::add[1][@type='correction']) and not(following-sibling::*/add[1][@type='correction']) and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef" behaviour="inline">
                     <param name="name" value="'pb-popover'"/>
                     <param name="content" value="'〈…〉'"/>
                     <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
@@ -786,11 +786,11 @@
             text-decoration: underline dotted;
             </outputRendition>
         </model>
-                    <model predicate="not(following-sibling::add[1][@type='correction']) and not(following-sibling::*/add[1][@type='correction']) and not(@hand='Autor')" behaviour="inline">
+                    <model predicate="not(following-sibling::add[1][@type='correction']) and not(following-sibling::*/add[1][@type='correction']) and not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef)" behaviour="inline">
                     <param name="name" value="'pb-popover'"/>
                     <param name="content" value="."/>
                     <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
-                    <param name="alternate" value="concat('Gestrichen von: ', @hand)"/>
+                    <param name="alternate" value="concat('Gestrichen von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text())"/>
                     <param name="placement" value="'right'"/>
                     <param name="fallback-placement" value="'left'"/>
                     <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
