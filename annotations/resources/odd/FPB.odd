@@ -774,7 +774,7 @@
         <model predicate="parent::add[1] and parent::add[1]/following::anchor" behaviour="omit">
             
         </model>
-                    <model predicate="not(following-sibling::add[1][@type='correction']) and not(following-sibling::*/add[1][@type='correction']) and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef" behaviour="inline">
+                    <model predicate="not(following-sibling::add[1][@type='correction']) and not(following-sibling::*//add[1][@type='correction']) and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef" behaviour="inline">
                     <param name="name" value="'pb-popover'"/>
                     <param name="content" value="'〈…〉'"/>
                     <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
@@ -786,7 +786,7 @@
             text-decoration: underline dotted;
             </outputRendition>
         </model>
-                    <model predicate="not(following-sibling::add[1][@type='correction']) and not(following-sibling::*/add[1][@type='correction']) and not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef)" behaviour="inline">
+                    <model predicate="not(following-sibling::add[1][@type='correction']) and not(following-sibling::*//add[1][@type='correction']) and not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef)" behaviour="inline">
                     <param name="name" value="'pb-popover'"/>
                     <param name="content" value="."/>
                     <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
