@@ -176,7 +176,6 @@
         </model>
                 </elementSpec>
                 <elementSpec ident="placeName" mode="add">
-                 <!-- For annotation tool only -->
                     <model behaviour="inline" predicate="@ref">
                         <param name="name" value="'pb-popover'"/>
                         <param name="content" value="."/>
