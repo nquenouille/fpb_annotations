@@ -259,7 +259,7 @@
                     <model behaviour="inline" cssClass="annotation annotation-unclear"/>
                 </elementSpec>
                 <elementSpec ident="ab" mode="change">
-                    <model behaviour="inline"/>
+                    <model behaviour="inline" cssClass="annotation annotation-ab"/>
                 </elementSpec>
             </schemaSpec>
         </body>
