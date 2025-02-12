@@ -509,6 +509,8 @@
         </model>
                 </elementSpec>
                 <elementSpec ident="lb" mode="change">
+                    <model predicate="@n='N001' and (ancestor::ab[@rend='textblock'][1] or ancestor::ab[@rend='tb cbr-li'][1] or ancestor::ab[@rend='tb cbr-lo'][1] or ancestor::ab[@rend='tb cbr-ri'][1] or ancestor::ab[@rend='tb cbr-ro'][1] or ancestor::ab[@rend='tb cbr-ti'][1] or ancestor::ab[@rend='tb cbr-to'][1] or ancestor::ab[@rend='tb cbr-bi'][1] or ancestor::ab[@rend='tb cbr-bo'][1])" behaviour="omit"/>
+                    <model predicate="parent::ab[@rend='container'][1] and not(@n='N001')" behaviour="break"/>
                     <model predicate="following-sibling::*[1][self::add[contains(@xml:id, 'ta')]]" behaviour="omit"/>
                     <model predicate="$parameters?mode='normalized' and not(ancestor::closer) and not(ancestor::opener) and not(ancestor::address) and not(following-sibling::seg[@type='keepLB'][1]) and not(ancestor::head) and not(ancestor::signed)" behaviour="omit"/>
                     <modelSequence>
@@ -1070,9 +1072,16 @@
             </outputRendition>
         </model>
                 </elementSpec>
-            <elementSpec ident="div2" mode="add">
-                    <model behaviour="inline"/>
-                </elementSpec>
+            <elementSpec ident="ab" mode="change">
+                <model behaviour="inline"/>
+            </elementSpec>
+            <elementSpec ident="table" mode="change">
+                <model behaviour="table">
+                    <outputRendition xml:space="preserve">
+                    font-size: smaller;
+                    </outputRendition>
+                </model>
+            </elementSpec>
             </schemaSpec>
         </body>
     </text>

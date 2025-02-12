@@ -43,13 +43,29 @@ td {
     height: 100%;
 }
 
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0;
+}
+.textblock {
+  text-align: left;
+}
+
+
+.tb {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    
+}
 
 .cbr-li {
   border-left: 10px solid;
   border-image-source: url('..//resources/images/bracket_li.svg');
   border-image-slice: 0 0 0 100;
   border-image-width: 0 0 0 40px;
-  padding: 2vw;
+  padding: 8vw;
 }
 
 .cbr-ri {
@@ -57,7 +73,7 @@ td {
   border-image-source: url('..//resources/images/bracket_li.svg');
   border-image-slice: 0 100 0 0;
   border-image-width: 0 40px 0 0;
-  padding: 2vw;
+  padding: 8vw;
 }
 
 .cbr-ti {
