@@ -94,6 +94,8 @@
                     <model behaviour="inline" predicate="@type='postalNote'" cssClass="annotation annotation-memo"/>
                     <model behaviour="inline" predicate="@type='other'" cssClass="annotation annotation-memo"/>
                     <model predicate="parent::num" behaviour="pass-through"/>
+                    <model predicate="@type='commented' and child::note" behaviour="inline" cssClass="annotation annotation-commentary"/>
+                    <model predicate="@type='commented' and child::anchor" behaviour="inline" cssClass="annotation annotation-commentary"/>
                     <model behaviour="inline" cssClass="annotation annotation-note"/>
                     <model behaviour="note">
             <param name="place" value="@place"/>
@@ -233,11 +235,7 @@
                 <elementSpec ident="floatingText" mode="change">
                     <model behaviour="inline" cssClass="annotation annotation-floatingText"/>
                 </elementSpec>
-                 <elementSpec ident="span" mode="change">
-                 <model predicate="child::anchor" behaviour="inline" cssClass="annotation annotation-commentary"/>
-                    <model predicate="child::note" behaviour="inline" cssClass="annotation annotation-commentary"/>
-                </elementSpec>
-                <elementSpec ident="p" mode="change">
+                 <elementSpec ident="p" mode="change">
                     <model behaviour="inline" cssClass="annotation annotation-paragraph"/>
                 </elementSpec>
                 <elementSpec ident="seg" mode="change">

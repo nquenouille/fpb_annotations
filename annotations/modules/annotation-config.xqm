@@ -33,7 +33,7 @@ declare function anno:annotations($type as xs:string, $properties as map(*)?, $c
         case "memo" return
             <note xmlns="http://www.tei-c.org/ns/1.0" hand="{$properties?ref}{$properties?hands}" type="{$properties?types}" subtype="person">{$content()}</note>
         case "commentary" return
-            <span xmlns="http://www.tei-c.org/ns/1.0" type="commented">{$content()}<note type="note" n="" target="">{$properties?commentary}</note></span>
+            <note xmlns="http://www.tei-c.org/ns/1.0" type="commented">{$content()}<note type="note" n="" target="">{$properties?commentary}</note></note>
         case "note" return
             ($content(),<note xmlns="http://www.tei-c.org/ns/1.0" type="note" n="" target="">{$properties?note}</note>)
         case "anchor" return

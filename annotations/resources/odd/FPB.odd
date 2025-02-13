@@ -222,6 +222,17 @@
         </model>
                 </elementSpec>
                 <elementSpec ident="note" mode="change">
+                     <model predicate="type='commented' and child::anchor" behaviour="inline">
+                    <param name="name" value="'pb-popover'"/>
+                    <param name="content" value="."/>
+                    <param name="alternate" value="for $anchor in child::anchor/@n return root($parameters?root)//div//note[@type='note'][@n=$anchor]/node()"/>
+                    <param name="placement" value="'bottom'"/>
+                    <param name="fallback-placement" value="'left'"/>
+                    <pb:template xml:space="preserve" xmlns=""><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                        <outputRendition xml:space="preserve">
+                        text-decoration: underline dotted;
+                        </outputRendition>
+                    </model>
                     <model behaviour="inline" predicate="@type='presentation'">
                         <param name="name" value="'pb-popover'"/>
                         <param name="content" value="."/>
@@ -650,17 +661,6 @@
                 </elementSpec>
                 <elementSpec ident="span" mode="add">
 <!--                    <model predicate="$parameters?mode='normalized' and @type='hyphen'" behaviour="omit"/>-->
-                     <model predicate="child::anchor" behaviour="inline">
-                    <param name="name" value="'pb-popover'"/>
-                    <param name="content" value="."/>
-                    <param name="alternate" value="for $anchor in child::anchor/@n return root($parameters?root)//div//note[@type='note'][@n=$anchor]/node()"/>
-                    <param name="placement" value="'bottom'"/>
-                    <param name="fallback-placement" value="'left'"/>
-                    <pb:template xml:space="preserve" xmlns=""><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-                        <outputRendition xml:space="preserve">
-                        text-decoration: underline dotted;
-                        </outputRendition>
-                    </model>
                     <model predicate="child::note" behaviour="inline">
                     <param name="name" value="'pb-popover'"/>
                     <param name="content" value="."/>
