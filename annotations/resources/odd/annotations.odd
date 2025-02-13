@@ -259,7 +259,7 @@
                     <model behaviour="inline" cssClass="annotation annotation-unclear"/>
                 </elementSpec>
                 <elementSpec ident="ab" mode="change">
-                    <model behaviour="inline" cssClass="annotation annotation-ab"/>
+                    <model behaviour="inline" predicate="not(@rend='container')" cssClass="annotation annotation-ab"/>
                 </elementSpec>
             </schemaSpec>
         </body>
