@@ -293,6 +293,8 @@ declare %private function anno:delete($nodes as node()*, $target as node()) {
                     }
                 else if ($target instance of element(tei:span) and $target is $node/..) then
                     ()
+                else if ($target instance of element(tei:note) and $target is $node/..) then
+                    ()
                 else if ($node is $target) then
                     element exist:delete {
                         $node/@*,
