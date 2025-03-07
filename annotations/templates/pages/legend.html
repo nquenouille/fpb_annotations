@@ -47,7 +47,9 @@
     </custom-style>
     </head>
     <body>
-        <p style="background-color: yellow;">
+        <p style="background-color: yellow; font-size: 14pt;">
+            <b>Bitte beachten:</b> <br/>Erst die strukturellen Tags, danach die inhaltlichen Tags! Immer von <b>außen nach innen</b> taggen!!!.</p>
+        <p style="background-color: orange;">
             <b>Bitte beachten:</b> Einige der verwendeten Tags werden im Annotationstool in der Ansicht "Zeilenfall aus" <b>nicht</b> angezeigt, in der späteren Editionsansicht jedoch sehr wohl. Dies betrifft vor allem den beibehaltenen Zeilenfall im Opener, Closer, der Adresse und dem entsprechend markierten Zeilenfall, aber auch Lücken zwischen im Text getrennten Worten oder auch verschiedene Anzeigen, die in der Zeilenfall-Ansicht anders behandelt werden als in der normalisierten Ansicht.</p>
         <h3>Struktur für Briefe</h3>
         <input type="checkbox" id="letter"/>
@@ -96,7 +98,7 @@
                     </li>
                     <li>Salute (Gruß): Kann nur in einem Opener, Closer oder Front stehen.
                     </li>
-                    <li>Dateline (Datumsbereich): Darf nur in einem Opener oder Closer oder Front und Back stehen.</li>
+                    <li>Dateline (Datumsbereich): Darf nur in einem Opener oder Closer oder Front und Back stehen ("date" allein darf jedoch überall stehen).</li>
                     <li>Signed (Unterschrift): Darf nur in einem Opener oder Closer, Front, Back oder Postscript stehen.</li>
                     <li>Postscript (P.S.): Darf nur alleine (also nicht im Opener, Closer oder p-Tag) stehen oder im Front oder Back.</li>
                     <li>Keine Einschränkungen bei der Adresse (darf überall stehen).</li>
@@ -112,6 +114,10 @@
             <p>Memo - Hier kann ein Eingangs-, Besitz-, Adress- oder Präsentationsvermerk in Form einer Note (automatisch eingefügt) stehen. Wichtig ist, daß ein Type ausgewählt wird, damit das Tag nicht wie eine 'normale' Fußnote behandelt wird. Das Tag kann auch für eine Adresse außerhalb der Struktur, z.B. nach einer Unterschrift, verwendet werden. <br/>
                 <br/>
                 <b>Caveat:</b> Wenn der Vermerk geändert werden muß und ein &lt;abbr&gt; oder &lt;sic&gt; Tag drin steht, muß dieses erst einmal entfernt werden, damit das Tag für den Vermerk neu gesetzt werden kann. Danach kann die Abkürzung oder das Sic neu getaggt werden. <b>Immer von außen nach innen taggen!!!</b>
+                <br/>
+                <b>type:</b> Type: presentation (Präsentationsvermerk), received (Empfangsvermerk), possessor (Besitzvermerk), address (Adressvermerk), numbering (Numerierungsvermerk), postalNote (Postvermerk), other (Sonstiger Vermerk).
+                <br/>
+                <b>hand:</b> Der Schreiber kann aus einem Menü, welches mit dem Personenregister verbunden ist, ausgewählt werden. Sollte eine Person fehlen, muß diese in Bach Digital angelegt und mit der FPB-Datenbank verknüpft werden. <ul><li>Bekannter Schreiber: UUID, z.B. fpb-dgbhd (aus Personenregister)</li><li>Beim unbekannten Hauptschreiber: "main1", "main2", etc.</li><li>Beim unbekannten Nebenschreiber: "involved1", "involved2", etc.</li></ul>
             </p>
         </div>
         <input type="checkbox" id="head"/>
@@ -176,7 +182,7 @@
             <span>  Unterschrift(en)</span>
         </label>
         <div class="panel">
-            <p>Signed - Unterschrift(en). <br/> Diese Änderung wird nur im TEI angezeigt.</p>
+            <p>Signed - Unterschrift(en). <br/> Eine Unterschrift kann in folgenden Tags enthalten sein: &lt;div&gt;, &lt;body&gt;, &lt;front&gt;, &lt;back&gt;, &lt;opener&gt;, &lt;closer&gt; und &lt;postscript&gt;. Diese Änderung wird nur im TEI angezeigt.</p>
         </div>
         <input type="checkbox" id="postscript"/>
         <label for="postscript">
@@ -256,7 +262,7 @@
             <span>  Datum</span>
         </label>
         <div class="panel">
-            <p>Datum - Hier kann das Datum innerhalb einer zuvor gesetzten Datumszeile (siehe strukturelle Tags) annotiert werden.</p>
+            <p>Datum - Hier kann das Datum innerhalb einer zuvor gesetzten Datumszeile (siehe strukturelle Tags) annotiert werden. Das Datum-Tag kann auch alleine, ohne Datumszeile, stehen. <br/>Falls nur das Jahr bekannt ist, wird der 1. Januar gesetzt, z.B. 1989: 01.01.1989</p>
         </div>
         <input type="checkbox" id="reference"/>
         <label for="reference">
@@ -339,6 +345,7 @@
         </label>
         <div class="panel">
             <p>Type = term &gt; Fachwort aus Glossar. <br/> Type = gloss &gt; Fachwort, auf das sich z.B. eine Glosse bezieht. Hier bitte die ID manuell eintragen. <br/> Fachwort (Glosse) - Dies sollte in Kombination mit einer Glosse annotiert werden. Hierbei ist die "xml:id" das verbindende Glied zwischen Fachwort und Glosse ("target").<br/>
+                <b>Achtung:</b> Sollte eine Korrektur des Tags erfolgen, müssen <b>alle Felder</b> noch einmal ausgefüllt werden!
                 <br/>
                 <b>xml:id:</b> Fachwort (Glosse): Frei wählbare, jedoch eindeutige Id, auf die sich die Glosse beziehen kann. Hierbei ist die genaue Id in das "target" Attribut der Glosse einzutragen, damit ein Bezug hergestellt werden kann. <br/> Fachwort (Glossar): Bitte aus dem Menü entsprechenden Eintrag auswählen.
               </p>
@@ -364,9 +371,9 @@
         <div class="panel">
             <p>Stellenkommentar - Hier kann ein Stellenkommentar eingefügt werden, d.h. die Zeile wird in der Text-Ansicht unterstrichen markiert, der Kommentar erscheint als Mouseover. Dies geschieht durch ein "note"-Tag des Typs "commented" und eine "Note" in diesem. Letztere wird beim Klicken auf das Anker-Symbol (Schiff) als Endnote in den Text gesetzt und separat in der Publikationsansicht angezeigt. <br/>
                 <br/>
-                <b>Korrektur:</b>Sollte der Kommentar korrigiert werden müssen, geschieht dies über das Korrektur-Tag (Edit-Tag, s.u.) in der Note am Ende des Textes. <br/>
+                <b>Korrektur:</b>Sollte der Kommentar korrigiert werden müssen, geschieht dies über das Korrektur-Tag (Edit-Tag, s.u.) in der Note am Ende des Textes oder über den Edit-Button der Note. <b>Vorsicht:</b> Falls letzteres verwendet wird, wird der Text, der nun eingetragen wird, den vorigen Kommentar überschreiben. <br/>
                 <br/>
-                <b>Entfernung:</b> Sollte der Kommentar entfernt werden müssen, so wird zunächst das Tag &lt;commentary&gt; entfernt,  dann erst das Note-Tag. Nicht irritieren lassen, nach dem Speichern wird der Text der Note auch entfernt. Danach sollte noch einmal auf den Anker geklickt und gespeichert werden, damit die Numerierung sich anpassen kann.</p>
+                <b>Entfernung:</b> Sollte der Kommentar entfernt werden müssen, so wird zunächst das Tag &lt;commentary&gt; entfernt (das &lt;anchor&gt;-Tag wird mit dem globalen Speichern gleich mitentfernt),  dann erst das Note-Tag. Nicht irritieren lassen, nach dem Speichern wird der Text der Note auch entfernt. Danach sollte noch einmal auf den Anker geklickt und gespeichert werden, damit die Numerierung sich anpassen kann.</p>
         </div>
         <input type="checkbox" id="del"/>
         <label for="del">
@@ -374,7 +381,8 @@
             <span>  Streichung durch den Autor</span>
         </label>
         <div class="panel">
-            <p>Durchstreichung durch den Original-Autor. Wird normalerweise schon in Transkribus erledigt. Der Urheber der Streichung kann jedoch hinzugefügt werden. Hierbei kann aus einer Liste ausgewählt werden oder NN als Urheber eingetragen werden.</p>
+            <p>Durchstreichung durch den Original-Autor. Wird normalerweise schon in Transkribus erledigt. Der Urheber der Streichung kann jedoch hinzugefügt werden. Hierbei kann aus einer Liste ausgewählt werden oder NN als Urheber eingetragen werden:<br/>
+                <b>hand:</b> Der Schreiber kann aus einem Menü, welches mit dem Personenregister verbunden ist, ausgewählt werden. Sollte eine Person fehlen, muß diese in Bach Digital angelegt und mit der FPB-Datenbank verknüpft werden. <ul><li>Bekannter Schreiber: UUID, z.B. fpb-dgbhd (aus Personenregister)</li><li>Beim unbekannten Hauptschreiber: "main1", "main2", etc.</li><li>Beim unbekannten Nebenschreiber: "involved1", "involved2", etc.</li></ul></p></p>
         </div>
         <input type="checkbox" id="referringString"/>
         <label for="referringString">
@@ -393,8 +401,12 @@
         </label>
         <div class="panel">
             <p>Originale Ergänzung - Eine originale Ergänzung im Dokument (keine Ergänzung durch einen Editor, etc.). <br/>
+                <b>Achtung:</b> Sollte eine Korrektur des Tags erfolgen, müssen <b>alle Felder</b> noch einmal ausgefüllt werden!
                 <br/>
-                <b>hand:</b> "Autor" oder Name des Ergänzenden <br/> <b>type:</b> "correction", falls die Ergänzung auf eine Durchstreichung folgt. Ansonsten sind auch andere Typen möglich. <br/> <b>place</b>: margin-left, margin-right, below, bottom, above, top möglich. <br/>
+                <b>xml:id:</b> <b>Eindeutige</b> ID. <ul><li>Bezieht sich auf einen Anker (anchor): Format ta[Seite]-[lfdNr] (z.B.: ta1-2)</li><li>Ohne Beziehung: Format add[Seite]-[lfdNr] (z.B. add1-2)</li></ul>
+                <b>hand:</b> Der Schreiber kann aus einem Menü, welches mit dem Personenregister verbunden ist, ausgewählt werden. Sollte eine Person fehlen, muß diese in Bach Digital angelegt und mit der FPB-Datenbank verknüpft werden. <ul><li>Bekannter Schreiber: UUID, z.B. fpb-dgbhd (aus Personenregister)</li><li>Beim unbekannten Hauptschreiber: "main1", "main2", etc.</li><li>Beim unbekannten Nebenschreiber: "involved1", "involved2", etc.</li></ul><br/> <b>type:</b> "correction", falls die Ergänzung auf eine Durchstreichung folgt, ansonsten "addition". <br/> <b>place</b>: margin-left, margin-right, below, bottom, above, top möglich (siehe Dropdown-Menü). <br/>
+                <b>Type:</b> Korrektur (correction - nach einer Durchstreichung!) oder Ergänzung (addition).
+                <b>Place:</b> top, above, below, inspace, margin-left, margin-right, bottom, opposite (Zusatz, der gegenüber der aktuellen Seite angebracht wurde), overleaf, end.
             </p>
         </div>
         <input type="checkbox" id="supplied"/>
@@ -404,11 +416,12 @@
         </label>
         <div class="panel">
             <p>Moderne Ergänzung durch den Herausgeber <br/>
+                <b>Achtung:</b> Sollte eine Korrektur des Tags erfolgen, müssen <b>alle Felder</b> noch einmal ausgefüllt werden!
                 <br/>
                 <b>supplied:</b> Wort, welches ergänzt wurde, weil es beispielsweise fehlte. Korrigiert wird es über das Korrektur-Tag (Edit-Tag, s.u.). <br/>
-                <br/> <b>reason:</b> Grund der modernen Ergänzung
+                <br/> <b>reason:</b> Grund der modernen Ergänzung: overbinding (Überbindung), fadedInk (verblasste Tinte), lost-folio (verlorenes Folio), omitted-in-original (schon im Original weggelassen).
                 <br/>
-                <br/> <b>resp:</b> Verantwortlicher Herausgeber</p>
+                <br/> <b>resp:</b> UUID des verantwortlichen Herausgebers. Format: fpb-[uuid]</p>
         </div>
         <input type="checkbox" id="unclear"/>
         <label for="unclear">
