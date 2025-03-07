@@ -233,97 +233,110 @@
                         text-decoration: underline dotted;
                         </outputRendition>
                     </model>
-                    <model behaviour="inline" predicate="@type='presentation'">
-                        <param name="name" value="'pb-popover'"/>
-                        <param name="content" value="."/>
-                        <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
-                        <param name="alternate" value="if(@subtype='person' and starts-with(@hand, 'fpb-')) then concat('Präsentationsvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Präsentationsvermerk, ergänzt von: ', ./@hand)"/>
-                        <param name="placement" value="'left'"/>
-                        <param name="fallback-placement" value="'right'"/>
-                        <pb:template xml:space="preserve" xmlns=""><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-                        <outputRendition xml:space="preserve">
-                            color: grey;
-                            text-decoration: underline dotted;
-                        </outputRendition>
-                    </model>
-                    <model behaviour="inline" predicate="@type='received'">
-                        <param name="name" value="'pb-popover'"/>
-                        <param name="content" value="."/>
-                        <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
-                        <param name="alternate" value="if(@subtype='person' and starts-with(@hand, 'fpb-')) then concat('Empfangsvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Empfangsvermerk, ergänzt von: ', ./@hand)"/>
-                        <param name="placement" value="'left'"/>
-                        <param name="fallback-placement" value="'right'"/>
-                        <pb:template xml:space="preserve" xmlns=""><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template> 
-                        <outputRendition xml:space="preserve">
-                            color: grey;
-                            text-decoration: underline dotted;
-                        </outputRendition>
-                    </model>
-                    <model behaviour="inline" predicate="@type='possessor'">
-                        <param name="name" value="'pb-popover'"/>
-                        <param name="content" value="."/>
-                        <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
-                        <param name="alternate" value="if(@subtype='person' and starts-with(@hand, 'fpb-')) then concat('Besitzvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Besitzvermerk, ergänzt von: ', ./@hand)"/>
-                        <param name="placement" value="'left'"/>
-                        <param name="fallback-placement" value="'right'"/>
-                        <pb:template xml:space="preserve" xmlns=""><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-                        <outputRendition xml:space="preserve">
-                            color: grey;
-                            text-decoration: underline dotted;
-                        </outputRendition>
-                    </model>
-                    <model behaviour="inline" predicate="@type='address'">
-                        <param name="name" value="'pb-popover'"/>
-                        <param name="content" value="."/>
-                        <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
-                        <param name="alternate" value="if(starts-with(@hand, 'fpb-')) then concat('Adressvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Adressvermerk, ergänzt von: ', ./@hand)"/>
-                        <param name="placement" value="'left'"/>
-                        <param name="fallback-placement" value="'right'"/>
-                        <pb:template xml:space="preserve" xmlns=""><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-                        <outputRendition xml:space="preserve">
-                            color: grey;
-                            text-decoration: underline dotted;
-                        </outputRendition>
-                    </model>
-                     <model behaviour="inline" predicate="@type='numbering'">
-                        <param name="name" value="'pb-popover'"/>
-                        <param name="content" value="."/>
-                        <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
-                        <param name="alternate" value="if(starts-with(@hand, 'fpb-')) then concat('Numerierungsvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Numerierungsvermerk, ergänzt von: ', ./@hand)"/>
-                        <param name="placement" value="'left'"/>
-                        <param name="fallback-placement" value="'right'"/>
-                        <pb:template xml:space="preserve" xmlns=""><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-                        <outputRendition xml:space="preserve">
-                            color: grey;
-                            text-decoration: underline dotted;
-                        </outputRendition>
-                    </model>
-                     <model behaviour="inline" predicate="@type='postalNote'">
-                        <param name="name" value="'pb-popover'"/>
-                        <param name="content" value="."/>
-                        <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
-                        <param name="alternate" value="if(starts-with(@hand, 'fpb-')) then concat('Postvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Postvermerk, ergänzt von: ', ./@hand)"/>
-                        <param name="placement" value="'left'"/>
-                        <param name="fallback-placement" value="'right'"/>
-                        <pb:template xml:space="preserve" xmlns=""><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-                        <outputRendition xml:space="preserve">
-                            color: grey;
-                            text-decoration: underline dotted;
-                        </outputRendition>
-                    </model>
-                     <model behaviour="inline" predicate="@type='other'">
-                        <param name="name" value="'pb-popover'"/>
-                        <param name="content" value="."/>
-                        <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
-                        <param name="alternate" value="if(starts-with(@hand, 'fpb-')) then concat('Sonstiger Vermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Sonstiger Vermerk, ergänzt von: ', ./@hand)"/>
-                        <param name="placement" value="'left'"/>
-                        <param name="fallback-placement" value="'right'"/>
-                        <pb:template xml:space="preserve" xmlns=""><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-                        <outputRendition xml:space="preserve">
-                            color: grey;
-                            text-decoration: underline dotted;
-                        </outputRendition>
-                    </model>
+                    <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
+                    <model predicate="@type='presentation'" behaviour="inline">
+                    <param name="name" value="'pb-popover'"/>
+                    <param name="content" value="."/>
+                    <param name="alternate" value="if(contains(@hand, 'main')) then concat('Präsentationsvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Präsentationsvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(@subtype='person' and starts-with(@hand, 'fpb-')) then concat('Präsentationsvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Präsentationsvermerk, ergänzt von: ', ./@hand)"/>
+                    <param name="placement" value="'left'"/>
+                    <param name="fallback-placement" value="'top'"/>
+                    <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                    <outputRendition xml:space="preserve">
+                    
+                                    color: grey;
+                                    text-decoration: underline dotted;
+                                
+                    </outputRendition>
+                </model>
+                <model predicate="@type='received'" behaviour="inline">
+                    <param name="name" value="'pb-popover'"/>
+                    <param name="content" value="."/>
+                    <param name="alternate" value="if(contains(@hand, 'main')) then concat('Empfangsvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Empfangsvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(@subtype='person' and starts-with(@hand, 'fpb-')) then concat('Empfangsvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Empfangsvermerk, ergänzt von: ', ./@hand)"/>
+                    <param name="placement" value="'left'"/>
+                    <param name="fallback-placement" value="'top'"/>
+                    <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                    <outputRendition xml:space="preserve">
+                    
+                                    color: grey;
+                                    text-decoration: underline dotted;
+                                
+                    </outputRendition>
+                </model>
+                <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
+                <model predicate="@type='possessor'" behaviour="inline">
+                    <param name="name" value="'pb-popover'"/>
+                    <param name="content" value="."/>
+                    <param name="alternate" value="if(contains(@hand, 'main')) then concat('Besitzvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Besitzvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(@subtype='person' and starts-with(@hand, 'fpb-')) then concat('Besitzvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Besitzvermerk, ergänzt von: ', ./@hand)"/>
+                    <param name="placement" value="'left'"/>
+                    <param name="fallback-placement" value="'top'"/>
+                    <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                    <outputRendition xml:space="preserve">
+                    
+                                    color: grey;
+                                    text-decoration: underline dotted;
+                                
+                    </outputRendition>
+                </model>
+                <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
+                <model predicate="@type='address'" behaviour="inline">
+                    <param name="name" value="'pb-popover'"/>
+                    <param name="content" value="."/>
+                    <param name="alternate" value="if(contains(@hand, 'main')) then concat('Adressvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Adressvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(starts-with(@hand, 'fpb-')) then concat('Adressvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Adressvermerk, ergänzt von: ', ./@hand)"/>
+                    <param name="placement" value="'left'"/>
+                    <param name="fallback-placement" value="'top'"/>
+                    <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                    <outputRendition xml:space="preserve">
+                    
+                                    color: grey;
+                                    text-decoration: underline dotted;
+                                
+                    </outputRendition>
+                </model>
+                <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
+                <model predicate="@type='numbering'" behaviour="inline">
+                    <param name="name" value="'pb-popover'"/>
+                    <param name="content" value="."/>
+                    <param name="alternate" value="if(contains(@hand, 'main')) then concat('Numerierungsvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Numerierungsvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(starts-with(@hand, 'fpb-')) then concat('Numerierungsvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Numerierungsvermerk, ergänzt von: ', ./@hand)"/>
+                    <param name="placement" value="'left'"/>
+                    <param name="fallback-placement" value="'top'"/>
+                    <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                    <outputRendition xml:space="preserve">
+                    
+                                    color: grey;
+                                    text-decoration: underline dotted;
+                                
+                    </outputRendition>
+                </model>
+                <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
+                <model predicate="@type='postalNote'" behaviour="inline">
+                    <param name="name" value="'pb-popover'"/>
+                    <param name="content" value="."/>
+                    <param name="alternate" value="if(contains(@hand, 'main')) then concat('Postvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Postvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(starts-with(@hand, 'fpb-')) then concat('Postvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Postvermerk, ergänzt von: ', ./@hand)"/>
+                    <param name="placement" value="'left'"/>
+                    <param name="fallback-placement" value="'top'"/>
+                    <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                    <outputRendition xml:space="preserve">
+                    
+                                    color: grey;
+                                    text-decoration: underline dotted;
+                                
+                    </outputRendition>
+                </model>
+                <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
+                <model predicate="@type='other'" behaviour="inline">
+                    <param name="name" value="'pb-popover'"/>
+                    <param name="content" value="."/>
+                    <param name="alternate" value="if(contains(@hand, 'main')) then concat('Sonstiger Vermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Sonstiger Vermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(starts-with(@hand, 'fpb-')) then concat('Sonstiger Vermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Sonstiger Vermerk, ergänzt von: ', ./@hand)"/>
+                    <param name="placement" value="'left'"/>
+                    <param name="fallback-placement" value="'top'"/>
+                    <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                    <outputRendition xml:space="preserve">
+                    
+                                    color: grey;
+                                    text-decoration: underline dotted;
+                                
+                    </outputRendition>
+                </model>
                     <model predicate="parent::person" behaviour="omit"/>
                     <model predicate="parent::num" behaviour="omit"/>
                     <model predicate="parent::span" behaviour="omit"/>
