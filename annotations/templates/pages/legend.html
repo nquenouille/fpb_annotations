@@ -111,7 +111,7 @@
             <span>  Vermerk</span>
         </label>
         <div class="panel">
-            <p>Memo - Hier kann ein Eingangs-, Besitz-, Adress- oder Präsentationsvermerk in Form einer Note (automatisch eingefügt) stehen. Wichtig ist, daß ein Type ausgewählt wird, damit das Tag nicht wie eine 'normale' Fußnote behandelt wird. Das Tag kann auch für eine Adresse außerhalb der Struktur, z.B. nach einer Unterschrift, verwendet werden. <br/>
+            <p>Memo - Hier kann ein Eingangs-, Besitz-, Adress- oder Präsentationsvermerk in Form einer Note (automatisch eingefügt) stehen. Wichtig ist, daß ein Type ausgewählt wird, damit das Tag nicht wie eine 'normale' Fußnote behandelt wird. Das Tag kann auch für eine Adresse außerhalb der Struktur, z.B. nach einer Unterschrift, verwendet werden. Bitte kein zusätzliches &lt;add&gt;-Tag verwenden!<br/>
                 <br/>
                 <b>Caveat:</b> Wenn der Vermerk geändert werden muß und ein &lt;abbr&gt; oder &lt;sic&gt; Tag drin steht, muß dieses erst einmal entfernt werden, damit das Tag für den Vermerk neu gesetzt werden kann. Danach kann die Abkürzung oder das Sic neu getaggt werden. <b>Immer von außen nach innen taggen!!!</b>
                 <br/>
@@ -369,7 +369,7 @@
             <span>  Stellenkommentar</span>
         </label>
         <div class="panel">
-            <p>Stellenkommentar - Hier kann ein Stellenkommentar eingefügt werden, d.h. die Zeile wird in der Text-Ansicht unterstrichen markiert, der Kommentar erscheint als Mouseover. Dies geschieht durch ein "note"-Tag des Typs "commented" und eine "Note" in diesem. Letztere wird beim Klicken auf das Anker-Symbol (Schiff) als Endnote in den Text gesetzt und separat in der Publikationsansicht angezeigt. <br/>
+            <p>Stellenkommentar - Hier kann ein Stellenkommentar eingefügt werden, d.h. die Zeile wird in der Text-Ansicht unterstrichen markiert, der Kommentar erscheint als Mouseover. Dies geschieht durch ein "note"-Tag des Typs "commented" und eine "Note" in diesem. Letztere wird beim Klicken auf das Anker-Symbol (Schiff) als Endnote in den Text gesetzt und separat in der Publikationsansicht angezeigt. <br/>Vorgehen: <ul><li>Zu kommentierenden Text auswählen</li><li>Click auf "commentary" Tag</li><li>Kommentar einfügen</li><li>Kleines Abspeichern: links unten oder Strg+s</li><li>Globales Abspeichern: Oben rechts oder Strg+Shift+s</li><li>Anker setzen: Auf Schiff rechts oben klicken</li><li>Nochmal globales Abspeichern: Oben rechts oder Strg+Shift+s</li></ul><br/>
                 <br/>
                 <b>Korrektur:</b>Sollte der Kommentar korrigiert werden müssen, geschieht dies über das Korrektur-Tag (Edit-Tag, s.u.) in der Note am Ende des Textes oder über den Edit-Button der Note. <b>Vorsicht:</b> Falls letzteres verwendet wird, wird der Text, der nun eingetragen wird, den vorigen Kommentar überschreiben. <br/>
                 <br/>
@@ -381,7 +381,7 @@
             <span>  Streichung durch den Autor</span>
         </label>
         <div class="panel">
-            <p>Durchstreichung durch den Original-Autor. Wird normalerweise schon in Transkribus erledigt. Der Urheber der Streichung kann jedoch hinzugefügt werden. Hierbei kann aus einer Liste ausgewählt werden oder NN als Urheber eingetragen werden:<br/>
+            <p>Durchstreichung durch den Original-Autor. Wird normalerweise schon in Transkribus erledigt. Der Urheber der Streichung kann jedoch hinzugefügt werden. Hierbei kann aus einer Liste ausgewählt werden oder NN als Urheber eingetragen werden. Bei Durchstreichung eines einzelnen Buchstabens im Wort, das Tag nur um diesen einen Buchstaben setzen.<br/>
                 <b>hand:</b> Der Schreiber kann aus einem Menü, welches mit dem Personenregister verbunden ist, ausgewählt werden. Sollte eine Person fehlen, muß diese in Bach Digital angelegt und mit der FPB-Datenbank verknüpft werden. <ul><li>Bekannter Schreiber: UUID, z.B. fpb-dgbhd (aus Personenregister)</li><li>Beim unbekannten Hauptschreiber: "main1", "main2", etc.</li><li>Beim unbekannten Nebenschreiber: "involved1", "involved2", etc.</li></ul></p></p>
         </div>
         <input type="checkbox" id="referringString"/>
@@ -400,7 +400,7 @@
             <span>  Originale Ergänzung</span>
         </label>
         <div class="panel">
-            <p>Originale Ergänzung - Eine originale Ergänzung im Dokument (keine Ergänzung durch einen Editor, etc.). <br/>
+            <p>Originale Ergänzung - Eine originale Ergänzung im Dokument (keine Ergänzung durch einen Editor, etc.). Bei Ergänzung eines einzelnen Buchstabens im Wort, nachdem eine Durchstreichung erfolgte, das Tag nur um diesen einen Buchstaben setzen.<br/>
                 <b>Achtung:</b> Sollte eine Korrektur des Tags erfolgen, müssen <b>alle Felder</b> noch einmal ausgefüllt werden!
                 <br/>
                 <b>xml:id:</b> <b>Eindeutige</b> ID. <ul><li>Bezieht sich auf einen Anker (anchor): Format ta[Seite]-[lfdNr] (z.B.: ta1-2)</li><li>Ohne Beziehung: Format add[Seite]-[lfdNr] (z.B. add1-2)</li></ul>
