@@ -100,7 +100,7 @@
                     </li>
                     <li>Dateline (Datumsbereich): Darf nur in einem Opener oder Closer oder Front und Back stehen ("date" allein darf jedoch überall stehen).</li>
                     <li>Signed (Unterschrift): Darf nur in einem Opener oder Closer, Front, Back oder Postscript stehen.</li>
-                    <li>Postscript (P.S.): Darf nur alleine (also nicht im Opener, Closer oder p-Tag) stehen oder im Front oder Back.</li>
+                    <li>Postscript (P.S.): Darf nur alleine (also nicht im Opener, Closer oder p-Tag) stehen sowie im Front oder Back.</li>
                     <li>Keine Einschränkungen bei der Adresse (darf überall stehen).</li>
                 </ul>
             </p>
@@ -126,7 +126,7 @@
             <span>  Head - Überschrift</span>
         </label>
         <div class="panel">
-            <p>Head - Überschrift <br/> Diese Änderung wird nur im TEI angezeigt.</p>
+            <p>Head - Überschrift <br/> Diese Änderung wird nur im TEI angezeigt. <br/><b>NB:</b> Kann <b>nicht</b> in einem Opener, Closer oder p-Tag stehen, sondern muß alleine am Anfang des Textes stehen. Einzige Ausnahme: Ein Präsentationsvermerk davor ist erlaubt.</p>
         </div>
         <input type="checkbox" id="opener"/>
         <label for="opener">
@@ -134,7 +134,7 @@
             <span>  Eröffnung des Dokuments</span>
         </label>
         <div class="panel">
-            <p>Opener - Brief- oder Dokumenteröffnung. <br/> Der Opener kann eine dateline, eine Unterschrift, einen Gruß oder auch eine Adresse enthalten. Der Zeilenfall wird automatisch beibehalten. Diese Änderung wird nur im TEI angezeigt.</p>
+            <p>Opener - Brief- oder Dokumenteröffnung. <br/> Der Opener kann eine dateline, eine Unterschrift, einen Gruß oder auch eine Adresse enthalten. Der Zeilenfall wird automatisch beibehalten. Diese Änderung wird nur im TEI angezeigt. <br/><b>NB:</b> Wenn ein Opener getaggt wird, dann darf dieser <b>nicht</b> in einem p-Tag stehen.<br/> <b>Vor</b> einem Opener darf <b>kein</b> p-Tag stehen.</p>
         </div>
         <input type="checkbox" id="address"/>
         <label for="address">
@@ -150,7 +150,7 @@
             <span>  Gruß</span>
         </label>
         <div class="panel">
-            <p>Salute - Gruß. <br/> Diese Änderung wird nur im TEI angezeigt.</p>
+            <p>Salute - Gruß. <br/> Diese Änderung wird nur im TEI angezeigt. <br/><b>NB:</b> Kann nur in einem Opener, Closer oder Front stehen.</p>
         </div>
         <input type="checkbox" id="paragraph"/>
         <label for="paragraph">
@@ -166,7 +166,7 @@
             <span>  Closer - Schlußformulierung</span>
         </label>
         <div class="panel">
-            <p>Closer - Schlußformulierung / Briefschluss <br/> Kann u.a. die Adresse, Unterschrift und Grußformal enthalten. Der Zeilenfall wird automatisch beibehalten. Diese Änderung wird nur im TEI angezeigt.</p>
+            <p>Closer - Schlußformulierung / Briefschluss <br/> Kann u.a. die Adresse, Unterschrift und Grußformal enthalten. Der Zeilenfall wird automatisch beibehalten. Diese Änderung wird nur im TEI angezeigt. <br/> <b>Hinter</b> einem Closer darf <b>kein</b> p-Tag stehen.</p>
         </div>
         <input type="checkbox" id="dateline"/>
         <label for="dateline">
@@ -190,7 +190,7 @@
             <span>  Postscriptum</span>
         </label>
         <div class="panel">
-            <p>Postscriptum - P.S. <br/> Das Tag setzt sich hier zusammen aus: &lt;postscript&gt;&lt;p /&gt;&lt;/postscript&gt;, so daß TEI konform das Postscriptum umschlossen wird.Diese Änderung wird nur im TEI angezeigt.</p>
+            <p>Postscriptum - P.S. <br/> Das Tag setzt sich hier zusammen aus: &lt;postscript&gt;&lt;p /&gt;&lt;/postscript&gt;, so daß TEI konform das Postscriptum umschlossen wird.Diese Änderung wird nur im TEI angezeigt. <br/><b>NB:</b> Darf nur alleine (also nicht im Opener, Closer oder p-Tag) stehen sowie im Front oder Back.</p>
         </div>
         <input type="checkbox" id="keepLineBreaks"/>
         <label for="keepLineBreaks">
