@@ -240,14 +240,14 @@
         <div class="panel">
             <p>Person - Hier werden Personen annotiert. Diese sind aus einem Menü, welches mit dem Personenregister verbunden ist, auszuwählen. Sollte eine Person fehlen, muß diese in Bach Digital angelegt und mit der FPB-Datenbank verknüpft werden. Manuelle Eingaben bewirken <b>kein</b> Abspeichern der Person im Register, so daß hier auch kein Mouseover angezeigt wird.</p>
         </div>
-        <input type="checkbox" id="organization"/>
+        <!-- <input type="checkbox" id="organization"/>
         <label for="organization">
             <iron-icon icon="social:people"/>
             <span>  Organisation</span>
         </label>
         <div class="panel">
             <p>Organisation - Hier werden Organisationen annotiert. Diese sind aus einem Menü, welches mit dem Institutionenregister der FPB-Datenbank verbunden ist, auszuwählen.</p>
-        </div>
+        </div> -->
         <input type="checkbox" id="places"/>
         <label for="places">
             <iron-icon icon="maps:place"/>
@@ -344,13 +344,13 @@
             <span>  Fachwort</span>
         </label>
         <div class="panel">
-            <p>Type = term &gt; Fachwort aus Glossar. <br/> Type = gloss &gt; Fachwort, auf das sich z.B. eine Glosse bezieht. Hier bitte die ID manuell eintragen. <br/> Fachwort (Glosse) - Dies sollte in Kombination mit einer Glosse annotiert werden. Hierbei ist die "xml:id" das verbindende Glied zwischen Fachwort und Glosse ("target").<br/>
+            <p>Type = term &gt; Fachwort aus Glossar. <!-- <br/> Type = gloss &gt; Fachwort, auf das sich z.B. eine Glosse bezieht. Hier bitte die ID manuell eintragen. <br/> Fachwort (Glosse) - Dies sollte in Kombination mit einer Glosse annotiert werden. Hierbei ist die "xml:id" das verbindende Glied zwischen Fachwort und Glosse ("target").<br/> -->
                 <b>Achtung:</b> Sollte eine Korrektur des Tags erfolgen, müssen <b>alle Felder</b> noch einmal ausgefüllt werden!
                 <br/>
-                <b>xml:id:</b> Fachwort (Glosse): Frei wählbare, jedoch eindeutige Id, auf die sich die Glosse beziehen kann. Hierbei ist die genaue Id in das "target" Attribut der Glosse einzutragen, damit ein Bezug hergestellt werden kann. <br/> Fachwort (Glossar): Bitte aus dem Menü entsprechenden Eintrag auswählen.
+                <b>xml:id:</b> <!-- Fachwort (Glosse): Frei wählbare, jedoch eindeutige Id, auf die sich die Glosse beziehen kann. Hierbei ist die genaue Id in das "target" Attribut der Glosse einzutragen, damit ein Bezug hergestellt werden kann. <br/> --> Fachwort (Glossar): Bitte aus dem Menü entsprechenden Eintrag auswählen.
               </p>
         </div>
-        <input type="checkbox" id="gloss"/>
+        <!-- <input type="checkbox" id="gloss"/>
         <label for="gloss">
             <iron-icon icon="icons:class"/>
             <span>  Glosse</span>
@@ -362,7 +362,7 @@
                 <br/>
                 <b>type:</b> Hier sollte eine Positionsangabe stehen, wo die Glosse sich auf dem Dokument befindet. Mögliche Werte: margin-left, margin-right, top, bottom <br/>
             </p>
-        </div>
+        </div> -->
         <input type="checkbox" id="commentary"/>
         <label for="commentary">
             <iron-icon icon="icons:speaker-notes"/>
