@@ -416,7 +416,21 @@ declare %private function anno:modify($nodes as node()*, $target as node(), $ann
                         $node/@*,
                         text { $annotation?properties(local-name($node)) }
                     }
-                else if ($node is $target and not($node[@type='note'])) then
+                else if ($node is $target and $node[@type='marginalia']) then
+                    element { node-name($node) } {
+                        map:for-each($annotation?properties, function($key, $value) {
+                            if ($value != '' and $key='margin_place') then
+                                attribute {'place'} {$value}
+                            else if ($value != '' and $key='margin_target') then
+                                attribute {'target'} {$value}
+                            else if ($value != '' and $key='margin_type') then
+                                attribute {'type'} {'marginalia'}
+                            else
+                                ()
+                        }),
+                        anno:modify($node/node(), $target, $annotation)
+                    }
+                else if ($node is $target and not($node[@type='note' or 'marginalia'])) then
                     element { node-name($node) } {
                         map:for-each($annotation?properties, function($key, $value) {
                             if ($value != '' and $key='hands') then

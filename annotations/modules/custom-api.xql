@@ -203,8 +203,8 @@ declare %private function api:transformNotes($nodes as node()*) {
                     ()
         case element(tei:note) return
             let $number := count($node/preceding::tei:note[@type='note'])
-            let $n := update value $node/@n with $number+1
-            let $target := update value $node/@target with concat('#n-', $number+1)
+            let $n := update value $node[@type="note"]/@n with $number+1
+            let $target := update value $node[@type="note"]/@target with concat('#n-', $number+1)
             return
                 ()
         case element() return 
@@ -229,22 +229,22 @@ declare function api:setNotes($request as map(*)) {
             error($errors:FORBIDDEN, "Not allowed to write to " || $doc)
         else if($srcDoc and $notes) then 
             for $note in $notes 
-            let $putAnchor := update insert <anchor xmlns="http://www.tei-c.org/ns/1.0" type="anchor" xml:id="" n="" /> following $note[@n=""]
+            let $putAnchor := update insert <anchor xmlns="http://www.tei-c.org/ns/1.0" type="anchor" xml:id="" n="" /> following $note[@type="note"][@n=""]
             let $numeroAnchor := api:transformNotes($srcDoc//*/tei:text/tei:body/tei:div[@type='original']//*/tei:anchor[@type='anchor'])
-            let $numeroNotes := update value $note/@n with $note/following::tei:anchor[@type='anchor']/@n
-            let $targetNotes := update value $note/@target with (concat('#n-', $note/@n))
-            let $notenumber := $note/@n
+            let $numeroNotes := update value $note[@type="note"]/@n with $note/following::tei:anchor[@type='anchor']/@n
+            let $targetNotes := update value $note[@type="note"]/@target with (concat('#n-', $note/@n))
+            let $notenumber := $note[@type="note"]/@n
             let $notetext := 
-                if ($srcDoc//tei:text/tei:body/tei:div[@type='commentary']/tei:p/tei:note[@n = $notenumber]) then 
+                if ($srcDoc//tei:text/tei:body/tei:div[@type='commentary']/tei:p/tei:note[@type="note"][@n = $notenumber]) then 
                         update insert $note preceding $srcDoc//tei:text/tei:body/tei:div[@type='commentary']/tei:p/tei:note[@n= $notenumber]
                     else if
-                        ($srcDoc//tei:text/tei:body/tei:div[@type='commentary']/tei:p/tei:note[@n = $notenumber -1]) then 
+                        ($srcDoc//tei:text/tei:body/tei:div[@type='commentary']/tei:p/tei:note[@type="note"][@n = $notenumber -1]) then 
                         update insert $note following $srcDoc//tei:text/tei:body/tei:div[@type='commentary']/tei:p/tei:note[@n= ($notenumber -1)] 
                     else if 
-                        ($srcDoc//tei:text/tei:body/tei:div[@type='commentary']/tei:p/tei:note[@n = max($notenumber)]) then 
+                        ($srcDoc//tei:text/tei:body/tei:div[@type='commentary']/tei:p/tei:note[@type="note"][@n = max($notenumber)]) then 
                         update insert $note following $srcDoc//tei:text/tei:body/tei:div[@type='commentary']/tei:p/tei:note[@n= max($notenumber)] 
                     else if
-                        ($srcDoc//tei:text/tei:body/tei:div[@type='commentary']/tei:p/tei:note[@n = $notenumber +1]) then 
+                        ($srcDoc//tei:text/tei:body/tei:div[@type='commentary']/tei:p/tei:note[@type="note"][@n = $notenumber +1]) then 
                         update insert $note preceding $srcDoc//tei:text/tei:body/tei:div[@type='commentary']/tei:p/tei:note[@n= $notenumber +1]
                     else 
                         update insert $note into $srcDoc//tei:text/tei:body/tei:div[@type='commentary']/tei:p
@@ -255,22 +255,22 @@ declare function api:setNotes($request as map(*)) {
                     "content": $srcDoc}
         else if($srcDoc and $notes_front) then 
             for $note in $notes_front 
-            let $putAnchor := update insert <anchor xmlns="http://www.tei-c.org/ns/1.0" type="anchor" xml:id="" n="" /> following $note[@n=""]
+            let $putAnchor := update insert <anchor xmlns="http://www.tei-c.org/ns/1.0" type="anchor" xml:id="" n="" /> following $note[@type="note"][@n=""]
             let $numeroAnchor := api:transformNotes($srcDoc//*/tei:text/tei:front/tei:div[@type='original_front']//*/tei:anchor[@type='anchor'])
-            let $numeroNotes := update value $note/@n with $note/following::tei:anchor[@type='anchor']/@n
-            let $targetNotes := update value $note/@target with (concat('#n-', $note/@n))
-            let $notenumber := $note/@n
+            let $numeroNotes := update value $note[@type="note"]/@n with $note/following::tei:anchor[@type='anchor']/@n
+            let $targetNotes := update value $note[@type="note"]/@target with (concat('#n-', $note/@n))
+            let $notenumber := $note[@type="note"]/@n
             let $notetext := 
-                if ($srcDoc//tei:text/tei:front/tei:div[@type='commentary_front']/tei:p/tei:note[@n = $notenumber]) then 
+                if ($srcDoc//tei:text/tei:front/tei:div[@type='commentary_front']/tei:p/tei:note[@type="note"][@n = $notenumber]) then 
                         update insert $note preceding $srcDoc//tei:text/tei:front/tei:div[@type='commentary_front']/tei:p/tei:note[@n= $notenumber]
                     else if
-                        ($srcDoc//tei:text/tei:front/tei:div[@type='commentary_front']/tei:p/tei:note[@n = $notenumber -1]) then 
+                        ($srcDoc//tei:text/tei:front/tei:div[@type='commentary_front']/tei:p/tei:note[@type="note"][@n = $notenumber -1]) then 
                         update insert $note following $srcDoc//tei:text/tei:front/tei:div[@type='commentary_front']/tei:p/tei:note[@n= ($notenumber -1)] 
                     else if 
-                        ($srcDoc//tei:text/tei:front/tei:div[@type='commentary_front']/tei:p/tei:note[@n = max($notenumber)]) then 
+                        ($srcDoc//tei:text/tei:front/tei:div[@type='commentary_front']/tei:p/tei:note[@type="note"][@n = max($notenumber)]) then 
                         update insert $note following $srcDoc//tei:text/tei:front/tei:div[@type='commentary_front']/tei:p/tei:note[@n= max($notenumber)] 
                     else if
-                        ($srcDoc//tei:text/tei:front/tei:div[@type='commentary_front']/tei:p/tei:note[@n = $notenumber +1]) then 
+                        ($srcDoc//tei:text/tei:front/tei:div[@type='commentary_front']/tei:p/tei:note[@type="note"][@n = $notenumber +1]) then 
                         update insert $note preceding $srcDoc//tei:text/tei:front/tei:div[@type='commentary_front']/tei:p/tei:note[@n= $notenumber +1]
                     else 
                         update insert $note into $srcDoc//tei:text/tei:front/tei:div[@type='commentary_front']/tei:p
@@ -281,22 +281,22 @@ declare function api:setNotes($request as map(*)) {
                     "content": $srcDoc}
         else if($srcDoc and $notes_back) then 
             for $note in $notes_back 
-            let $putAnchor := update insert <anchor xmlns="http://www.tei-c.org/ns/1.0" type="anchor" xml:id="" n="" /> following $note[@n=""]
+            let $putAnchor := update insert <anchor xmlns="http://www.tei-c.org/ns/1.0" type="anchor" xml:id="" n="" /> following $note[@type="note"][@n=""]
             let $numeroAnchor := api:transformNotes($srcDoc//*/tei:text/tei:back/tei:div[@type='original_back']//*/tei:anchor[@type='anchor'])
-            let $numeroNotes := update value $note/@n with $note/following::tei:anchor[@type='anchor']/@n
-            let $targetNotes := update value $note/@target with (concat('#n-', $note/@n))
-            let $notenumber := $note/@n
+            let $numeroNotes := update value $note[@type="note"]/@n with $note/following::tei:anchor[@type='anchor']/@n
+            let $targetNotes := update value $note[@type="note"]/@target with (concat('#n-', $note/@n))
+            let $notenumber := $note[@type="note"]/@n
             let $notetext := 
-                if ($srcDoc//tei:text/tei:back/tei:div[@type='commentary_back']/tei:p/tei:note[@n = $notenumber]) then 
+                if ($srcDoc//tei:text/tei:back/tei:div[@type='commentary_back']/tei:p/tei:note[@type="note"][@n = $notenumber]) then 
                         update insert $note preceding $srcDoc//tei:text/tei:back/tei:div[@type='commentary_back']/tei:p/tei:note[@n= $notenumber]
                     else if
-                        ($srcDoc//tei:text/tei:back/tei:div[@type='commentary_back']/tei:p/tei:note[@n = $notenumber -1]) then 
+                        ($srcDoc//tei:text/tei:back/tei:div[@type='commentary_back']/tei:p/tei:note[@type="note"][@n = $notenumber -1]) then 
                         update insert $note following $srcDoc//tei:text/tei:back/tei:div[@type='commentary_back']/tei:p/tei:note[@n= ($notenumber -1)] 
                     else if 
-                        ($srcDoc//tei:text/tei:back/tei:div[@type='commentary_back']/tei:p/tei:note[@n = max($notenumber)]) then 
+                        ($srcDoc//tei:text/tei:back/tei:div[@type='commentary_back']/tei:p/tei:note[@type="note"][@n = max($notenumber)]) then 
                         update insert $note following $srcDoc//tei:text/tei:back/tei:div[@type='commentary_back']/tei:p/tei:note[@n= max($notenumber)] 
                     else if
-                        ($srcDoc//tei:text/tei:back/tei:div[@type='commentary_back']/tei:p/tei:note[@n = $notenumber +1]) then 
+                        ($srcDoc//tei:text/tei:back/tei:div[@type='commentary_back']/tei:p/tei:note[@type="note"][@n = $notenumber +1]) then 
                         update insert $note preceding $srcDoc//tei:text/tei:back/tei:div[@type='commentary_back']/tei:p/tei:note[@n= $notenumber +1]
                     else 
                         update insert $note into $srcDoc//tei:text/tei:back/tei:div[@type='commentary_back']/tei:p

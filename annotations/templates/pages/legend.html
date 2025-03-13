@@ -465,5 +465,17 @@
         <div class="panel">
             <p>Korrektur einer Lesung, die womöglich in Transkribus übersehen wurde und daher nicht erfolgt ist. Bitte mitteilen, damit das Dokument bei Transkribus nochmal hochgeladen werden kann, falls es als Ground Truth fungieren soll.</p>
         </div>
+        <input type="checkbox" id="note"/>
+        <label for="note">
+            <iron-icon icon="icons:note-add"/>
+            <span>  Marginalia</span>
+        </label>
+        <div class="panel">
+            <p>Es gibt in einem separaten &lt;div&gt;-Tag Notes, welche die Marginalien enthalten (mit "marginalia" gekennzeichnet). Diese werden automatisch von Transkribus übernommen. Allerdings gibt es in Transkribus derzeit einen Bug, weshalb mehrere Tags mit unterschiedlichen target-Attributen zusammengefaßt werden. Dies muß hier korrigiert werden.<br/>
+                <br/>
+                <b>Korrektur:</b> Sollten zwei Marginalien zusammengefaßt sein, dann bitte Tag löschen und zwei neue Tags anlegen. <b>Achtung:</b> Die Anker haben ihre entsprechenden IDs behalten, so daß die entsprechende ID in das target-Attribut eingetragen werden sollte (siehe auch Transkribus-Anleitung). <br/>Sollen nur Attribute der Marginalie korrigiert werden müssen, geschieht dies über das Korrektur-Tag (Edit-Tag). Hierbei bitte <b>alle</b> Felder noch einmal ausfüllen!<br/>
+                <br/>
+                <b>Entfernung:</b> Sollte die Marginalie entfernt werden müssen, so wird zunächst der dazugehörige Anker entfernt, dann erst das Marginalia-Tag. Die Zählung der Anker und Marginalien muß jedoch nicht angepasst werden.</p>
+        </div>
     </body>
 </html>

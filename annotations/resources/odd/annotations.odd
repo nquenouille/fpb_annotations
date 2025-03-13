@@ -87,6 +87,7 @@
 <!--                </elementSpec>-->
                 <elementSpec ident="note" mode="change">
                     <model predicate="@type='commentary'" behaviour="omit"/>
+                    <model predicate="@type='marginalia'" behaviour="inline" cssClass="annotation annotation-marginalia"/>
                     <model behaviour="inline" predicate="@type='presentation'" cssClass="annotation annotation-memo"/>
                     <model behaviour="inline" predicate="@type='received'" cssClass="annotation annotation-memo"/>
                     <model behaviour="inline" predicate="@type='address'" cssClass="annotation annotation-memo"/>

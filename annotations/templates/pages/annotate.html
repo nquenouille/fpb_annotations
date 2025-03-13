@@ -263,6 +263,9 @@
                                 <span data-i18n="[title]annotations.modify">
                                     <paper-icon-button class="annotation-action" title="Edit" data-type="edit" icon="editor:mode-edit" disabled="disabled"/>
                                 </span>
+                                <span data-i18n="[title]annotations.marginalia">
+                                    <paper-icon-button class="annotation-action" title="Marginalia" data-type="marginalia" icon="icons:note-add" disabled="disabled"/>
+                                </span>
                                 <paper-icon-button id="ner-action" icon="social:group-add" data-i18n="[title]annotations.ner.title"/>
                             </div>
                             
@@ -509,6 +512,28 @@
                                     </div>
                                     <div class="annotation-form note" data-i18n="[label]annotations.note">
                                         <paper-input name="note" label="Note"/>
+                                    </div>
+                                    <div class="annotation-form marginalia" data-i18n="[label]annotations.marginalia">
+                                        <paper-dropdown-menu name="margin_type" id="ddmargintype" style="padding-left: 10px;" data-i18n="[title]add.type.title" label="Type">
+                                            <paper-listbox id="addplacelistbox" slot="dropdown-content">
+                                                <paper-item value="default" style="display:none;"/>
+                                                <paper-item value="marginalia">
+                                                    marginalia
+                                                </paper-item>
+                                            </paper-listbox>
+                                        </paper-dropdown-menu>
+                                        <paper-input name="margin_target" label="Target"/>
+                                        <paper-dropdown-menu name="margin_place" id="ddmarginplace" style="padding-left: 10px;" data-i18n="[title]add.place.title" label="Place">
+                                            <paper-listbox id="addplacelistbox" slot="dropdown-content">
+                                                <paper-item value="default" style="display:none;"/>
+                                                <paper-item value="margin-left">
+                                                    <pb-i18n key="add.margin-left"/>
+                                                </paper-item>
+                                                <paper-item value="margin-right">
+                                                    <pb-i18n key="add.margin-right"/>
+                                                </paper-item>
+                                            </paper-listbox>
+                                        </paper-dropdown-menu>
                                     </div>
                                     <div class="annotation-form commentary" data-i18n="[label]annotations.commentary">
                                         <paper-input name="commentary" label="Commentary"/>

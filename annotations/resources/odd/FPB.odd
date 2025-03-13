@@ -221,8 +221,40 @@
             </outputRendition>
         </model>
                 </elementSpec>
-                <elementSpec ident="note" mode="change">
-                     <model predicate="type='commented' and child::anchor" behaviour="inline">
+        <elementSpec ident="note" mode="change">
+            <model predicate="@place='margin-left'" behaviour="inline">
+                <param name="content" value="for $anchor in ..//anchor/@xml:id return root($parameters?root)//div//note[@type='marginalia'][@target=$anchor]/node()"/>
+                <outputRendition xml:space="preserve">
+                    display: block;
+                    float: right;
+                    margin-right: -15%;
+                    width: 5em;
+                    margin-bottom: 0;
+                    margin-top: 0;
+                    clear: right;
+                    overflow: visible;
+                    font-size: 70%;
+                    text-align: right;
+                    text-indent: 0%;
+                </outputRendition>
+            </model>
+            <model predicate="@place='margin-right'" behaviour="inline">
+                <param name="content" value="for $anchor in ..//anchor/@xml:id return root($parameters?root)//div//note[@type='marginalia'][@target=$anchor]/node()"/>
+                <outputRendition xml:space="preserve">
+                    display: block;
+                    float: left;
+                    margin-left: -15%;
+                    width: 5em;
+                    margin-bottom: 0;
+                    margin-top: 0;
+                    clear: left;
+                    overflow: visible;
+                    font-size: 70%;
+                    text-align: left;
+                    text-indent: 0%;
+                </outputRendition>
+            </model>
+            <model predicate="type='commented' and child::anchor" behaviour="inline">
                     <param name="name" value="'pb-popover'"/>
                     <param name="content" value="."/>
                     <param name="alternate" value="for $anchor in child::anchor/@n return root($parameters?root)//div//note[@type='note'][@n=$anchor]/node()"/>
@@ -415,6 +447,40 @@
                    <model behaviour="inline" useSourceRendition="true"/>
                 </elementSpec>
                 <elementSpec ident="anchor" mode="change">
+                <modelSequence>
+        <model predicate="contains(@xml:id, 'm') and following::note[@place='margin-left']" behaviour="inline">
+            <param name="content" value="for $anchor in ./@xml:id return root($parameters?root)//div//note[@type='marginalia'][@place='margin-left'][@target=$anchor]/node()"/>
+            <outputRendition xml:space="preserve">
+                display: block;
+                float: left;
+                margin-left: -15%;
+                width: 5em;
+                margin-bottom: 0;
+                margin-top: 0;
+                clear: right;
+                overflow: visible;
+                font-size: 70%;
+                text-align: left;
+                text-indent: 0%;
+            </outputRendition>
+        </model>
+        <model predicate="contains(@xml:id, 'm') and following::note[@place='margin-right']" behaviour="inline">
+                <param name="content" value="for $anchor in ./@xml:id return root($parameters?root)//div//note[@type='marginalia'][@place='margin-right'][@target=$anchor]/node()"/>
+                <outputRendition xml:space="preserve">
+                display: block;
+                float: right;
+                margin-right: -15%;
+                width: 5em;
+                margin-bottom: 0;
+                margin-top: 0;
+                clear: left;
+                overflow: visible;
+                font-size: 70%;
+                text-align: right;
+                text-indent: 0%;
+            </outputRendition>
+        </model>
+    </modelSequence>
 <!--                <model behaviour="alternate" predicate="$parameters?mode='normalized'">-->
                     <!-- add with Involved Scribe -->
                     <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = ./following::add[@type='addition']/@xml:id) and not((concat('t', ./@xml:id) = ./following::add[@type='addition'][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]/@xml:id))" behaviour="inline">
@@ -503,28 +569,30 @@
         </model>
                 </elementSpec>
                 <elementSpec ident="p" mode="change">
-                    <model predicate="descendant::gloss[@type='margin-right'] and not(descendant::gloss[@type='margin-left'])" behaviour="paragraph">
-            <outputRendition xml:space="preserve">
-            margin-right: 15%;
-            </outputRendition>
-        </model>
-                    <model predicate="descendant::gloss[@type='margin-left'] and not(descendant::gloss[@type='margin-right'])" behaviour="paragraph">
-            <outputRendition xml:space="preserve">
-            margin-left: 15%;
-            </outputRendition>
-        </model>
-                    <model predicate="descendant::gloss[@type='margin-left'] and descendant::gloss[@type='margin-right']" behaviour="paragraph">
+                 <model predicate="following::note[@place='margin-left'] and following::note[@place='margin-right']" behaviour="paragraph">
             <outputRendition xml:space="preserve">
                 margin-left: 15%;
                 margin-right: 15%;
             </outputRendition>
         </model>
-        <model predicate="@type='hidden'" behaviour="alternate">
+        <model predicate="following::note[@place='margin-right'] and not(following::note[@place='margin-left'])" behaviour="paragraph">
+            <outputRendition xml:space="preserve">
+                margin-right: 15%;
+            </outputRendition>
+        </model>
+        <model predicate="following::note[@place='margin-left'] and not(following::note[@place='margin-right'])" behaviour="paragraph">
+            <outputRendition xml:space="preserve">
+                margin-left: 15%;
+            </outputRendition>
+        </model>
+                    <model predicate="@type='hidden'" behaviour="alternate">
             <param name="default" value="."/>
             <param name="alternate" value="'Non-edited text / Nicht edierter Text'"/>
             <outputRendition xml:space="preserve">
+            
             text-decoration: underline dotted;
             color: transparent;
+            
             </outputRendition>
         </model>
                     <model output="print" predicate="ancestor::note" behaviour="inline"/>
@@ -898,45 +966,47 @@
         </model>
                 </elementSpec>
                 <elementSpec ident="closer" mode="change">
-                    <model predicate="descendant::gloss[@type='margin-right'] and not(descendant::gloss[@type='margin-left'])" behaviour="block">
-            <outputRendition xml:space="preserve">
-            margin-right: 15%;
-            </outputRendition>
-        </model>
-                    <model predicate="descendant::gloss[@type='margin-left'] and not(descendant::gloss[@type='margin-right'])" behaviour="block">
-            <outputRendition xml:space="preserve">
-            margin-left: 15%;
-            </outputRendition>
-        </model>
-                    <model predicate="descendant::gloss[@type='margin-left'] and descendant::gloss[@type='margin-right']" behaviour="block">
+                    <model predicate="following::note[@place='margin-left'] and following::note[@place='margin-right']" behaviour="block">
             <outputRendition xml:space="preserve">
                 margin-left: 15%;
                 margin-right: 15%;
             </outputRendition>
         </model>
-                    <model predicate="preceding::gloss[@type='margin-left']" behaviour="block">
-            <outputRendition xml:space="preserve">
-            margin-left: 15%;
-            </outputRendition>
-        </model>
-                    <model predicate="preceding::gloss[@type='margin-right']" behaviour="block">
-            <outputRendition xml:space="preserve">
-            margin-right: 15%;
-            </outputRendition>
-        </model>
-                    <model predicate="preceding::gloss[@type='margin-right'] and preceding::gloss[@type='margin-left']" behaviour="block">
+        <model predicate="preceding::note[@place='margin-right'] and preceding::note[@place='margin-left']" behaviour="block">
             <outputRendition xml:space="preserve">
                 margin-right: 15%;
                 margin-left: 15%;
-           </outputRendition>
+            </outputRendition>
+        </model>
+        <model predicate="following::note[@place='margin-right'] and not(following::note[@place='margin-left'])" behaviour="block">
+            <outputRendition xml:space="preserve">
+                margin-right: 15%;
+            </outputRendition>
+        </model>
+        <model predicate="following::note[@place='margin-left'] and not(following::note[@place='margin-right'])" behaviour="block">
+            <outputRendition xml:space="preserve">
+                margin-left: 15%;
+            </outputRendition>
+        </model>
+        <model predicate="preceding::note[@place='margin-left']" behaviour="block">
+            <outputRendition xml:space="preserve">
+                margin-left: 15%;
+            </outputRendition>
+        </model>
+        <model predicate="preceding::note[@place='margin-right']" behaviour="block">
+            <outputRendition xml:space="preserve">
+                margin-right: 15%;
+            </outputRendition>
         </model>
                     <model behaviour="inline"/>
                 </elementSpec>
                 <elementSpec ident="floatingText" mode="change">
                     <model behaviour="inline">
             <outputRendition xml:space="preserve">
+            
                 margin-left: 10em;
                 margin-right: 10em;
+            
             </outputRendition>
         </model>
                 </elementSpec>
@@ -945,38 +1015,38 @@
                     <model output="print" behaviour="omit"/>
                 </elementSpec>
             <elementSpec ident="opener" mode="change">
-                    <model predicate="following::gloss[@type='margin-right'] and not(following::gloss[@type='margin-left'])" behaviour="block">
-            <outputRendition xml:space="preserve">
-            margin-right: 15%;
-            </outputRendition>
-        </model>
-                    <model predicate="following::gloss[@type='margin-left'] and not(following::gloss[@type='margin-right'])" behaviour="block">
-            <outputRendition xml:space="preserve">
-            margin-left: 15%;
-            </outputRendition>
-        </model>
-                    <model predicate="following::gloss[@type='margin-left'] and following::gloss[@type='margin-right']" behaviour="block">
+                <model predicate="following::note[@place='margin-left'] and following::note[@place='margin-right']" behaviour="block">
             <outputRendition xml:space="preserve">
                 margin-left: 15%;
                 margin-right: 15%;
             </outputRendition>
         </model>
+        <model predicate="following::note[@place='margin-right'] and not(following::note[@place='margin-left'])" behaviour="block">
+            <outputRendition xml:space="preserve">
+                margin-right: 15%;
+            </outputRendition>
+        </model>
+        <model predicate="following::note[@place='margin-left'] and not(following::note[@place='margin-right'])" behaviour="block">
+            <outputRendition xml:space="preserve">
+                margin-left: 15%;
+            </outputRendition>
+        </model>
                     <model behaviour="inline"/>
                 </elementSpec>
                 <elementSpec ident="address" mode="add">
-                    <model predicate="not(ancestor::closer) and descendant::gloss[@type='margin-left'] and not(descendant::gloss[@type='margin-right'])" behaviour="block">
-            <outputRendition xml:space="preserve">
-            margin-right: 15%;
-            </outputRendition>
-        </model>
-                    <model predicate="not(ancestor::closer) and descendant::gloss[@type='margin-right'] and not(descendant::gloss[@type='margin-left'])" behaviour="block">
-            <outputRendition xml:space="preserve">
-            margin-right: 15%;
-            </outputRendition>
-        </model>
-                    <model predicate="not(ancestor::closer) and descendant::gloss[@type='margin-right'] and descendant::gloss[@type='margin-left']" behaviour="block">
+                    <model predicate="not(ancestor::closer) and following::note[@place='margin-right'] and following::note[@place='margin-left']" behaviour="block">
             <outputRendition xml:space="preserve">
                 margin-left: 15%;
+                margin-right: 15%;
+            </outputRendition>
+        </model>
+        <model predicate="not(ancestor::closer) and following::note[@place='margin-left'] and not(following::note[@place='margin-right'])" behaviour="block">
+            <outputRendition xml:space="preserve">
+                margin-right: 15%;
+            </outputRendition>
+        </model>
+        <model predicate="not(ancestor::closer) and following::note[@place='margin-right'] and not(following::note[@place='margin-left'])" behaviour="block">
+            <outputRendition xml:space="preserve">
                 margin-right: 15%;
             </outputRendition>
         </model>
@@ -1037,20 +1107,20 @@
                     <model predicate="parent::div" behaviour="heading">
             <param name="level" value="count(ancestor::div)"/>
         </model>
-                    <model predicate="following::gloss[@type='margin-right'] and following::gloss[@type='margin-left']" behaviour="block">
+                    <model predicate="following::note[@place='margin-right'] and following::note[@place='margin-left']" behaviour="block">
             <outputRendition xml:space="preserve">
                 margin-right: 15%;
                 margin-left: 15%;
-           </outputRendition>
-        </model>
-                    <model predicate="following::gloss[@type='margin-right'] and not(following::gloss[@type='margin-left'])" behaviour="block">
-            <outputRendition xml:space="preserve">
-            margin-right: 15%;
             </outputRendition>
         </model>
-                    <model predicate="following::gloss[@type='margin-left'] and not(following::gloss[@type='margin-right'])" behaviour="block">
+        <model predicate="following::note[@place='margin-right'] and not(following::note[@place='margin-left'])" behaviour="block">
             <outputRendition xml:space="preserve">
-            margin-left: 15%;
+                margin-right: 15%;
+            </outputRendition>
+        </model>
+       <model predicate="following::note[@place='margin-left'] and not(following::note[@place='margin-right'])" behaviour="block">
+            <outputRendition xml:space="preserve">
+                margin-left: 15%;
             </outputRendition>
         </model>
                     <model behaviour="block"/>
