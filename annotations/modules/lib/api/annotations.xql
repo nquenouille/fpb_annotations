@@ -667,14 +667,6 @@ declare %private function anno:find-offset($nodes as node()*, $offset as xs:int,
                             $found
                         else
                             anno:find-offset(tail($nodes), $offset - anno:string-length($primary), $pos, ())
-                case element(tei:num) return
-                    let $primary := $node/tei:note
-                    let $found := anno:find-offset($primary, $offset, $pos, ())
-                    return
-                        if (exists($found)) then
-                            $found
-                        else
-                            anno:find-offset(tail($nodes), $offset - anno:string-length($primary), $pos, ())
                 case element() return
                     let $found := anno:find-offset($node/node(), $offset, $pos, ())
                     return
@@ -684,11 +676,11 @@ declare %private function anno:find-offset($nodes as node()*, $offset as xs:int,
                     return
                         if ($offset <= $len) then
                             [$node, $offset]
-                        (: prevents from setting a tag into a tei:abbr, tei:sich, tei:orig or tei:lem element element :)
+                        (: prevents from setting a tag into a tei:abbr, tei:sic, tei:orig or tei:lem element :)
                          else if ($offset > $len and ($node/parent::element(tei:abbr) | $node/parent::element(tei:sic) | $node/parent::element(tei:orig)) | $node/parent::element(tei:lem)) then
                             anno:find-offset(tail($nodes), $offset - $len, $pos, ())
                         (: if the start is at the beginning of line and begins with a <choice> tag, tagging of it and the next word is possible :)
-                        else if ($pos = "start" and $offset = $len + 1) then
+                        else if ($pos = "start" and $offset = $len + 1 and ($node/parent::element(tei:abbr) | $node/parent::element(tei:sic) | $node/parent::element(tei:orig)) | $node/parent::element(tei:lem)) then
                             [$node, $len + 2]
                         (: end is immediately after the node :)
                         else if ($pos = "end" and $offset = $len + 1) then
@@ -713,11 +705,9 @@ declare %private function anno:string-length($nodes as node()*, $length as xs:in
         let $newLength :=
             typeswitch ($node)
                 case element(tei:choice) return
-                    anno:string-length($node/tei:sic | $node/tei:abbr, $length)
+                    anno:string-length($node/tei:abbr | $node/tei:sic | $node/tei:orig, $length)
                 case element(tei:app) return
                     anno:string-length($node/tei:lem, $length)
-                case element(tei:num) return
-                    anno:string-length($node/tei:note, $length)
                 case element() return
                     anno:string-length($node/node(), $length)
                 default return
