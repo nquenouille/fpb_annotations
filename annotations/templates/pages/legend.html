@@ -381,7 +381,7 @@
             <span>  Streichung durch den Autor</span>
         </label>
         <div class="panel">
-            <p>Durchstreichung durch den Original-Autor. Wird normalerweise schon in Transkribus erledigt. Der Urheber der Streichung kann jedoch hinzugefügt werden. Hierbei kann aus einer Liste ausgewählt werden oder NN als Urheber eingetragen werden. Bei Durchstreichung eines einzelnen Buchstabens im Wort, das Tag nur um diesen einen Buchstaben setzen. Falls eine Korrektur erfolgt, das &lt;add&gt;-Tag <b>nach</b> dem &lt;del&gt;-Tag setzen.<br/>
+            <p>Durchstreichung durch den Original-Autor. Wird normalerweise schon in Transkribus erledigt. Der Urheber der Streichung kann jedoch hinzugefügt werden. Hierbei kann aus einer Liste ausgewählt werden oder NN als Urheber eingetragen werden. Bei Durchstreichung eines einzelnen Buchstabens im Wort, das Tag nur um diesen einen Buchstaben setzen. Falls eine Korrektur erfolgt, das &lt;add&gt;-Tag <b>direkt nach</b> dem &lt;del&gt;-Tag setzen und mit place='inspace' versehen.<br/>
                 <b>hand:</b> Der Schreiber kann aus einem Menü, welches mit dem Personenregister verbunden ist, ausgewählt werden. Sollte eine Person fehlen, muß diese in Bach Digital angelegt und mit der FPB-Datenbank verknüpft werden. <ul><li>Bekannter Schreiber: UUID, z.B. fpb-dgbhd (aus Personenregister)</li><li>Beim unbekannten Hauptschreiber: "main1", "main2", etc.</li><li>Beim unbekannten Nebenschreiber: "involved1", "involved2", etc.</li></ul></p></p>
         </div>
         <input type="checkbox" id="referringString"/>
@@ -400,7 +400,7 @@
             <span>  Originale Ergänzung</span>
         </label>
         <div class="panel">
-            <p>Originale Ergänzung - Eine originale Ergänzung im Dokument (keine Ergänzung durch einen Editor, etc.). Bei Ergänzung eines einzelnen Buchstabens im Wort, nachdem eine Durchstreichung erfolgte, das Tag nur um diesen einen Buchstaben setzen. Allgemein gilt: Falls eine originale Korrektur erfolgt, das &lt;add&gt;-Tag <b>nach</b> dem &lt;del&gt;-Tag setzen.<br/>
+            <p>Originale Ergänzung oder Korrektur - Eine originale Ergänzung oder Korrektur im Dokument (keine Ergänzung durch einen Editor, etc.). Bei Ergänzung eines Wortes / eines einzelnen Buchstabens im Wort, nachdem eine Durchstreichung erfolgte, das Tag nur um dieses eine Wort / diesen einen Buchstaben setzen und das Attribut place='inspace' setzen. Falls weitere Tags im &lt;add&gt;-Tag gesetzt werden müssen, diese <b>immer innerhalb</b> des Tags setzen, so daß es z.B. die Form &lt;add&gt;...&lt;hi&gt;...&lt;/hi&gt;...&lt;/add&gt; erhält. Allgemein gilt: Falls eine originale Korrektur erfolgt, das &lt;add&gt;-Tag <b>immer nach</b> dem &lt;del&gt;-Tag setzen und place='inspace' verwenden.<br/>
                 <b>Achtung:</b> Sollte eine Korrektur des Tags durch den Editor erfolgen, müssen <b>alle Felder</b> noch einmal ausgefüllt werden!
                 <br/>
                 <b>xml:id:</b> <b>Eindeutige</b> ID. <ul><li>Bezieht sich auf einen Anker (anchor): Format ta[Seite]-[lfdNr] (z.B.: ta1-2)</li><li>Ohne Beziehung: Format add[Seite]-[lfdNr] (z.B. add1-2)</li></ul>
