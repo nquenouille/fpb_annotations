@@ -724,7 +724,7 @@
                     <model predicate="not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef) and @type='addition' and not(contains(@xml:id, 'ta'))" behaviour="inline">
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="."/>
-            <param name="alternate" value="if(starts-with(@hand, 'fpb-') and not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef)) then concat('Ergänzt von: ', id(@hand, doc(&#34;/db/apps/tei-publisher/data/register.xml&#34;))/persName/text()) else if(not(@hand='')) then concat('Ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else 'Ergänzung'"/>
+            <param name="alternate" value="if(starts-with(@hand, 'fpb-') and not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef)) then concat('Ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else if(not(@hand='')) then concat('Ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else 'Ergänzung'"/>
             <param name="placement" value="'top'"/>
             <param name="fallback-placement" value="'bottom'"/>
             <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
@@ -737,7 +737,7 @@
                     <model predicate="(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef) and @type='addition' and not(contains(@xml:id, 'ta'))" behaviour="inline">
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="."/>
-            <param name="alternate" value="if(starts-with(@hand, 'fpb-') and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef) then concat('Ergänzt von: ', id(@hand, doc(&#34;/db/apps/tei-publisher/data/register.xml&#34;))/persName/text()) else if(not(@hand='')) then concat('Ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else 'Ergänzung'"/>
+            <param name="alternate" value="if(starts-with(@hand, 'fpb-') and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef) then concat('Ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else if(not(@hand='')) then concat('Ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else 'Ergänzung'"/>
             <param name="placement" value="'top'"/>
             <param name="fallback-placement" value="'bottom'"/>
             <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
