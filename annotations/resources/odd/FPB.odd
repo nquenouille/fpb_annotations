@@ -667,16 +667,6 @@
                 margin-left: 15%;
             </outputRendition>
         </model>
-                    <model predicate="@type='hidden'" behaviour="alternate">
-            <param name="default" value="."/>
-            <param name="alternate" value="'Non-edited text / Nicht edierter Text'"/>
-            <outputRendition xml:space="preserve">
-            
-            text-decoration: underline dotted;
-            color: transparent;
-            
-            </outputRendition>
-        </model>
                     <model output="print" predicate="ancestor::note" behaviour="inline"/>
                     <model behaviour="paragraph" useSourceRendition="true">
             <outputRendition xml:space="preserve">
@@ -1289,6 +1279,16 @@
         </model>
                 </elementSpec>
             <elementSpec ident="ab" mode="change">
+            <model predicate="@type='hidden'" behaviour="alternate">
+            <param name="default" value="."/>
+            <param name="alternate" value="'Non-edited text / Nicht edierter Text'"/>
+            <outputRendition xml:space="preserve">
+            
+            text-decoration: underline dotted;
+            color: transparent;
+            
+            </outputRendition>
+        </model>
                 <model behaviour="inline"/>
             </elementSpec>
             <elementSpec ident="table" mode="change">
