@@ -258,6 +258,16 @@
                     <model behaviour="inline" cssClass="annotation annotation-unclear"/>
                 </elementSpec>
                 <elementSpec ident="ab" mode="change">
+                    <model predicate="@type='hidden'" behaviour="alternate">
+                        <param name="default" value="."/>
+                        <param name="alternate" value="'Non-edited text / Nicht edierter Text'"/>
+                        <outputRendition xml:space="preserve">
+                        
+                        text-decoration: underline dotted;
+                        color: #e8e8e8;
+                        
+                        </outputRendition>
+                    </model>
                     <model behaviour="inline" predicate="not(@rend='container')" cssClass="annotation annotation-ab"/>
                 </elementSpec>
             </schemaSpec>
