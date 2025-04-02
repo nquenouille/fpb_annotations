@@ -1289,6 +1289,22 @@
             
             </outputRendition>
         </model>
+         <model predicate="following::note[@place='margin-left'] and following::note[@place='margin-right']" behaviour="paragraph">
+            <outputRendition xml:space="preserve">
+                margin-left: 15%;
+                margin-right: 15%;
+            </outputRendition>
+        </model>
+        <model predicate="following::note[@place='margin-right'] and not(following::note[@place='margin-left'])" behaviour="paragraph">
+            <outputRendition xml:space="preserve">
+                margin-right: 15%;
+            </outputRendition>
+        </model>
+        <model predicate="following::note[@place='margin-left'] and not(following::note[@place='margin-right'])" behaviour="paragraph">
+            <outputRendition xml:space="preserve">
+                margin-left: 15%;
+            </outputRendition>
+        </model>
                 <model behaviour="inline"/>
             </elementSpec>
             <elementSpec ident="table" mode="change">
