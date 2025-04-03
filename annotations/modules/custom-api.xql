@@ -220,9 +220,9 @@ declare function api:setNotes($request as map(*)) {
     let $doc := xmldb:decode($request?parameters?path)
     let $srcDoc := config:get-document($doc)
     let $src := util:expand($srcDoc/*, 'add-exist-id=all')
-    let $notes := $srcDoc//*/tei:text/tei:body/tei:div[@type='original']//tei:note[@type="note"]
-    let $notes_front := $srcDoc//*/tei:text/tei:front/tei:div[@type='original_front']//tei:note[@type="note"]
-    let $notes_back := $srcDoc//*/tei:text/tei:back/tei:div[@type='original_back']//tei:note[@type="note"]
+    let $notes := $srcDoc//*/tei:text/tei:body/tei:div[@type='original' or @type='marginalia']//tei:note[@type="note"]
+    let $notes_front := $srcDoc//*/tei:text/tei:front/tei:div[@type='original_front' or @type='marginalia_front']//tei:note[@type="note"]
+    let $notes_back := $srcDoc//*/tei:text/tei:back/tei:div[@type='original_back' or @type='marginalia_back']//tei:note[@type="note"]
     let $hasAccess := sm:has-access(document-uri(root($srcDoc)), "rw-")
     return
         if (not($hasAccess) and request:get-method() = 'PUT') then
@@ -230,7 +230,7 @@ declare function api:setNotes($request as map(*)) {
         else if($srcDoc and $notes) then 
             for $note in $notes 
             let $putAnchor := update insert <anchor xmlns="http://www.tei-c.org/ns/1.0" type="anchor" xml:id="" n="" /> following $note[@type="note"][@n=""]
-            let $numeroAnchor := api:transformNotes($srcDoc//*/tei:text/tei:body/tei:div[@type='original']//*/tei:anchor[@type='anchor'])
+            let $numeroAnchor := api:transformNotes($srcDoc//*/tei:text/tei:body/tei:div[@type='original' or @type='marginalia']//*/tei:anchor[@type='anchor'])
             let $numeroNotes := update value $note[@type="note"]/@n with $note/following::tei:anchor[@type='anchor']/@n
             let $targetNotes := update value $note[@type="note"]/@target with (concat('#n-', $note/@n))
             let $notenumber := $note[@type="note"]/@n
@@ -248,7 +248,7 @@ declare function api:setNotes($request as map(*)) {
                         update insert $note preceding $srcDoc//tei:text/tei:body/tei:div[@type='commentary']/tei:p/tei:note[@n= $notenumber +1]
                     else 
                         update insert $note into $srcDoc//tei:text/tei:body/tei:div[@type='commentary']/tei:p
-            let $delNotes := update delete $srcDoc//tei:text/tei:body/tei:div[@type='original']//$note
+            let $delNotes := update delete $srcDoc//tei:text/tei:body/tei:div[@type='original' or @type='marginalia']//$note
             let $newNotes := $srcDoc//*/tei:text/tei:body/tei:div[@type='commentary']/tei:p/*
             let $countNewNotes := if ($newNotes) then api:transformNotes($newNotes) else ()
                 return map {
@@ -256,7 +256,7 @@ declare function api:setNotes($request as map(*)) {
         else if($srcDoc and $notes_front) then 
             for $note in $notes_front 
             let $putAnchor := update insert <anchor xmlns="http://www.tei-c.org/ns/1.0" type="anchor" xml:id="" n="" /> following $note[@type="note"][@n=""]
-            let $numeroAnchor := api:transformNotes($srcDoc//*/tei:text/tei:front/tei:div[@type='original_front']//*/tei:anchor[@type='anchor'])
+            let $numeroAnchor := api:transformNotes($srcDoc//*/tei:text/tei:front/tei:div[@type='original_front' or @type='marginalia_front']//*/tei:anchor[@type='anchor'])
             let $numeroNotes := update value $note[@type="note"]/@n with $note/following::tei:anchor[@type='anchor']/@n
             let $targetNotes := update value $note[@type="note"]/@target with (concat('#n-', $note/@n))
             let $notenumber := $note[@type="note"]/@n
@@ -274,7 +274,7 @@ declare function api:setNotes($request as map(*)) {
                         update insert $note preceding $srcDoc//tei:text/tei:front/tei:div[@type='commentary_front']/tei:p/tei:note[@n= $notenumber +1]
                     else 
                         update insert $note into $srcDoc//tei:text/tei:front/tei:div[@type='commentary_front']/tei:p
-            let $delNotes := update delete $srcDoc//tei:text/tei:front/tei:div[@type='original_front']//$note
+            let $delNotes := update delete $srcDoc//tei:text/tei:front/tei:div[@type='original_front' or @type='marginalia_front']//$note
             let $newNotes := $srcDoc//*/tei:text/tei:front/tei:div[@type='commentary_front']/tei:p/*
             let $countNewNotes := if ($newNotes) then api:transformNotes($newNotes) else ()
                 return map {
@@ -282,7 +282,7 @@ declare function api:setNotes($request as map(*)) {
         else if($srcDoc and $notes_back) then 
             for $note in $notes_back 
             let $putAnchor := update insert <anchor xmlns="http://www.tei-c.org/ns/1.0" type="anchor" xml:id="" n="" /> following $note[@type="note"][@n=""]
-            let $numeroAnchor := api:transformNotes($srcDoc//*/tei:text/tei:back/tei:div[@type='original_back']//*/tei:anchor[@type='anchor'])
+            let $numeroAnchor := api:transformNotes($srcDoc//*/tei:text/tei:back/tei:div[@type='original_back' or @type='marginalia_back']//*/tei:anchor[@type='anchor'])
             let $numeroNotes := update value $note[@type="note"]/@n with $note/following::tei:anchor[@type='anchor']/@n
             let $targetNotes := update value $note[@type="note"]/@target with (concat('#n-', $note/@n))
             let $notenumber := $note[@type="note"]/@n
@@ -300,7 +300,7 @@ declare function api:setNotes($request as map(*)) {
                         update insert $note preceding $srcDoc//tei:text/tei:back/tei:div[@type='commentary_back']/tei:p/tei:note[@n= $notenumber +1]
                     else 
                         update insert $note into $srcDoc//tei:text/tei:back/tei:div[@type='commentary_back']/tei:p
-            let $delNotes := update delete $srcDoc//tei:text/tei:back/tei:div[@type='original_back']//$note
+            let $delNotes := update delete $srcDoc//tei:text/tei:back/tei:div[@type='original_back' or @type='marginalia_back']//$note
             let $newNotes := $srcDoc//*/tei:text/tei:back/tei:div[@type='commentary_back']/tei:p/*
             let $countNewNotes := if ($newNotes) then api:transformNotes($newNotes) else ()
                 return map {
