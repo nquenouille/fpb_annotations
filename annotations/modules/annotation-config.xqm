@@ -117,9 +117,9 @@ declare function anno:annotations($type as xs:string, $properties as map(*)?, $c
                 {$content()}
             </abbr><expan xmlns="http://www.tei-c.org/ns/1.0">manu propria = mit eigener Hand</expan></choice>
         case "perge" return
-            <choice xmlns="http://www.tei-c.org/ns/1.0"><abbr xmlns="http://www.tei-c.org/ns/1.0" type="perge">
+            <hi xmlns="http://www.tei-c.org/ns/1.0" rend="latintype"><choice xmlns="http://www.tei-c.org/ns/1.0"><abbr xmlns="http://www.tei-c.org/ns/1.0" type="perge">
                 {$content()}
-            </abbr><expan xmlns="http://www.tei-c.org/ns/1.0">perge = et cetera</expan></choice>
+            </abbr><expan xmlns="http://www.tei-c.org/ns/1.0">perge = et cetera</expan></choice></hi>
         case "keepLineBreaks" return
             (<seg xmlns="http://www.tei-c.org/ns/1.0" type='keepLB' />, $content())
         case "seg" return
