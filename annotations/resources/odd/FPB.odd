@@ -632,18 +632,6 @@
             color: grey;
             </outputRendition>
         </model>
-                    <model predicate="@extent" behaviour="inline">
-            <param name="content" value="@extent"/>
-            <outputRendition xml:space="preserve" scope="before">
-            content: ' [..';
-            </outputRendition>
-            <outputRendition xml:space="preserve" scope="after">
-            content: '..] ';
-            </outputRendition>
-            <outputRendition xml:space="preserve">
-            color: grey;
-            </outputRendition>
-        </model>
                     <model behaviour="inline">
             <outputRendition xml:space="preserve" scope="before">
             content: '[...]';
