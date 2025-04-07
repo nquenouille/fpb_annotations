@@ -305,19 +305,6 @@ declare %private function anno:delete($nodes as node()*, $target as node()) {
                         $node/@*,
                         anno:delete($node/node(), $target)
                     }
-            case element(tei:supplied) return
-                if ($node is $target and not(child::tei:lb)) then
-                    ()
-                else if ($node is $target) then
-                    element exist:delete {
-                        $node/@*,
-                        anno:delete($node/node(), $target)
-                    }
-                else
-                    element { node-name($node) } {
-                        $node/@*,
-                        anno:delete($node/node(), $target)
-                    } 
             case element(tei:note) return
                 if ($node[@type='note'] is $target) then
                     ()
