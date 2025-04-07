@@ -680,7 +680,7 @@
                     <model predicate="following-sibling::*[1][self::add[contains(@xml:id, 'ta')]]" behaviour="omit"/>
                     <model predicate="$parameters?mode='normalized' and not(ancestor::closer) and not(ancestor::opener) and not(ancestor::address) and not(following-sibling::seg[@type='keepLB'][1]) and not(ancestor::head) and not(ancestor::signed)" behaviour="omit"/>
                     <modelSequence>
-            <model predicate="not($parameters?mode='normalized') and not(parent::cell)" behaviour="break">
+            <model predicate="not($parameters?mode='normalized')" behaviour="break">
                 <param name="type" value="'line'"/>
                 <param name="label" value="@n"/>
             </model>
