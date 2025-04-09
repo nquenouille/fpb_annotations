@@ -577,6 +577,50 @@ declare %private function anno:modify($nodes as node()*, $target as node(), $ann
                         $node/@*,
                         anno:modify($node/node(), $target, $annotation)
                     }
+            case element(tei:date) return
+                if ($node is $target) then
+                    let $year := $annotation?properties('year')
+                    let $month := switch($annotation?properties('month'))
+                                    case "Januar" return '01'
+                                    case "Februar" return '02'
+                                    case "März" return '03'
+                                    case "April" return '04'
+                                    case "Mai" return '05'
+                                    case "Juni" return '06'
+                                    case "Juli" return '07'
+                                    case "August" return '08'
+                                    case "September" return '09'
+                                    case "Oktober" return '10'
+                                    case "November" return '11'
+                                    case "Dezember" return '12'
+                                    default return ()
+                    let $day := $annotation?properties('day')
+                    let $when := 
+                        if ($year and $month and $day) then
+                            string-join(($year, $month, $day), '-')
+                        else if ($year and $month) then
+                            string-join(($year, $month), '-')
+                        else if ($month and $day) then
+                            concat('--', $month, '-', $day)
+                        else if ($year) then
+                            $year
+                        else if ($month) then
+                            concat('--', $month)
+                        else if ($day) then
+                            concat('---', $day)
+                        else
+                            ()
+                    return
+                        element { node-name($node) } {
+                            attribute {'when'} { $when },
+                            
+                        anno:modify($node/node(), $target, $annotation)
+                        }
+                else
+                    element { node-name($node) } {
+                        $node/@*,
+                        anno:modify($node/node(), $target, $annotation)
+                    }
             case element() return
                 if ($node is $target) then
                     element { node-name($node) } {

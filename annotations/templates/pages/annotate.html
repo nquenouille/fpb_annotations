@@ -282,7 +282,84 @@
                                         </div>
                                     </div>
                                     <div class="annotation-form date">
-                                        <paper-input name="when" label="when" type="date"/>
+                                        <paper-input name="year" label="JJJJ" style="padding-left: 10px;"/>
+                                        <paper-dropdown-menu name="month" id="month" style="padding-left: 10px;" label="Month">
+                                            <paper-listbox id="monthlistbox" slot="dropdown-content">
+                                                <paper-item value="default" style="display:none;"/>
+                                                <paper-item value="01">
+                                                    <pb-i18n key="month.01"/>
+                                                </paper-item>
+                                                <paper-item value="02">
+                                                    <pb-i18n key="month.02"/>
+                                                </paper-item>
+                                                <paper-item value="03">
+                                                    <pb-i18n key="month.03"/>
+                                                </paper-item>
+                                                <paper-item value="04">
+                                                    <pb-i18n key="month.04"/>
+                                                </paper-item>
+                                                <paper-item value="05">
+                                                    <pb-i18n key="month.05"/>
+                                                </paper-item>
+                                                <paper-item value="06">
+                                                    <pb-i18n key="month.06"/>
+                                                </paper-item>
+                                                <paper-item value="07">
+                                                    <pb-i18n key="month.07"/>
+                                                </paper-item>
+                                                <paper-item value="08">
+                                                    <pb-i18n key="month.08"/>
+                                                </paper-item>
+                                                <paper-item value="09">
+                                                    <pb-i18n key="month.09"/>
+                                                </paper-item>
+                                                <paper-item value="10">
+                                                    <pb-i18n key="month.10"/>
+                                                </paper-item>
+                                                <paper-item value="11">
+                                                    <pb-i18n key="month.11"/>
+                                                </paper-item>
+                                                <paper-item value="12">
+                                                    <pb-i18n key="month.12"/>
+                                                </paper-item>
+                                            </paper-listbox>
+                                        </paper-dropdown-menu>
+                                        <paper-dropdown-menu name="day" id="day" style="padding-left: 10px;" label="Day">
+                                            <paper-listbox id="daylistbox" slot="dropdown-content">
+                                                <paper-item value="default" style="display:none;"/>
+                                                <paper-item>01</paper-item>
+                                                <paper-item>02</paper-item>
+                                                <paper-item>03</paper-item>
+                                                <paper-item>04</paper-item>
+                                                <paper-item>05</paper-item>
+                                                <paper-item>06</paper-item>
+                                                <paper-item>07</paper-item>
+                                                <paper-item>08</paper-item>
+                                                <paper-item>09</paper-item>
+                                                <paper-item>10</paper-item>
+                                                <paper-item>11</paper-item>
+                                                <paper-item>12</paper-item>
+                                                <paper-item>13</paper-item>
+                                                <paper-item>14</paper-item>
+                                                <paper-item>15</paper-item>
+                                                <paper-item>16</paper-item>
+                                                <paper-item>17</paper-item>
+                                                <paper-item>18</paper-item>
+                                                <paper-item>19</paper-item>
+                                                <paper-item>20</paper-item>
+                                                <paper-item>21</paper-item>
+                                                <paper-item>22</paper-item>
+                                                <paper-item>23</paper-item>
+                                                <paper-item>24</paper-item>
+                                                <paper-item>25</paper-item>
+                                                <paper-item>26</paper-item>
+                                                <paper-item>27</paper-item>
+                                                <paper-item>28</paper-item>
+                                                <paper-item>29</paper-item>
+                                                <paper-item>30</paper-item>
+                                                <paper-item>31</paper-item>
+                                            </paper-listbox>
+                                        </paper-dropdown-menu>
                                         <paper-input name="from" label="from" type="date"/>
                                         <paper-input name="to" label="to" type="date"/>
                                         <paper-input name="notBefore" label="notBefore" type="date"/>
@@ -780,6 +857,7 @@
             <pb-message id="ner-denied-dialog" data-i18n="[title]dialogs.error;[message]annotations.ner.denied"/>
             <pb-message id="error-dialog" data-i18n="[title]dialogs.error;[message]dialogs.serverError"/>
             <pb-message id="runtime-error-dialog" data-i18n="[title]dialogs.error;[message]dialogs.serverError"/>
+            <pb-message id="date-error-dialog" data-i18n="[title]dialogs.error;[message]dialogs.dateError"/>
         </pb-page>
         <div class="splash"/>
     </body>

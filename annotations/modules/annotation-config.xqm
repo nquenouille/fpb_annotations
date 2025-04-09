@@ -74,10 +74,67 @@ declare function anno:annotations($type as xs:string, $properties as map(*)?, $c
         case "date" return
             <date xmlns="http://www.tei-c.org/ns/1.0">
             {
-                for $prop in map:keys($properties)[. = ('when', 'from', 'to', 'notBefore', 'notAfter')]
+                let $year := $properties('year')
+                let $month := switch($properties('month'))
+                                case "Januar" return '01'
+                                case "Februar" return '02'
+                                case "März" return '03'
+                                case "April" return '04'
+                                case "Mai" return '05'
+                                case "Juni" return '06'
+                                case "Juli" return '07'
+                                case "August" return '08'
+                                case "September" return '09'
+                                case "Oktober" return '10'
+                                case "November" return '11'
+                                case "Dezember" return '12'
+                                default return ()
+                let $day := $properties('day')
+                let $isLeap := if((xs:int($year) mod 4 = 0) and ((xs:int($year) mod 100 != 0) or xs:int($year) mod 400 = 0)) then 'true' else 'false'
+                let $validYear := matches($year, '^\d{4}$')
+                let $validDay := 
+                    if ($month = '02') then
+                        if ($isLeap = 'true') then
+                            (xs:int($day) ge 1 and xs:int($day) le 29)   (: Februar hat 29 Tage im Schaltjahr, 28 im Nicht-Schaltjahr :)
+                        else
+                            (xs:int($day) ge 1 and xs:int($day) le 28)
+                    else if ($month = '04' or $month = '06' or $month = '09' or $month = '11') then
+                        (xs:int($day) ge 1 and xs:int($day) le 30)  (: Monate mit 30 Tagen haben nur Tage zwischen 1 und 30 :)
+                    else
+                        (xs:int($day) ge 1 and xs:int($day) le 31)  (: Alle anderen Monate haben 31 Tage :)  
+                let $dates := 
+                    if ($year and $month and $day and $validDay and $validYear) then 
+                        string-join(($year, $month, $day), '-')
+                    else if($year and $month and $day and not($validDay or $validYear)) then
+                        error($errors:UNPROCESSABLE_ENTITY)
+                    else if($year and $month and $validYear) then
+                        string-join(($year, $month), '-')
+                    else if($year and $month and not($validYear)) then
+                        error($errors:UNPROCESSABLE_ENTITY)
+                    else if($month and $day and $validDay) then
+                        concat('--',$month, '-', $day)
+                    else if($month and $day and not($validDay)) then 
+                        error($errors:UNPROCESSABLE_ENTITY)
+                    else if($year and $validYear) then
+                        $year
+                    else if($year and not($validYear)) then
+                        error($errors:UNPROCESSABLE_ENTITY)
+                    else if($month) then
+                        concat('--', $month)
+                    else if($day) then
+                        concat('---', $day)
+                    else ()
                 return
-                    attribute { $prop } { $properties($prop) },
-                $content()
+                    (
+                        if ($dates) then 
+                            attribute {'when'} {$dates}
+                        else 
+                            (),
+                for $prop in map:keys($properties)[. = ('from', 'to', 'notBefore', 'notAfter')]
+                return
+                    
+                        attribute { $prop } { $properties($prop) }
+                    ), $content()
             }
             </date>
         case "ref" return

@@ -29,7 +29,8 @@
     "serverError": "Die Anfrage an den Server schlug fehl.",
     "generatingFile": "Erzeuge Datei...",
     "downloadMessage": "Das Erzeugen einer Datei zum Download kann bis zu mehrere Minuten dauern. Bitte warten Sie. Das Fenster sollte sich automatisch schließen, sobald der Download beendet wurde.",
-    "loading": "Lade ..."
+    "loading": "Lade ...",
+    "dateError": "Ungültige Datumseingabe. Das Jahr muß vierstellig sein ( JJJJ ), der Tag sollte im Monat vorhanden sein ;-)"
   },
   "document": {
     "contents": "Inhalt",
@@ -316,6 +317,20 @@
   	"inprogress": "In Arbeit",
   	"review": "Zu Überprüfen",
   	"final": "Fertig"
+  },
+  "month": {
+  	"01": "Januar",
+  	"02": "Februar",
+  	"03": "März",
+  	"04": "April",
+  	"05": "Mai",
+  	"06": "Juni",
+  	"07": "Juli",
+  	"08": "August",
+  	"09": "September",
+  	"10": "Oktober",
+  	"11": "November",
+  	"12": "Dezember"
   },
   "memo": {
   	"title": "Vermerk",

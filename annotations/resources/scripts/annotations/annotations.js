@@ -288,6 +288,10 @@ window.addEventListener("WebComponentsReady", () => {
 					document.getElementById('permission-denied-dialog').show();
 					throw new Error(response.statusText);
 				}
+				if (response.status === 422) {
+					document.getElementById('date-error-dialog').show();
+					throw new Error(response.statusText);
+				}
 				document.getElementById('error-dialog').show();
 				throw new Error(response.statusText);
 			})
