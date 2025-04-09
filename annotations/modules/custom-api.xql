@@ -250,7 +250,7 @@ declare function api:setNotes($request as map(*)) {
                         update insert $note into $srcDoc//tei:text/tei:body/tei:div[@type='commentary']/tei:p
             let $delNotes := update delete $srcDoc//tei:text/tei:body/tei:div[@type='original' or @type='marginalia']//$note
             let $newNotes := $srcDoc//*/tei:text/tei:body/tei:div[@type='commentary']/tei:p/*
-            let $countNewNotes := if ($newNotes) then api:transformNotes($newNotes) else ()
+            let $countNewNotes := api:transformNotes($srcDoc)
                 return map {
                     "content": $srcDoc}
         else if($srcDoc and $notes_front) then 
@@ -276,7 +276,7 @@ declare function api:setNotes($request as map(*)) {
                         update insert $note into $srcDoc//tei:text/tei:front/tei:div[@type='commentary_front']/tei:p
             let $delNotes := update delete $srcDoc//tei:text/tei:front/tei:div[@type='original_front' or @type='marginalia_front']//$note
             let $newNotes := $srcDoc//*/tei:text/tei:front/tei:div[@type='commentary_front']/tei:p/*
-            let $countNewNotes := if ($newNotes) then api:transformNotes($newNotes) else ()
+            let $countNewNotes := api:transformNotes($srcDoc)
                 return map {
                     "content": $srcDoc}
         else if($srcDoc and $notes_back) then 
@@ -302,7 +302,7 @@ declare function api:setNotes($request as map(*)) {
                         update insert $note into $srcDoc//tei:text/tei:back/tei:div[@type='commentary_back']/tei:p
             let $delNotes := update delete $srcDoc//tei:text/tei:back/tei:div[@type='original_back' or @type='marginalia_back']//$note
             let $newNotes := $srcDoc//*/tei:text/tei:back/tei:div[@type='commentary_back']/tei:p/*
-            let $countNewNotes := if ($newNotes) then api:transformNotes($newNotes) else ()
+            let $countNewNotes := api:transformNotes($srcDoc)
                 return map {
                     "content": $srcDoc}
         else api:transformNotes($srcDoc)
