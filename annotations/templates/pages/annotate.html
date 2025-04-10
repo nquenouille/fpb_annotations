@@ -367,39 +367,19 @@
                                     </div>
                                     <div class="annotation-form hi" data-i18n="[label]annotations.hi">
                                         <paper-input name="rend" label="rend"/>
-                                        <p>Hervorhebung der Schriftart. Hier kann die Hervorhebung des Fonts noch einmal korrigiert werden. Auch kann eine nicht hier stehende Hervorhebung eingefügt werden.</p>
                                     </div>
-                                    <div class="annotation-form latintype" data-i18n="[label]annotations.latintype">
-                                        <p>
-                                            Latintype / Kursiv - Text wird kursiv angezeigt. Hierbei wird das "hi"-Tag verwendet, welches unter dem Tag "Schriftart" (s.o.) geändert werden kann.
-                                        </p>
-                                    </div>
-                                    <div class="annotation-form underline" data-i18n="[label]annotations.underline">
-                                        <p>
-                                            Unterstrichen - Text wird unterstrichen angezeigt. Hierbei wird das "hi"-Tag verwendet, welches unter dem Tag "Schriftart" (s.o.) geändert werden kann.
-                                        </p>
-                                    </div>
-                                    <div class="annotation-form semibold" data-i18n="[label]annotations.semibold">
-                                        <p>
-                                            Halbfett - Text wird halb-fett angezeigt (von Schriftart des Browsers abhängig). Hierbei wird das "hi"-Tag verwendet, welches unter dem Tag "Schriftart" (s.o.) geändert werden kann.
-                                        </p>
-                                    </div>
-                                    <div class="annotation-form superscript" data-i18n="[label]annotations.superscript">
-                                        <p>
-                                            Hochgestellt - Text wird hochgestellt angezeigt. Hierbei wird das "hi"-Tag verwendet, welches unter dem Tag "Schriftart" (s.o.) geändert werden kann.
-                                        </p>
-                                    </div>
-                                    <div class="annotation-form emph" data-i18n="[label]annotations.emph">
-                                        <p>Gesperrt - Text wird gesperrt angezeigt. Hierbei wird das "hi"-Tag verwendet, welches unter dem Tag "Schriftart" (s.o.) geändert werden kann.</p>
-                                    </div>
+                                    <div class="annotation-form latintype" data-i18n="[label]annotations.latintype" />
+                                    <div class="annotation-form underline" data-i18n="[label]annotations.underline" />
+                                    <div class="annotation-form semibold" data-i18n="[label]annotations.semibold" />
+                                    <div class="annotation-form superscript" data-i18n="[label]annotations.superscript" />
+                                    <div class="annotation-form emph" data-i18n="[label]annotations.emph" />
                                     <div class="annotation-form ref" data-i18n="[label]annotations.reference">
                                         <paper-input id="ref" name="target" label="target"/>
                                     </div>
                                     <div class="annotation-form abbr" data-i18n="[label]annotations.abbreviation">
                                         <paper-input name="expan" data-i18n="[label]annotations.expansion" label="Expansion"/>
-                                        <p>Hier können Abkürzungen markiert und aufgelöst werden. Diese werden im Allgemeinen als Mouseover dargestellt. <br/> <b>Erweiterung:</b> Auflösung der Abkürzung</p>
                                     </div>
-                                   <div class="annotation-form rs" data-i18n="[label]annotations.rs">
+                                    <div class="annotation-form rs" data-i18n="[label]annotations.rs">
                                         <paper-dropdown-menu name="typers" id="ddrs" style="padding-left: 10px;" data-i18n="[title]rs.title" label="Type">
                                             <paper-listbox id="rslistbox" slot="dropdown-content">
                                                 <paper-item value="default" style="display:none;"/>
@@ -417,7 +397,6 @@
                                         <paper-input class="form-rs" name="key" data-i18n="[label]annotations.reference" label="Reference">
                                             <paper-icon-button slot="prefix" icon="search" data-i18n="[label]annotations.lookup"/>
                                         </paper-input>
-                                        <p>Indirekte Erwähnung - Falls hier Bezug auf eine bekannte Person / einen bekannten Ort etc. genommen wird, die nicht namentlich genannt wird, kann hier diese mit ihrer Id annotiert werden. <br/> <b>Typ:</b> z.B.: person, place, org. <br/> <b>Key:</b> Id zu Person, Ort, Organisation, etc. </p>
                                     </div>
                                     <div class="annotation-form term" data-i18n="[label]annotations.term">
                                         <paper-input class="form-term" name="key" data-i18n="[label]annotations.xmlid" label="key">
@@ -434,7 +413,6 @@
                                                 </paper-item>
                                             </paper-listbox>
                                         </paper-dropdown-menu>
-                                        <p>Type = term &gt; Fachwort aus Glossar. <br/> Type = gloss &gt; Fachwort, auf das sich z.B. eine Glosse bezieht. Hier bitte die ID manuell eintragen.</p>
                                     </div>
                                     <div class="annotation-form gloss" data-i18n="[label]annotations.gloss">
                                         <paper-input name="targets" label="Target-Id"/>
@@ -455,11 +433,6 @@
                                                 </paper-item>
                                             </paper-listbox>
                                         </paper-dropdown-menu>
-                                        <p>Glosse. Diese muß in Kombination mit dem Bezugswort, welches als "Term" annotiert wird, stehen. Hierbei ist das Attribut "target" das verbindende Element zwischen Glosse und Fachwort. <br/>
-                                            <br/>
-                                            <b>target:</b>Id des Fachwortes, auf die sich die Glosse bezieht. Hierbei ist die genaue Id in das "target" Attribut der Glosse einzutragen, damit ein Bezug hergestellt werden kann. <br/>
-                                            <br/>
-                                            <b>type:</b> Hier sollte eine Positionsangabe stehen, wo die Glosse sich auf dem Dokument befindet. Mögliche Werte: margin-left, margin-right, top, bottom</p>
                                     </div>
                                     <div class="annotation-form add" data-i18n="[label]annotations.add">
                                         <paper-input name="xmlid" label="xml:id"/>
@@ -515,8 +488,6 @@
                                                 </paper-item>
                                             </paper-listbox>
                                         </paper-dropdown-menu>
-                                        <p>Originale Ergänzung - Eine originale Ergänzung im Dokument (keine Ergänzung durch einen Editor, etc.). <br/>
-                                            <b>hand:</b> "Autor" oder Name des Ergänzenden <br/> <b>type:</b> "correction", falls die Ergänzung auf eine Durchstreichung folgt. Ansonsten sind auch andere Typen möglich. <br/> <b>place</b>: margin-left, margin-right, below, bottom, above, top möglich. </p>
                                     </div>
                                     <div class="annotation-form supplied" data-i18n="[label]annotations.supplied">
                                         <paper-input name="supplied" label="Supplied"/>
@@ -538,11 +509,8 @@
                                             </paper-listbox>
                                         </paper-dropdown-menu>
                                         <paper-input name="resp" data-i18n="[title]supplied.responsible" label="Responsible"/>
-                                        <p>Moderne Ergänzung durch einen Editor etc. - <br/>
-                                            <b>supplied:</b> Wort, welches ergänzt wurde, weil es beispielsweise fehlte. Wird nach dem markierten Wort eingesetzt. <br/> <b>reason:</b> Grund der modernen Ergänzung</p>
                                     </div>
                                     <div class="annotation-form unclear" data-i18n="[label]annotations.unclear">
-                                        <p>Unleserliche Stelle oder unsichere Lesart. Bei unleserlicher Stelle das Attribut 'reason' mit 'unclear' versehen, sonst kann es leer bleiben.</p>
                                         <paper-dropdown-menu name="reasons" id="ddunclear" style="padding-left: 10px;" data-i18n="[title]unclear.title" label="Reason">
                                             <paper-listbox id="unclearlistbox" slot="dropdown-content">
                                                 <paper-item value="default" style="display:none;"/>
@@ -589,7 +557,6 @@
                                         </paper-item>
                                         </paper-listbox>
                                         </paper-dropdown-menu>
-                                        <p>Memo - Hier kann ein Eingangs- oder Präsentationsvermerk in Form einer Note (automatisch eingefügt) stehen. Wichtig ist, daß ein Type ausgewählt wird, damit es nicht wie eine 'normale' Fußnote behandelt wird. Das Tag kann auch für eine Adresse außerhalb der Struktur, z.B. nach einer Unterschrift, verwendet werden.</p>
                                     </div>
                                     <div class="annotation-form note" data-i18n="[label]annotations.note">
                                         <paper-input name="note" label="Note"/>
@@ -623,95 +590,34 @@
                                         <paper-input class="form-handShift" name="scribe" data-i18n="[label]annotations.scribe" label="Scribe">
                                             <paper-icon-button slot="prefix" icon="search" data-i18n="[label]annotations.lookup"/>
                                         </paper-input>
-                                         <p>
-                                            <b>Dieses Tag wird automatisch direkt vor das markierte Wort gesetzt, </b>da es leer ist. Daran denken, daß beim nächsten Schreiberwechsel (z.B. falls der Text mit der ursprünglichen Hand weitergeführt wird) dieses Tag nochmals gesetzt wird. <br/>Scribe: Schreibername (bei Schreiberwechsel). <br/> Diese Änderung wird nur im TEI angezeigt.</p>
                                     </div>
                                     <div class="annotation-form pb" data-i18n="[label]annotations.pb">
                                         <paper-input name="n" label="Pagenumber"/>
                                         <paper-input name="facs" label="Facsimile-ID" style="display:none"/>
-                                        <p>Dieses Tag dient dazu, die originale Seitennumerierung einzufügen. Die Facsimile-ID bitte <b>nicht</b> ändern.</p>
                                     </div>
                                     <div class="annotation-form sic" data-i18n="[label]annotations.correction">
                                         <paper-input name="corr" label="Correction"/>
-                                        <p>Korrektur des Textes - Hier kann der Text korrigiert werden, wenn der Schreiber einen Fehler gemacht haben sollte. Im Mouseover wird die ursprüngliche Fassung angezeigt.</p>
                                     </div>
-                                    <div class="annotation-form head">
-                                        <p>
-                                            Head - Überschrift <br/> Diese Änderung wird nur im TEI angezeigt.
-                                        </p>
-                                    </div>
-                                    <div class="annotation-form opener" data-i18n="[label]annotations.opener">
-                                        <p>
-                                            Opener - Brief- oder Dokumenteröffnung. <br/> Der Opener kann eine dateline, eine Unterschrift, einen Gruß oder auch eine Adresse enthalten. Diese Änderung wird nur im TEI angezeigt.
-                                        </p>
-                                    </div>
-                                    <div class="annotation-form closer" data-i18n="[label]annotations.closer">
-                                        <p>
-                                            Closer - Schlußformulierung / Briefschluss <br/> Kann u.a. die Adresse, Unterschrift und Grußformal enthalten. Diese Änderung wird nur im TEI angezeigt.
-                                        </p>
-                                    </div>
-                                    <div class="annotation-form salute" data-i18n="[label]annotations.salute">
-                                        <p>
-                                            Salute - Gruß. <br/> Diese Änderung wird nur im TEI angezeigt.
-                                        </p>
-                                    </div>
-                                    <div class="annotation-form address" data-i18n="[label]annotations.address">
-                                        <p>
-                                            Adresse <br/> Das Tag setzt sich hier zusammen aus: &lt;address&gt;&lt;addrLine /&gt;&lt;/address&gt;, so daß TEI konform die Adresse umschlossen wird. Diese Änderung wird nur im TEI angezeigt.
-                                        </p>
-                                    </div>
-                                    <div class="annotation-form signed" data-i18n="[label]annotations.signed">
-                                        <p>
-                                            Signed - Unterschrift(en). <br/> Diese Änderung wird nur im TEI angezeigt.
-                                        </p>
-                                    </div>
-                                    <div class="annotation-form mp" data-i18n="[label]annotations.mp">
-                                        <p>Manu propria Kürzel</p>
-                                    </div>
-                                    <div class="annotation-form perge" data-i18n="[label]annotations.perge">
-                                        <p>Perge Kürzel</p>
-                                    </div>
-                                    <div class="annotation-form postscript" data-i18n="[label]annotations.postscript">
-                                        <p>
-                                            Postscriptum - P.S. <br/> Diese Änderung wird nur im TEI angezeigt.
-                                        </p>
-                                    </div>
-                                    <div class="annotation-form dateline" data-i18n="[label]annotations.dateline">
-                                        <p>
-                                            Dateline - Umgibt die Zeilen, die das Datum (und z.B. auch Ort) enthalten. Bitte daran denken, daß hier auch Inhalt-Tags (date, placeName,...) gesetzt werden müssen. <br/> Diese Änderung wird nur im TEI angezeigt.
-                                        </p>
-                                    </div>
-                                    <div class="annotation-form keepLineBreaks" data-i18n="[label]annotations.keepLineBreaks">
-                                        <p>
-                                            Der Zeilenfall wird für die Zeile, in der das Tag steht, in der Leseansicht beibehalten. <b>Nicht in eine Adresse, einen Opener oder Closer setzen.</b> <br/> Diese Änderung wird nur im TEI angezeigt.
-                                        </p>
-                                    </div>
-                                    <div class="annotation-form paragraph" data-i18n="[label]annotations.paragraph">
-                                        <p>
-                                            Textkörper (&lt;p&gt;-Tag)
-                                        </p>
-                                    </div>
-                                    <div class="annotation-form seg" data-i18n="[label]annotations.seg">
-                                        <p>
-                                            Dieses Element kann für unsicheres Tagging eingesetzt werden, wenn es später durch einen anderen Tag ausgetauscht werden soll. Diese Änderung wird nur im TEI angezeigt.
-                                        </p>
-                                    </div>
+                                    <div class="annotation-form head" />
+                                    <div class="annotation-form opener" data-i18n="[label]annotations.opener" />
+                                    <div class="annotation-form closer" data-i18n="[label]annotations.closer" />
+                                    <div class="annotation-form salute" data-i18n="[label]annotations.salute" />
+                                    <div class="annotation-form address" data-i18n="[label]annotations.address" />
+                                    <div class="annotation-form signed" data-i18n="[label]annotations.signed" />
+                                    <div class="annotation-form mp" data-i18n="[label]annotations.mp" />
+                                    <div class="annotation-form perge" data-i18n="[label]annotations.perge" />
+                                    <div class="annotation-form postscript" data-i18n="[label]annotations.postscript" />
+                                    <div class="annotation-form dateline" data-i18n="[label]annotations.dateline" />
+                                    <div class="annotation-form keepLineBreaks" data-i18n="[label]annotations.keepLineBreaks" />
+                                    <div class="annotation-form paragraph" data-i18n="[label]annotations.paragraph" />
+                                    <div class="annotation-form seg" data-i18n="[label]annotations.seg" />
                                     <div class="annotation-form del" data-i18n="[label]annotations.del">
                                         <paper-input class="form-del" name="handdel" data-i18n="[label]annotations.hand" label="Hand">
                                             <paper-icon-button slot="prefix" icon="search" data-i18n="[label]annotations.lookup"/>
                                         </paper-input>
-                                        <p>
-                                            Deletion - Durchstreichung durch den Original-Autor
-                                        </p>
                                     </div>
-                                    <div class="annotation-form indentation" data-i18n="[label]annotations.indentation">
-                                        <p>
-                                            Segment. Hiermit wird eine Einrückung eines Textabschnitts angegeben. Dieser endet mit dem Zeilenende. Das Tag wird vor das einzurückende Wort gesetzt, welches schließlich zusammen mit dem Rest der Zeile eingerückt erscheint.
-                                        </p>
-                                    </div>
+                                    <div class="annotation-form indentation" data-i18n="[label]annotations.indentation" />
                                     <div class="annotation-form anchor" data-i18n="[label]annotations.anchor">
-                                        <p>Nur zur Korrektur einer ID. <b>Anker werden über Transkribus automatisch gesetzt!</b>
-                                        </p>
                                         <paper-input name="xmlid" label="xml:id"/>
                                         <paper-input name="nn" label="n"/>
                                         <paper-dropdown-menu name="typez" id="ddanchor" style="padding-left: 10px;" data-i18n="[title]anchor.title" label="Type">
@@ -728,9 +634,6 @@
                                     </div>
                                     <div class="annotation-form edit">
                                         <paper-input name="content" data-i18n="[label]annotations.correction" label="Correction"/>
-                                        <p>
-                                            <pb-i18n key="annotations.modify-info"/>
-                                        </p>
                                     </div>
                                 </form>
                             </iron-form>
