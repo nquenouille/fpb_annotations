@@ -282,6 +282,8 @@
                                         </div>
                                     </div>
                                     <div class="annotation-form date">
+                                    <pb-repeat initial="1">
+                                        <template>
                                         <paper-input name="year" label="JJJJ" style="padding-left: 10px;"/>
                                         <paper-dropdown-menu name="month" id="month" style="padding-left: 10px;" label="Month">
                                             <paper-listbox id="monthlistbox" slot="dropdown-content">
@@ -325,7 +327,7 @@
                                             </paper-listbox>
                                         </paper-dropdown-menu>
                                         <paper-dropdown-menu name="day" id="day" style="padding-left: 10px;" label="Day">
-                                            <paper-listbox id="daylistbox" slot="dropdown-content">
+                                            <paper-listbox id="monthlistbox" slot="dropdown-content">
                                                 <paper-item value="default" style="display:none;"/>
                                                 <paper-item>01</paper-item>
                                                 <paper-item>02</paper-item>
@@ -360,10 +362,18 @@
                                                 <paper-item>31</paper-item>
                                             </paper-listbox>
                                         </paper-dropdown-menu>
-                                        <paper-input name="from" label="from" type="date"/>
-                                        <paper-input name="to" label="to" type="date"/>
-                                        <paper-input name="notBefore" label="notBefore" type="date"/>
-                                        <paper-input name="notAfter" label="notAfter" type="date"/>
+                                        <paper-dropdown-menu name="date-form" id="date-form" style="padding-left: 10px;" data-i18n="[title]rs.title" label="Type">
+                                            <paper-listbox id="date-form-listbox" slot="dropdown-content">
+                                                <paper-item value="default" style="display:none;"/>
+                                                <paper-item value="when">when</paper-item>
+                                                <paper-item value="from">from</paper-item>
+                                                <paper-item value="to">to</paper-item>
+                                                <paper-item value="notBefore">notBefore</paper-item>
+                                                <paper-item value="notAfter">notAfter</paper-item>
+                                            </paper-listbox>
+                                        </paper-dropdown-menu>
+                                        </template>
+                                        </pb-repeat>
                                     </div>
                                     <div class="annotation-form hi" data-i18n="[label]annotations.hi">
                                         <paper-input name="rend" label="rend"/>

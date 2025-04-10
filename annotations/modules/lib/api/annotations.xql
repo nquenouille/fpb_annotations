@@ -579,47 +579,63 @@ declare %private function anno:modify($nodes as node()*, $target as node(), $ann
                     }
             case element(tei:date) return
                 if ($node is $target) then
-                    let $year := $annotation?properties('year')
-                    let $month := switch($annotation?properties('month'))
-                                    case "Januar" return '01'
-                                    case "Februar" return '02'
-                                    case "März" return '03'
-                                    case "April" return '04'
-                                    case "Mai" return '05'
-                                    case "Juni" return '06'
-                                    case "Juli" return '07'
-                                    case "August" return '08'
-                                    case "September" return '09'
-                                    case "Oktober" return '10'
-                                    case "November" return '11'
-                                    case "Dezember" return '12'
-                                    default return ()
-                    let $day := $annotation?properties('day')
-                    let $when := 
-                        if ($year and $month and $day) then
-                            string-join(($year, $month, $day), '-')
-                        else if ($year and $month) then
-                            string-join(($year, $month), '-')
-                        else if ($month and $day) then
-                            concat('--', $month, '-', $day)
+                    let $valid-entries :=
+                      for $i in (1 to 2)
+                      let $year := $annotation?properties('year[' || $i || ']')
+                      let $month := $annotation?properties('month[' || $i || ']')
+                      let $day := $annotation?properties('day[' || $i || ']')
+                      let $form := $annotation?properties('date-form[' || $i || ']')
+                      where $year or $month or $day or $form
+                      return $i
+                      
+                    let $attributes :=
+                      for $n in $valid-entries
+                      let $year := $annotation?properties('year[' || $n || ']')
+                      let $month := $annotation?properties('month[' || $n || ']')
+                      let $month-number := switch($month)
+                        case "Januar" return '01'
+                        case "Februar" return '02'
+                        case "März" return '03'
+                        case "April" return '04'
+                        case "Mai" return '05'
+                        case "Juni" return '06'
+                        case "Juli" return '07'
+                        case "August" return '08'
+                        case "September" return '09'
+                        case "Oktober" return '10'
+                        case "November" return '11'
+                        case "Dezember" return '12'
+                        default return ()
+                      let $day := $annotation?properties('day[' || $n || ']')
+                      
+                      let $date :=
+                        if ($year and $month-number and $day) then
+                          string-join(($year, $month-number, $day), '-')
+                        else if ($year and $month-number) then
+                          string-join(($year, $month-number), '-')
+                        else if ($month-number and $day) then
+                          concat('--', $month-number, '-', $day)
                         else if ($year) then
-                            $year
-                        else if ($month) then
-                            concat('--', $month)
+                          $year
+                        else if ($month-number) then
+                          concat('--', $month-number)
                         else if ($day) then
-                            concat('---', $day)
-                        else
-                            ()
+                          concat('---', $day)
+                        else ()
+                      
+                      let $form := $annotation?properties('date-form[' || $n || ']')
+                        where $date and $form
+                        return attribute { $form } { $date }
+                      
                     return
-                        element { node-name($node) } {
-                            attribute {'when'} { $when },
-                            
+                      element { node-name($node) } {
+                        $attributes,
                         anno:modify($node/node(), $target, $annotation)
-                        }
-                else
+                      }
+                  else
                     element { node-name($node) } {
-                        $node/@*,
-                        anno:modify($node/node(), $target, $annotation)
+                      $node/@*,
+                      anno:modify($node/node(), $target, $annotation)
                     }
             case element() return
                 if ($node is $target) then

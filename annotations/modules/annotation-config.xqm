@@ -74,8 +74,16 @@ declare function anno:annotations($type as xs:string, $properties as map(*)?, $c
         case "date" return
             <date xmlns="http://www.tei-c.org/ns/1.0">
             {
-                let $year := $properties('year')
-                let $month := switch($properties('month'))
+                let $valid-entries :=
+                    for $i in (1, 2)
+                    let $year := $properties('year[' || $i || ']')
+                    let $month := $properties('month[' || $i || ']')
+                    let $day := $properties('day[' || $i || ']')
+                    where $year or $month or $day
+                    return $i
+                for $n in $valid-entries
+                let $year := $properties('year[' || $n || ']')
+                let $month := switch($properties('month[' || $n || ']'))
                                 case "Januar" return '01'
                                 case "Februar" return '02'
                                 case "März" return '03'
@@ -89,7 +97,7 @@ declare function anno:annotations($type as xs:string, $properties as map(*)?, $c
                                 case "November" return '11'
                                 case "Dezember" return '12'
                                 default return ()
-                let $day := $properties('day')
+                let $day := $properties('day[' || $n || ']')
                 let $isLeap := if((xs:int($year) mod 4 = 0) and ((xs:int($year) mod 100 != 0) or xs:int($year) mod 400 = 0)) then 'true' else 'false'
                 let $validYear := matches($year, '^\d{4}$')
                 let $validDay := 
@@ -125,16 +133,17 @@ declare function anno:annotations($type as xs:string, $properties as map(*)?, $c
                         concat('---', $day)
                     else ()
                 return
-                    (
-                        if ($dates) then 
-                            attribute {'when'} {$dates}
-                        else 
-                            (),
-                for $prop in map:keys($properties)[. = ('from', 'to', 'notBefore', 'notAfter')]
-                return
-                    
-                        attribute { $prop } { $properties($prop) }
-                    ), $content()
+                    if ($dates) then
+                        let $form := $properties('date-form[' || $n || ']')
+                        return
+                            if ($form = 'when') then attribute {'when'} {$dates}
+                            else if ($form = 'from') then attribute {'from'} {$dates}
+                            else if ($form = 'to') then attribute {'to'} {$dates}
+                            else if ($form = 'notBefore') then attribute {'notBefore'} {$dates}
+                            else if ($form = 'notAfter') then attribute {'notAfter'} {$dates}
+                            else ()
+                    else (),
+                $content()
             }
             </date>
         case "ref" return
