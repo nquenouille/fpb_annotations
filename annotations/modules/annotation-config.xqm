@@ -113,7 +113,7 @@ declare function anno:annotations($type as xs:string, $properties as map(*)?, $c
                 let $dates := 
                     if ($year and $month and $day and $validDay and $validYear) then 
                         string-join(($year, $month, $day), '-')
-                    else if($year and $month and $day and not($validDay or $validYear)) then
+                    else if($year and $month and $day and (not($validDay) or not($validYear))) then
                         error($errors:UNPROCESSABLE_ENTITY)
                     else if($year and $month and $validYear) then
                         string-join(($year, $month), '-')

@@ -608,19 +608,39 @@ declare %private function anno:modify($nodes as node()*, $target as node(), $ann
                         default return ()
                       let $day := $annotation?properties('day[' || $n || ']')
                       
-                      let $date :=
-                        if ($year and $month-number and $day) then
-                          string-join(($year, $month-number, $day), '-')
-                        else if ($year and $month-number) then
-                          string-join(($year, $month-number), '-')
-                        else if ($month-number and $day) then
-                          concat('--', $month-number, '-', $day)
-                        else if ($year) then
-                          $year
-                        else if ($month-number) then
-                          concat('--', $month-number)
-                        else if ($day) then
-                          concat('---', $day)
+                      let $isLeap := if((xs:int($year) mod 4 = 0) and ((xs:int($year) mod 100 != 0) or xs:int($year) mod 400 = 0)) then 'true' else 'false'
+                      let $validYear := matches($year, '^\d{4}$')
+                      let $validDay := 
+                        if ($month-number = '02') then
+                            if ($isLeap = 'true') then
+                                (xs:int($day) ge 1 and xs:int($day) le 29)   (: Februar hat 29 Tage im Schaltjahr, 28 im Nicht-Schaltjahr :)
+                            else
+                                (xs:int($day) ge 1 and xs:int($day) le 28)
+                        else if ($month-number = '04' or $month-number = '06' or $month-number = '09' or $month-number = '11') then
+                            (xs:int($day) ge 1 and xs:int($day) le 30)  (: Monate mit 30 Tagen haben nur Tage zwischen 1 und 30 :)
+                        else
+                            (xs:int($day) ge 1 and xs:int($day) le 31)  (: Alle anderen Monate haben 31 Tage :)  
+                      let $date := 
+                        if ($year and $month-number and $day and $validDay and $validYear) then 
+                            string-join(($year, $month-number, $day), '-')
+                        else if($year and $month-number and $day and (not($validDay) or not($validYear))) then
+                            error($errors:UNPROCESSABLE_ENTITY)
+                        else if($year and $month-number and $validYear) then
+                            string-join(($year, $month-number), '-')
+                        else if($year and $month-number and not($validYear)) then
+                            error($errors:UNPROCESSABLE_ENTITY)
+                        else if($month-number and $day and $validDay) then
+                            concat('--',$month-number, '-', $day)
+                        else if($month-number and $day and not($validDay)) then 
+                            error($errors:UNPROCESSABLE_ENTITY)
+                        else if($year and $validYear) then
+                            $year
+                        else if($year and not($validYear)) then
+                            error($errors:UNPROCESSABLE_ENTITY)
+                        else if($month-number) then
+                            concat('--', $month)
+                        else if($day) then
+                            concat('---', $day)
                         else ()
                       
                       let $form := $annotation?properties('date-form[' || $n || ']')
