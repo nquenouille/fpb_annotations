@@ -1001,7 +1001,7 @@
             <model predicate="following-sibling::anchor[1][concat('t', @xml:id) = root($parameters?root)//add[@type='correction']/@xml:id]" behaviour="omit"/>
         
         <!-- Involved Scribe and direct add[correction] -->
-                    <model predicate="following-sibling::add[1][@type='correction' and @place='inspace' and not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef)]" behaviour="inline">
+                    <model predicate="self::del[following-sibling::*[1][self::add and @type='correction' and @place='inspace' and not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef)]]" behaviour="inline">
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="."/>
             <param name="alternate" value="let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef return (if(following-sibling::add[1][@type='correction' and @place='inspace' and not(@hand = $refPers)]) then (if(following-sibling::add[1][@type='correction' and @place='inspace' and not(@hand = $refPers)]/@hand and starts-with(following-sibling::add[1][@type='correction' and @place='inspace' and not(@hand = $refPers)]/@hand, 'fpb-')) then concat('Korrigiert von: ', following-sibling::add[1][@type='correction' and @place='inspace' and not(@hand = $refPers)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text(), ' zu: ', following-sibling::add[1][@type='correction' and @place='inspace' and not(@hand = $refPers)]/string()) else if(following-sibling::add[1][@type='correction' and @place='inspace' and not(@hand = $refPers)]/@hand and not(following-sibling::add[1][@type='correction' and @place='inspace' and not(@hand = $refPers)]/@hand = '')) then concat('Korrigiert von: ', replace(following-sibling::add[1][@type='correction' and @place='inspace' and not(@hand = $refPers)]/@hand, 'involved', 'Unbekannter Schreiber '), ' zu: ', following-sibling::add[1][@type='correction' and @place='inspace' and not(@hand = $refPers)]/string()) else concat('Korrigiert zu: ', following-sibling::add[1][@type='correction' and @place='inspace' and not(@hand = $refPers)]/text())) else ('Korrigiert'))"/>
@@ -1014,7 +1014,7 @@
         </model>
         
         <!-- Main Scribe and direct add[correction] -->
-                    <model predicate="following-sibling::add[1][@type='correction' and @place='inspace' and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]" behaviour="inline">
+        <model predicate="self::del[following-sibling::*[1][self::add and @type='correction' and @place='inspace' and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]]" behaviour="inline">
             <param name="name" value="'pb-popover'"/>
             <param name="content" value=" let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef return (if(following-sibling::add[1][@type='correction' and @place='inspace' and @hand = $refPers]) then following-sibling::add[1][@type='correction' and @place='inspace' and @hand = $refPers]/node() else ()) "/>
             <param name="alternate" value="let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef return                      (if(following-sibling::add[1][@type='correction' and @place='inspace' and @hand = $refPers]/@hand and starts-with(following-sibling::add[1][@type='correction' and @place='inspace' and @hand = $refPers]/@hand, 'fpb-')) then concat('Korrigiert von: ', following-sibling::add[1][@type='correction' and @place='inspace' and @hand = $refPers]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text(),'; Ursprüngliche Lesart: ', .) else if (following-sibling::add[1][@type='correction' and @place='inspace' and @hand = $refPers]/@hand and contains(following-sibling::add[1][@type='correction' and @place='inspace' and @hand = $refPers]/@hand, 'main')) then (concat('Korrigiert von: ', replace(following-sibling::add[1][@type='correction' and @place='inspace' and @hand = $refPers]/@hand, 'main', 'Unbekannter Hauptschreiber '),'; Ursprüngliche Lesart: ', .)) else concat('Ursprüngliche Lesart: ', .))"/>
@@ -1030,7 +1030,7 @@
         <!-- parent add with anchor -> omit -->
                     <model predicate="parent::add[1] and parent::add[1]/following::anchor" behaviour="omit"/>
         <!-- del of Main Scribe without correction -->
-                    <model predicate="not(following-sibling::add[1][@type='correction']) and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef" behaviour="inline">
+        <model predicate="not(self::del/following-sibling::*[1][self::add and @type='correction']) and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef" behaviour="inline">
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="'〈…〉'"/>
             <param name="alternate" value="if(contains(child::span/text(), '-')) then concat('Ursprüngliche Lesart: ', replace(., '-', '')) else concat('Ursprüngliche Lesart: ', .)"/>
@@ -1042,7 +1042,7 @@
             </outputRendition>
         </model>
         <!-- del of Involved Scribe without correciton -->
-                    <model predicate="not(following-sibling::add[1][@type='correction']) and not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef)" behaviour="inline">
+        <model predicate="not(following-sibling::*[1][self::add and @type='correction']) and not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef)" behaviour="inline">
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="."/>
             <param name="alternate" value="concat('Gestrichen von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text())"/>
