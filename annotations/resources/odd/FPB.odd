@@ -1389,14 +1389,11 @@
         <!-- parent add with anchor -> omit -->
                     <model predicate="parent::add[1] and parent::add[1]/following::anchor" behaviour="omit"/>
                     
-        <!-- del of Main Scribe without correction -->
-        <model predicate="not(self::del/following-sibling::*[1][self::add and @type='correction']) and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef" behaviour="inline">
+        <!-- del of Main Scribe without correction and lb within del -->
+        <model predicate="not(self::del/following-sibling::*[1][self::add and @type='correction']) and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef and self::del//lb" behaviour="inline">
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="
-                if (child::lb) then 
-                    '&#10;〈…〉' 
-                else 
-                    '〈…〉'
+                    '&#10;〈…〉'
             "/>
             <param name="alternate" value="
                 if (contains(child::span/text(), '-')) then 
@@ -1408,6 +1405,31 @@
             <param name="fallback-placement" value="'bottom'"/>
             <pb:template xmlns="" xml:space="preserve">
                 <pb-popover style="white-space: pre-line;" placement="[[placement]]" fallback-placement="[[fallback-placement]]">
+                    [[content]]
+                    <span slot="alternate">[[alternate]]</span>
+                </pb-popover>
+            </pb:template>
+            <outputRendition xml:space="preserve">
+                text-decoration: underline dotted;
+            </outputRendition>
+        </model>
+        
+        <!-- del of Main Scribe without correction and no lb within del -->
+        <model predicate="not(self::del/following-sibling::*[1][self::add and @type='correction']) and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef and not(self::del//lb)" behaviour="inline">
+            <param name="name" value="'pb-popover'"/>
+            <param name="content" value="
+                    '〈…〉'
+            "/>
+            <param name="alternate" value="
+                if (contains(child::span/text(), '-')) then 
+                    concat('Ursprüngliche Lesart: ', replace(., '-', ''))
+                else 
+                    concat('Ursprüngliche Lesart: ', .)
+            "/>
+            <param name="placement" value="'top'"/>
+            <param name="fallback-placement" value="'bottom'"/>
+            <pb:template xmlns="" xml:space="preserve">
+                <pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">
                     [[content]]
                     <span slot="alternate">[[alternate]]</span>
                 </pb-popover>
