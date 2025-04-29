@@ -467,7 +467,7 @@
             <param name="level" value="5"/>
         </model>
         </elementSpec>
-        <elementSpec ident="seg" mode="change">
+        <elementSpec ident="orig" mode="change">
             <model predicate="@rend='indent'" behaviour="inline">
             <param name="content" value="concat('     ', .)"/>
             <outputRendition xml:space="preserve" scope="before">

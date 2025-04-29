@@ -87,5 +87,8 @@
 .view1-content-name .annotation.annotation-paragraph::after {display:none !important}
 .view1-content-line .annotation-memo {display:none !important}
 .view1-content-name .annotation.annotation-memo::after {display:none !important}
-
+.view1-content-line .annotation-indentation {display:none !important}
+.view1-content-name .annotation.annotation-indentation::after {display:none !important}
+.view1-content-line .annotation-keepingLineBreaks {display:none !important}
+.view1-content-name .annotation.annotation-keepingLineBreaks::after {display:none !important}
 

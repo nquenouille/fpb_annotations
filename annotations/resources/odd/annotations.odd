@@ -270,6 +270,19 @@
                     </model>
                     <model behaviour="inline" predicate="not(@rend='container')" cssClass="annotation annotation-ab"/>
                 </elementSpec>
+                <elementSpec ident="orig" mode="change">
+                    <model behaviour="inline" predicate="@rend='keepLB'" cssClass="annotation annotation-keepingLineBreaks"/>
+                    <model behaviour="inline" predicate="@rend='indent'" cssClass="annotation annotation-indentation"/>
+                </elementSpec>
+                <elementSpec ident="lb" mode="change">
+                    <modelSequence>
+                        <model behaviour="break" cssClass="annotation annotation-lb">
+                            <param name="type" value="'line'"/>
+                            <param name="label" value="@n"/>
+                        </model>
+                        <model behaviour="inline" cssClass="annotation annotation-lb"/>
+                    </modelSequence>
+                </elementSpec>
             </schemaSpec>
         </body>
     </text>

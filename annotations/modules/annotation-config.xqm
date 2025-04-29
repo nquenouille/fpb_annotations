@@ -57,7 +57,7 @@ declare function anno:annotations($type as xs:string, $properties as map(*)?, $c
         case "closer" return
             <closer xmlns="http://www.tei-c.org/ns/1.0">{$content()}</closer>
         case "indentation" return
-            (<seg xmlns="http://www.tei-c.org/ns/1.0" rend='indent' />, $content())
+            (<orig xmlns="http://www.tei-c.org/ns/1.0" rend='indent' />, $content())
         case "pb" return
             <pb xmlns="http://www.tei-c.org/ns/1.0" n="{$properties?pb}" facs="{$properties?facs}" />
         case "term" return
@@ -187,7 +187,7 @@ declare function anno:annotations($type as xs:string, $properties as map(*)?, $c
                 {$content()}
             </abbr><expan xmlns="http://www.tei-c.org/ns/1.0">perge = et cetera</expan></choice></hi>
         case "keepLineBreaks" return
-            (<seg xmlns="http://www.tei-c.org/ns/1.0" type='keepLB' />, $content())
+            (<orig xmlns="http://www.tei-c.org/ns/1.0" rend='keepLB' />, $content())
         case "seg" return
             <seg xmlns="http://www.tei-c.org/ns/1.0" type="todo">{$content()}</seg>
         case "paragraph" return
