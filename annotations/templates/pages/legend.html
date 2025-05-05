@@ -99,7 +99,7 @@
                     <li>Salute (Gruß): Kann nur in einem Opener, Closer oder Front stehen.
                     </li>
                     <li>Dateline (Datumsbereich): Darf nur in einem Opener oder Closer oder Front und Back stehen ("date" allein darf jedoch überall stehen).</li>
-                    <li>Signed (Unterschrift): Darf nur in einem Opener oder Closer, Front, Back oder Postscript stehen.</li>
+                    <li>Signed (Unterschrift): Darf nur in einem Div, Opener oder Closer, Front, Back oder Postscript stehen.</li>
                     <li>Postscript (P.S.): Darf nur alleine (also nicht im Opener, Closer oder p-Tag) stehen sowie im Front oder Back.</li>
                     <li>Keine Einschränkungen bei der Adresse (darf überall stehen).</li>
                 </ul>
@@ -182,7 +182,7 @@
             <span>  Unterschrift(en)</span>
         </label>
         <div class="panel">
-            <p>Signed - Unterschrift(en). <br/> Eine Unterschrift kann in folgenden Tags enthalten sein: &lt;div&gt;, &lt;body&gt;, &lt;front&gt;, &lt;back&gt;, &lt;opener&gt;, &lt;closer&gt; und &lt;postscript&gt;. Diese Änderung wird nur im TEI angezeigt.</p>
+            <p>Signed - Unterschrift(en). <br/> Eine Unterschrift kann in folgenden Tags enthalten sein: &lt;div&gt;, &lt;body&gt;, &lt;front&gt;, &lt;back&gt;, &lt;opener&gt;, &lt;closer&gt; und &lt;postscript&gt;. Sollte noch eine Person getaggt werden, dann muß dieses Tag innerhalb des &lt;signed&gt;-Tag stehen: &lt;signed&gt;&lt;persName&gt;[Name der Person]&lt;/persName&gt;&lt;/signed&gt; Diese Änderung wird nur im TEI angezeigt.</p>
         </div>
         <input type="checkbox" id="postscript"/>
         <label for="postscript">
