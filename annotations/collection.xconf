@@ -14,6 +14,7 @@
                 <field name="oldid" expression="nav:get-metadata(ancestor::tei:TEI, 'oldid')"/>
                 <field name="repository" expression="nav:get-metadata(ancestor::tei:TEI, 'repository')"/>
                 <field name="oldrepository" expression="nav:get-metadata(ancestor::tei:TEI, 'oldrepository')"/>
+                <field name="editor" expression="nav:get-metadata(ancestor::tei:TEI, 'editor')"/>
                 <field name="file" expression="util:document-name(.)"/>
                 <field name="text" expression="."/>
                 <facet dimension="genre" expression="nav:get-metadata(ancestor::tei:TEI, 'genre')" hierarchical="yes"/>

@@ -101,6 +101,10 @@ declare function idx:get-metadata($root as element(), $field as xs:string) {
                 (
                     $header//tei:fileDesc/tei:sourceDesc/tei:msDesc/tei:msIdentifier/tei:altIdentifier/tei:repository
                 )
+            case "editor" return
+                (
+                    $header//tei:fileDesc/tei:editionStmt/tei:editor
+                )
             (: END of FPB changes :)
             default return
                 ()

@@ -125,7 +125,8 @@
     "id": "Signaturen durchsuchen",
     "oldid": "Alte Signaturen durchsuchen",
     "repository": "Archive durchsuchen",
-    "oldrepository": "Ehem. Archive durchsuchen"
+    "oldrepository": "Ehem. Archive durchsuchen",
+    "editor": "Editor"
   },
   "dts": {
     "endpoint": "Server wählen",

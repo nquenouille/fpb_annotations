@@ -132,7 +132,8 @@
     "id": "Inventory numbers",
     "oldid": "Old inventory no.",
     "repository": "Repository",
-    "oldrepository": "Previous repository"
+    "oldrepository": "Previous repository",
+    "editor": "editor"
   },
   "dts": {
     "endpoint": "Select Endpoint",
