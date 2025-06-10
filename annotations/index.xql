@@ -81,7 +81,7 @@ declare function idx:get-metadata($root as element(), $field as xs:string) {
                 head(
                     $header//tei:revisionDesc/@status
                 )
-            case "uuid" return
+            case "pid" return
                 (
                     $header/@xml:id
                 )

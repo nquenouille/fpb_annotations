@@ -121,7 +121,7 @@
     "headings": "Überschriften durchsuchen",
     "title": "Titel durchsuchen",
     "content": "Inhalt durchsuchen",
-    "uuid": "UUID",
+    "pid": "PID",
     "id": "Signaturen durchsuchen",
     "oldid": "Alte Signaturen durchsuchen",
     "repository": "Archive durchsuchen",

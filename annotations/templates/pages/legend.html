@@ -117,7 +117,7 @@
                 <br/>
                 <b>type:</b> Type: presentation (Präsentationsvermerk), received (Empfangsvermerk), possessor (Besitzvermerk), address (Adressvermerk), numbering (Numerierungsvermerk), postalNote (Postvermerk), other (Sonstiger Vermerk).
                 <br/>
-                <b>hand:</b> Der Schreiber kann aus einem Menü, welches mit dem Personenregister verbunden ist, ausgewählt werden. Sollte eine Person fehlen, muß diese in Bach Digital angelegt und mit der FPB-Datenbank verknüpft werden. <ul><li>Bekannter Schreiber: UUID, z.B. fpb-dgbhd (aus Personenregister)</li><li>Beim unbekannten Hauptschreiber: "main1", "main2", etc.</li><li>Beim unbekannten Nebenschreiber: "involved1", "involved2", etc.</li></ul>
+                <b>hand:</b> Der Schreiber kann aus einem Menü, welches mit dem Personenregister verbunden ist, ausgewählt werden. Sollte eine Person fehlen, muß diese in Bach Digital angelegt und mit der FPB-Datenbank verknüpft werden. <ul><li>Bekannter Schreiber: PID, z.B. fpb-dgbhd (aus Personenregister)</li><li>Beim unbekannten Hauptschreiber: "main1", "main2", etc.</li><li>Beim unbekannten Nebenschreiber: "involved1", "involved2", etc.</li></ul>
             </p>
         </div>
         <input type="checkbox" id="head"/>
@@ -382,7 +382,7 @@
         </label>
         <div class="panel">
             <p>Durchstreichung durch den Original-Autor. Wird normalerweise schon in Transkribus erledigt. Der Urheber der Streichung kann jedoch hinzugefügt werden. Hierbei kann aus einer Liste ausgewählt werden oder NN als Urheber eingetragen werden. Bei Durchstreichung eines einzelnen Buchstabens im Wort, das Tag nur um diesen einen Buchstaben setzen. Falls eine Korrektur erfolgt, das &lt;add&gt;-Tag <b>direkt nach</b> dem &lt;del&gt;-Tag setzen und mit place='inspace' versehen.<br/>
-                <b>hand:</b> Der Schreiber kann aus einem Menü, welches mit dem Personenregister verbunden ist, ausgewählt werden. Sollte eine Person fehlen, muß diese in Bach Digital angelegt und mit der FPB-Datenbank verknüpft werden. <ul><li>Bekannter Schreiber: UUID, z.B. fpb-dgbhd (aus Personenregister)</li><li>Beim unbekannten Hauptschreiber: "main1", "main2", etc.</li><li>Beim unbekannten Nebenschreiber: "involved1", "involved2", etc.</li></ul></p></p>
+                <b>hand:</b> Der Schreiber kann aus einem Menü, welches mit dem Personenregister verbunden ist, ausgewählt werden. Sollte eine Person fehlen, muß diese in Bach Digital angelegt und mit der FPB-Datenbank verknüpft werden. <ul><li>Bekannter Schreiber: PID, z.B. fpb-dgbhd (aus Personenregister)</li><li>Beim unbekannten Hauptschreiber: "main1", "main2", etc.</li><li>Beim unbekannten Nebenschreiber: "involved1", "involved2", etc.</li></ul></p></p>
         </div>
         <input type="checkbox" id="referringString"/>
         <label for="referringString">
@@ -404,7 +404,7 @@
                 <b>Achtung:</b> Sollte eine Korrektur des Tags durch den Editor erfolgen, müssen <b>alle Felder</b> noch einmal ausgefüllt werden!
                 <br/>
                 <b>xml:id:</b> <b>Eindeutige</b> ID. <ul><li>Bezieht sich auf einen Anker (anchor): Format ta[Seite]-[lfdNr] (z.B.: ta1-2)</li><li>Ohne Beziehung: Format add[Seite]-[lfdNr] (z.B. add1-2)</li></ul>
-                <b>hand:</b> Der Schreiber kann aus einem Menü, welches mit dem Personenregister verbunden ist, ausgewählt werden. Sollte eine Person fehlen, muß diese in Bach Digital angelegt und mit der FPB-Datenbank verknüpft werden. <ul><li>Bekannter Schreiber: UUID, z.B. fpb-dgbhd (aus Personenregister)</li><li>Beim unbekannten Hauptschreiber: "main1", "main2", etc.</li><li>Beim unbekannten Nebenschreiber: "involved1", "involved2", etc.</li></ul><br/> <b>type:</b> "correction", falls die Ergänzung auf eine Durchstreichung folgt, ansonsten "addition". <br/> <b>place</b>: margin-left, margin-right, below, bottom, above, top möglich (siehe Dropdown-Menü). <br/>
+                <b>hand:</b> Der Schreiber kann aus einem Menü, welches mit dem Personenregister verbunden ist, ausgewählt werden. Sollte eine Person fehlen, muß diese in Bach Digital angelegt und mit der FPB-Datenbank verknüpft werden. <ul><li>Bekannter Schreiber: PID, z.B. fpb-dgbhd (aus Personenregister)</li><li>Beim unbekannten Hauptschreiber: "main1", "main2", etc.</li><li>Beim unbekannten Nebenschreiber: "involved1", "involved2", etc.</li></ul><br/> <b>type:</b> "correction", falls die Ergänzung auf eine Durchstreichung folgt, ansonsten "addition". <br/> <b>place</b>: margin-left, margin-right, below, bottom, above, top möglich (siehe Dropdown-Menü). <br/>
                 <b>Type:</b> Korrektur (correction - nach einer Durchstreichung!) oder Ergänzung (addition).
                 <b>Place:</b> top, above, below, inspace (nur, wenn es direkt in der Zeile steht, dann keinen Anker verwenden), margin-left, margin-right, bottom, opposite (Zusatz, der gegenüber der aktuellen Seite angebracht wurde), overleaf, end.
             </p>
@@ -421,7 +421,7 @@
                 <b>supplied:</b> Wort, welches ergänzt wurde, weil es beispielsweise fehlte. Korrigiert wird es über das Korrektur-Tag (Edit-Tag, s.u.). <br/>
                 <br/> <b>reason:</b> Grund der modernen Ergänzung: overbinding (Überbindung), fadedInk (verblasste Tinte), lost-folio (verlorenes Folio), omitted-in-original (schon im Original weggelassen).
                 <br/>
-                <br/> <b>resp:</b> UUID des verantwortlichen Herausgebers. Format: fpb-[uuid]</p>
+                <br/> <b>resp:</b> PID des verantwortlichen Herausgebers. Format: fpb-[pid]</p>
         </div>
         <input type="checkbox" id="unclear"/>
         <label for="unclear">

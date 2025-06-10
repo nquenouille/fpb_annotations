@@ -9,7 +9,7 @@
                 <field name="author" expression="nav:get-metadata(ancestor::tei:TEI, 'author')"/>
                 <field name="language" expression="nav:get-metadata(ancestor::tei:TEI, 'language')"/>
                 <field name="date" expression="nav:get-metadata(ancestor::tei:TEI, 'date')"/>
-                <field name="uuid" expression="nav:get-metadata(ancestor::tei:TEI, 'uuid')"/>
+                <field name="pid" expression="nav:get-metadata(ancestor::tei:TEI, 'pid')"/>
                 <field name="id" expression="nav:get-metadata(ancestor::tei:TEI, 'id')"/>
                 <field name="oldid" expression="nav:get-metadata(ancestor::tei:TEI, 'oldid')"/>
                 <field name="repository" expression="nav:get-metadata(ancestor::tei:TEI, 'repository')"/>

@@ -128,7 +128,7 @@
     "title": "Search titles",
     "content": "Search content",
     "scope": "Query scope",
-    "uuid": "UUID",
+    "pid": "PID",
     "id": "Inventory numbers",
     "oldid": "Old inventory no.",
     "repository": "Repository",

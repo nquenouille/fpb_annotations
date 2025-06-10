@@ -476,7 +476,7 @@
                    <elementSpec ident="teiHeader" mode="change"><model output="latex" behaviour="metadata"/><model output="fo" behaviour="omit"/><modelSequence>
             <model output="web" predicate="$parameters?header='short'" behaviour="block"/>
             <model output="web" predicate="@xml:id" behaviour="block" cssClass="revisionDesc">
-                <param name="content" value="concat('UUID: ', @xml:id)"/>
+                <param name="content" value="concat('PID: ', @xml:id)"/>
                 <outputRendition xml:space="preserve">
                 
                 
