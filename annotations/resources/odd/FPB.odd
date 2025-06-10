@@ -300,7 +300,7 @@
                     text-indent: 0%;
                 </outputRendition>
             </model>
-            <model predicate="type='commented' and child::anchor" behaviour="inline">
+            <model predicate="@type='commented' and child::anchor" behaviour="inline">
                     <param name="name" value="'pb-popover'"/>
                     <param name="content" value="."/>
                     <param name="alternate" value="for $anchor in child::anchor/@n return root($parameters?root)//div//note[@type='note'][@n=$anchor]/node()"/>
