@@ -92,7 +92,7 @@ declare variable $config:default-template :="annotate.html";
 (:
  : The element to search by default, either 'tei:div' or 'tei:text'.
  :)
-declare variable $config:search-default :="tei:div";
+declare variable $config:search-default :="tei:text";
 
 (:
  : Defines which nested divs will be displayed as single units on one
@@ -111,7 +111,7 @@ declare variable $config:pagination-depth := 10;
  : up the page by pulling following divs in. When set to 0, it will never
  : attempt to fill up the page.
  :)
-declare variable $config:pagination-fill := 5;
+declare variable $config:pagination-fill := 0;
 
 (:
  : Display configuration for facets to be shown in the sidebar. The facets themselves
