@@ -40,197 +40,206 @@
         <body>
             <schemaSpec start="TEI teiCorpus" ident="FPB" source="teipublisher.odd"> 
                 <elementSpec ident="hi" mode="change">
-                    <model predicate="@rend=&#34;superscript&#34;" behaviour="inline">
-            <outputRendition xml:space="preserve">
-                vertical-align: super;
-                font-size: 50%;
-            </outputRendition>
-        </model>
-                    <model predicate="@rend=&#34;underline&#34;" behaviour="inline">
-            <outputRendition xml:space="preserve">
-            text-decoration: underline;
-            </outputRendition>
-        </model>
-                    <model predicate="@rend='semibold'" behaviour="inline">
-            <outputRendition xml:space="preserve">
-            font-weight: 600;
-            </outputRendition>
-        </model>
-                    <model predicate="@rend=&#34;latintype&#34; or @rend=&#34;italic&#34;" behaviour="inline" useSourceRendition="true">
-            <outputRendition xml:space="preserve">
-            font-style:italic;
-            </outputRendition>
-        </model>
-                </elementSpec>
-                <elementSpec ident="choice" mode="change">
-                    <model predicate="sic and corr" behaviour="inline">
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="sic[1]"/>
-            <param name="alternate" value="concat('recte: ', corr[1])"/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xml:space="preserve" xmlns=""><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-            <outputRendition xml:space="preserve">
-            text-decoration:underline dotted;
-            </outputRendition>
-        </model>
-<!--                    <model predicate="expan and abbr[@type='resolve'] and $parameters?mode='normalized'" behaviour="inline">-->
-            <model predicate="expan and abbr[@type='resolve']" behaviour="inline">
-            <param name="content" value="expan"/>
-        </model>
-        <model predicate="expan and (abbr[@type='perge'] or abbr[@type='mp']) and $parameters?mode='normalized'" behaviour="inline">
-            <outputRendition xml:space="preserve">
-                text-decoration:underline dotted;
-            </outputRendition>
-        </model>
-        <model predicate="abbr and expan" behaviour="inline">
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="abbr[1]"/>
-            <param name="alternate" value="expan[1]"/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xml:space="preserve" xmlns=""><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-            <outputRendition xml:space="preserve">
-            text-decoration:underline dotted;
-            </outputRendition>
-        </model>
-<!--                    <model predicate="orig and reg[@type='modern'] and $parameters?mode='normalized'" behaviour="inline">-->
-            <model predicate="orig and reg[@type='modern']" behaviour="inline">
-            <param name="content" value="reg"/>
-        </model>
-                    <model predicate="orig and reg" behaviour="inline">
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="reg[1]"/>
-            <param name="alternate" value="orig[1]"/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xml:space="preserve" xmlns=""><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-            <outputRendition xml:space="preserve">
-            text-decoration:underline dotted;
-            </outputRendition>
-        </model>
-                </elementSpec>
-                <elementSpec ident="dateline" mode="change">
-                    <model behaviour="block">
-            <outputRendition xml:space="preserve">
-            
-            </outputRendition>
-        </model>
-                </elementSpec>
-                <elementSpec ident="date" mode="change">
-                    <model output="web" predicate="@when" behaviour="inline">
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="."/>
-            <param name="alternate" value=" let $date-pattern := matches(@when, '^\d{4}-\d{2}-\d{2}$') 
-                                            let $month-pattern := matches(@when, '^\d{4}-\d{2}$')
-                                            let $month-day-pattern := matches(@when, '^--\d{2}-\d{2}$')
-                                            let $year-only-pattern := matches(@when, '^\d{4}$')
-                                            let $day-only-pattern := matches(@when, '^---\d{2}$') 
-                                            let $month-only-pattern := matches(@when, '^--\d{2}$') 
-                                            let $months := ('Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember') 
-                                            return 
-                                              if ($date-pattern) then 
-                                                let $month := substring(@when, 6, 2) 
-                                                let $month-index := xs:int($month) 
-                                                let $day := substring(@when, 9, 2) 
-                                                let $year := substring(@when, 1, 4) 
-                                                return concat($day, '. ', $months[$month-index], ' ', $year) 
-                                              else if ($month-pattern) then 
-                                                let $month := substring(@when, 6, 2) 
-                                                let $month-index := xs:int($month) 
-                                                let $year := substring(@when, 1, 4) 
-                                                return concat($months[$month-index], ' ', $year) 
-                                              else if ($month-day-pattern) then
-                                                let $month := substring(@when, 3, 2)
-                                                let $month-index := xs:int($month)
-                                                let $day := substring(@when, 6,2)
-                                                return concat($day, '. ', $months[$month-index])
-                                              else if ($day-only-pattern) then 
-                                                let $day := substring(@when, 4, 2)
-                                                return concat($day, '. Tag eines unbekannten Monats') 
-                                              else if ($month-only-pattern) then 
-                                                let $month := substring(@when, 3, 2) 
-                                                let $month-index := xs:int($month)
-                                                return $months[$month-index] 
-                                              else if ($year-only-pattern) then 
-                                                let $year := substring(@when, 1, 4)
-                                                return $year
-                                              else ()" />
-            <param name="placement" value="'bottom'"/>
-            <param name="fallback-placement" value="'right'"/>
-            <pb:template xml:space="preserve" xmlns=""><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-            <outputRendition xml:space="preserve">
-            text-decoration: underline dotted;
-            </outputRendition>
-        </model>
-                    <model behaviour="inline">
-            <outputRendition xml:space="preserve">
-            null
-            </outputRendition>
-        </model>
-                </elementSpec>
-                <elementSpec ident="persName" mode="add">
-                    <!-- For annotation tool only -->
-                    <model behaviour="inline" predicate="@ref">
-                        <param name="name" value="'pb-popover'"/>
-                        <param name="content" value="."/>
-                        <param name="uri" value="concat('https://fpb.saw-leipzig.de/person/person/', replace(@ref, 'fpb-', ''))"/>
-                        <param name="target" value="'_blank'"/>
-                        <param name="alternate" value="concat(id(@ref, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text(), ' (*', id(@ref, doc(&#34;/db/apps/annotations/data/register.xml&#34;))//birth/date/@when, ', ✝', id(@ref, doc(&#34;/db/apps/annotations/data/register.xml&#34;))//death/date/@when, ')')"/>
-                        <param name="placement" value="'bottom'"/>
-                        <param name="fallback-placement" value="'right'"/>
-                        <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate"><a href="[[uri]]" target="[[target]]">[[alternate]]</a></span></pb-popover></pb:template>
-                        <outputRendition xml:space="preserve">
-                            text-decoration: underline dotted;
-                        </outputRendition>
-                    </model>
-<!--                    <model output="web" predicate="@ref and $parameters?view='normalized'" behaviour="webcomponent">-->
-<!--            <param name="content" value="."/>-->
-<!--            <param name="name" value="'pb-highlight'"/>-->
-<!--            <param name="duration" value="3000"/>-->
-<!--            <param name="key" value="@ref"/>-->
-<!--            <param name="highlight-self" value="'highlight-self'"/>-->
-<!--        </model>-->
-                    <model behaviour="inline"/>
-                </elementSpec>
-                <elementSpec ident="person" mode="add">
-                    <model output="web" predicate="@xml:id" behaviour="listItem">
-            <param name="name" value="'pb-highlight'"/>
-            <param name="highlight-self" value="'highlight-self'"/>
-            <param name="duration" value="3000"/>
-            <param name="key" value="@xml:id"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-highlight key="[[key]]" highlight-self="[[highlight-self]]" duration="[[duration]]">[[content]]</pb-highlight></pb:template>
-        </model>
-                    <model behaviour="block"/>
-                </elementSpec>
-                <elementSpec ident="expan" mode="add"/>
-                <elementSpec ident="place" mode="add">
-                    <model behaviour="block">
-            <param name="content" value="note/node()"/>
-        </model>
-                </elementSpec>
-                <elementSpec ident="placeName" mode="add">
-                    <model behaviour="inline" predicate="@ref">
-                        <param name="name" value="'pb-popover'"/>
-                        <param name="content" value="."/>
-                        <param name="uri" value="concat('https://fpb.saw-leipzig.de/places/place/', replace(@ref, 'fpb-', ''))"/>
-                        <param name="target" value="'_blank'"/>
-                        <param name="alternate" value="concat(id(@ref, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/placeName/text(), ' (N', substring-before(id(@ref, doc(&#34;/db/apps/annotations/data/register.xml&#34;))//location/geo/text(), ' '),' E', substring-after(id(@ref, doc(&#34;/db/apps/annotations/data/register.xml&#34;))//location/geo/text(), ' '), ')')"/>
-                        <param name="placement" value="'bottom'"/>
-                        <param name="fallback-placement" value="'right'"/>
-                        <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate"><a href="[[uri]]" target="[[target]]">[[alternate]]</a></span></pb-popover></pb:template>
-                        <outputRendition xml:space="preserve">
-                            text-decoration: underline dotted;
-                        </outputRendition>
-                    </model>
-                    <model behaviour="inline">
-            <outputRendition xml:space="preserve">
-            
-            </outputRendition>
-        </model>
+                <model predicate="@rend=&#34;superscript&#34;" behaviour="inline">
+                    <desc>For @rend='superscript' display the text in superscript.</desc>
+                    <outputRendition xml:space="preserve">
+                        vertical-align: super;
+                        font-size: 50%;
+                    </outputRendition>
+                </model>
+                <model predicate="@rend=&#34;underline&#34;" behaviour="inline">
+                    <desc>For @rend='underline' display the text with an underline.</desc>
+                    <outputRendition xml:space="preserve">
+                    text-decoration: underline;
+                    </outputRendition>
+                </model>
+                <model predicate="@rend='semibold'" behaviour="inline">
+                    <desc>For @rend='semibold' display the text, if possible in semi-bold, otherwise in bold.</desc>
+                    <outputRendition xml:space="preserve">
+                    font-weight: 600;
+                    </outputRendition>
+                </model>
+                <model predicate="@rend=&#34;latintype&#34; or @rend=&#34;italic&#34;" behaviour="inline" useSourceRendition="true">
+                    <desc>For @rend='latintype' or @rend='italic' put the text, which in original is written in Latinscript, in italics.</desc>
+                    <outputRendition xml:space="preserve">
+                    font-style:italic;
+                    </outputRendition>
+                </model>
+            </elementSpec>
+            <elementSpec ident="choice" mode="change">
+                <model predicate="sic and corr" behaviour="inline">
+                    <desc>In the case of an unusual spelling or similar, the correct spelling is displayed by a mouseover. The word in question is marked with a dotted line.</desc>
+                    <param name="name" value="'pb-popover'"/>
+                    <param name="content" value="sic[1]"/>
+                    <param name="alternate" value="concat('recte: ', corr[1])"/>
+                    <param name="placement" value="'top'"/>
+                    <param name="fallback-placement" value="'bottom'"/>
+                    <pb:template xml:space="preserve" xmlns=""><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                    <outputRendition xml:space="preserve">
+                    text-decoration:underline dotted;
+                    </outputRendition>
+                </model>
+                <model predicate="expan and abbr[@type='resolve'] and $parameters?mode='normalized'" behaviour="inline">
+                    <desc>Not in use. The original intention was to use abbreviations in the text version and to dissolve them in the reading version. The attribute rend=‘resolve’ would have been responsible for this.</desc>
+                    <param name="alternate" value="abbr[1]"/>
+                    <param name="content" value="expan[1]"/>
+                    <param name="placement" value="'right'"/>
+                    <param name="fallback-placement" value="'top'"/>
+                    <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                    <outputRendition xml:space="preserve">
+                    text-decoration:underline dotted;
+                    </outputRendition>
+                </model>        
+                <model predicate="abbr and expan" behaviour="inline">
+                    <desc>Normal use of abbreviation and expansion: The text will preserve the abbreviation, and the mouse-over shows the expansion. The word in question is marked with a dotted line.</desc>
+                    <param name="name" value="'pb-popover'"/>
+                    <param name="content" value="abbr[1]"/>
+                    <param name="alternate" value="expan[1]"/>
+                    <param name="placement" value="'top'"/>
+                    <param name="fallback-placement" value="'bottom'"/>
+                    <pb:template xml:space="preserve" xmlns=""><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                    <outputRendition xml:space="preserve">
+                    text-decoration:underline dotted;
+                    </outputRendition>
+                </model>
+                <model predicate="orig and reg" behaviour="inline">
+                    <desc>Not in use.</desc>
+                    <param name="name" value="'pb-popover'"/>
+                    <param name="content" value="reg[1]"/>
+                    <param name="alternate" value="orig[1]"/>
+                    <param name="placement" value="'top'"/>
+                    <param name="fallback-placement" value="'bottom'"/>
+                    <pb:template xml:space="preserve" xmlns=""><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                    <outputRendition xml:space="preserve">
+                    text-decoration:underline dotted;
+                    </outputRendition>
+                </model>
+            </elementSpec>
+            <elementSpec ident="dateline" mode="change">
+                <model behaviour="block">
+                    <desc>Datelines will be rendered as block.</desc>
+                </model>
+            </elementSpec>
+            <elementSpec ident="date" mode="change">
+                <model output="web" predicate="@when" behaviour="inline">
+                    <desc>Mouseover for specific dates with attribute @when. Case distinction for complete information (YYYY-MM-DD) and partial information (YYYY; YYYY-MM; YYYY-DD; MM; MM-DD; DD) and month mapping.</desc>
+                    <param name="name" value="'pb-popover'"/>
+                    <param name="content" value="."/>
+                    <param name="alternate" value=" let $date-pattern := matches(@when, '^\d{4}-\d{2}-\d{2}$') 
+                                                    let $month-pattern := matches(@when, '^\d{4}-\d{2}$')
+                                                    let $month-day-pattern := matches(@when, '^--\d{2}-\d{2}$')
+                                                    let $year-only-pattern := matches(@when, '^\d{4}$')
+                                                    let $day-only-pattern := matches(@when, '^---\d{2}$') 
+                                                    let $month-only-pattern := matches(@when, '^--\d{2}$') 
+                                                    let $months := ('Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember') 
+                                                    return 
+                                                    if ($date-pattern) then 
+                                                        let $month := substring(@when, 6, 2) 
+                                                        let $month-index := xs:int($month) 
+                                                        let $day := substring(@when, 9, 2) 
+                                                        let $year := substring(@when, 1, 4) 
+                                                        return concat($day, '. ', $months[$month-index], ' ', $year) 
+                                                    else if ($month-pattern) then 
+                                                        let $month := substring(@when, 6, 2) 
+                                                        let $month-index := xs:int($month) 
+                                                        let $year := substring(@when, 1, 4) 
+                                                        return concat($months[$month-index], ' ', $year) 
+                                                    else if ($month-day-pattern) then
+                                                        let $month := substring(@when, 3, 2)
+                                                        let $month-index := xs:int($month)
+                                                        let $day := substring(@when, 6,2)
+                                                        return concat($day, '. ', $months[$month-index])
+                                                    else if ($day-only-pattern) then 
+                                                        let $day := substring(@when, 4, 2)
+                                                        return concat($day, '. Tag eines unbekannten Monats') 
+                                                    else if ($month-only-pattern) then 
+                                                        let $month := substring(@when, 3, 2) 
+                                                        let $month-index := xs:int($month)
+                                                        return $months[$month-index] 
+                                                    else if ($year-only-pattern) then 
+                                                        let $year := substring(@when, 1, 4)
+                                                        return $year
+                                                    else ()" />
+                    <param name="placement" value="'bottom'"/>
+                    <param name="fallback-placement" value="'right'"/>
+                    <pb:template xml:space="preserve" xmlns=""><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                    <outputRendition xml:space="preserve">
+                    text-decoration: underline dotted;
+                    </outputRendition>
+                </model>
+                <model output="web" predicate="@from and @to" behaviour="inline">
+                    <desc>Mouseover for case of attributes @from and @to.</desc>
+                    <param name="name" value="'pb-popover'"/>
+                    <param name="content" value="."/>
+                    <param name="alternate" value="concat(@from, ' bis ', @to)"/>
+                    <param name="placement" value="'bottom'"/>
+                    <param name="fallback-placement" value="'right'"/>
+                    <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                    <outputRendition xml:space="preserve">
+                    text-decoration: underline dotted;
+                    </outputRendition>
+                </model>
+                <model output="web" predicate="@from and not(@to)" behaviour="inline">
+                    <desc>Mouseover for case of attributes @from without specific ending.</desc>
+                    <param name="name" value="'pb-popover'"/>
+                    <param name="content" value="."/>
+                    <param name="alternate" value="concat('Von ', @from, ' an.')"/>
+                    <param name="placement" value="'bottom'"/>
+                    <param name="fallback-placement" value="'right'"/>
+                    <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                    <outputRendition xml:space="preserve">
+                    text-decoration: underline dotted;
+                    </outputRendition>
+                </model>
+                <model behaviour="inline">
+                    <desc>Default.</desc>
+                    <outputRendition xml:space="preserve">
+                    null
+                    </outputRendition>
+                </model>
+            </elementSpec>
+            <elementSpec ident="persName" mode="add">
+                <!-- For annotation tool only -->
+                <model behaviour="inline" predicate="@ref">
+                    <desc>For annotation tool only: Show names as mouseover.</desc>
+                    <param name="name" value="'pb-popover'"/>
+                    <param name="content" value="."/>
+                    <param name="uri" value="concat('https://fpb.saw-leipzig.de/person/person/', replace(@ref, 'fpb-', ''))"/>
+                    <param name="target" value="'_blank'"/>
+                    <param name="alternate" value="concat(id(@ref, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text(), ' (*', id(@ref, doc(&#34;/db/apps/annotations/data/register.xml&#34;))//birth/date/@when, ', ✝', id(@ref, doc(&#34;/db/apps/annotations/data/register.xml&#34;))//death/date/@when, ')')"/>
+                    <param name="placement" value="'bottom'"/>
+                    <param name="fallback-placement" value="'right'"/>
+                    <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate"><a href="[[uri]]" target="[[target]]">[[alternate]]</a></span></pb-popover></pb:template>
+                    <outputRendition xml:space="preserve">
+                        text-decoration: underline dotted;
+                    </outputRendition>
+                </model>
+                <model behaviour="inline">
+                    <desc>Default.</desc>
+                </model>
+            </elementSpec>
+            <elementSpec ident="placeName" mode="add">
+                <model behaviour="inline" predicate="@ref">
+                    <desc>For annotation tool only: Show place names as mouseover.</desc>
+                    <param name="name" value="'pb-popover'"/>
+                    <param name="content" value="."/>
+                    <param name="uri" value="concat('https://fpb.saw-leipzig.de/places/place/', replace(@ref, 'fpb-', ''))"/>
+                    <param name="target" value="'_blank'"/>
+                    <param name="alternate" value="concat(id(@ref, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/placeName/text(), ' (N', substring-before(id(@ref, doc(&#34;/db/apps/annotations/data/register.xml&#34;))//location/geo/text(), ' '),' E', substring-after(id(@ref, doc(&#34;/db/apps/annotations/data/register.xml&#34;))//location/geo/text(), ' '), ')')"/>
+                    <param name="placement" value="'bottom'"/>
+                    <param name="fallback-placement" value="'right'"/>
+                    <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate"><a href="[[uri]]" target="[[target]]">[[alternate]]</a></span></pb-popover></pb:template>
+                    <outputRendition xml:space="preserve">
+                        text-decoration: underline dotted;
+                    </outputRendition>
+                </model>
+                <model behaviour="inline">
+                    <desc>Default.</desc>
+                </model>
                 </elementSpec>
                 <elementSpec ident="rs" mode="add">
                     <model behaviour="inline">
+                        <desc>For annotation tool only: Show referred strings as mouseover.</desc>
                         <param name="name" value="'pb-popover'"/>
                         <param name="content" value="."/>
                         <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
@@ -243,199 +252,195 @@
                         </outputRendition>
                     </model>
                 </elementSpec>
-                    <elementSpec ident="app" mode="add">
+                    <elementSpec ident="app" mode="add">                    
                     <model behaviour="alternate">
-                    <param name="default" value="lem[1]/node()"/>
-                    <param name="alternate" value="for $rdg at $p in ./rdg return concat($rdg/@wit/string() || ': ', $rdg/string() || '&#xA;&#xA;')"/>
-            <param name="lem" value="lem[1]/node()"/>
-            <param name="rdg" value="string-join(  for $rdg at $p in ./rdg return (      '&#34;rdg[' || $p || ']&#34;:&#34;' || $rdg/string() || '&#34;',         '&#34;wit[' || $p || ']&#34;:&#34;' || $rdg/@wit/string() || '&#34;'     ),     ',' )"/>
-            <pb:template xmlns="" xml:space="preserve"><span class="annotation annotation-app" data-type="app" data-annotation="{{[[rdg]]}}">[[lem]]</span></pb:template>
-            <outputRendition xml:space="preserve">
-                    text-decoration: underline dotted;
-            </outputRendition>
-        </model>
-                </elementSpec>
-        <elementSpec ident="note" mode="change">
-            <model predicate="@type='unedited'" behaviour="inline">
-                <param name="name" value="'pb-popover'"/>
-                <param name="content" value="'[...]'"/>
-                <param name="alternate" value="."/>
-                <param name="placement" value="'top'"/>
-                <param name="fallback-placement" value="'bottom'"/>
-                <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-                <outputRendition xml:space="preserve">
-                text-decoration: underline dotted;
-                background-color: #e6e6e6;
-                </outputRendition>
-            </model>
-            <model predicate="@place='margin-left'" behaviour="inline">
-                <param name="content" value="for $anchor in ..//anchor/@xml:id return root($parameters?root)//div//note[@type='marginalia'][@target=$anchor]/node()"/>
-                <outputRendition xml:space="preserve">
-                    display: block;
-                    float: right;
-                    margin-right: -15%;
-                    width: 5em;
-                    margin-bottom: 0;
-                    margin-top: 0;
-                    clear: right;
-                    overflow: visible;
-                    font-size: 70%;
-                    text-align: right;
-                    text-indent: 0%;
-                </outputRendition>
-            </model>
-            <model predicate="@place='margin-right'" behaviour="inline">
-                <param name="content" value="for $anchor in ..//anchor/@xml:id return root($parameters?root)//div//note[@type='marginalia'][@target=$anchor]/node()"/>
-                <outputRendition xml:space="preserve">
-                    display: block;
-                    float: left;
-                    margin-left: -15%;
-                    width: 5em;
-                    margin-bottom: 0;
-                    margin-top: 0;
-                    clear: left;
-                    overflow: visible;
-                    font-size: 70%;
-                    text-align: left;
-                    text-indent: 0%;
-                </outputRendition>
-            </model>
-            <model predicate="@type='commented' and child::anchor" behaviour="inline">
-                    <param name="name" value="'pb-popover'"/>
-                    <param name="content" value="."/>
-                    <param name="alternate" value="for $anchor in child::anchor/@n return root($parameters?root)//div//note[@type='note'][@n=$anchor]/node()"/>
-                    <param name="placement" value="'bottom'"/>
-                    <param name="fallback-placement" value="'left'"/>
-                    <pb:template xml:space="preserve" xmlns=""><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                        <desc>Not in use. Show apparatus via mouseover.</desc>
+                        <param name="default" value="lem[1]/node()"/>
+                        <param name="alternate" value="for $rdg at $p in ./rdg return concat($rdg/@wit/string() || ': ', $rdg/string() || '&#xA;&#xA;')"/>
+                        <param name="lem" value="lem[1]/node()"/>
+                        <param name="rdg" value="string-join(  for $rdg at $p in ./rdg return (      '&#34;rdg[' || $p || ']&#34;:&#34;' || $rdg/string() || '&#34;',         '&#34;wit[' || $p || ']&#34;:&#34;' || $rdg/@wit/string() || '&#34;'     ),     ',' )"/>
+                        <pb:template xmlns="" xml:space="preserve"><span class="annotation annotation-app" data-type="app" data-annotation="{{[[rdg]]}}">[[lem]]</span></pb:template>
                         <outputRendition xml:space="preserve">
-                        text-decoration: underline dotted;
+                                text-decoration: underline dotted;
                         </outputRendition>
                     </model>
-                    <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
-                    <model predicate="@type='presentation'" behaviour="inline">
-                    <param name="name" value="'pb-popover'"/>
-                    <param name="content" value="."/>
-                    <param name="alternate" value="if(contains(@hand, 'main')) then concat('Präsentationsvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Präsentationsvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(@subtype='person' and starts-with(@hand, 'fpb-')) then concat('Präsentationsvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Präsentationsvermerk, ergänzt von: ', ./@hand)"/>
-                    <param name="placement" value="'left'"/>
-                    <param name="fallback-placement" value="'top'"/>
-                    <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-                    <outputRendition xml:space="preserve">
-                    
-                                    color: grey;
+                </elementSpec>
+                <elementSpec ident="note" mode="change">
+                    <model predicate="@type='unedited'" behaviour="inline">
+                        <desc>If there is unedited text, show only [...] with grey background and the note text as mouseover (normally "unedited text" or similar).</desc>
+                        <param name="name" value="'pb-popover'"/>
+                        <param name="content" value="'[...]'"/>
+                        <param name="alternate" value="."/>
+                        <param name="placement" value="'top'"/>
+                        <param name="fallback-placement" value="'bottom'"/>
+                        <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                        <outputRendition xml:space="preserve">
+                        text-decoration: underline dotted;
+                        background-color: #e6e6e6;
+                        </outputRendition>
+                    </model>
+                    <model predicate="@place='margin-left'" behaviour="inline">
+                        <desc>If note is type='marginalia' and placed 'margin-left' show note on the left and give some space.</desc>
+                        <param name="content" value="for $anchor in ..//anchor/@xml:id return root($parameters?root)//div//note[@type='marginalia'][@target=$anchor]/node()"/>
+                        <outputRendition xml:space="preserve">
+                            display: block;
+                            float: right;
+                            margin-right: -15%;
+                            width: 5em;
+                            margin-bottom: 0;
+                            margin-top: 0;
+                            clear: right;
+                            overflow: visible;
+                            font-size: 70%;
+                            text-align: right;
+                            text-indent: 0%;
+                        </outputRendition>
+                    </model>
+                    <model predicate="@place='margin-right'" behaviour="inline">
+                        <desc>If note is type='marginalia' and placed 'margin-left' show note on the left and give some space.</desc>
+                        <param name="content" value="for $anchor in ..//anchor/@xml:id return root($parameters?root)//div//note[@type='marginalia'][@target=$anchor]/node()"/>
+                        <outputRendition xml:space="preserve">
+                            display: block;
+                            float: left;
+                            margin-left: -15%;
+                            width: 5em;
+                            margin-bottom: 0;
+                            margin-top: 0;
+                            clear: left;
+                            overflow: visible;
+                            font-size: 70%;
+                            text-align: left;
+                            text-indent: 0%;
+                        </outputRendition>
+                    </model>
+                    <model predicate="@type='commented' and child::anchor" behaviour="inline">
+                            <desc>If note is a commentary, get commentary and show it in mouseover.</desc>
+                            <param name="name" value="'pb-popover'"/>
+                            <param name="content" value="."/>
+                            <param name="alternate" value="for $anchor in child::anchor/@n return root($parameters?root)//div//note[@type='note'][@n=$anchor]/node()"/>
+                            <param name="placement" value="'bottom'"/>
+                            <param name="fallback-placement" value="'left'"/>
+                            <pb:template xml:space="preserve" xmlns=""><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                                <outputRendition xml:space="preserve">
                                     text-decoration: underline dotted;
-                                
-                    </outputRendition>
-                </model>
-                <model predicate="@type='received'" behaviour="inline">
-                    <param name="name" value="'pb-popover'"/>
-                    <param name="content" value="."/>
-                    <param name="alternate" value="if(contains(@hand, 'main')) then concat('Empfangsvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Empfangsvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(@subtype='person' and starts-with(@hand, 'fpb-')) then concat('Empfangsvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Empfangsvermerk, ergänzt von: ', ./@hand)"/>
-                    <param name="placement" value="'left'"/>
-                    <param name="fallback-placement" value="'top'"/>
-                    <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-                    <outputRendition xml:space="preserve">
-                    
-                                    color: grey;
-                                    text-decoration: underline dotted;
-                                
-                    </outputRendition>
-                </model>
-                <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
-                <model predicate="@type='possessor'" behaviour="inline">
-                    <param name="name" value="'pb-popover'"/>
-                    <param name="content" value="."/>
-                    <param name="alternate" value="if(contains(@hand, 'main')) then concat('Besitzvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Besitzvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(@subtype='person' and starts-with(@hand, 'fpb-')) then concat('Besitzvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Besitzvermerk, ergänzt von: ', ./@hand)"/>
-                    <param name="placement" value="'left'"/>
-                    <param name="fallback-placement" value="'top'"/>
-                    <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-                    <outputRendition xml:space="preserve">
-                    
-                                    color: grey;
-                                    text-decoration: underline dotted;
-                                
-                    </outputRendition>
-                </model>
-                <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
-                <model predicate="@type='address'" behaviour="inline">
-                    <param name="name" value="'pb-popover'"/>
-                    <param name="content" value="."/>
-                    <param name="alternate" value="if(contains(@hand, 'main')) then concat('Adressvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Adressvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(starts-with(@hand, 'fpb-')) then concat('Adressvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Adressvermerk, ergänzt von: ', ./@hand)"/>
-                    <param name="placement" value="'left'"/>
-                    <param name="fallback-placement" value="'top'"/>
-                    <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-                    <outputRendition xml:space="preserve">
-                    
-                                    color: grey;
-                                    text-decoration: underline dotted;
-                                
-                    </outputRendition>
-                </model>
-                <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
-                <model predicate="@type='numbering'" behaviour="inline">
-                    <param name="name" value="'pb-popover'"/>
-                    <param name="content" value="."/>
-                    <param name="alternate" value="if(contains(@hand, 'main')) then concat('Numerierungsvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Numerierungsvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(starts-with(@hand, 'fpb-')) then concat('Numerierungsvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Numerierungsvermerk, ergänzt von: ', ./@hand)"/>
-                    <param name="placement" value="'left'"/>
-                    <param name="fallback-placement" value="'top'"/>
-                    <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-                    <outputRendition xml:space="preserve">
-                    
-                                    color: grey;
-                                    text-decoration: underline dotted;
-                                
-                    </outputRendition>
-                </model>
-                <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
-                <model predicate="@type='postalNote'" behaviour="inline">
-                    <param name="name" value="'pb-popover'"/>
-                    <param name="content" value="."/>
-                    <param name="alternate" value="if(contains(@hand, 'main')) then concat('Postvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Postvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(starts-with(@hand, 'fpb-')) then concat('Postvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Postvermerk, ergänzt von: ', ./@hand)"/>
-                    <param name="placement" value="'left'"/>
-                    <param name="fallback-placement" value="'top'"/>
-                    <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-                    <outputRendition xml:space="preserve">
-                    
-                                    color: grey;
-                                    text-decoration: underline dotted;
-                                
-                    </outputRendition>
-                </model>
-                <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
-                <model predicate="@type='other'" behaviour="inline">
-                    <param name="name" value="'pb-popover'"/>
-                    <param name="content" value="."/>
-                    <param name="alternate" value="if(contains(@hand, 'main')) then concat('Sonstiger Vermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Sonstiger Vermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(starts-with(@hand, 'fpb-')) then concat('Sonstiger Vermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Sonstiger Vermerk, ergänzt von: ', ./@hand)"/>
-                    <param name="placement" value="'left'"/>
-                    <param name="fallback-placement" value="'top'"/>
-                    <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-                    <outputRendition xml:space="preserve">
-                    
-                                    color: grey;
-                                    text-decoration: underline dotted;
-                                
-                    </outputRendition>
-                </model>
-                    <model predicate="parent::person" behaviour="omit"/>
-                    <model predicate="parent::num" behaviour="omit"/>
-                    <model predicate="parent::span" behaviour="omit"/>
-                    <model predicate="$parameters?view='notes' and not(parent::unclear)" behaviour="listItem">
-            <param name="n" value="@n"/>
-        </model>
-<!--                    <model predicate="not(parent::unclear)" behaviour="note">-->
-<!--            <param name="place" value="'footnote'"/>-->
-<!--            <outputRendition xml:space="preserve">-->
-<!--                font-size: 75%;-->
-<!--                background-color: #C0C0C0;-->
-<!--                padding: 0 .25em;-->
-<!--                border-right: 1px solid black;-->
-<!--                text-indent: 0;-->
-<!--                margin: 0 .25em;-->
-<!--            </outputRendition>-->
-<!--        </model>-->
-                    <model predicate="$parameters?view='notes' and not(parent::unclear)" behaviour="listItem">
-            <param name="n" value="@n"/>
-        </model>
+                                </outputRendition>
+                            </model>
+                            <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
+                            <model predicate="@type='presentation'" behaviour="inline">
+                            <desc>If there is a presentation note, show in mouseover, which kind of note, and who left it.</desc>
+                            <param name="name" value="'pb-popover'"/>
+                            <param name="content" value="."/>
+                            <param name="alternate" value="if(contains(@hand, 'main')) then concat('Präsentationsvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Präsentationsvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(@subtype='person' and starts-with(@hand, 'fpb-')) then concat('Präsentationsvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Präsentationsvermerk, ergänzt von: ', ./@hand)"/>
+                            <param name="placement" value="'left'"/>
+                            <param name="fallback-placement" value="'top'"/>
+                            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                            <outputRendition xml:space="preserve">
+                                color: grey;
+                                text-decoration: underline dotted;
+                            </outputRendition>
+                        </model>
+                        <model predicate="@type='received'" behaviour="inline">
+                            <desc>If there is a receipt note, show in mouseover, which kind of note, and who left it.</desc>
+                            <param name="name" value="'pb-popover'"/>
+                            <param name="content" value="."/>
+                            <param name="alternate" value="if(contains(@hand, 'main')) then concat('Empfangsvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Empfangsvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(@subtype='person' and starts-with(@hand, 'fpb-')) then concat('Empfangsvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Empfangsvermerk, ergänzt von: ', ./@hand)"/>
+                            <param name="placement" value="'left'"/>
+                            <param name="fallback-placement" value="'top'"/>
+                            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                            <outputRendition xml:space="preserve">
+                                color: grey;
+                                text-decoration: underline dotted;
+                            </outputRendition>
+                        </model>
+                        <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
+                        <model predicate="@type='possessor'" behaviour="inline">
+                            <desc>If there is a ownership note, show in mouseover, which kind of note, and who left it.</desc>
+                            <param name="name" value="'pb-popover'"/>
+                            <param name="content" value="."/>
+                            <param name="alternate" value="if(contains(@hand, 'main')) then concat('Besitzvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Besitzvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(@subtype='person' and starts-with(@hand, 'fpb-')) then concat('Besitzvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Besitzvermerk, ergänzt von: ', ./@hand)"/>
+                            <param name="placement" value="'left'"/>
+                            <param name="fallback-placement" value="'top'"/>
+                            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                            <outputRendition xml:space="preserve">
+                                color: grey;
+                                text-decoration: underline dotted;
+                            </outputRendition>
+                        </model>
+                        <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
+                        <model predicate="@type='address'" behaviour="inline">
+                            <desc>If there is an address note, show in mouseover, which kind of note, and who left it.</desc>
+                            <param name="name" value="'pb-popover'"/>
+                            <param name="content" value="."/>
+                            <param name="alternate" value="if(contains(@hand, 'main')) then concat('Adressvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Adressvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(starts-with(@hand, 'fpb-')) then concat('Adressvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Adressvermerk, ergänzt von: ', ./@hand)"/>
+                            <param name="placement" value="'left'"/>
+                            <param name="fallback-placement" value="'top'"/>
+                            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                            <outputRendition xml:space="preserve">
+                                color: grey;
+                                text-decoration: underline dotted;
+                            </outputRendition>
+                        </model>
+                        <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
+                        <model predicate="@type='numbering'" behaviour="inline">
+                            <desc>If there is a numbering note, show in mouseover, which kind of note, and who left it.</desc>
+                            <param name="name" value="'pb-popover'"/>
+                            <param name="content" value="."/>
+                            <param name="alternate" value="if(contains(@hand, 'main')) then concat('Numerierungsvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Numerierungsvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(starts-with(@hand, 'fpb-')) then concat('Numerierungsvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Numerierungsvermerk, ergänzt von: ', ./@hand)"/>
+                            <param name="placement" value="'left'"/>
+                            <param name="fallback-placement" value="'top'"/>
+                            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                            <outputRendition xml:space="preserve">
+                                color: grey;
+                                text-decoration: underline dotted;
+                            </outputRendition>
+                        </model>
+                        <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
+                        <model predicate="@type='postalNote'" behaviour="inline">
+                            <desc>If there is a postal note, show in mouseover, which kind of note, and who left it.</desc>
+                            <param name="name" value="'pb-popover'"/>
+                            <param name="content" value="."/>
+                            <param name="alternate" value="if(contains(@hand, 'main')) then concat('Postvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Postvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(starts-with(@hand, 'fpb-')) then concat('Postvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Postvermerk, ergänzt von: ', ./@hand)"/>
+                            <param name="placement" value="'left'"/>
+                            <param name="fallback-placement" value="'top'"/>
+                            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                            <outputRendition xml:space="preserve">
+                                color: grey;
+                                text-decoration: underline dotted;
+                            </outputRendition>
+                        </model>
+                        <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
+                        <model predicate="@type='other'" behaviour="inline">
+                            <desc>If there is an unspecified note, show in mouseover, which kind of note, and who left it.</desc>
+                            <param name="name" value="'pb-popover'"/>
+                            <param name="content" value="."/>
+                            <param name="alternate" value="if(contains(@hand, 'main')) then concat('Sonstiger Vermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Sonstiger Vermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(starts-with(@hand, 'fpb-')) then concat('Sonstiger Vermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Sonstiger Vermerk, ergänzt von: ', ./@hand)"/>
+                            <param name="placement" value="'left'"/>
+                            <param name="fallback-placement" value="'top'"/>
+                            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                            <outputRendition xml:space="preserve">
+                                color: grey;
+                                text-decoration: underline dotted;
+                            </outputRendition>
+                        </model>
+                            <model predicate="parent::person" behaviour="omit">
+                                <desc>If note is a part of person in register, omit.</desc>
+                            </model>
+                            <model predicate="parent::num" behaviour="omit">
+                                <desc>Not in use. If there is a number, the child::note will be omitted here, because it is taken care of at ident="num".</desc>
+                            </model>
+                            <model predicate="parent::span" behaviour="omit">
+                                <desc>Not in use. If there is a span with child::note, omit.</desc>
+                            </model>
+                            <model predicate="$parameters?view='notes' and not(parent::unclear)" behaviour="listItem">
+                                <desc>If there is a note that does not have a parent::unclear, show it in view='notes' as list item.</desc>
+                                <param name="n" value="@n"/>
+                            </model>
+                            <model predicate="$parameters?view='notes' and not(parent::unclear)" behaviour="listItem">
+                                <desc>If there is a note that does not have a parent::unclear, show it in view='notes' as list item.</desc>
+                                <param name="n" value="@n"/>
+                            </model>
 <!--                    <model predicate="not(parent::unclear) and not(@type='presentation') and not(@type='received') and not(@type='address')" behaviour="note">-->
+<!--                    <desc>Treat everything else as footnote</desc>-->
 <!--            <param name="place" value="'footnote'"/>-->
 <!--            <outputRendition xml:space="preserve">-->
 <!--                font-size: 75%;-->
@@ -446,283 +451,288 @@
 <!--                margin: 0 .25em;-->
 <!--            </outputRendition>-->
 <!--        </model>-->
-                    <model predicate="not(parent::unclear)" behaviour="inline"/>
-                    <model behaviour="block"/>
                 </elementSpec>
                 <elementSpec ident="teiHeader" mode="change">
                     <model output="latex" behaviour="block">
-            <param name="content" value=".//fileDesc//sourceDesc"/>
-        </model>
-                    <modelSequence output="fo">
-            <model behaviour="heading">
-                <param name="content" value="fileDesc/titleStmt/title"/>
-                <param name="level" value="1"/>
-            </model>
-            <model behaviour="heading">
-                <param name="content" value="'Metadata'"/>
-                <param name="level" value="2"/>
-            </model>
-            <model behaviour="block">
-                <param name="content" value=".//sourceDesc//msDesc"/>
-            </model>
-        </modelSequence>
-                    <model predicate="$parameters?view='metadata'" behaviour="block" cssClass="metadata">
-            <param name="content" value=".//fileDesc//sourceDesc | .//fileDesc//publicationStmt |.//profileDesc//correspDesc"/>
-            <outputRendition xml:space="preserve">
-            font-size: .75em;
-            </outputRendition>
-        </model>
-                    <model output="web" predicate="$parameters?header='short'" behaviour="block"/>
-                    <model output="fo" behaviour="omit"/>
+                        <desc>Heading behaiour in latex output.</desc>
+                        <param name="content" value=".//fileDesc//sourceDesc"/>
+                    </model>
+                <modelSequence output="fo">
+                    <model behaviour="heading">
+                        <desc>Heading behaiour in FO output.</desc>
+                        <param name="content" value="fileDesc/titleStmt/title"/>
+                        <param name="level" value="1"/>
+                    </model>
+                    <model behaviour="heading">
+                        <param name="content" value="'Metadata'"/>
+                        <param name="level" value="2"/>
+                    </model>
+                    <model behaviour="block">
+                        <param name="content" value=".//sourceDesc//msDesc"/>
+                    </model>
+                </modelSequence>
+                <model predicate="$parameters?view='metadata'" behaviour="block" cssClass="metadata">
+                    <desc>Heading for metadata output in view='metadata'.</desc>
+                    <param name="content" value=".//fileDesc//sourceDesc | .//fileDesc//publicationStmt |.//profileDesc//correspDesc"/>
+                    <outputRendition xml:space="preserve">
+                    font-size: .75em;
+                    </outputRendition>
+                </model>
+                    <model output="web" predicate="$parameters?header='short'" behaviour="block">
+                        <desc>Edition view: Show short header.</desc>
+                    </model>
+                    <model output="fo" behaviour="omit">
+                        <desc>Omit FO output here.</desc>
+                    </model>
                     <model predicate="$parameters?header='letter'" behaviour="inline">
-            <param name="content" value="./fileDesc/titleStmt/title"/>
-            <param name="level" value="5"/>
-        </model>
-        </elementSpec>
-        <elementSpec ident="orig" mode="change">
-            <model predicate="@rend='indent'" behaviour="inline">
-            <param name="content" value="concat('     ', .)"/>
-            <outputRendition xml:space="preserve" scope="before">
-                content: '    ';
-                white-space: pre;
-            </outputRendition>
-        </model>
-        <model predicate="@type='keepLB' and $parameters?mode='normalized'" behaviour="break">
-            <param name="type" value="'line'"/>
-        </model>
-                   <model behaviour="inline" useSourceRendition="true"/>
+                        <desc>Edition view: Show title as header.</desc>
+                        <param name="content" value="./fileDesc/titleStmt/title"/>
+                        <param name="level" value="5"/>
+                    </model>
+                </elementSpec>
+                <elementSpec ident="orig" mode="change">
+                    <model predicate="@rend='indent'" behaviour="inline">
+                        <desc>Original indentation.</desc>
+                        <param name="content" value="concat('     ', .)"/>
+                        <outputRendition xml:space="preserve" scope="before">
+                            content: '    ';
+                            white-space: pre;
+                        </outputRendition>
+                    </model>
+                    <model predicate="@type='keepLB' and $parameters?mode='normalized'" behaviour="break">
+                         <desc>Original line breaks should be kept.</desc>
+                        <param name="type" value="'line'"/>
+                    </model>
+                    <model behaviour="inline" useSourceRendition="true">
+                        <desc>Default.</desc>
+                    </model>
                 </elementSpec>
                 <elementSpec ident="anchor" mode="change">
-                <modelSequence>
-                <model predicate="contains(@xml:id, 'm') and following::note[@place='margin-left']" behaviour="inline">
-                    <param name="content" value="for $anchor in ./@xml:id return root($parameters?root)//div//note[@type='marginalia'][@place='margin-left'][@target=$anchor]/node()"/>
-                    <outputRendition xml:space="preserve">
-            
-            
-            
-            
-                display: block;
-                float: left;
-                margin-left: -15%;
-                width: 5em;
-                margin-bottom: 0;
-                margin-top: 0;
-                clear: right;
-                overflow: visible;
-                font-size: 70%;
-                text-align: left;
-                text-indent: 0%;
-            
-            
-            
-            
-            </outputRendition>
-                </model>
-                
-            <model predicate="contains(@xml:id, 'm') and following::note[@place='margin-right']" behaviour="inline">
-                    <param name="content" value="for $anchor in ./@xml:id return root($parameters?root)//div//note[@type='marginalia'][@place='margin-right'][@target=$anchor]/node()"/>
-                    <outputRendition xml:space="preserve">
-            
-            
-            
-            
-                display: block;
-                float: right;
-                margin-right: -15%;
-                width: 5em;
-                margin-bottom: 0;
-                margin-top: 0;
-                clear: left;
-                overflow: visible;
-                font-size: 70%;
-                text-align: right;
-                text-indent: 0%;
-            
-            
-            
-            
-            </outputRendition>
-                </model>
-           
-            <!-- add[addition] with Involved Scribe, differ between del tag in add and normal add -->
-        <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = root($parameters?root)//add[@type='addition']/@xml:id) and not((concat('t', ./@xml:id) = root($parameters?root)//add[@type='addition'][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]/@xml:id))" behaviour="inline">
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="id(concat('t', @xml:id), root($parameters?root))[@type='addition']/node()"/>
-            <param name="alternate" value="if (id(concat('t', @xml:id), root($parameters?root))[@type='addition']/del[1]) then concat('Ergänzt von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add[@type='addition']/@xml:id) then (if(starts-with(root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@type='addition'and @xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/@hand, 'involved', 'Unbekannter Schreiber ')  else()) else (), ' Ursprüngliche Lesart: ', id(concat('t', @xml:id), root($parameters?root))/string()) else concat('Ergänzt von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add[@type='addition']/@xml:id) then (if(starts-with(root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/@hand, 'involved', 'Unbekannter Schreiber ')  else()) else ()    )"/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-            <outputRendition xml:space="preserve">
-            color: grey;
-            </outputRendition>
-        </model>
-        <!-- add[addition] with Main Scribe, differ between del tag in add and normal add -->
-                    <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = root($parameters?root)//add[@type='addition'][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]/@xml:id)" behaviour="inline">
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="id(concat('t', @xml:id), root($parameters?root))[@type='addition']/node()"/>
-            <param name="alternate" value="if (id(concat('t', @xml:id), root($parameters?root))/del[1]) then concat('Ergänzt von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@type='addition'and @xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/@hand, 'main', 'Unbekannter Hauptschreiber ')  else()) else (), ' Ursprüngliche Lesart: ', id(concat('t', @xml:id), root($parameters?root))/string()) else concat('Ergänzt von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/@hand, 'main', 'Unbekannter Hauptschreiber ')  else()) else ())"/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-            <outputRendition xml:space="preserve">
-            text-decoration: underline dotted;
-            </outputRendition>
-        </model>
-        
-        
-         <!-- add[correction] with Involved Scribe  and unclear[unsure] del -->
-        <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')]/@xml:id) and not((concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]/@xml:id)) and preceding-sibling::del[1]/unclear[@reason='unsure']" behaviour="inline">
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="preceding-sibling::del[1]/node()"/>
-            <param name="alternate" value="if (id(concat('t', @xml:id), root($parameters?root))) then concat('Korrigiert von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'involved', 'Unbekannter Schreiber ')  else()) else (), ' zu: ', id(concat('t', @xml:id), root($parameters?root))/string(), ' (unsicher)') else concat('Korrigiert von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'involved', 'Unbekannter Schreiber ')  else()) else ()    )"/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-            <outputRendition xml:space="preserve">
-            color: grey;
-            </outputRendition>
-        </model>
-        <!-- add[correction] with Main Scribe and unclear[unsure] del -->
-                    <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]/@xml:id) and preceding-sibling::del[1]/unclear[@reason='unsure']" behaviour="inline">
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="id(concat('t', @xml:id), root($parameters?root))[@type='correction']/node()"/>
-            <param name="alternate" value="if (id(concat('t', @xml:id), root($parameters?root))) then concat('Korrigiert von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'main', 'Unbekannter Hauptschreiber ')  else()) else (), ' Ursprüngliche Lesart: ', preceding-sibling::del[1], ' (unsicher)') else concat('Korrigiert von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'main', 'Unbekannter Hauptschreiber ')  else()) else ())"/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-            <outputRendition xml:space="preserve">
-            text-decoration: underline dotted;
-            </outputRendition>
-        </model>
-        
-        
-        <!-- add[correction] with Involved Scribe  and unclear[illegible] del -->
-        <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')]/@xml:id) and not((concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]/@xml:id)) and preceding-sibling::del[1]/unclear[@reason='illegible']" behaviour="inline">
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="preceding-sibling::del[1]/node()"/>
-            <param name="alternate" value="if (id(concat('t', @xml:id), root($parameters?root))) then concat('Korrigiert von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'involved', 'Unbekannter Schreiber ')  else()) else (), ' zu: ', id(concat('t', @xml:id), root($parameters?root))/string(), ' (unleserlich)') else concat('Korrigiert von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'involved', 'Unbekannter Schreiber ')  else()) else ()    )"/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-            <outputRendition xml:space="preserve">
-            color: grey;
-            </outputRendition>
-        </model>
-        <!-- add[correction] with Main Scribe and unclear[illegible] del -->
-                    <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]/@xml:id) and preceding-sibling::del[1]/unclear[@reason='illegible']" behaviour="inline">
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="id(concat('t', @xml:id), root($parameters?root))[@type='correction']/node()"/>
-            <param name="alternate" value="if (id(concat('t', @xml:id), root($parameters?root))) then concat('Korrigiert von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'main', 'Unbekannter Hauptschreiber ')  else()) else (), ' Ursprüngliche Lesart: ', preceding-sibling::del[1], ' (unleserlich)') else concat('Korrigiert von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'main', 'Unbekannter Hauptschreiber ')  else()) else ())"/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-            <outputRendition xml:space="preserve">
-            text-decoration: underline dotted;
-            </outputRendition>
-        </model>
-        
-        
-        <!-- add[correction] with Involved Scribe -->
-        <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')]/@xml:id) and not((concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]/@xml:id)) and not(preceding-sibling::del[1]/unclear[@reason='unsure' or 'illegible'])" behaviour="inline">
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="preceding-sibling::del[1]/node()"/>
-            <param name="alternate" value="if (id(concat('t', @xml:id), root($parameters?root))) then concat('Korrigiert von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'involved', 'Unbekannter Schreiber ')  else()) else (), ' zu: ', id(concat('t', @xml:id), root($parameters?root))/string()) else concat('Korrigiert von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'involved', 'Unbekannter Schreiber ')  else()) else ()    )"/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-            <outputRendition xml:space="preserve">
-            color: grey;
-            </outputRendition>
-        </model>
-        <!-- add[correction] with Main Scribe, differ between del tag in add and normal add -->
-                    <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]/@xml:id) and not(preceding-sibling::del[1]/unclear[@reason='unsure' or 'illegible'])" behaviour="inline">
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="id(concat('t', @xml:id), root($parameters?root))[@type='correction']/node()"/>
-            <param name="alternate" value="if (id(concat('t', @xml:id), root($parameters?root))) then concat('Korrigiert von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'main', 'Unbekannter Hauptschreiber ')  else()) else (), ' Ursprüngliche Lesart: ', preceding-sibling::del[1]) else concat('Korrigiert von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'main', 'Unbekannter Hauptschreiber ')  else()) else ())"/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-            <outputRendition xml:space="preserve">
-            text-decoration: underline dotted;
-            </outputRendition>
-        </model>
-        
-             </modelSequence>
-                </elementSpec>
-                <elementSpec ident="term" mode="add">
-                    <model predicate="@type='term'" behaviour="inline">
-                    <param name="name" value="'pb-popover'"/>
-                    <param name="content" value="."/>
-                    <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
-                    <param name="alternate" value="if(@type='term') then let $s := id(@key, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/def/string() return  concat(id(@key, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/orth/term/string(), ': ', $s) else ()"/>
-                    <param name="placement" value="'bottom'"/>
-                    <param name="fallback-placement" value="'top'"/>
-                    <pb:template xml:space="preserve" xmlns=""><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-            <outputRendition xml:space="preserve">
-            text-decoration: underline dotted;
-            </outputRendition>
-        </model>
-                </elementSpec>
-                <elementSpec ident="gap" mode="change">
-                    <model behaviour="inline">
-                        <param name="name" value="'pb-popover'"/>
-                        <param name="content" value="'[ ]'"/>
-                        <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
-                        <param name="alternate" value="concat('Textverlust durch ', @reason)"/>
-                        <param name="placement" value="'top'"/>
-                        <param name="fallback-placement" value="'bottom'"/>
-                        <pb:template xml:space="preserve" xmlns=""><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-        </model>
-                    <model predicate="desc" behaviour="inline">
-            <outputRendition xml:space="preserve">
-            color: grey;
-            </outputRendition>
-        </model>
-                    <model behaviour="inline">
-            <outputRendition xml:space="preserve" scope="before">
-            content: '[...]';
-            </outputRendition>
-        </model>
-                </elementSpec>
-                <elementSpec ident="p" mode="change">
-                 <model predicate="following::note[@place='margin-left'] and following::note[@place='margin-right']" behaviour="paragraph">
-            <outputRendition xml:space="preserve">
-                margin-left: 15%;
-                margin-right: 15%;
-            </outputRendition>
-        </model>
-        <model predicate="following::note[@place='margin-right'] and not(following::note[@place='margin-left'])" behaviour="paragraph">
-            <outputRendition xml:space="preserve">
-                margin-right: 15%;
-            </outputRendition>
-        </model>
-        <model predicate="following::note[@place='margin-left'] and not(following::note[@place='margin-right'])" behaviour="paragraph">
-            <outputRendition xml:space="preserve">
-                margin-left: 15%;
-            </outputRendition>
-        </model>
-                    <model output="print" predicate="ancestor::note" behaviour="inline"/>
-                    <model behaviour="paragraph" useSourceRendition="true">
-            <outputRendition xml:space="preserve">
-            text-align: justify;
-            </outputRendition>
-        </model>
-                </elementSpec>
-                <elementSpec ident="lb" mode="change">
-                    <model predicate="@n='N001' and (ancestor::div[@rend='textblock'][1] or ancestor::div[@rend='tb cbr-li'][1] or ancestor::div[@rend='tb cbr-lo'][1] or ancestor::div[@rend='tb cbr-ri'][1] or ancestor::div[@rend='tb cbr-ro'][1] or ancestor::div[@rend='tb cbr-ti'][1] or ancestor::div[@rend='tb cbr-to'][1] or ancestor::div[@rend='tb cbr-bi'][1] or ancestor::div[@rend='tb cbr-bo'][1])" behaviour="omit"/>
-                    <model predicate="parent::div[@rend='container'][1] and not(@n='N001')" behaviour="break"/>
-                    <model predicate="following-sibling::*[1][self::add[contains(@xml:id, 'ta')]]" behaviour="omit"/>
-                    <model predicate="$parameters?mode='normalized' and not(ancestor::closer) and not(ancestor::opener) and not(ancestor::address) and not(following-sibling::orig[@type='keepLB'][1]) and not(ancestor::head) and not(ancestor::signed)" behaviour="omit"/>
                     <modelSequence>
-            <model predicate="not($parameters?mode='normalized')" behaviour="break">
-                <param name="type" value="'line'"/>
-                <param name="label" value="@n"/>
-            </model>
-            <model predicate="not($parameters?mode='normalized')" behaviour="break">
-                <param name="type" value="'line'"/>
-                <param name="label" value="@n"/>
-            </model>
+                        <model predicate="contains(@xml:id, 'm') and following::note[@place='margin-left']" behaviour="inline">
+                            <desc>Place marginalia to the left of the text, if margin-left note.</desc>
+                            <param name="content" value="for $anchor in ./@xml:id return root($parameters?root)//div//note[@type='marginalia'][@place='margin-left'][@target=$anchor]/node()"/>
+                            <outputRendition xml:space="preserve">
+                                display: block;
+                                float: left;
+                                margin-left: -15%;
+                                width: 5em;
+                                margin-bottom: 0;
+                                margin-top: 0;
+                                clear: right;
+                                overflow: visible;
+                                font-size: 70%;
+                                text-align: left;
+                                text-indent: 0%;
+                            </outputRendition>
+                        </model>   
+                        <model predicate="contains(@xml:id, 'm') and following::note[@place='margin-right']" behaviour="inline">
+                            <desc>Place marginalia to the right of the text, if margin-right note.</desc>
+                            <param name="content" value="for $anchor in ./@xml:id return root($parameters?root)//div//note[@type='marginalia'][@place='margin-right'][@target=$anchor]/node()"/>
+                            <outputRendition xml:space="preserve">
+                                display: block;
+                                float: right;
+                                margin-right: -15%;
+                                width: 5em;
+                                margin-bottom: 0;
+                                margin-top: 0;
+                                clear: left;
+                                overflow: visible;
+                                font-size: 70%;
+                                text-align: right;
+                                text-indent: 0%;
+                            </outputRendition>
+                        </model>
+                
+                        <!-- add[addition] with Involved Scribe, differ between del tag in add and normal add -->
+                        <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = root($parameters?root)//add[@type='addition']/@xml:id) and not((concat('t', ./@xml:id) = root($parameters?root)//add[@type='addition'][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]/@xml:id))" behaviour="inline">
+                            <desc>Annotation view: add[addition] with Involved Scribe, differ between del tag in add and normal add</desc>
+                            <param name="name" value="'pb-popover'"/>
+                            <param name="content" value="id(concat('t', @xml:id), root($parameters?root))[@type='addition']/node()"/>
+                            <param name="alternate" value="if (id(concat('t', @xml:id), root($parameters?root))[@type='addition']/del[1]) then concat('Ergänzt von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add[@type='addition']/@xml:id) then (if(starts-with(root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@type='addition'and @xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/@hand, 'involved', 'Unbekannter Schreiber ')  else()) else (), ' Ursprüngliche Lesart: ', id(concat('t', @xml:id), root($parameters?root))/string()) else concat('Ergänzt von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add[@type='addition']/@xml:id) then (if(starts-with(root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/@hand, 'involved', 'Unbekannter Schreiber ')  else()) else ()    )"/>
+                            <param name="placement" value="'top'"/>
+                            <param name="fallback-placement" value="'bottom'"/>
+                            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                            <outputRendition xml:space="preserve">
+                            color: grey;
+                            </outputRendition>
+                        </model>
+                <!-- add[addition] with Main Scribe, differ between del tag in add and normal add -->
+                            <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = root($parameters?root)//add[@type='addition'][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]/@xml:id)" behaviour="inline">
+                                <desc>Annotation view: add[addition] with Main Scribe, differ between del tag in add and normal add</desc>
+                                <param name="name" value="'pb-popover'"/>
+                                <param name="content" value="id(concat('t', @xml:id), root($parameters?root))[@type='addition']/node()"/>
+                                <param name="alternate" value="if (id(concat('t', @xml:id), root($parameters?root))/del[1]) then concat('Ergänzt von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@type='addition'and @xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/@hand, 'main', 'Unbekannter Hauptschreiber ')  else()) else (), ' Ursprüngliche Lesart: ', id(concat('t', @xml:id), root($parameters?root))/string()) else concat('Ergänzt von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@type='addition' and @xml:id = concat('t', $a/@xml:id)]/@hand, 'main', 'Unbekannter Hauptschreiber ')  else()) else ())"/>
+                                <param name="placement" value="'top'"/>
+                                <param name="fallback-placement" value="'bottom'"/>
+                                <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                                <outputRendition xml:space="preserve">
+                                text-decoration: underline dotted;
+                                </outputRendition>
+                            </model>
+                <!-- add[correction] with Involved Scribe  and unclear[unsure] del -->
+                            <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')]/@xml:id) and not((concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]/@xml:id)) and preceding-sibling::del[1]/unclear[@reason='unsure']" behaviour="inline">
+                                <desc>Annotation view: add[correction] with Involved Scribe  and unclear[unsure] del</desc>
+                                <param name="name" value="'pb-popover'"/>
+                                <param name="content" value="preceding-sibling::del[1]/node()"/>
+                                <param name="alternate" value="if (id(concat('t', @xml:id), root($parameters?root))) then concat('Korrigiert von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'involved', 'Unbekannter Schreiber ')  else()) else (), ' zu: ', id(concat('t', @xml:id), root($parameters?root))/string(), ' (unsicher)') else concat('Korrigiert von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'involved', 'Unbekannter Schreiber ')  else()) else ()    )"/>
+                                <param name="placement" value="'top'"/>
+                                <param name="fallback-placement" value="'bottom'"/>
+                                <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                                <outputRendition xml:space="preserve">
+                                color: grey;
+                                </outputRendition>
+                            </model>
+                <!-- add[correction] with Main Scribe and unclear[unsure] del -->
+                            <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]/@xml:id) and preceding-sibling::del[1]/unclear[@reason='unsure']" behaviour="inline">
+                                <desc>Annotation view: add[correction] with Main Scribe and unclear[unsure] del</desc>
+                                <param name="name" value="'pb-popover'"/>
+                                <param name="content" value="id(concat('t', @xml:id), root($parameters?root))[@type='correction']/node()"/>
+                                <param name="alternate" value="if (id(concat('t', @xml:id), root($parameters?root))) then concat('Korrigiert von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'main', 'Unbekannter Hauptschreiber ')  else()) else (), ' Ursprüngliche Lesart: ', preceding-sibling::del[1], ' (unsicher)') else concat('Korrigiert von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'main', 'Unbekannter Hauptschreiber ')  else()) else ())"/>
+                                <param name="placement" value="'top'"/>
+                                <param name="fallback-placement" value="'bottom'"/>
+                                <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                                <outputRendition xml:space="preserve">
+                                text-decoration: underline dotted;
+                                </outputRendition>
+                            </model>
+                <!-- add[correction] with Involved Scribe  and unclear[illegible] del -->
+                            <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')]/@xml:id) and not((concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]/@xml:id)) and preceding-sibling::del[1]/unclear[@reason='illegible']" behaviour="inline">
+                                <desc>Annotation view: add[correction] with Involved Scribe  and unclear[illegible] del</desc>
+                                <param name="name" value="'pb-popover'"/>
+                                <param name="content" value="preceding-sibling::del[1]/node()"/>
+                                <param name="alternate" value="if (id(concat('t', @xml:id), root($parameters?root))) then concat('Korrigiert von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'involved', 'Unbekannter Schreiber ')  else()) else (), ' zu: ', id(concat('t', @xml:id), root($parameters?root))/string(), ' (unleserlich)') else concat('Korrigiert von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'involved', 'Unbekannter Schreiber ')  else()) else ()    )"/>
+                                <param name="placement" value="'top'"/>
+                                <param name="fallback-placement" value="'bottom'"/>
+                                <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                                <outputRendition xml:space="preserve">
+                                color: grey;
+                                </outputRendition>
+                            </model>
+                <!-- add[correction] with Main Scribe and unclear[illegible] del -->
+                            <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]/@xml:id) and preceding-sibling::del[1]/unclear[@reason='illegible']" behaviour="inline">
+                                <desc>Annotation view: add[correction] with Main Scribe  and unclear[illegible] del</desc>
+                                <param name="name" value="'pb-popover'"/>
+                                <param name="content" value="id(concat('t', @xml:id), root($parameters?root))[@type='correction']/node()"/>
+                                <param name="alternate" value="if (id(concat('t', @xml:id), root($parameters?root))) then concat('Korrigiert von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'main', 'Unbekannter Hauptschreiber ')  else()) else (), ' Ursprüngliche Lesart: ', preceding-sibling::del[1], ' (unleserlich)') else concat('Korrigiert von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'main', 'Unbekannter Hauptschreiber ')  else()) else ())"/>
+                                <param name="placement" value="'top'"/>
+                                <param name="fallback-placement" value="'bottom'"/>
+                                <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                                <outputRendition xml:space="preserve">
+                                text-decoration: underline dotted;
+                                </outputRendition>
+                            </model>
+                
+                
+                <!-- add[correction] with Involved Scribe -->
+                            <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')]/@xml:id) and not((concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]/@xml:id)) and not(preceding-sibling::del[1]/unclear[@reason='unsure' or 'illegible'])" behaviour="inline">
+                                <desc>Annotation view: add[correction] with Involved Scribe</desc>
+                                <param name="name" value="'pb-popover'"/>
+                                <param name="content" value="preceding-sibling::del[1]/node()"/>
+                                <param name="alternate" value="if (id(concat('t', @xml:id), root($parameters?root))) then concat('Korrigiert von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'involved', 'Unbekannter Schreiber ')  else()) else (), ' zu: ', id(concat('t', @xml:id), root($parameters?root))/string()) else concat('Korrigiert von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'involved', 'Unbekannter Schreiber ')  else()) else ()    )"/>
+                                <param name="placement" value="'top'"/>
+                                <param name="fallback-placement" value="'bottom'"/>
+                                <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                                <outputRendition xml:space="preserve">
+                                color: grey;
+                                </outputRendition>
+                            </model>
+                <!-- add[correction] with Main Scribe, differ between del tag in add and normal add -->
+                            <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]/@xml:id) and not(preceding-sibling::del[1]/unclear[@reason='unsure' or 'illegible'])" behaviour="inline">
+                                <desc>Annotation view: add[correction] with Main Scribe, differ between del tag in add and normal add</desc>
+                                <param name="name" value="'pb-popover'"/>
+                                <param name="content" value="id(concat('t', @xml:id), root($parameters?root))[@type='correction']/node()"/>
+                                <param name="alternate" value="if (id(concat('t', @xml:id), root($parameters?root))) then concat('Korrigiert von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'main', 'Unbekannter Hauptschreiber ')  else()) else (), ' Ursprüngliche Lesart: ', preceding-sibling::del[1]) else concat('Korrigiert von: ', for $a in . return if(concat('t', $a/@xml:id) = root($parameters?root)//add/@xml:id) then (if(starts-with(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'fpb-')) then root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text() else if(not(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand='')) then replace(root($parameters?root)//add[@xml:id = concat('t', $a/@xml:id)]/@hand, 'main', 'Unbekannter Hauptschreiber ')  else()) else ())"/>
+                                <param name="placement" value="'top'"/>
+                                <param name="fallback-placement" value="'bottom'"/>
+                                <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                                <outputRendition xml:space="preserve">
+                                text-decoration: underline dotted;
+                                </outputRendition>
+                            </model>
+                        </modelSequence>
+                    </elementSpec>
+                    <elementSpec ident="term" mode="add">
+                        <model predicate="@type='term'" behaviour="inline">
+                            <desc>Not in use. If term then show meaning from glossary in register via mouseover.</desc>
+                            <param name="name" value="'pb-popover'"/>
+                            <param name="content" value="."/>
+                            <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
+                            <param name="alternate" value="if(@type='term') then let $s := id(@key, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/def/string() return  concat(id(@key, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/orth/term/string(), ': ', $s) else ()"/>
+                            <param name="placement" value="'bottom'"/>
+                            <param name="fallback-placement" value="'top'"/>
+                            <pb:template xml:space="preserve" xmlns=""><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                            <outputRendition xml:space="preserve">
+                            text-decoration: underline dotted;
+                            </outputRendition>
+                        </model>
+                    </elementSpec>
+                    <elementSpec ident="gap" mode="change">
+                        <model behaviour="inline">
+                            <desc>If gap, show [ ] in text and show reason via mouseover.</desc>
+                            <param name="name" value="'pb-popover'"/>
+                            <param name="content" value="'[ ]'"/>
+                            <!-- CAVEAT: /db/apps/annotations/data/register.xml -->
+                            <param name="alternate" value="concat('Textverlust durch ', @reason)"/>
+                            <param name="placement" value="'top'"/>
+                            <param name="fallback-placement" value="'bottom'"/>
+                            <pb:template xml:space="preserve" xmlns=""><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                        </model>
+                        <model behaviour="inline">
+                            <desc>Default.</desc>
+                            <outputRendition xml:space="preserve" scope="before">
+                                content: '[...]';
+                            </outputRendition>
+                        </model>
+                    </elementSpec>
+                    <elementSpec ident="p" mode="change">
+                        <model predicate="following::note[@place='margin-left'] and following::note[@place='margin-right']" behaviour="paragraph">
+                            <desc>If there are marginalia right and left, set margin to main text.</desc>
+                            <outputRendition xml:space="preserve">
+                                margin-left: 15%;
+                                margin-right: 15%;
+                            </outputRendition>
+                        </model>
+                        <model predicate="following::note[@place='margin-right'] and not(following::note[@place='margin-left'])" behaviour="paragraph">
+                            <desc>If there are marginalia on the right, set margin to main text.</desc>
+                            <outputRendition xml:space="preserve">
+                                margin-right: 15%;
+                            </outputRendition>
+                        </model>
+                        <model predicate="following::note[@place='margin-left'] and not(following::note[@place='margin-right'])" behaviour="paragraph">
+                            <desc>If there are marginalia on the left, set margin to main text.</desc>
+                            <outputRendition xml:space="preserve">
+                                margin-left: 15%;
+                            </outputRendition>
+                        </model>
+                        <model behaviour="paragraph" useSourceRendition="true">
+                            <desc>Default: set paragraph.</desc>
+                            <outputRendition xml:space="preserve">
+                                text-align: justify;
+                            </outputRendition>
+                        </model>
+                    </elementSpec>
+                    <elementSpec ident="lb" mode="change">
+                        <model predicate="@n='N001' and (ancestor::div[@rend='textblock'][1] or ancestor::div[@rend='tb cbr-li'][1] or ancestor::div[@rend='tb cbr-lo'][1] or ancestor::div[@rend='tb cbr-ri'][1] or ancestor::div[@rend='tb cbr-ro'][1] or ancestor::div[@rend='tb cbr-ti'][1] or ancestor::div[@rend='tb cbr-to'][1] or ancestor::div[@rend='tb cbr-bi'][1] or ancestor::div[@rend='tb cbr-bo'][1])" behaviour="omit">
+                            <desc>If curly-bracket and first row, omit.</desc>
+                        </model>
+                        <model predicate="parent::div[@rend='container'][1] and not(@n='N001')" behaviour="break">
+                            <desc>If curly-bracket and not first row, break.</desc>
+                        </model>
+                        <model predicate="following-sibling::*[1][self::add[contains(@xml:id, 'ta')]]" behaviour="omit">
+                            <desc>Omit, if add Tag, so that the rows with add tags are not shown, even if empty.</desc>
+                        </model>
+                        <model predicate="$parameters?mode='normalized' and not(ancestor::closer) and not(ancestor::opener) and not(ancestor::address) and not(following-sibling::orig[@type='keepLB'][1]) and not(ancestor::head) and not(ancestor::signed)" behaviour="omit">
+                            <desc>Edition normalized view: Omit in normalized view, if no closer, opender, address or intentional line breaks or head or signature.</desc>
+                        </model>
+                        <modelSequence>
+                            <model predicate="not($parameters?mode='normalized')" behaviour="break">
+                                <desc>Break line if diplomatic view.</desc>
+                                <param name="type" value="'line'"/>
+                                <param name="label" value="@n"/>
+                            </model>
 <!--            <model predicate="not($parameters?mode='normalized') and starts-with(@facs, 'iiif:')" behaviour="webcomponent" cssClass="facs">-->
+<!--                 <desc>Insert 'eye' before every line, so while hovering rows on facsimile will be shown.</desc>-->
 <!--                <param name="facs" value="replace(replace(@facs, '/[^/]*$', ''), 'iiif:', '')"/>-->
 <!--                <param name="content" value="''"/>-->
 <!--                <param name="coordinates" value="('[' || replace(@facs, '^.*/', '') || ']')"/>-->
@@ -744,18 +754,21 @@
 <!--                -->
 <!--                </outputRendition>-->
 <!--            </model>-->
-        </modelSequence>
-                </elementSpec>
-                <elementSpec ident="l" mode="change"/>
-                <elementSpec ident="supplied" mode="change">
-                    <model predicate="parent::choice" behaviour="inline"/>
-                </elementSpec>
-                <elementSpec ident="add" mode="change">
-                    <model predicate="contains(@xml:id, 'ta')" behaviour="omit"/>
-                    <model predicate="@type='correction' and preceding-sibling::del[1]" behaviour="omit"/>
-                    
-                <!-- Involved Scribe -->
-                    <model predicate="not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef) and @type='addition' and not(contains(@xml:id, 'ta'))" behaviour="inline">
+                        </modelSequence>
+                    </elementSpec>
+                    <elementSpec ident="supplied" mode="change">
+                        <model predicate="parent::choice" behaviour="inline">
+                            <desc>Default.</desc>
+                        </model>
+                    </elementSpec>
+                    <elementSpec ident="add" mode="change">
+                        <model predicate="contains(@xml:id, 'ta')" behaviour="omit">
+                            <desc>If the add tag refers to an anchor, omit.</desc>
+                        </model>
+                        <model predicate="@type='correction' and preceding-sibling::del[1]" behaviour="omit"/>
+                        
+                    <!-- Involved Scribe -->
+                        <model predicate="not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef) and @type='addition' and not(contains(@xml:id, 'ta'))" behaviour="inline">
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="."/>
             <param name="alternate" value="if(starts-with(@hand, 'fpb-') and not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef)) then concat('Ergänzt von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else if(not(@hand='')) then concat('Ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else 'Ergänzung'"/>
@@ -841,6 +854,7 @@
                       </model>
                 </elementSpec>
                 <elementSpec ident="span" mode="add">
+                        <model predicate="not($parameters?mode='normalized') and @type='hyphen'" behaviour="inline"/>
 <!--                    <model predicate="$parameters?mode='normalized' and @type='hyphen'" behaviour="omit"/>-->
                     <model predicate="child::note" behaviour="inline">
                     <param name="name" value="'pb-popover'"/>
@@ -957,6 +971,8 @@
                     <model predicate="parent::closer" behaviour="inline" />
                 </elementSpec>
         <elementSpec ident="del" mode="change">
+        <!-- omit if there is an anchor -->
+        <model predicate="self::del[following-sibling::anchor[position() &lt; 1][concat('t', @xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')]/@xml:id]]" behaviour="omit"/>
          <!-- Involved Scribe and direct add[correction] and del with child::unclear[@reason='unsure'] -->
         <model predicate="child::unclear[@reason='unsure'] and following-sibling::*[1][self::add and @type='correction' and @place='inspace' and not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef)]" behaviour="inline">
             <param name="name" value="'pb-popover'"/>
@@ -1241,9 +1257,6 @@
             </outputRendition>
         </model>
         
-        <!-- omit if there is an anchor -->
-        <model predicate="following-sibling::anchor[1][concat('t', @xml:id) = root($parameters?root)//add[@type='correction']/@xml:id]" behaviour="omit"/>
-    
         <!-- Involved Scribe and direct add[correction] -->
         <model predicate="self::del[
                 following-sibling::*[1][
@@ -1325,6 +1338,8 @@
                     if ($add) then
                         if ($name) then
                             concat('Korrigiert von: ', $name, '; Ursprüngliche Lesart: ', $original)
+                        else if (contains($hand, 'main')) then
+                            concat('Korrigiert von: ', replace($hand, 'main', 'Unbekannter Hauptschreiber '), '; Ursprüngliche Lesart:', $original)
                         else
                             concat('Ursprüngliche Lesart: ', $original)
                     else
@@ -1378,6 +1393,9 @@
                     if ($add) then
                         if ($name) then
                             concat('Korrigiert von: ', $name, '; Ursprüngliche Lesart: ', $original)
+                        
+                        else if (contains($hand, 'main')) then
+                            concat('Korrigiert von: ', replace($hand, 'main', 'Unbekannter Hauptschreiber '), '; Ursprüngliche Lesart:', $original)
                         else
                             concat('Ursprüngliche Lesart: ', $original)
                     else
@@ -1396,13 +1414,31 @@
             </outputRendition>
         </model>
 
+        <!-- Main Scribe and direct add[correction]  -->
+        <model predicate="following-sibling::add[1][@type='correction'][@place='inspace'][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]" behaviour="inline">
+            <param name="name" value="'pb-popover'"/>
+            <param name="content" value="                 let                      $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,                     $add := following-sibling::*[1][self::add and @type='correction' and                          @place='inspace' and                          @hand = $refPers                     ]                 return                         $add/node()             "/>
+            <param name="alternate" value="                 let                      $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,                     $add := following-sibling::add[1][                         @type='correction' and                          @place='inspace' and                          @hand = $refPers                     ],                     $hand := $add/@hand,                     $name := $add/id($hand, doc('/db/apps/annotations/data/register.xml'))/persName/text(),                     $original := string(.)                 return                     if ($add) then                         if ($name) then                             concat('Korrigiert von: ', $name, '; Ursprüngliche Lesart: ', $original) else if (contains($hand, 'main')) then                          concat('Korrigiert von: ', replace($hand, 'main', 'Unbekannter Hauptschreiber '), '; Ursprüngliche Lesart:', $original)                          else                             concat('Ursprüngliche Lesart: ', $original)                     else                         ()             "/>
+            <param name="placement" value="'top'"/>
+            <param name="fallback-placement" value="'bottom'"/>
+            <pb:template xmlns="" xml:space="preserve">
+                <pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">
+                    [[content]]
+                    <span slot="alternate">[[alternate]]</span>
+                </pb-popover>
+            </pb:template>
+            <outputRendition xml:space="preserve">
+                text-decoration: underline dotted;
+            </outputRendition>
+        </model>
         
         
         <!-- parent add with anchor -> omit -->
-                    <model predicate="parent::add[1] and parent::add[1]/following::anchor" behaviour="omit"/>
+        <model predicate="parent::add[1] and parent::add[1]/following::anchor[1]" behaviour="omit"/>
+        <model predicate="following::*[1][self::anchor[position() = 1]]" behaviour="omit"/>
                     
         <!-- del of Main Scribe without correction and lb within del -->
-        <model predicate="not(self::del/following-sibling::*[1][self::add and @type='correction']) and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef and self::del//lb" behaviour="inline">
+        <model predicate="not(following-sibling::add[1][@type='correction']) and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef and self::del//lb" behaviour="inline">
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="
                     '&#10;〈…〉'
@@ -1427,7 +1463,7 @@
         </model>
         
         <!-- del of Main Scribe without correction and no lb within del -->
-        <model predicate="not(self::del/following-sibling::*[1][self::add and @type='correction']) and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef and not(self::del//lb)" behaviour="inline">
+        <model predicate="not(following-sibling::add[1][@type='correction']) and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef and not(self::del//lb)" behaviour="inline">
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="
                     '〈…〉'

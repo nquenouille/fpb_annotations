@@ -393,9 +393,9 @@ window.addEventListener("WebComponentsReady", () => {
 					.then((html) => {
 						const iframe = document.getElementById("html");
 						iframe.contentDocument.body.style.fontFamily = "sans-serif";
-						iframe.srcdoc = html.replaceAll(/<img[^>]*>/g, "").replaceAll(/<body class/g, '<body style=\"font-family:\'Open Sans\', \'Roboto\', \'Noto\', sans-serif; line-height: 1.5em;\" class');
+						iframe.srcdoc = html.replaceAll(/<img[^>]*>/g, "").replaceAll(/\s*<span[^>]*>-<\/span[^>]*>\s*/g, '-').replaceAll(/<body class/g, '<body style=\"font-family:\'Open Sans\', \'Roboto\', \'Noto\', sans-serif; line-height: 1.5em;\" class');
 						const iframe2 = document.getElementById("html2");
-						iframe2.srcdoc = html.replaceAll(/<img[^>]*>/g, "").replaceAll(/-\s*<br[^>]*>/g, '').replaceAll(/<br[^>]*>/g, ' ').replaceAll(/\s\s+/g, ' ').replaceAll(/<body class/g, '<body style=\"font-family:\'Open Sans\', \'Roboto\', \'Noto\', sans-serif; line-height: 1.5em;\" class');
+						iframe2.srcdoc = html.replaceAll(/<img[^>]*>/g, "").replaceAll(/-\s*<br[^>]*>/g, '').replaceAll(/<br[^>]*>/g, ' ').replaceAll(/\s\s+/g, ' ').replaceAll(/<body class/g, '<body style=\"font-family:\'Open Sans\', \'Roboto\', \'Noto\', sans-serif; line-height: 1.5em;\" class').replaceAll(/\s*<span[^>]*>-<\/span[^>]*>\s*/g, '');
 					})
 				
                 /* FPB Validation of the document */
