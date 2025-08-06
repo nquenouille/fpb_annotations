@@ -1435,7 +1435,6 @@
         
         <!-- parent add with anchor -> omit -->
         <model predicate="parent::add[1] and parent::add[1]/following::anchor[1]" behaviour="omit"/>
-        <model predicate="following::*[1][self::anchor[position() = 1]]" behaviour="omit"/>
                     
         <!-- del of Main Scribe without correction and lb within del -->
         <model predicate="not(following-sibling::add[1][@type='correction']) and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef and self::del//lb" behaviour="inline">
@@ -1511,6 +1510,7 @@
                 text-decoration: underline dotted;
             </outputRendition>
         </model>
+        <model predicate="following::*[1][self::anchor[position() = 1]]" behaviour="omit"/>
 
 <!--                    <model behaviour="inline">-->
 <!--            <outputRendition xml:space="preserve">-->
