@@ -606,6 +606,19 @@ window.addEventListener("WebComponentsReady", () => {
 			type='memo';
 		});
 	});
+
+		/*FPB lookup for scribe in rdg */
+    document.querySelectorAll('.form-rdg [slot="prefix"]').forEach(elem => {
+		elem.addEventListener("click", () => {
+		    type="person";
+			window.pbEvents.emit("pb-authority-lookup", "transcription", {
+				type,
+				query: text,
+			});
+			authorityDialog.open();
+			type='rdg';
+		});
+	});
     
     /*FPB Get availability status from xml document and place it into status dropdown menu for showing availability status */
     

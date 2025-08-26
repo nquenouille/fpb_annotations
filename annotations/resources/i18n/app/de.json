@@ -343,6 +343,13 @@
   	"postalNote": "postalNote",
   	"other": "other"
   },
+  "rdg": {
+  	"title": "Lesart",
+  	"alt1": "alt1",
+  	"alt2": "alt2",
+  	"1": "1",
+  	"2": "2"
+  },
   "unclear": {
   	"title": "Unleserlich/Unsicher",
   	"illegible": "illegible",

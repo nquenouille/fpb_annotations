@@ -269,6 +269,9 @@
                                 <span data-i18n="[title]annotations.marginalia">
                                     <paper-icon-button class="annotation-action" title="Marginalia" data-type="marginalia" icon="icons:note-add" disabled="disabled"/>
                                 </span>
+                                <span data-i18n="[title]annotations.rdg" style="display:none;">
+                                    <paper-icon-button class="annotation-action" title="Readings" data-type="rdg" icon="icons:visibility" disabled="disabled"/>
+                                </span>
                                 <paper-icon-button id="ner-action" icon="social:group-add" data-i18n="[title]annotations.ner.title"/>
                             </div>
                             
@@ -537,6 +540,33 @@
                                                 </paper-item>
                                             </paper-listbox>
                                         </paper-dropdown-menu>
+                                    </div>
+                                    <div class="annotation-form rdg">
+                                        <paper-dropdown-menu name="varSeq" id="ddvarSeq" style="padding-left: 10px;" label="Sequenz">
+                                            <paper-listbox id="varSeqlistbox" slot="dropdown-content">
+                                                <paper-item value="default" style="display:none;"/>
+                                                <paper-item value="1">
+                                                    <pb-i18n key="rdg.1"/>
+                                                </paper-item>
+                                                <paper-item value="2">
+                                                    <pb-i18n key="rdg.2"/>
+                                                </paper-item>
+                                            </paper-listbox>
+                                        </paper-dropdown-menu>
+                                         <paper-dropdown-menu name="typerdg" id="ddrdg" style="padding-left: 10px;" data-i18n="[title]rdg.title" label="Type">
+                                                <paper-listbox id="rdglistbox" slot="dropdown-content">
+                                                <paper-item value="default" style="display:none;"/>
+                                                <paper-item value="alt1">
+                                                    <pb-i18n key="rdg.alt1"/>
+                                                </paper-item>
+                                                <paper-item value="alt2">
+                                                    <pb-i18n key="rdg.alt2"/>
+                                                </paper-item>
+                                            </paper-listbox>
+                                        </paper-dropdown-menu>
+                                        <paper-input class="form-rdg" name="handrdg" data-i18n="[label]annotations.hand" label="Hand">
+                                            <paper-icon-button slot="prefix" icon="search" data-i18n="[label]annotations.lookup"/>
+                                        </paper-input>
                                     </div>
                                     <div class="annotation-form memo" data-i18n="[label]annotations.memo">
                                     <paper-input class="form-memo" name="hands" data-i18n="[label]annotations.hand" label="Hand">

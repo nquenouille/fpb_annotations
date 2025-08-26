@@ -57,6 +57,10 @@
 .view1-layout-name .annotation.annotation-perge::after {display:none !important;}
 .view1-layout-line .annotation-commentary {display:none !important;}
 .view1-layout-name .annotation.annotation-commentary::after {display:none !important;}
+.view1-layout-line .annotation-rdg {display:none !important;}
+.view1-layout-name .annotation.annotation-rdg::after {display:none !important;}
+.view1-layout-line .annotation-app {display:none !important;}
+.view1-layout-name .annotation.annotation-app::after {display:none !important;}
 
 /* When content toggled, do not display the layout annotations */
 .view1-content-line .annotation-closer {display:none !important}

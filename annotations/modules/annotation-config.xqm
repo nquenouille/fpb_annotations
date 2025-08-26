@@ -71,6 +71,8 @@ declare function anno:annotations($type as xs:string, $properties as map(*)?, $c
                 $content()
             }
             </gloss>
+        case "rdg" return
+            <rdg xmlns="http://www.tei-c.org/ns/1.0" hand="{$properties?ref}{$properties?handrdg}" type="{$properties?typerdg}" varSeq="{$properties?varSeq}">{$content()}</rdg>
         case "date" return
             <date xmlns="http://www.tei-c.org/ns/1.0">
             {

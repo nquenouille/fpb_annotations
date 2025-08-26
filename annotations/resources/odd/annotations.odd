@@ -270,6 +270,12 @@
                     </model>
                     <model behaviour="inline" predicate="not(@rend='container')" cssClass="annotation annotation-ab"/>
                 </elementSpec>
+                <elementSpec ident="app" mode="add">
+                    <model behaviour="inline" cssClass="annotation annotation-app" useSourceRendition="true" />
+                </elementSpec>
+                <elementSpec ident="rdg" mode="add">
+                    <model behaviour="inline" cssClass="annotation annotation-rdg" useSourceRendition="true" />
+                </elementSpec>
                 <elementSpec ident="orig" mode="change">
                     <model behaviour="inline" predicate="@rend='keepLB'" cssClass="annotation annotation-keepingLineBreaks"/>
                     <model behaviour="inline" predicate="@rend='indent'" cssClass="annotation annotation-indentation"/>
