@@ -475,5 +475,13 @@
                 <br/>
                 <b>Entfernung:</b> Sollte die Marginalie entfernt werden müssen, so wird zunächst der dazugehörige Anker entfernt, dann erst das Marginalia-Tag. Die Zählung der Anker und Marginalien muß jedoch nicht angepasst werden.</p>
         </div>
+        <input type="checkbox" id="rdg"/>
+        <label for="rdg">
+            <iron-icon icon="icons:visibility"/>
+            <span>  Lesart</span>
+        </label>
+        <div class="panel">
+            <p>Die Lesart wird schon in Transkribus ausgezeichnet. Wichtig ist an dieser Stelle nur, daß die Lesart aus &lt;app&gt;&lt;rdg&gt;Lesart1&lt;/rdg&gt;&lt;rdg&gt;Lesart2&lt;/rdg&gt;&lt;/app&gt; besteht. Hier kann jeweils nur zwischen den &lt;rdg&gt; Tags getaggt werden, allerdings kann dieses außer einem &lt;p&gt; Tag keine strukturellen Tags direkt enthalten. Alles, was aber in einem &lt;p&gt; Tag stehen kann, kann nach Hinzufügung eines solchen reingetaggt werden.</p>
+        </div>
     </body>
 </html>
