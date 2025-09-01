@@ -1836,6 +1836,13 @@
                 </model>
                 <model behaviour="cell"/>
             </elementSpec>
+            <elementSpec ident="title" mode="change">
+                <model behaviour="inline">
+                    <outputRendition xml:space="preserve">
+                        font-weight: bold;
+                    </outputRendition>
+                </model>
+            </elementSpec>
             </schemaSpec>
         </body>
     </text>

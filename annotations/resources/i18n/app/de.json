@@ -261,6 +261,7 @@
   	"scribe": "Scribe",
   	"type": "Typ",
   	"head": "Überschrift",
+    "title": "Titel",
   	"address": "Adresse",
   	"opener": "Eröffnungszeilen",
   	"salute": "Grußformel",

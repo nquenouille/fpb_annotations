@@ -280,6 +280,9 @@
                     <model behaviour="inline" predicate="@rend='keepLB'" cssClass="annotation annotation-keepingLineBreaks"/>
                     <model behaviour="inline" predicate="@rend='indent'" cssClass="annotation annotation-indentation"/>
                 </elementSpec>
+                <elementSpec ident="title" mode="change">
+                    <model behaviour="inline" cssClass="annotation annotation-title"/>
+                </elementSpec>
                 <elementSpec ident="lb" mode="change">
                     <modelSequence>
                         <model behaviour="break" cssClass="annotation annotation-lb">
