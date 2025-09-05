@@ -229,7 +229,7 @@ window.addEventListener("WebComponentsReady", () => {
 				const cb = document.createElement("paper-checkbox");
 				cb._options = o;
 				cb._info = info;
-				if (o.annotated && o[key] === info.id) {
+				if (o.annotated) {
 					cb.setAttribute("checked", "checked");
 				}
 				cb.addEventListener("click", () => {
