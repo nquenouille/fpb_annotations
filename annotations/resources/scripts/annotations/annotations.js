@@ -90,6 +90,7 @@ window.addEventListener("WebComponentsReady", () => {
 	const nerDialog = document.getElementById("ner-dialog");
 	let docSaved = false;
 	let autoSave = false;
+	let wasSelectOccurrenceCalled = false;
 	let type = "";
 	let text = "";
 	let enablePreview = true;
@@ -103,7 +104,7 @@ window.addEventListener("WebComponentsReady", () => {
 	function showForm(type, data) {
 		form.reset();
 		document.querySelectorAll('paper-dropdown-menu').forEach(e => e.contentElement.selected = null);
-		if (autoSave) {
+		if (autoSave || isTextualType(type)) {
 			saveBtn.style.display = "none";
 		} else {
 			saveBtn.style.display = "";
@@ -135,6 +136,32 @@ window.addEventListener("WebComponentsReady", () => {
 		form.style.display = "none";
 		occurDiv.style.display = "none";
 	}
+
+	/** FPB: Textual Types that are elegible for multi-tagging and thus don't need a save-form button */
+	function isTextualType(type) {
+        const textualTypes = [
+            "person",
+            "place",
+            "org",
+            "date",
+            "ref",
+            "abbr",
+            "sic",
+            "reg",
+            "latintype",
+            "hi",
+            "semibold",
+            "underline",
+            "superscript",
+            "emph",
+            "term",
+            "gloss",
+            "rs",
+            "mp",
+            "perge"
+        ];
+        return textualTypes.includes(type);
+    }
 
 	/**
 	 * The user selected an authority entry.
@@ -440,6 +467,7 @@ window.addEventListener("WebComponentsReady", () => {
 			}
 			showForm(type);
 			text = selection;
+			findOther(type);
 			activeSpan = null;
 		}
 		disableButtons(true);
@@ -814,7 +842,6 @@ window.addEventListener("WebComponentsReady", () => {
 
 	// apply annotation action
 	saveBtn.addEventListener("click", () => {e.preventDefault(); if(docSaved != true) {save(); docSaved = true; console.log("'e is not defined': prevents double annotation")}});
-	document.addEventListener("keydown", (e) => {if (e.ctrlKey && e.key ==="s") {e.preventDefault(); if(docSaved != true) {save(); docSaved = true; }}});
 	document.getElementById('ner-action').addEventListener('click', () => {
 		if (view.annotations.length > 0) {
 			document.getElementById('ner-denied-dialog').show();
@@ -846,11 +873,27 @@ window.addEventListener("WebComponentsReady", () => {
 	// save document action
 	const saveDocBtn = document.getElementById("document-save");
 	saveDocBtn.addEventListener("click", () => {preview(view.annotations, true); docSaved=false; });
-	document.addEventListener("keydown", (e) => {if (e.ctrlKey && e.shiftKey && e.key ==="s") {e.preventDefault(); preview(view.annotations, true); docSaved=false; }});
 	if (saveDocBtn.dataset.shortcut) {
 		window.hotkeys(saveDocBtn.dataset.shortcut, () => {preview(view.annotations, true); docSaved=false; });
 	}
     
+	// FPB: Check if Occurrences were selected and, if so, use strg+s for global save
+	document.addEventListener("keydown", (e) => {
+    	if (e.ctrlKey && e.key === "s") {
+    		e.preventDefault();
+    
+    		if (wasSelectOccurrenceCalled) {
+    			preview(view.annotations, true);
+    			docSaved = false;
+    			console.log("Ctrl+S → preview (wegen Annotation)");
+    		} else {
+    			save();
+    			docSaved = true;
+    			console.log("Ctrl+S → save (nichts annotiert)");
+    		}
+    	}
+    });
+
 	// save and download merged TEI to local file
 	const downloadBtn = document.getElementById('document-download');
 	if ('showSaveFilePicker' in window) {

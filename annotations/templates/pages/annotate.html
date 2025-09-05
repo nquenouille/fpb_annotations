@@ -683,16 +683,16 @@
                                     <div class="annotation-form edit">
                                         <paper-input name="content" data-i18n="[label]annotations.correction" label="Correction"/>
                                     </div>
+                                    <div id="occurrences">
+                                        <h4>
+                                            <div>
+                                                <pb-i18n key="annotations.occurrences">Occurrences in text</pb-i18n>
+                                            </div> <paper-icon-button id="mark-all" icon="icons:done-all" data-i18n="[label]annotations.apply-all"/>
+                                        </h4>
+                                        <ul/>
+                                    </div>
                                 </form>
-                            </iron-form>
-                            <div id="occurrences">
-                                <h4>
-                                    <div>
-                                        <pb-i18n key="annotations.occurrences">Occurrences in text</pb-i18n>
-                                    </div> <paper-icon-button id="mark-all" icon="icons:done-all" data-i18n="[label]annotations.apply-all"/>
-                                </h4>
-                                <ul/>
-                            </div>
+                            </iron-form>                            
                         </aside>
                         <div class="text">
                             <pb-view id="title-view1" src="document1" xpath="//teiHeader/fileDesc/titleStmt/title[@xml:lang='de']" view="single">
