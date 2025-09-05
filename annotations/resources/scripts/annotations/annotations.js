@@ -1045,7 +1045,7 @@ window.addEventListener("WebComponentsReady", () => {
 		autoSave = false;
 		const trigger = document.querySelector(`[data-type=${type}]`);
 		if (trigger && trigger.classList.contains("authority")) {
-			autoSave = false;
+			autoSave = true;
 			window.pbEvents.emit("pb-authority-lookup", "transcription", {
 				type,
 				query: text,
