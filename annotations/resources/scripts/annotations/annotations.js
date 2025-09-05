@@ -185,6 +185,7 @@ window.addEventListener("WebComponentsReady", () => {
 	 * @returns 
 	 */
 	function selectOccurrence(data, o, inBatch) {
+		wasSelectOccurrenceCalled = true;
 		try {
 			if (!o.annotated) {
 				const teiRange = {
