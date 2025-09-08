@@ -1837,7 +1837,7 @@
                 <model behaviour="cell"/>
             </elementSpec>
             <elementSpec ident="title" mode="change">
-                <model behaviour="inline">
+                <model behaviour="paragraph">
                     <outputRendition xml:space="preserve">
                         font-weight: bold;
                     </outputRendition>

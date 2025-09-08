@@ -234,6 +234,8 @@
   },
   "annotations": {
   	"anchor": "Anker setzen, um Note zu verschieben",
+    "memo": "Vermerk",
+  	"rdg": "Lesart",
   	"paragraph": "Paragraph",
   	"indentation": "Einrückung",
   	"sic": "Sic",

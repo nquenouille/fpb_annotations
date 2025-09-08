@@ -242,6 +242,8 @@
   },
   "annotations": {
   	"anchor": "Set anchor to move note",
+    "memo": "Memo",
+  	"rdg": "Reading",
   	"paragraph": "Paragraph",
   	"identation": "Indentation",
   	"sic": "Sic",
