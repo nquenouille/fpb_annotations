@@ -485,8 +485,8 @@ declare %private function anno:modify($nodes as node()*, $target as node(), $ann
                                 attribute {'hand'} {$value}
                             else if ($value != '' and $key='ref') then
                                 attribute {'hand'} {$value}
-                            else if ($value != '' and $key='varSeq') then
-                                attribute {'varSeq'} {$value}
+                            else if ($value != '' and $key='change') then
+                                attribute {'change'} {$value}
                             else if ($value != '' and $key='typerdg') then
                                 attribute {'type'} {$value}
                             else
