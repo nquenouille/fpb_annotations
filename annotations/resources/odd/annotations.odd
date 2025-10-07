@@ -54,6 +54,14 @@
                         <param name="default" value="."/>
                         <param name="alternate" value="./ancestor::teiHeader/@xml:id"/>
                     </model>
+                    <model behaviour="inline" cssClass="annotation annotation-title">
+                        <param name="default" value="."/>
+                        <param name="alternate" value="./ancestor::teiHeader/@xml:id"/>
+                        <pb:template xmlns="" xml:space="preserve"><pb-popover>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                        <outputRendition xml:space="preserve">
+                        font-weight:bold;
+                        </outputRendition>
+                    </model>
                 </elementSpec>
                 <elementSpec ident="persName" mode="add">
                     <model predicate="ancestor::person" behaviour="link">
@@ -279,9 +287,6 @@
                 <elementSpec ident="orig" mode="change">
                     <model behaviour="inline" predicate="@rend='keepLB'" cssClass="annotation annotation-keepingLineBreaks"/>
                     <model behaviour="inline" predicate="@rend='indent'" cssClass="annotation annotation-indentation"/>
-                </elementSpec>
-                <elementSpec ident="title" mode="change">
-                    <model behaviour="inline" cssClass="annotation annotation-title"/>
                 </elementSpec>
                 <elementSpec ident="lb" mode="change">
                     <modelSequence>
