@@ -1053,6 +1053,25 @@ window.addEventListener("WebComponentsReady", () => {
 			authorityDialog.open();
 		}
 		showForm(type, ev.detail.properties);
+		/** FPB addition: When editing elements, show occurrences **/
+		if (text && type) {
+        	const occurrencesList = document.querySelector('#occurrences ul');
+            occurrencesList.innerHTML = '';
+            
+            const matches = findOther(text);
+            
+            if (!matches || matches.length === 0) {
+              const li = document.createElement('li');
+              li.textContent = `Keine weiteren Vorkommen von "${text}" gefunden.`;
+              occurrencesList.appendChild(li);
+            } else {
+              matches.forEach((el, idx) => {
+                const li = document.createElement('li');
+                li.textContent = `Vorkommen ${idx + 1}: „${text}“`;
+                occurrencesList.appendChild(li);
+              });
+            }
+        }
 	});
 
 	window.pbEvents.subscribe("pb-annotation-detail", "transcription", (ev) => {
