@@ -1446,6 +1446,10 @@
             <param name="alternate" value="
                 if (contains(child::span/text(), '-')) then 
                     concat('Ursprüngliche Lesart: ', replace(., '-', ''))
+                else if (child::unclear[1][@reason='illegible']) then 
+                    'Ursprüngliche Lesart: unleserlich'
+                else if (child::unclear[1][@reason='unsure']) then 
+                    concat('Ursprüngliche Lesart: ', ., '(unleserlich)') 
                 else 
                     concat('Ursprüngliche Lesart: ', .)
             "/>
@@ -1471,6 +1475,10 @@
             <param name="alternate" value="
                 if (contains(child::span/text(), '-')) then 
                     concat('Ursprüngliche Lesart: ', replace(., '-', ''))
+                else if (child::unclear[1][@reason='illegible']) then 
+                    'Ursprüngliche Lesart: unleserlich'
+                else if (child::unclear[1][@reason='unsure']) then 
+                    concat('Ursprüngliche Lesart: ', ., '(unleserlich)') 
                 else 
                     concat('Ursprüngliche Lesart: ', .)
             "/>
