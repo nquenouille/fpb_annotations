@@ -238,7 +238,7 @@ declare function anno:create-record($type as xs:string, $id as xs:string, $data 
                     else
                         ()
                 }
-                <ptr type="fpb" target="https://fpb.saw-leipzig.de/places/place/{$data?link}"/>
+                <ptr type="fpb" target="https://fpb.saw-leipzig.de/{$data?link}"/>
                 {if (exists($data?geonames)) then
                     <note type="geo">
                         <ptr type="geo" target="https://geonames.org/{$data?geonames}"/>
@@ -301,7 +301,7 @@ declare function anno:create-record($type as xs:string, $id as xs:string, $data 
                     else
                         (),
                     if (exists($data?burialDate)) then
-                        (<event type="burial">
+                        (<event type="funeral">
                             <desc>
                                 <date when="{$data?burialDate}"/>
                                 {(if (exists($data?burialPlace)) then
@@ -335,7 +335,7 @@ declare function anno:create-record($type as xs:string, $id as xs:string, $data 
                     else
                         ()
                 }
-                <ptr type="fpb" target="https://fpb.saw-leipzig.de/person/person/{$data?link}"/>
+                <ptr type="fpb" target="https://fpb.saw-leipzig.de/{$data?link}"/>
             </person>
         case "organization" return
             <org xmlns="http://www.tei-c.org/ns/1.0" xml:id="{$id}">
@@ -356,7 +356,7 @@ declare function anno:create-record($type as xs:string, $id as xs:string, $data 
                     </place>)
                     else()
                 }
-                <ptr type="fpb" target="https://fpb.saw-leipzig.de/places/institution/{$data?link}"/>
+                <ptr type="fpb" target="https://fpb.saw-leipzig.de/{$data?link}"/>
                 {if (exists($data?geonames)) then
                     <note type="geo">
                         <ptr type="geo" target="https://geonames.org/{$data?geonames}"/>
