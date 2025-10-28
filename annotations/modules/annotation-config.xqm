@@ -324,7 +324,7 @@ declare function anno:create-record($type as xs:string, $id as xs:string, $data 
                         (),
                     if (exists($data?bdid)) then
                         <note type='bdid'>
-                            <ptr type="bdid" target="https://www.bach-digital.de/{$data?bdid}"/>
+                            <ptr type="bdid" target="https://www.bach-digital.de/receive/{$data?bdid}"/>
                         </note>
                     else
                         (),
