@@ -322,7 +322,325 @@ declare function api:getUser($request as map(*)) {
          }
 };
 
-(: Postprocesseing - If Closer or Opener  :)
+(: Update registry, if there was an update at the source :)
+declare function api:updateRegister($request as map(*)) {
+    let $reg-path := "//db/apps/annotations/data/register.xml"
+    let $collection := util:collection-name($reg-path)
+    let $file := util:document-name($reg-path)
+    let $reg-doc := doc($reg-path)
+    let $persons := $reg-doc//tei:listPerson//tei:person
+    let $places := $reg-doc//tei:listPlace//tei:place
+    let $updated := ()
+    let $persResults :=
+        for $person in $persons
+        let $id := substring-after($person/@xml:id, 'fpb-')
+        let $url := "https://fpb.saw-leipzig.de/" || $id || "/json-ld/"
+        let $json := try {
+            json-doc($url)
+        } catch * {
+            ()
+        }
+        let $size := try {
+            map:size($json) 
+            } catch * { 
+                () 
+            } 
+        let $firstname := try { $json("firstname") } catch * { () }
+        let $lastname := try { $json("lastname") } catch * { () }
+        let $nobility := try { $json("title_of_nobility") } catch * { () }
+        
+        let $json-fullname :=
+            try {
+            if (exists($lastname) and exists($firstname)) then
+                concat($lastname, ", ", $firstname)
+            else if (not(exists($lastname)) and exists($firstname) and not(exists($nobility))) then
+                concat("NN, ", $firstname)
+            else if (exists($lastname) and not(exists($firstname))) then
+                concat($lastname, ", NN")
+            else if (not(exists($lastname)) and exists($firstname) and exists($nobility)) then
+                concat($firstname, ", ", $nobility)
+            else
+                "NN"
+            } catch * { () }
+        let $json-birthDate := try {$json("birthday")} catch * { () }
+        let $json-birthPlace := try { $json("birthplace")?name(1)?value } catch * { () }
+        let $json-birthLat := try { $json("birthplace")?latitude } catch * { () }
+        let $json-birthLng := try { $json("birthplace")?longitude } catch * { () }
+
+        let $json-deathDate := try {$json("deathday")} catch * { () }
+        let $json-deathPlace := try { $json("deathplace")?name(1)?value } catch * { () }
+        let $json-deathLat := try { $json("deathplace")?latitude } catch * { () }
+        let $json-deathLng := try { $json("deathplace")?longitude } catch * { () }
+        
+        let $json-baptism :=
+            try {
+                for $e in $json("lifeEvents")?*
+                where some $n in $e?name?*
+                      satisfies (map:get($n, "@language") = "de" and $n?name = "Taufe")
+                return $e
+            } catch * { () }
+        let $json-baptismDate := try { $json-baptism?startDate } catch * { () }
+        let $json-baptismPlace := try { $json-baptism?location?name(1)?value } catch * { () }
+        let $json-baptismLat := try { $json-baptism?location?latitude } catch * { () }
+        let $json-baptismLng := try { $json-baptism?location?longitude } catch * { () }
+        
+        let $json-burial :=
+            try {
+                for $e in $json("lifeEvents")?*
+                where some $n in $e?name?*
+                      satisfies (map:get($n, "@language") = "de" and $n?name = "Beerdigung")
+                return $e
+            } catch * { () }
+        
+        let $json-burialDate := try { $json-burial?startDate } catch * { () }
+        let $json-burialPlace := try { $json-burial?location?name(1)?value } catch * { () }
+        let $json-burialLat := try { $json-burial?location?latitude } catch * { () }
+        let $json-burialLng := try { $json-burial?location?longitude } catch * { () }
+
+        
+        let $json-professionOrOccupation :=
+            try {
+                for $p in $json("professions")?*
+                let $de-name :=
+                    for $n in $p?name?*
+                    where map:get($n, "@language") = "de"
+                    return $n?name
+                where exists($de-name)
+                return normalize-space($de-name)
+            } catch * { () }
+        let $json-gnd := try { $json("gnd")?value } catch * { () }
+        let $json-bdid := try { $json("bdid") } catch * { () }
+        let $json-pid := try { $json("pid") } catch * { () }
+
+        let $xml-pid := $id
+        
+        let $shouldUpdate :=
+            $size > 0 and
+            exists($json-pid) and
+            normalize-space(string($json-pid)) != "" and
+            $json-pid = $xml-pid
+        
+        let $_ := (
+            
+            if ($shouldUpdate) then (
+                for $x in $person
+                        return update delete $x,
+                        update insert
+                            <person xmlns="http://www.tei-c.org/ns/1.0" xml:id="fpb-{$json-pid}">
+                                <persName type="full">{$json-fullname}</persName>
+                                {
+                                    if (exists($json-birthDate)) then
+                                        (<birth>
+                                            <date when="{$json-birthDate}"/>
+                                                {(if (exists($json-birthPlace)) then
+                                                <placeName>{$json-birthPlace}</placeName>
+                                                else (),
+                                                if (exists($json-birthLat)) then
+                                                <location>
+                                                    <geo>{$json-birthLat}&#x20;{$json-birthLng}</geo>
+                                                </location>
+                                                else ())}
+                                        </birth>)
+                                    else
+                                        (),
+                                    if (exists($json-deathDate)) then
+                                        (<death>
+                                            <date when="{$json-deathDate}"/>
+                                                {(if (exists($json-deathPlace)) then
+                                                <placeName>{$json-deathPlace}</placeName>
+                                                else (),
+                                                if (exists($json-deathLat)) then
+                                                <location>
+                                                    <geo>{$json-deathLat}&#x20;{$json-deathLng}</geo>
+                                                </location>
+                                                else ())}
+                                        </death>)
+                                    else
+                                        (),
+                                    if (exists($json-baptismDate)) then
+                                        (<event type="baptism">
+                                            <desc>
+                                                <date when="{$json-baptismDate}"/>
+                                                {(if (exists($json-baptismPlace)) then
+                                                <placeName>{$json-baptismPlace}</placeName>
+                                                else (),
+                                                if (exists($json-baptismLat)) then
+                                                <location>
+                                                    <geo>{$json-baptismLat}&#x20;{$json-baptismLng}</geo>
+                                                </location>
+                                                else ())}
+                                            </desc>
+                                        </event>)
+                                    else
+                                        (),
+                                    if (exists($json-burialDate)) then
+                                        (<event type="funeral">
+                                            <desc>
+                                                <date when="{$json-burialDate}"/>
+                                                {(if (exists($json-burialPlace)) then
+                                                <placeName>{$json-burialPlace}</placeName>
+                                                else (),
+                                                if (exists($json-burialLat)) then
+                                                <location>
+                                                    <geo>{$json-burialLat}&#x20;{$json-burialLng}</geo>
+                                                </location>
+                                                else ())}
+                                            </desc>
+                                        </event>)
+                                    else
+                                        (),
+                                    if (exists($json-professionOrOccupation)) then
+                                        for $prof in $json-professionOrOccupation
+                                        return
+                                            <occupation>{$prof}</occupation>
+                                    else
+                                        (),
+                                    if (exists($json-bdid)) then
+                                        <note type='bdid'>
+                                            <ptr type="bdid" target="https://www.bach-digital.de/receive/{$json-bdid}"/>
+                                        </note>
+                                    else
+                                        (),
+                                    if (exists($json-gnd)) then
+                                        <note type='gnd'>
+                                            <ptr type="gnd" target="https://d-nb.info/gnd/{$json-gnd}"/>
+                                        </note>
+                                    else
+                                        ()
+                                }
+                                <ptr type="fpb" target="https://fpb.saw-leipzig.de/{$json-pid}"/>
+                            </person> into $reg-doc//tei:listPerson
+                    ) else ()
+                )
+        
+              return map {
+                  "id": $id,
+                  "updated": $shouldUpdate
+              }
+        
+    let $placeResults :=
+        for $place in $places
+        let $id := substring-after($place/@xml:id, 'fpb-')
+        let $url := "https://fpb.saw-leipzig.de/" || $id || "/json-ld/"
+        let $json := try {
+            json-doc($url)
+        } catch * {
+            ()
+        }
+        let $size := try {
+            map:size($json) 
+            } catch * { 
+                () 
+            }
+        
+        let $json-names := try { $json("name")?* } catch * { () }
+        let $json-name-de := try { 
+            for $n in $json-names
+            where map:get($n, "@language") = "de"
+            return $n("value")
+        } catch * { () }
+        let $json-lat := try { 
+            string($json("latitude"))
+        } catch * { () }
+        let $json-lng := try { 
+            string($json("longitude"))
+        } catch * { () }
+        let $json-gnd := try { $json("gnd") } catch * { () }
+        let $json-geonames := try { 
+          let $g := $json("geonames")
+          return
+              if(exists($g)) then
+                  format-number($g, "0")
+                  else ()
+        } catch * { () }
+        let $json-pid := try { $json("pid") } catch * { () }
+    
+        let $xml-pid := $id
+        
+        let $shouldUpdate :=
+            $size > 0 and
+            exists($json-pid) and
+            normalize-space(string($json-pid)) != "" and
+            $json-pid = $xml-pid
+        
+        let $_ := (
+            
+            if ($shouldUpdate) then (
+                for $x in $place
+                return 
+                    update delete $x,
+                    update insert
+                        <place xmlns="http://www.tei-c.org/ns/1.0" xml:id="fpb-{$json-pid}">
+                            {
+                                for $n in $json-names
+                                    where map:get($n, "@language") = "de"
+                                    return <placeName type="full">{$n("value")}</placeName>,
+                                if ($json-lat and $json-lng) then
+                                    <location>
+                                        <geo>{$json-lat}&#x20;{$json-lng}</geo>
+                                    </location>
+                                else (),
+                                if ($json-gnd) then
+                                    <note type="gnd">
+                                        <ptr type="gnd" target="https://d-nb.info/gnd/{$json-gnd}"/>
+                                    </note>
+                                else (),
+                                if ($json-geonames) then
+                                    <note type="geonames">
+                                        <ptr type="geo" target="https://www.geonames.org/{$json-geonames}"/>
+                                    </note>
+                                else ()
+                            }
+                            <ptr type="fpb" target="https://fpb.saw-leipzig.de/{$json-pid}"/>
+                        </place>
+                        into $reg-doc//tei:listPlace
+                
+            ) else ()
+        )   
+        return map {
+              "id": $id,
+              "updated": $shouldUpdate
+          }
+        
+            
+        
+        let $whitespace-updates :=
+            for $t in $reg-doc//text()[normalize-space(.) = ""]
+            return update delete $t
+        let $save := xmldb:store(
+            $collection,
+            $file,
+            serialize($reg-doc, map { "method": "xml", "indent": true() })
+        )
+        
+    let $duplicatedPersons :=
+    for $id in distinct-values($persons/@xml:id)
+        let $dups := $persons[@xml:id = $id]
+        where count($dups) > 1
+        return $id
+    
+    let $duplicatedPlaces :=
+    for $id in distinct-values($places/@xml:id)
+        let $dups := $places[@xml:id = $id]
+        where count($dups) > 1
+        return $id
+        
+    return map {
+        "status": "done",
+        "persons": count(distinct-values($persons/@xml:id)),
+        "duplicated-persons": $duplicatedPersons,
+        "places": count(distinct-values($places/@xml:id)),
+        "duplicated-places": $duplicatedPlaces,
+        "updated-persons-count": count($persResults[?updated = true()]),
+        "updated-places-count": count($placeResults[?updated = true()]),
+        "not-updated-persons": count($persResults[?updated = false()]),
+        "not-updated-places": count($placeResults[?updated = false()]),
+        "persResults": $persResults,
+        "placeResults": $placeResults
+    }
+};
+
+(: Postprocessing - If Closer or Opener  :)
 declare function api:setTags($request as map(*)){
     let $body := $request?body
     let $path := xmldb:decode($request?parameters?id)
