@@ -330,6 +330,7 @@ declare function api:updateRegister($request as map(*)) {
     let $reg-doc := doc($reg-path)
     let $persons := $reg-doc//tei:listPerson//tei:person
     let $places := $reg-doc//tei:listPlace//tei:place
+    let $terms := $reg-doc//tei:listNym//tei:nym
     let $updated := ()
     let $persResults :=
         for $person in $persons
