@@ -601,17 +601,87 @@ declare function api:updateRegister($request as map(*)) {
               "id": $id,
               "updated": $shouldUpdate
           }
+
+    let $termResults :=
+        for $term in $terms
+        let $id := substring-after($term/@xml:id, 'fpb-')
+        let $url := "https://fpb.saw-leipzig.de/" || $id || "/json-ld/"
+        let $json := try {
+            json-doc($url)
+        } catch * {
+            ()
+        }
+        let $size := try {
+            map:size($json) 
+            } catch * { 
+                () 
+            }
         
+        let $json-names := try { $json("name")?* } catch * { () }
+        let $json-name-de := try { 
+            for $n in $json-names
+            where map:get($n, "@language") = "de"
+            return $n("name")
+        } catch * { () }
+        let $json-desc := try { $json("description")?* } catch * { () }
+        let $json-desc-de := try { 
+            for $d in $json-desc
+            where map:get($d, "@language") = "de"
+            return $d("description")
+        } catch * { () }
+        let $json-pid := try { $json("pid") } catch * { () }
+    
+        let $xml-pid := $id
+        
+        let $shouldUpdate :=
+            $size > 0 and
+            exists($json-pid) and
+            normalize-space(string($json-pid)) != "" and
+            $json-pid = $xml-pid
+        
+        let $_ := (
             
+            if ($shouldUpdate) then (
+                for $x in $term
+                return 
+                    update delete $x,
+                    update insert
+                        <nym xmlns="http://www.tei-c.org/ns/1.0" xml:id="fpb-{$json-pid}">
+                            {
+                                for $n in $json-names
+                                    where map:get($n, "@language") = "de"
+                                    return 
+                                                <orth>
+                                                    <term>{$n("name")}</term>
+                                                </orth>
+                                            ,
+                                if (exists($json-desc)) then
+                                    for $d in $json-desc
+                                    where map:get($d, "@language") = "de"
+                                    return <def>
+                                                {$d("description")}
+                                            </def>
+                                else ()
+                            }
+                            <ptr type="fpb" target="https://fpb.saw-leipzig.de/{$json-pid}"/>
+                        </nym>
+                        into $reg-doc//tei:listNym
+                
+            ) else ()
+        )   
+        return map {
+              "id": $id,
+              "updated": $shouldUpdate
+          }
         
-        let $whitespace-updates :=
-            for $t in $reg-doc//text()[normalize-space(.) = ""]
-            return update delete $t
-        let $save := xmldb:store(
-            $collection,
-            $file,
-            serialize($reg-doc, map { "method": "xml", "indent": true() })
-        )
+    let $whitespace-updates :=
+        for $t in $reg-doc//text()[normalize-space(.) = ""]
+        return update delete $t
+    let $save := xmldb:store(
+        $collection,
+        $file,
+        serialize($reg-doc, map { "method": "xml", "indent": true() })
+    )
         
     let $duplicatedPersons :=
     for $id in distinct-values($persons/@xml:id)
@@ -631,12 +701,16 @@ declare function api:updateRegister($request as map(*)) {
         "duplicated-persons": $duplicatedPersons,
         "places": count(distinct-values($places/@xml:id)),
         "duplicated-places": $duplicatedPlaces,
+        "terms": count(distinct-values($terms/@xml:id)),
         "updated-persons-count": count($persResults[?updated = true()]),
         "updated-places-count": count($placeResults[?updated = true()]),
+        "updated-terms-count": count($termResults[?updated = true()]),
         "not-updated-persons": count($persResults[?updated = false()]),
         "not-updated-places": count($placeResults[?updated = false()]),
+        "not-updated-terms": count($termResults[?updated = false()]),
         "persResults": $persResults,
-        "placeResults": $placeResults
+        "placeResults": $placeResults,
+        "termResults": $termResults
     }
 };
 
