@@ -389,7 +389,7 @@ declare function anno:create-record($type as xs:string, $id as xs:string, $data 
                     <term>{$data?title}</term>
                 </orth>
                 <def>{$data?desc}
-                    <ptr type="fpb" target="https://fpb.saw-leipzig.de/glossary/{$data?link}"/>
+                    <ptr type="fpb" target="https://fpb.saw-leipzig.de/{$data?link}"/>
                 </def>
             </nym>
         default return
