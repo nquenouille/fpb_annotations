@@ -8,7 +8,7 @@
     "servers": [
         {
             "description": "Endpoint for testing on localhost",
-            "url": "/exist/apps/annotations"
+            "url": "https://fpb-anno.saw-leipzig.de/"
         }
     ],
     "components": {
@@ -473,6 +473,62 @@
 											"type": "string"
 										},
 										"date": {
+											"type": "string"
+										}
+									}
+								}
+							}
+							
+						}
+					},
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "XQuery error",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+		"/api/updateRegister": {
+        	"get": {
+				"summary": "updateRegister",
+				"description": "Update Register",
+				"operationId": "custom:updateRegister",
+				"tags": ["UpdateRegister"],
+                "responses": {
+					"200": {
+						"description": "Person",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"persName": {
 											"type": "string"
 										}
 									}
