@@ -695,6 +695,12 @@ declare function api:updateRegister($request as map(*)) {
         let $dups := $places[@xml:id = $id]
         where count($dups) > 1
         return $id
+    
+    let $duplicatedTerms :=
+    for $id in distinct-values($terms/@xml:id)
+        let $dups := $terms[@xml:id = $id]
+        where count($dups) > 1
+        return $id
         
     return map {
         "status": "done",
@@ -703,6 +709,7 @@ declare function api:updateRegister($request as map(*)) {
         "places": count(distinct-values($places/@xml:id)),
         "duplicated-places": $duplicatedPlaces,
         "terms": count(distinct-values($terms/@xml:id)),
+        "duplicated-terms": $duplicatedTerms,
         "updated-persons-count": count($persResults[?updated = true()]),
         "updated-places-count": count($placeResults[?updated = true()]),
         "updated-terms-count": count($termResults[?updated = true()]),
