@@ -799,6 +799,11 @@
             <pb-message id="runtime-error-dialog" data-i18n="[title]dialogs.error;[message]dialogs.serverError"/>
             <pb-message id="date-error-dialog" data-i18n="[title]dialogs.error;[message]dialogs.dateError"/>
         </pb-page>
+        <div id="popup">
+          <h3>Udate erfolgreich!</h3>
+          <pre id="popup-data" style="max-height:300px; overflow:auto;"></pre>
+          <button onclick="document.getElementById('popup').style.display='none'">Schließen</button>
+        </div>
         <div class="splash"/>
     </body>
 </html>

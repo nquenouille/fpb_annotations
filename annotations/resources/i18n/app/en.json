@@ -6,7 +6,8 @@
       "title": "Admin",
       "recompile": "Recompile ODD",
       "appGenerator": "App Generator",
-      "edit-odd": "Edit ODD"
+      "edit-odd": "Edit ODD",
+      "updateRegister": "Update Register"
     },
     "news": "News",
     "download": {

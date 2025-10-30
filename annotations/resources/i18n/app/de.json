@@ -6,7 +6,8 @@
       "title": "Administration",
       "recompile": "ODD neu übersetzen",
       "appGenerator": "Anwendung generieren",
-      "edit-odd": "ODD editieren"
+      "edit-odd": "ODD editieren",
+      "updateRegister": "Update Register"
     },
     "news": "Neuigkeiten",
     "download": {

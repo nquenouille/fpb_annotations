@@ -1137,4 +1137,33 @@ window.addEventListener("WebComponentsReady", () => {
 		doc.odd = ev.detail.odd;
 		preview(view.annotations);
 	});
+
+	/* FPB: Update Register */
+	document.getElementById('updateRegister').addEventListener('click', () => updateRegister());
+	function updateRegister() {
+		const endpoint = document.querySelector("pb-page").getEndpoint();
+		fetch(`${endpoint}/api/updateRegister`, {
+			method: "GET",
+			mode: "cors",
+			credentials: "same-origin",
+			headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(),
+		})
+		.then((response) => {
+			if (response.ok) {
+				return response.json();
+                
+			} else {
+				console.error("Kein Update");
+				alert("Fehler beim Update: " + error.message);
+			}
+		})
+		.then((data) => {
+		    console.log("Register updated: ", data);
+		    document.getElementById("popup-data").textContent = JSON.stringify(data, null, 2);
+            document.getElementById("popup").style.display = "block";
+		})
+	}
 });
