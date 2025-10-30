@@ -424,6 +424,11 @@ pb-drawer {
     max-height: var(--pb-logo-image-height);
 }
 
+.updateRegister {
+  cursor: pointer;
+  box-shadow: var(--paper-material-elevation-1_-_box-shadow);
+}
+
 #popup {
   display: none;
   position: fixed;
