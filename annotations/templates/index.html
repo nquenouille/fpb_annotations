@@ -125,7 +125,8 @@
         }
         
         aside .odds,
-        aside .upload {
+        aside .upload,
+        aside .update {
             --paper-card-header: {
                 background-color: #607D8B;
             }
@@ -356,6 +357,14 @@
                                         <pb-upload id="upload" subscribe="search" emit="search" accept=".xml, .tei, .odd, .docx, .md, .mei" event="pb-search-resubmit"/>
                                     </div>
                                 </paper-card>
+                                <paper-card class="update" data-i18n="[heading]menu.admin.updateRegister" heading="Update Register">
+                                    <div class="card-content">
+                                        <paper-item id="updateRegister" style="cursor: pointer;">
+                                            <paper-icon-button title="Update Register" icon="icons:cached" />
+                                            <pb-i18n key="menu.admin.updateRegister">Update Register</pb-i18n>
+                                        </paper-item>
+                                    </div>
+                                </paper-card>
                                 <paper-card data-i18n="[heading]odd.files" class="odds" heading="ODD Files">
                                 <div class="card-content">
                                     <pb-manage-odds id="manage-odds" target="document-list" emit="search"/>
@@ -399,8 +408,14 @@
             </div>
         </paper-dialog>
     </pb-page>
+    <div id="popup">
+      <h3>Update erfolgreich!</h3>
+      <pre id="popup-data" style="max-height:300px; overflow:auto;" />
+      <button onclick="document.getElementById('popup').style.display='none'">Schließen</button>
+    </div>
     <div class="splash"/>
     <script src="resources/scripts/browse.js"/>
+    <script type="text/javascript" src="resources/scripts/custom.js"/>
 </body>
 
 </html>
