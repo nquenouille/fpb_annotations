@@ -6,8 +6,7 @@
       "title": "Administration",
       "recompile": "ODD neu übersetzen",
       "appGenerator": "Anwendung generieren",
-      "edit-odd": "ODD editieren",
-      "updateRegister": "Update Register"
+      "edit-odd": "ODD editieren"
     },
     "news": "Neuigkeiten",
     "download": {
@@ -90,6 +89,9 @@
   "upload": {
     "upload": "Hochladen",
     "drop": "Dateien vom Typ {{accept}} hier hinziehen zum Hochladen."
+  },
+  "update": {
+  	"updateRegister": "Update Register"
   },
   "demo": {
     "showCode": {

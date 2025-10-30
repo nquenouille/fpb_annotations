@@ -6,8 +6,7 @@
       "title": "Admin",
       "recompile": "Recompile ODD",
       "appGenerator": "App Generator",
-      "edit-odd": "Edit ODD",
-      "updateRegister": "Update Register"
+      "edit-odd": "Edit ODD"
     },
     "news": "News",
     "download": {
@@ -97,6 +96,9 @@
   "upload": {
     "upload": "Upload",
     "drop": "Drop {{accept}} files here to upload."
+  },
+  "update": {
+  	"updateRegister": "Update Register"
   },
   "demo": {
     "showCode": {
