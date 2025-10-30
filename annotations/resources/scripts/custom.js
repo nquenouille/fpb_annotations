@@ -5,9 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Delegation: auf pb-page lauschen, ob ein Klick auf #updateRegister kommt
     pbPage.addEventListener('click', (event) => {
-        window.pbEvents.emit("pb-start-update", "update", {});
         const btn = event.target.closest('#updateRegister');
         if (btn) {
+            window.pbEvents.emit("pb-start-update", "update", {});
             updateRegister();
         }
     });
