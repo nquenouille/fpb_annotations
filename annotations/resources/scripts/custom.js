@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Delegation: auf pb-page lauschen, ob ein Klick auf #updateRegister kommt
     pbPage.addEventListener('click', (event) => {
+        window.pbEvents.emit("pb-start-update", "update", {});
         const btn = event.target.closest('#updateRegister');
         if (btn) {
             updateRegister();
@@ -23,6 +24,7 @@ function updateRegister() {
         }
     })
     .then(response => {
+        window.pbEvents.emit("pb-end-update", "update", {});
         if (!response.ok) throw new Error("HTTP-Fehler: " + response.status);
         return response.json();
     })
