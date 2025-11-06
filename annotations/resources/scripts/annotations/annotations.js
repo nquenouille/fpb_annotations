@@ -886,6 +886,7 @@ window.addEventListener("WebComponentsReady", () => {
     		if (wasSelectOccurrenceCalled) {
     			preview(view.annotations, true);
     			docSaved = false;
+				wasSelectOccurrenceCalled = false;
     			console.log("Ctrl+S → preview (wegen Annotation)");
     		} else {
     			save();
