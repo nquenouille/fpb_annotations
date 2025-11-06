@@ -375,25 +375,25 @@ declare function api:updateRegister($request as map(*)) {
         
         let $json-baptism :=
             try {
-                for $e in $json("lifeEvents")?*
+                for $e in $json("life_events")?*
                 where some $n in $e?name?*
                       satisfies (map:get($n, "@language") = "de" and $n?name = "Taufe")
                 return $e
             } catch * { () }
-        let $json-baptismDate := try { $json-baptism?startDate } catch * { () }
+        let $json-baptismDate := try { $json-baptism?start_date } catch * { () }
         let $json-baptismPlace := try { $json-baptism?location?name(1)?value } catch * { () }
         let $json-baptismLat := try { $json-baptism?location?latitude } catch * { () }
         let $json-baptismLng := try { $json-baptism?location?longitude } catch * { () }
         
         let $json-burial :=
             try {
-                for $e in $json("lifeEvents")?*
+                for $e in $json("life_events")?*
                 where some $n in $e?name?*
                       satisfies (map:get($n, "@language") = "de" and $n?name = "Beerdigung")
                 return $e
             } catch * { () }
         
-        let $json-burialDate := try { $json-burial?startDate } catch * { () }
+        let $json-burialDate := try { $json-burial?start_date } catch * { () }
         let $json-burialPlace := try { $json-burial?location?name(1)?value } catch * { () }
         let $json-burialLat := try { $json-burial?location?latitude } catch * { () }
         let $json-burialLng := try { $json-burial?location?longitude } catch * { () }
