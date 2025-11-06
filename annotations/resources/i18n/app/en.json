@@ -292,7 +292,6 @@
   	"scribe": "Scribe",
     "type": "Type",
     "head": "Header",
-    "title": "Title",
     "pb": "Pagination",
     "lookup": "Search entity",
     "apply": "Apply annotation",

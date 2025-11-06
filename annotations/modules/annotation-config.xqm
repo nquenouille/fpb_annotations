@@ -192,8 +192,6 @@ declare function anno:annotations($type as xs:string, $properties as map(*)?, $c
             (<orig xmlns="http://www.tei-c.org/ns/1.0" rend='keepLB' />, $content())
         case "seg" return
             <seg xmlns="http://www.tei-c.org/ns/1.0" type="todo">{$content()}</seg>
-        case "title" return
-            <title xmlns="http://www.tei-c.org/ns/1.0">{$content()}</title>
         case "paragraph" return
             <p xmlns="http://www.tei-c.org/ns/1.0">{$content()}</p>
         case "edit" return
