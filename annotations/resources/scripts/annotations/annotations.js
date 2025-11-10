@@ -1054,6 +1054,34 @@ window.addEventListener("WebComponentsReady", () => {
 			authorityDialog.open();
 		}
 		showForm(type, ev.detail.properties);
+
+		/** FPB: Mapping for autocompletion when editing fields **/
+		const mappings = {
+            rs: { type: "typers", key: "key" },
+            add: { type: "types", place: "place", hand: "hand", "xml:id": "xmlid" },
+            del: { hand: "handdel", rend: "rend" },
+            rdg: { hand: "handrdg", varSeq: "varSeq", type: "typerdg" },
+            term: { type: "typeterms", key: "keys" },
+            marginalia: { type: "types", place: "margin_place", target: "margin_target" },
+            unclear: { reason: "reasons" },
+            gloss: { type: "types", target: "targets" },
+            anchor: { type: "typez", n: "nn", "xml:id": "xmlid" }
+          };
+
+          const props = ev.detail.properties || {};
+          const form = document.querySelector(`.annotation-form.${type}`);
+          if (form && mappings[type]) {
+            const map = mappings[type];
+        
+            Object.entries(map).forEach(([attrName, fieldName]) => {
+              const value = props[attrName];
+              const field = form.querySelector(`[name="${fieldName}"]`);
+              if (field && value != null && value !== "") {
+                field.value = value;
+              }
+            });
+          }
+
 		/** FPB addition: When editing elements, show occurrences **/
 		if (text && type) {
         	const occurrencesList = document.querySelector('#occurrences ul');
