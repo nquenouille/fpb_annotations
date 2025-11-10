@@ -395,7 +395,7 @@
   },
   "supplied": {
   	"title": "Herausgeberergänzung",
-  	"overbinding": "overbinding",
+  	"binding": "binding",
   	"fadedInk": "faded-ink",
   	"lost": "lost",
   	"omitted-in-original": "omitted-in-original",
