@@ -505,7 +505,6 @@
                                         </paper-dropdown-menu>
                                     </div>
                                     <div class="annotation-form supplied" data-i18n="[label]annotations.supplied">
-                                        <paper-input name="supplied" label="Supplied"/>
                                         <paper-dropdown-menu name="reason" id="ddsupplied" style="padding-left: 10px;" data-i18n="[title]supplied.title" label="Reason">
                                             <paper-listbox id="suppliedlistbox" slot="dropdown-content">
                                                 <paper-item value="default" style="display:none;"/>
@@ -514,6 +513,9 @@
                                                 </paper-item>
                                                 <paper-item value="faded-ink">
                                                     <pb-i18n key="supplied.fadedInk"/>
+                                                </paper-item>
+                                                <paper-item value="illegible">
+                                                    <pb-i18n key="supplied.illegible"/>
                                                 </paper-item>
                                                 <paper-item value="lost">
                                                     <pb-i18n key="supplied.lost"/>
@@ -527,6 +529,8 @@
                                             </paper-listbox>
                                         </paper-dropdown-menu>
                                         <paper-input name="resp" data-i18n="[title]supplied.responsible" label="Responsible"/>
+                                        <p>Moderne Ergänzung durch einen Editor etc. - <br/>
+                                            <b>reason:</b> Grund der modernen Ergänzung<br/><b>resp:</b> PID des verantwortlichen Herausgebers. Format: fpb-[pid]</p>
                                     </div>
                                     <div class="annotation-form unclear" data-i18n="[label]annotations.unclear">
                                         <paper-dropdown-menu name="reasons" id="ddunclear" style="padding-left: 10px;" data-i18n="[title]unclear.title" label="Reason">

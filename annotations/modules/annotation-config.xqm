@@ -155,7 +155,7 @@ declare function anno:annotations($type as xs:string, $properties as map(*)?, $c
         case "add" return
             <add xmlns="http://www.tei-c.org/ns/1.0" xml:id="{$properties?xmlid}" hand="{$properties?ref}{$properties?hand}" type="{$properties?types}" place="{$properties?place}" >{$content()}</add>
         case "supplied" return
-            ($content(), <supplied xmlns="http://www.tei-c.org/ns/1.0" reason="{$properties?reason}" resp="{$properties?resp}">{$properties?supplied}</supplied>)
+            <supplied xmlns="http://www.tei-c.org/ns/1.0" reason="{$properties?reason}" resp="{$properties?resp}">{$content()}</supplied>
         case "handShift" return
             (<handShift xmlns="http://www.tei-c.org/ns/1.0" scribe="{$properties?ref}{$properties?scribe}" />, $content())
         case "latintype" return

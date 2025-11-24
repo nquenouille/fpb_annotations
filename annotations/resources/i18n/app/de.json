@@ -397,6 +397,7 @@
   	"title": "Herausgeberergänzung",
   	"binding": "binding",
   	"fadedInk": "faded-ink",
+    "illegible": "illegible",
   	"lost": "lost",
   	"omitted-in-original": "omitted-in-original",
     "covered": "covered",
