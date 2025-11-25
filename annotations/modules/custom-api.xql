@@ -516,7 +516,7 @@ declare function api:updateRegister($request as map(*)) {
         
               return map {
                   "id": $id,
-                  "updated": $shouldUpdate
+                  "updated": if ($shouldUpdate) then true() else false()
               }
         
     let $placeResults :=
@@ -600,7 +600,7 @@ declare function api:updateRegister($request as map(*)) {
         )   
         return map {
               "id": $id,
-              "updated": $shouldUpdate
+              "updated": if ($shouldUpdate) then true() else false()
           }
 
     let $termResults :=
@@ -672,7 +672,7 @@ declare function api:updateRegister($request as map(*)) {
         )   
         return map {
               "id": $id,
-              "updated": $shouldUpdate
+              "updated": if ($shouldUpdate) then true() else false()
           }
         
     let $whitespace-updates :=
