@@ -282,11 +282,13 @@ declare function anno:create-record($type as xs:string, $id as xs:string, $data 
                         </death>)
                     else
                         (),
-                    if (exists($data?baptismDate)) then
+                    if (exists($data?baptismEvent)) then
                         (<event type="baptism">
                             <desc>
-                                <date when="{$data?baptismDate}"/>
-                                {(if (exists($data?baptismPlace)) then
+                                {(if (exists($data?baptismDate)) then
+                                 <date when="{$data?baptismDate}"/>
+                                else (),
+                                if (exists($data?baptismPlace)) then
                                 <placeName>{$data?baptismPlace}</placeName>
                                 else (),
                                 if (exists($data?baptismLat)) then
@@ -298,11 +300,13 @@ declare function anno:create-record($type as xs:string, $id as xs:string, $data 
                         </event>)
                     else
                         (),
-                    if (exists($data?burialDate)) then
+                    if (exists($data?burialEvent)) then
                         (<event type="funeral">
                             <desc>
+                                {(if (exists($data?burialDate)) then
                                 <date when="{$data?burialDate}"/>
-                                {(if (exists($data?burialPlace)) then
+                                else (),
+                                if (exists($data?burialPlace)) then
                                 <placeName>{$data?burialPlace}</placeName>
                                 else (),
                                 if (exists($data?burialLat)) then

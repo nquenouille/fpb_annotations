@@ -375,7 +375,7 @@ declare function api:updateRegister($request as map(*)) {
         
         let $json-baptism :=
             try {
-                for $e in $json("life_events")?*
+                for $e in $json("life_event")?*
                 where some $n in $e?name?*
                       satisfies (map:get($n, "@language") = "de" and $n?name = "Taufe")
                 return $e
@@ -387,7 +387,7 @@ declare function api:updateRegister($request as map(*)) {
         
         let $json-burial :=
             try {
-                for $e in $json("life_events")?*
+                for $e in $json("life_event")?*
                 where some $n in $e?name?*
                       satisfies (map:get($n, "@language") = "de" and $n?name = "Beerdigung")
                 return $e
@@ -401,7 +401,7 @@ declare function api:updateRegister($request as map(*)) {
         
         let $json-professionOrOccupation :=
             try {
-                for $p in $json("professions")?*
+                for $p in $json("profession")?*
                 let $de-name :=
                     for $n in $p?name?*
                     where map:get($n, "@language") = "de"
@@ -458,11 +458,13 @@ declare function api:updateRegister($request as map(*)) {
                                         </death>)
                                     else
                                         (),
-                                    if (exists($json-baptismDate)) then
+                                    if (exists($json-baptism)) then
                                         (<event type="baptism">
                                             <desc>
+                                                {(if (exists($json-baptismDate)) then
                                                 <date when="{$json-baptismDate}"/>
-                                                {(if (exists($json-baptismPlace)) then
+                                                else (),
+                                                if (exists($json-baptismPlace)) then
                                                 <placeName>{$json-baptismPlace}</placeName>
                                                 else (),
                                                 if (exists($json-baptismLat)) then
@@ -474,11 +476,12 @@ declare function api:updateRegister($request as map(*)) {
                                         </event>)
                                     else
                                         (),
-                                    if (exists($json-burialDate)) then
+                                    if (exists($json-burial)) then
                                         (<event type="funeral">
                                             <desc>
                                                 <date when="{$json-burialDate}"/>
-                                                {(if (exists($json-burialPlace)) then
+                                                else (),
+                                                if (exists($json-burialPlace)) then
                                                 <placeName>{$json-burialPlace}</placeName>
                                                 else (),
                                                 if (exists($json-burialLat)) then
