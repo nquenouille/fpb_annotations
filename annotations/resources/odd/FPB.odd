@@ -607,7 +607,7 @@
                                 <param name="content" value="let $add := id(concat('t', @xml:id), root($parameters?root))
                                                             return
                                                                 if ($add//add[@type='correction'])
-                                                                then $add//add[@type='correction']/node()
+                                                                then $add//add[@type='correction'][last()]/node()
                                                                 else $add/node()"/>
                                 <param name="alternate" value="let $root := root($parameters?root)
                                                         let $add := id(concat('t', @xml:id), $root)
