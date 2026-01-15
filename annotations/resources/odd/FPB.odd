@@ -576,7 +576,7 @@
                             <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')]/@xml:id) and not((concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]/@xml:id))" behaviour="inline">
                                 <desc>Annotation view: add[correction] with Involved Scribe</desc>
                                 <param name="name" value="'pb-popover'"/>
-                                <param name="content" value="preceding-sibling::del[1]/node()"/>
+                                <param name="content" value="preceding::del[1]/node()"/>
                                 <param name="alternate" value="let $main := id(concat('t', @xml:id), root($parameters?root)) return 
                                             string-join(
                                               for $a in ($main, $main/child::add)
@@ -588,7 +588,7 @@
                                                     replace($a/@hand, 'involved', 'Unbekannter Schreiber ')
                                                 else 'Unbekannter Schreiber'
                                               let $delText := string-join($a/node()[not(self::add)], '')
-                                              let $del := $a/preceding-sibling::del[1]
+                                              let $del := $a/preceding::del[1]
                                               let $new := string-join($a/node()[not(self::add)], '')
                                               let $status := if($del/unclear[@reason='unsure']) then ' (unsicher)' else if ($del/unclear[@reason='illegible']) then ' (unleserlich)' else ''
                                               return concat('Korrigiert von: ', $hand, ' zu: ', $new, $status)
@@ -627,7 +627,7 @@
                                                                 else replace($a/@hand,'main','Unbekannter Hauptschreiber ')
                                                             else 'Unbekannter Hauptschreiber'
                                                 
-                                                            let $del := $a/preceding-sibling::del[1]
+                                                            let $del := $a/preceding::del[1]
                                                             let $delText := string-join($del//text(), '')
                                                             let $status :=
                                                                 if ($del/unclear[@reason='unsure']) then ' (unsicher)'
@@ -768,7 +768,7 @@
                         <model predicate="contains(@xml:id, 'ta')" behaviour="omit">
                             <desc>If the add tag refers to an anchor, omit.</desc>
                         </model>
-                        <model predicate="@type='correction' and preceding-sibling::del[1]" behaviour="omit"/>
+                        <model predicate="@type='correction' and preceding::del[1]" behaviour="omit"/>
                         
                     <!-- Involved Scribe -->
                         <model predicate="not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef) and @type='addition' and not(contains(@xml:id, 'ta'))" behaviour="inline">
