@@ -345,6 +345,7 @@
   	"address": "address",
   	"numbering": "numbering",
   	"postalNote": "postalNote",
+    "processed": "processed",
   	"other": "other"
   },
   "rdg": {
