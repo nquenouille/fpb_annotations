@@ -93,6 +93,7 @@
                     <model behaviour="inline" predicate="@type='address'" cssClass="annotation annotation-memo"/>
                     <model behaviour="inline" predicate="@type='numbering'" cssClass="annotation annotation-memo"/>
                     <model behaviour="inline" predicate="@type='postalNote'" cssClass="annotation annotation-memo"/>
+                    <model behaviour="inline" predicate="@type='processed'" cssClass="annotation annotation-memo"/>
                     <model behaviour="inline" predicate="@type='other'" cssClass="annotation annotation-memo"/>
                     <model predicate="parent::num" behaviour="pass-through"/>
                     <model predicate="@type='commented' and child::note" behaviour="inline" cssClass="annotation annotation-commentary"/>
