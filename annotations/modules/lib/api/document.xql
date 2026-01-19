@@ -183,6 +183,20 @@ declare function dapi:postprocess($nodes as node()*, $styles as element()*, $scr
                         $node/@*,
                         dapi:postprocess($node/node(), $styles, $scripts, $base, $components)
                     }
+            (: FPB change; if there is a carriage return between spans, occuring e.g. when parent and child element are placed in part of a word, and not direct sibling elements do not show whitespace :)
+            case text() return
+                if (
+                    matches($node, '^[\r\n\t ]+$')
+                    and not(
+                        (exists($node/preceding-sibling::text()[normalize-space() != '']) 
+                        or exists($node/following-sibling::text()[normalize-space() != '']))
+                        or (exists($node/preceding-sibling::element()) and exists($node/following-sibling::element()))
+                    )
+                ) then
+                    ()
+                else
+                    $node
+            (: END of FPB change :)
             default return
                 $node
 };
