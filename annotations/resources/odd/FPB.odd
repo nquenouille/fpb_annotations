@@ -1653,7 +1653,7 @@
                 <elementSpec ident="unclear" mode="change">
                     <model predicate="not(@reason='illegible')" behaviour="inline">
                     <param name="name" value="'pb-popover'"/>
-                    <param name="content" value="if (child::note[@type='commentary']) then replace(., child::note/text(), '') else ."/>
+                    <param name="content" value="if (child::note[@type='commentary']) then replace(., child::note/text(), '') else ' 〈…〉 '"/>
                     <param name="alternate" value="if (child::note[@type='commentary']) then note/text() else 'Lesart unsicher.'"/>
                     <param name="placement" value="'bottom'"/>
                     <param name="fallback-placement" value="'top'"/>
