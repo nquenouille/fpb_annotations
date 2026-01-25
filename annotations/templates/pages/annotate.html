@@ -75,6 +75,71 @@
                 .drpdwn:hover .drpdwn-cntnt {display: block;}
                 
                 .drpdwn:hover .drpbtn {background-color: #3e8e41;}
+                               
+                .html-preview {
+                    width: 100%;
+                    height: 100%;
+                    overflow: auto;
+                    background: white;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    line-height:1.5em;
+                               }
+                .html-preview span {
+                    vertical-align: baseline !important;
+                }
+                
+                .annotation-editor {
+                    width: 320px;
+                    min-width: 280px;
+                    max-width: 420px;
+                    overflow-y: auto;
+                    border-right: 1px solid #ccc;
+                    background: #fafafa;
+                }
+                
+                .split-container {
+                    flex: 1;
+                    display: flex;
+                    min-width: 0;
+                    min-height: 0;   
+                    position: relative;
+                }
+                
+                app-header-layout {
+                    height: 100vh;
+                }
+                
+                main.main-layout {
+                    display: flex;
+                    flex: 1;
+                    overflow: hidden;
+                }
+                
+                .text {
+                    flex: 0 0 65%;
+                    min-width: 300px;
+                    background: white;
+                }
+                
+                .preview {
+                    flex: 1;
+                    min-width: 250px;
+                    border-left: 1px solid #ccc;
+                }
+                .resizer {
+                    flex: 0 0 6px;         
+                    width: 6px;
+                    height: 100%;
+                    background: #e0e0e0;
+                    cursor: col-resize;
+                    z-index: 9999;
+                }
+                
+                .resizer:hover {
+                    background-color: #90caf9;
+                }
+
             </style>
         </custom-style>
     </head>
@@ -90,7 +155,7 @@
                         <app-toolbar data-template="lib:include" data-template-path="templates/toolbar.html"/>
                     </app-header>
 
-                    <main>
+                    <main class="main-layout">
                         <aside class="annotation-editor">
                             <div>
                             <button id="toggle-toolbar" style="margin-bottom: 1em; margin-top: 1em;">Switch between Layout and Content</button>
@@ -690,7 +755,9 @@
                                 </form>
                             </iron-form>
                         </aside>
-                        <div class="text">
+                        <div class="split-container">
+                        <div class="text-wrapper">
+                        <div class="text" id="text">
                             <pb-view id="title-view1" src="document1" xpath="//teiHeader/fileDesc/titleStmt/title[@xml:lang='de']" view="single">
                                 <pb-param name="header" value="short"/>
                             </pb-view>
@@ -698,6 +765,8 @@
                                 <pb-param name="track-ids" value="yes"/>
                             </pb-view-annotate>
                         </div>
+                        </div>
+                        <div class="resizer" id="resizer"/>
                         <aside class="preview">
                             <header>
                                 <div class="toolbar">
@@ -736,17 +805,18 @@
                                     <pb-i18n key="annotations.legend">Legende</pb-i18n>
                                 </paper-tab>
                                 <paper-tab slot="tab">Validierung</paper-tab>
-                                <iframe slot="page" id="html" src="about:blank"/>
-                                <iframe slot="page" id="html2" src="about:blank"/>
+                                <div slot="page" id="html-container" class="html-preview"/>
+                                <div slot="page" id="html2-container" class="html-preview"/>
                                 <pb-code-highlight slot="page" id="output" language="xml" theme="default" line-numbers="true" style="max-width: 95%"/>
                                 // Add facsimile and legend to view
                                 <pb-facsimile slot="page" id="facsimile" base-uri="" default-zoom-level="0" show-navigation-control="show-navigation-control" show-home-control="" show-sequence-control="" show-rotation-control=""/>
-                                <iframe slot="page" id="legend" src="../pages/legend.html" frameBorder="0" style="width: 90%"/>
+                                <div slot="page" id="legend" style="width: 90%"/>
                                 <div slot="page" id="validation" class="validation"/>
                                 <pre slot="page" id="json"/>
                                 <div slot="page" id="changes"/>
                             </pb-tabs>
                         </aside>
+                        </div>
                     </main>
                 </app-header-layout>
             </app-drawer-layout>

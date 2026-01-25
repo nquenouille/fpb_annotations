@@ -419,12 +419,28 @@ window.addEventListener("WebComponentsReady", () => {
 					
 					/* FPB adding view for Transcription and Lesetext */
 					.then((html) => {
-						const iframe = document.getElementById("html");
-						iframe.contentDocument.body.style.fontFamily = "sans-serif";
-						iframe.srcdoc = html.replaceAll(/<img[^>]*>/g, "").replaceAll(/\s*<span[^>]*>-<\/span[^>]*>\s*/g, '-').replaceAll(/<body class/g, '<body style=\"font-family:\'Open Sans\', \'Roboto\', \'Noto\', sans-serif; line-height: 1.5em;\" class');
-						const iframe2 = document.getElementById("html2");
-						iframe2.srcdoc = html.replaceAll(/<img[^>]*>/g, "").replaceAll(/-\s*<br[^>]*>/g, '').replaceAll(/<br[^>]*>/g, ' ').replaceAll(/\s\s+/g, ' ').replaceAll(/<body class/g, '<body style=\"font-family:\'Open Sans\', \'Roboto\', \'Noto\', sans-serif; line-height: 1.5em;\" class').replaceAll(/\s*<span[^>]*>-<\/span[^>]*>\s*/g, '');
-					})
+                        // html1
+                        const htmlContainer = document.getElementById("html-container");
+                        let cleanHtml = html
+                            .replaceAll(/<img[^>]*>/g, "")
+                            .replaceAll(/\s*<span[^>]*>-<\/span[^>]*>\s*/g, '-')
+                            .replaceAll(/<body class/g, '<div style="font-family:\'Open Sans\', \'Roboto\', \'Noto\', sans-serif; line-height:1.5em;" class');
+                    
+                        htmlContainer.innerHTML = cleanHtml;
+                        
+                    
+                        // html2
+                        const html2Container = document.getElementById("html2-container");
+                        let cleanHtml2 = html
+                            .replaceAll(/<img[^>]*>/g, "")
+                            .replaceAll(/-\s*<br[^>]*>/g, '')
+                            .replaceAll(/<br[^>]*>/g, ' ')
+                            .replaceAll(/\s\s+/g, ' ')
+                            .replaceAll(/\s*<span[^>]*>-<\/span[^>]*>\s*/g, '')
+                            .replaceAll(/<body class/g, '<div style="font-family:\'Open Sans\', \'Roboto\', \'Noto\', sans-serif; line-height:1.5em;" class');
+                    
+                        html2Container.innerHTML = cleanHtml2;
+                    })
 				
                 /* FPB Validation of the document */
                 fetch(`${endpoint}/api/validation/${doc.path}`, {
@@ -439,10 +455,30 @@ window.addEventListener("WebComponentsReady", () => {
         		    val.textContent = xml; 
         		    })
 			    }); 
-			        /* *********END of FPB change********* */
 		    })
 	    }
 
+	/* Show legend in div */
+    function loadLegend() {
+        const legendDiv = document.getElementById('legend');
+        fetch('../pages/legend.html')
+            .then(res => {
+                if (!res.ok) throw new Error('Legende konnte nicht geladen werden');
+                return res.text();
+            })
+            .then(html => {
+                legendDiv.innerHTML = html;
+    
+                // optional: Schriftart und Zeilenhöhe direkt auf alle Elemente anwenden
+                legendDiv.querySelectorAll('*').forEach(el => {
+                    el.style.fontFamily = "'Open Sans', 'Roboto', 'Noto', sans-serif";
+                    el.style.lineHeight = '1.5em';
+                });
+            })
+            .catch(err => console.error(err));
+    }
+    loadLegend();
+    /* *********END of FPB change********* */
     
 	/**
 	 * Handler called if user clicks on an annotation action.
@@ -1010,7 +1046,11 @@ window.addEventListener("WebComponentsReady", () => {
 		});
 	});
 	
-	
+		/* FPB */
+	window.pbEvents.subscribe('pb-login', null, (ev) => {
+		currentUser = ev.detail.user;
+	});
+
 	window.pbEvents.subscribe("pb-authority-select", "transcription", (ev) =>
 		authoritySelected(ev.detail)
 	);
@@ -1164,4 +1204,43 @@ window.addEventListener("WebComponentsReady", () => {
 		doc.odd = ev.detail.odd;
 		preview(view.annotations);
 	});
+
+		/* Handler for resizing annotation and preview containers */
+	var vertResize = document.getElementById('text');
+    var handle = document.getElementById('resizer');
+    let startX, startWidth;
+    let isDragging = false;
+    
+    const move = function(e) {
+        if (!isDragging) return;
+        let dx = e.clientX - startX;
+        let newWidth = startWidth + dx;
+        // Optional: Grenzen setzen
+        newWidth = Math.max(300, Math.min(newWidth, 1000));
+        vertResize.style.width = newWidth + 'px';
+    };
+    
+    const stopDrag = function() {
+        isDragging = false;
+        document.body.style.cursor = 'default';
+        document.body.style.userSelect = '';
+        window.removeEventListener('mousemove', move);
+        window.removeEventListener('mouseup', stopDrag);
+    };
+    
+    handle.addEventListener('mousedown', function(e) {
+        isDragging = true;
+        startX = e.clientX;
+        startWidth = vertResize.offsetWidth;
+    
+        // Maus & Textauswahl anpassen
+        document.body.style.cursor = 'col-resize';
+        document.body.style.userSelect = 'none';
+    
+        // Events global auf window hören
+        window.addEventListener('mousemove', move);
+        window.addEventListener('mouseup', stopDrag);
+    
+        e.preventDefault();
+    });
 });
