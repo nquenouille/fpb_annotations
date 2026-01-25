@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <html>
     <head>
         <meta charset="utf-8"/>
@@ -94,10 +93,11 @@
                     <main>
                         <aside class="annotation-editor">
                             <div>
-                                <button id="toggle-toolbar" style="margin-bottom: 1em; margin-top: 1em;">Switch between Layout and Content</button>
-                                <p style="font-weight: bold; background-color:yellow;">Nach jeder Aktion abspeichern, auch nach dem Löschen!</p>
+                            <button id="toggle-toolbar" style="margin-bottom: 1em; margin-top: 1em;">Switch between Layout and Content</button>
+                            <p style="font-weight: bold; background-color:yellow;">Nach jeder Aktion abspeichern, auch nach dem Löschen!</p>
                             </div>
                             <div class="toolbar" id="toolbar-layout">
+                            
                             <div style="margin-left: 1em;">
                                     <span style="font-weight: bold">Strukturelle Tags</span> <span style="font-size:10pt"> (immer von außen nach innen taggen, danach abspeichern)</span>
                                     <p style="font-size:10pt">Strukturelle Reihenfolge (immer einzuhalten, sofern zutreffend!):</p>
@@ -383,18 +383,18 @@
                                     <div class="annotation-form hi" data-i18n="[label]annotations.hi">
                                         <paper-input name="rend" label="rend"/>
                                     </div>
-                                    <div class="annotation-form latintype" data-i18n="[label]annotations.latintype" />
-                                    <div class="annotation-form underline" data-i18n="[label]annotations.underline" />
-                                    <div class="annotation-form semibold" data-i18n="[label]annotations.semibold" />
-                                    <div class="annotation-form superscript" data-i18n="[label]annotations.superscript" />
-                                    <div class="annotation-form emph" data-i18n="[label]annotations.emph" />
+                                    <div class="annotation-form latintype" data-i18n="[label]annotations.latintype"/>
+                                    <div class="annotation-form underline" data-i18n="[label]annotations.underline"/>
+                                    <div class="annotation-form semibold" data-i18n="[label]annotations.semibold"/>
+                                    <div class="annotation-form superscript" data-i18n="[label]annotations.superscript"/>
+                                    <div class="annotation-form emph" data-i18n="[label]annotations.emph"/>
                                     <div class="annotation-form ref" data-i18n="[label]annotations.reference">
                                         <paper-input id="ref" name="target" label="target"/>
                                     </div>
                                     <div class="annotation-form abbr" data-i18n="[label]annotations.abbreviation">
                                         <paper-input name="expan" data-i18n="[label]annotations.expansion" label="Expansion"/>
                                     </div>
-                                    <div class="annotation-form rs" data-i18n="[label]annotations.rs">
+                                   <div class="annotation-form rs" data-i18n="[label]annotations.rs">
                                         <paper-dropdown-menu name="typers" id="ddrs" style="padding-left: 10px;" data-i18n="[title]rs.title" label="Type">
                                             <paper-listbox id="rslistbox" slot="dropdown-content">
                                                 <paper-item value="default" style="display:none;"/>
@@ -414,7 +414,7 @@
                                         </paper-input>
                                     </div>
                                     <div class="annotation-form term" data-i18n="[label]annotations.term">
-                                        <paper-input class="form-term" name="key" data-i18n="[label]annotations.xmlid" label="key">
+                                        <paper-input class="form-term" name="keys" data-i18n="[label]annotations.xmlid" label="key">
                                             <paper-icon-button slot="prefix" icon="search" data-i18n="[label]annotations.lookup"/>
                                         </paper-input>
                                         <paper-dropdown-menu name="typeterms" id="ddterm" style="padding-left: 10px;" data-i18n="[title]rs.title" label="Type">
@@ -529,8 +529,9 @@
                                             </paper-listbox>
                                         </paper-dropdown-menu>
                                         <paper-input name="resp" data-i18n="[title]supplied.responsible" label="Responsible"/>
-                                        <p>Moderne Ergänzung durch einen Editor etc. - <br/>
-                                            <b>reason:</b> Grund der modernen Ergänzung<br/><b>resp:</b> PID des verantwortlichen Herausgebers. Format: fpb-[pid]</p>
+                                        <p>Moderne Ergänzung durch den Herausgeber. Diese ist per "editor"-Tag einzufügen und danach mit "supplied" zu taggen.  <br/>
+                                            <b>reason:</b> Grund der modernen Ergänzung<br/>
+                                            <b>resp:</b> PID des verantwortlichen Herausgebers. Format: fpb-[pid]</p>
                                     </div>
                                     <div class="annotation-form unclear" data-i18n="[label]annotations.unclear">
                                         <paper-dropdown-menu name="reasons" id="ddunclear" style="padding-left: 10px;" data-i18n="[title]unclear.title" label="Reason">
@@ -635,29 +636,31 @@
                                     <div class="annotation-form pb" data-i18n="[label]annotations.pb">
                                         <paper-input name="n" label="Pagenumber"/>
                                         <paper-input name="facs" label="Facsimile-ID" style="display:none"/>
+                                        <p>Dieses Tag dient dazu, die originale Seitennumerierung einzufügen. Die Facsimile-ID bitte <b>nicht</b> ändern.</p>
                                     </div>
                                     <div class="annotation-form sic" data-i18n="[label]annotations.correction">
-                                        <paper-input name="corr" label="Correction"/>
+                                        <paper-input name="corr" data-i18n="[label]annotations.correction"/>
+                                        <p>Korrektur des Textes - Hier kann der Text korrigiert werden, wenn der Schreiber einen Fehler gemacht haben sollte. Im Mouseover wird die ursprüngliche Fassung angezeigt.</p>
                                     </div>
-                                    <div class="annotation-form head" />
-                                    <div class="annotation-form opener" data-i18n="[label]annotations.opener" />
-                                    <div class="annotation-form closer" data-i18n="[label]annotations.closer" />
-                                    <div class="annotation-form salute" data-i18n="[label]annotations.salute" />
-                                    <div class="annotation-form address" data-i18n="[label]annotations.address" />
-                                    <div class="annotation-form signed" data-i18n="[label]annotations.signed" />
-                                    <div class="annotation-form mp" data-i18n="[label]annotations.mp" />
-                                    <div class="annotation-form perge" data-i18n="[label]annotations.perge" />
-                                    <div class="annotation-form postscript" data-i18n="[label]annotations.postscript" />
-                                    <div class="annotation-form dateline" data-i18n="[label]annotations.dateline" />
-                                    <div class="annotation-form keepLineBreaks" data-i18n="[label]annotations.keepLineBreaks" />
-                                    <div class="annotation-form paragraph" data-i18n="[label]annotations.paragraph" />
-                                    <div class="annotation-form seg" data-i18n="[label]annotations.seg" />
+                                    <div class="annotation-form head"/>
+                                    <div class="annotation-form opener" data-i18n="[label]annotations.opener"/>
+                                    <div class="annotation-form closer" data-i18n="[label]annotations.closer"/>
+                                    <div class="annotation-form salute" data-i18n="[label]annotations.salute"/>
+                                    <div class="annotation-form address" data-i18n="[label]annotations.address"/>
+                                    <div class="annotation-form signed" data-i18n="[label]annotations.signed"/>
+                                    <div class="annotation-form mp" data-i18n="[label]annotations.mp"/>
+                                    <div class="annotation-form perge" data-i18n="[label]annotations.perge"/>
+                                    <div class="annotation-form postscript" data-i18n="[label]annotations.postscript"/>
+                                    <div class="annotation-form dateline" data-i18n="[label]annotations.dateline"/>
+                                    <div class="annotation-form keepLineBreaks" data-i18n="[label]annotations.keepLineBreaks"/>
+                                    <div class="annotation-form paragraph" data-i18n="[label]annotations.paragraph"/>
+                                    <div class="annotation-form seg" data-i18n="[label]annotations.seg"/>
                                     <div class="annotation-form del" data-i18n="[label]annotations.del">
                                         <paper-input class="form-del" name="handdel" data-i18n="[label]annotations.hand" label="Hand">
                                             <paper-icon-button slot="prefix" icon="search" data-i18n="[label]annotations.lookup"/>
                                         </paper-input>
                                     </div>
-                                    <div class="annotation-form indentation" data-i18n="[label]annotations.indentation" />
+                                    <div class="annotation-form indentation" data-i18n="[label]annotations.indentation"/>
                                     <div class="annotation-form anchor" data-i18n="[label]annotations.anchor">
                                         <paper-input name="xmlid" label="xml:id"/>
                                         <paper-input name="nn" label="n"/>
@@ -685,7 +688,7 @@
                                         <ul/>
                                     </div>
                                 </form>
-                            </iron-form>                            
+                            </iron-form>
                         </aside>
                         <div class="text">
                             <pb-view id="title-view1" src="document1" xpath="//teiHeader/fileDesc/titleStmt/title[@xml:lang='de']" view="single">
@@ -737,7 +740,7 @@
                                 <iframe slot="page" id="html2" src="about:blank"/>
                                 <pb-code-highlight slot="page" id="output" language="xml" theme="default" line-numbers="true" style="max-width: 95%"/>
                                 // Add facsimile and legend to view
-                                <pb-facsimile slot="page" id="facsimile" base-uri="" default-zoom-level="0" show-navigation-control="show-navigation-control" show-home-control="" show-sequence-control="" show-rotation-control="" />
+                                <pb-facsimile slot="page" id="facsimile" base-uri="" default-zoom-level="0" show-navigation-control="show-navigation-control" show-home-control="" show-sequence-control="" show-rotation-control=""/>
                                 <iframe slot="page" id="legend" src="../pages/legend.html" frameBorder="0" style="width: 90%"/>
                                 <div slot="page" id="validation" class="validation"/>
                                 <pre slot="page" id="json"/>
@@ -805,7 +808,7 @@
         </pb-page>
         <div id="popup">
           <h3>Udate erfolgreich!</h3>
-          <pre id="popup-data" style="max-height:300px; overflow:auto;"></pre>
+          <pre id="popup-data" style="max-height:300px; overflow:auto;"/>
           <button onclick="document.getElementById('popup').style.display='none'">Schließen</button>
         </div>
         <div class="splash"/>

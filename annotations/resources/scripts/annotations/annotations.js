@@ -106,7 +106,8 @@ window.addEventListener("WebComponentsReady", () => {
 		document.querySelectorAll('paper-dropdown-menu').forEach(e => e.contentElement.selected = null);
 		if (autoSave || isTextualType(type)) {
 			saveBtn.style.display = "none";
-		} else {
+		} 
+		else {
 			saveBtn.style.display = "";
 		}
 		form.style.display = "";
@@ -132,13 +133,7 @@ window.addEventListener("WebComponentsReady", () => {
 		}
 	}
 
-	function hideForm() {
-		form.style.display = "none";
-		occurDiv.style.display = "none";
-	}
-
-	/** FPB: Textual Types that are elegible for multi-tagging and thus don't need a save-form button */
-	function isTextualType(type) {
+    function isTextualType(type) {
         const textualTypes = [
             "person",
             "place",
@@ -163,6 +158,11 @@ window.addEventListener("WebComponentsReady", () => {
         return textualTypes.includes(type);
     }
 
+	function hideForm() {
+		form.style.display = "none";
+		occurDiv.style.display = "none";
+	}
+
 	/**
 	 * The user selected an authority entry.
 	 *
@@ -185,7 +185,7 @@ window.addEventListener("WebComponentsReady", () => {
 	 * @returns 
 	 */
 	function selectOccurrence(data, o, inBatch) {
-		wasSelectOccurrenceCalled = true;
+	    wasSelectOccurrenceCalled = true; //FPB: Check if selectOccurrence was called
 		try {
 			if (!o.annotated) {
 				const teiRange = {
@@ -222,7 +222,7 @@ window.addEventListener("WebComponentsReady", () => {
 		}
 		try {
 			const key = view.getKey(type);
-			const occur = view.search(type, strings);
+			const occur = view.search(type, strings, false);
 			occurrences.innerHTML = "";
 			occur.forEach((o) => {
 				const li = document.createElement("li");
@@ -623,7 +623,7 @@ window.addEventListener("WebComponentsReady", () => {
 		});
 	});
 	
-		/*FPB lookup for scribe in handshift */
+		/*FPB lookup for scribe in memo */
     document.querySelectorAll('.form-memo [slot="prefix"]').forEach(elem => {
 		elem.addEventListener("click", () => {
 		    type="person";
@@ -635,8 +635,8 @@ window.addEventListener("WebComponentsReady", () => {
 			type='memo';
 		});
 	});
-
-		/*FPB lookup for scribe in rdg */
+    
+    	/*FPB lookup for scribe in rdg */
     document.querySelectorAll('.form-rdg [slot="prefix"]').forEach(elem => {
 		elem.addEventListener("click", () => {
 		    type="person";
@@ -648,7 +648,6 @@ window.addEventListener("WebComponentsReady", () => {
 			type='rdg';
 		});
 	});
-    
     /*FPB Get availability status from xml document and place it into status dropdown menu for showing availability status */
     
     function getStatus() {
@@ -766,7 +765,7 @@ window.addEventListener("WebComponentsReady", () => {
 	    transformNotes();
 	});
 	
-	document.getElementById("form-save").addEventListener("click", () => window.alert("Abspeichern nicht vergessen! Bei Kommentaren danach einen Anker setzen."));
+	document.getElementById("form-save").addEventListener("click", () => {save(); window.alert("Abspeichern nicht vergessen! Bei Kommentaren danach einen Anker setzen.")});
 	/* END of FPB changes*/
 	
 	
@@ -779,7 +778,7 @@ window.addEventListener("WebComponentsReady", () => {
 		})
 		.then((response) => {
 			if (response.ok) {
-				document.getElementById('ner-action').style.display = 'block';
+				document.getElementById('ner-action').style.display = 'inline-block';
 				response.json().then(json => console.log(`NER: found spaCy version ${json.spacy_version}.`));
 			} else {
 				console.error("NER endpoint not available");
@@ -832,7 +831,7 @@ window.addEventListener("WebComponentsReady", () => {
 				return response.json();
 			}
 		}).then((json) => {
-			view.annotations = json;
+			view.annotations = json[doc.path];
 			window.pbEvents.emit("pb-end-update", "transcription", {});
 			preview(view.annotations);
 		});
@@ -842,7 +841,7 @@ window.addEventListener("WebComponentsReady", () => {
 	
 
 	// apply annotation action
-	saveBtn.addEventListener("click", () => {e.preventDefault(); if(docSaved != true) {save(); docSaved = true; console.log("'e is not defined': prevents double annotation")}});
+	saveBtn.addEventListener("click", () => {e.preventDefault(); save(); docSaved = true;});
 	document.getElementById('ner-action').addEventListener('click', () => {
 		if (view.annotations.length > 0) {
 			document.getElementById('ner-denied-dialog').show();
@@ -874,11 +873,12 @@ window.addEventListener("WebComponentsReady", () => {
 	// save document action
 	const saveDocBtn = document.getElementById("document-save");
 	saveDocBtn.addEventListener("click", () => {preview(view.annotations, true); docSaved=false; });
+
 	if (saveDocBtn.dataset.shortcut) {
 		window.hotkeys(saveDocBtn.dataset.shortcut, () => {preview(view.annotations, true); docSaved=false; });
 	}
-    
-	// FPB: Check if Occurrences were selected and, if so, use strg+s for global save
+	
+	//FPB: Check if Occurrences were selected and, if so, use strg+s for global save
 	document.addEventListener("keydown", (e) => {
     	if (e.ctrlKey && e.key === "s") {
     		e.preventDefault();
@@ -886,16 +886,14 @@ window.addEventListener("WebComponentsReady", () => {
     		if (wasSelectOccurrenceCalled) {
     			preview(view.annotations, true);
     			docSaved = false;
-				wasSelectOccurrenceCalled = false;
-    			console.log("Ctrl+S → preview (wegen Annotation)");
+    			wasSelectOccurrenceCalled = false;
     		} else {
     			save();
     			docSaved = true;
-    			console.log("Ctrl+S → save (nichts annotiert)");
     		}
     	}
     });
-
+    
 	// save and download merged TEI to local file
 	const downloadBtn = document.getElementById('document-download');
 	if ('showSaveFilePicker' in window) {
@@ -1046,7 +1044,7 @@ window.addEventListener("WebComponentsReady", () => {
 		autoSave = false;
 		const trigger = document.querySelector(`[data-type=${type}]`);
 		if (trigger && trigger.classList.contains("authority")) {
-			autoSave = true;
+			autoSave = false;
 			window.pbEvents.emit("pb-authority-lookup", "transcription", {
 				type,
 				query: text,
@@ -1054,7 +1052,7 @@ window.addEventListener("WebComponentsReady", () => {
 			authorityDialog.open();
 		}
 		showForm(type, ev.detail.properties);
-
+		
 		/** FPB: Mapping for autocompletion when editing fields **/
 		const mappings = {
             rs: { type: "typers", key: "key" },
@@ -1081,7 +1079,7 @@ window.addEventListener("WebComponentsReady", () => {
               }
             });
           }
-
+          
 		/** FPB addition: When editing elements, show occurrences **/
 		if (text && type) {
         	const occurrencesList = document.querySelector('#occurrences ul');
