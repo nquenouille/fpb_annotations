@@ -903,7 +903,7 @@
             <param name="emit" value="'transcription'"/>
             <param name="order" value="@n"/>
             <outputRendition xml:space="preserve">
-            display: block; color: grey; text-align: right; font-size: 75%;
+            display: block; color: grey; text-align: right; font-size: 75%; padding-right: 20px;
             </outputRendition>
             <outputRendition xml:space="preserve" scope="before">
             content: ' |p.';
