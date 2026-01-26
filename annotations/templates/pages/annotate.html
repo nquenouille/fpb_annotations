@@ -84,9 +84,15 @@
                     padding-left: 10px;
                     padding-right: 10px;
                     line-height:1.5em;
+                    box-sizing: border-box;
                                }
                 .html-preview span {
                     vertical-align: baseline !important;
+                }
+                
+                pb-tabs [slot="page"] {
+                    max-height: 100%;
+                    overflow: auto;
                 }
                 
                 .annotation-editor {
@@ -126,6 +132,18 @@
                     flex: 1;
                     min-width: 250px;
                     border-left: 1px solid #ccc;
+                    display: block;
+                    flex-direction: column;
+                    height: 100%;
+                    min-height: 0;
+                }
+                .preview > header {
+                    flex: 0 0 auto;
+                }
+                .preview > pb-tabs {
+                    flex: 1 1 auto;
+                    min-height: 0;
+                    display: block;
                 }
                 .resizer {
                     flex: 0 0 6px;         
@@ -139,7 +157,6 @@
                 .resizer:hover {
                     background-color: #b3b3b3;
                 }
-
             </style>
         </custom-style>
     </head>
@@ -623,6 +640,9 @@
                                                 </paper-item>
                                                 <paper-item value="#version2">
                                                     <pb-i18n key="rdg.#version2"/>
+                                                </paper-item>
+                                                <paper-item value="#version3">
+                                                    <pb-i18n key="rdg.#version3"/>
                                                 </paper-item>
                                             </paper-listbox>
                                         </paper-dropdown-menu>
