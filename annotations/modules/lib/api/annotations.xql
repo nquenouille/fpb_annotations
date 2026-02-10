@@ -299,8 +299,6 @@ declare %private function anno:delete($nodes as node()*, $target as node()) {
                         $node/@*,
                         anno:delete($node/node(), $target)
                     }
-                else if ($target instance of element(tei:span) and $target is $node/..) then
-                    ()
                 else if ($target instance of element(tei:note) and $target is $node/..) then
                     ()
                 else if ($node is $target) then
@@ -314,7 +312,47 @@ declare %private function anno:delete($nodes as node()*, $target as node()) {
                         anno:delete($node/node(), $target)
                     }
             case element(tei:note) return
-                if ($node[@type='note'] is $target) then
+                if ($node[@type='presentation'] is $target) then
+                    element exist:delete {
+                        $node/@*,
+                        anno:delete($node/node(), $target)
+                    }
+                else if ($node[@type='received'] is $target) then
+                    element exist:delete {
+                        $node/@*,
+                        anno:delete($node/node(), $target)
+                    }
+                else if ($node[@type='possessor'] is $target) then
+                    element exist:delete {
+                        $node/@*,
+                        anno:delete($node/node(), $target)
+                    }
+                else if ($node[@type='address'] is $target) then
+                    element exist:delete {
+                        $node/@*,
+                        anno:delete($node/node(), $target)
+                    }
+                else if ($node[@type='numbering'] is $target) then
+                    element exist:delete {
+                        $node/@*,
+                        anno:delete($node/node(), $target)
+                    }
+                else if ($node[@type='postalNote'] is $target) then
+                    element exist:delete {
+                        $node/@*,
+                        anno:delete($node/node(), $target)
+                    }
+                else if ($node[@type='processed'] is $target) then
+                    element exist:delete {
+                        $node/@*,
+                        anno:delete($node/node(), $target)
+                    }
+                else if ($node[@type='other'] is $target) then
+                    element exist:delete {
+                        $node/@*,
+                        anno:delete($node/node(), $target)
+                    }
+                else if ($node[@type='note'] is $target) then
                     ()
                 else if ($node is $target) then
                     element exist:delete {
@@ -539,7 +577,7 @@ declare %private function anno:modify($nodes as node()*, $target as node(), $ann
                 if ($node is $target) then
                     element { node-name($node) } {
                         map:for-each($annotation?properties, function($key, $value) {
-                            if ($value != '' and $key='key') then
+                            if ($value != '' and $key='keys') then
                                 attribute {'key'} {$value}
                             else if ($value != '' and $key='ref') then
                                 attribute {'key'} {$value}
@@ -742,22 +780,22 @@ declare %private function anno:find-offset($nodes as node()*, $offset as xs:int,
                             $found
                         else
                             anno:find-offset(tail($nodes), $offset - anno:string-length($primary), $pos, ())
-                (: case element(tei:postscript) return
-                    let $primary := $node/tei:p
-                    let $found := anno:find-offset($primary, $offset + anno:string-length($node), $pos, ()) (: added + anno:string-length($node) for better offset :)
-                    return
-                        if (exists($found)) then
-                            $found
-                        else
-                            anno:find-offset(tail($nodes), $offset - anno:string-length($primary), $pos, ())
-                case element(tei:address) return
-                    let $primary := $node/tei:addrLine
-                    let $found := anno:find-offset($primary, $offset + anno:string-length($node), $pos, ()) (: added + anno:string-length($node) for better offset :)
-                    return
-                        if (exists($found)) then
-                            $found
-                        else
-                            anno:find-offset(tail($nodes), $offset - anno:string-length($primary), $pos, ()) :)
+(:                case element(tei:postscript) return:)
+(:                    let $primary := $node/tei:p:)
+(:                    let $found := anno:find-offset($primary, $offset + anno:string-length($node), $pos, ()) (: added + anno:string-length($node) for better offset :):)
+(:                    return:)
+(:                        if (exists($found)) then:)
+(:                            $found:)
+(:                        else:)
+(:                            anno:find-offset(tail($nodes), $offset - anno:string-length($primary), $pos, ()):)
+(:                case element(tei:address) return:)
+(:                    let $primary := $node/tei:addrLine:)
+(:                    let $found := anno:find-offset($primary, $offset + anno:string-length($node), $pos, ()) (: added + anno:string-length($node) for better offset :):)
+(:                    return:)
+(:                        if (exists($found)) then:)
+(:                            $found:)
+(:                        else:)
+(:                            anno:find-offset(tail($nodes), $offset - anno:string-length($primary), $pos, ()):)
                 case element() return
                     let $found := anno:find-offset($node/node(), $offset, $pos, ())
                     return
@@ -767,11 +805,11 @@ declare %private function anno:find-offset($nodes as node()*, $offset as xs:int,
                     return
                         if ($offset <= $len) then
                             [$node, $offset]
-                        (: prevents from setting a tag into a tei:abbr, tei:sic, tei:orig element :)
-                         else if ($offset > $len and ($node/parent::element(tei:abbr) | $node/parent::element(tei:sic) | $node/parent::element(tei:orig))) then
+                        (: prevents from setting a tag into a tei:abbr, tei:sic, tei:orig or tei:lem element :)
+                         else if ($offset > $len and ($node/parent::element(tei:abbr) | $node/parent::element(tei:sic) | $node/parent::element(tei:orig)) | $node/parent::element(tei:lem)) then
                             anno:find-offset(tail($nodes), $offset - $len, $pos, ())
                         (: if the start is at the beginning of line and begins with a <choice> tag, tagging of it and the next word is possible :)
-                        else if ($pos = "start" and $offset = $len + 1 and ($node/parent::element(tei:abbr) | $node/parent::element(tei:sic) | $node/parent::element(tei:orig))) then
+                        else if ($pos = "start" and $offset = $len + 1 and ($node/parent::element(tei:abbr) | $node/parent::element(tei:sic) | $node/parent::element(tei:orig)) | $node/parent::element(tei:lem)) then
                             [$node, $len + 2]
                         (: end is immediately after the node :)
                         else if ($pos = "end" and $offset = $len + 1) then
