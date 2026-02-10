@@ -1829,33 +1829,61 @@
                         font-size: smaller;
                     </outputRendition>
                 </model>
-                <model behaviour="table">
-                    <outputRendition xml:space="preserve">
-                    font-size: smaller;
-                    </outputRendition>
-                </model>
-            </elementSpec>
-            <elementSpec ident="cell" mode="change">
-                <model predicate="@role='subheading'" behaviour="cell">
-                    <outputRendition xml:space="preserve">
-                        font-style: italic;
-                        text-align: center;
-                    </outputRendition>
-                </model>
-                <model predicate="@role='heading'" behaviour="cell">
-                    <outputRendition xml:space="preserve">
-                        font-weight: bold;
-                        text-align: center;
-                    </outputRendition>
-                </model>
-                <model predicate="@role='unedited'" behaviour="cell">
-                    <outputRendition xml:space="preserve">
-                        background-color: #e6e6e6;
-                        text-align: center;
-                    </outputRendition>
-                </model>
-                <model behaviour="cell"/>
-            </elementSpec>
+                        <model predicate="@rendition='stundenplan'" behaviour="table" cssClass="stundenplan-table">
+            <outputRendition xml:space="preserve">
+            font-size: smaller;
+            </outputRendition>
+        </model>
+        <model behaviour="table">
+            <outputRendition xml:space="preserve">
+            font-size: smaller;
+            </outputRendition>
+        </model>
+                </elementSpec>
+                
+        <elementSpec ident="cell" mode="change">
+            <model predicate="@role='subheading' and @rendition='stundenplan'" behaviour="cell" cssClass="stundenplan">
+                <outputRendition xml:space="preserve">
+                    font-weight: bold;
+                    text-align: center;
+                </outputRendition>
+            </model>
+            <model predicate="@role='subheading'" behaviour="cell">
+                <outputRendition xml:space="preserve">
+                   font-weight: bold;
+                    text-align: center;
+                </outputRendition>
+            </model>
+            <model predicate="@role='heading' and @rendition='stundenplan'" behaviour="cell" cssClass="stundenplan">
+                <outputRendition xml:space="preserve">
+                    font-weight: bold;
+                    text-align: center;
+                </outputRendition>
+            </model>
+            <model predicate="@role='heading'" behaviour="cell">
+                <outputRendition xml:space="preserve">
+                    font-weight: bold;
+                    text-align: center;
+                </outputRendition>
+            </model>
+            <model predicate="@role='unedited' and @rendition='stundenplan'" behaviour="cell" cssClass="stundenplan">
+                <outputRendition xml:space="preserve">
+                    background-color: #e6e6e6;
+                    text-align: center;
+                </outputRendition>
+            </model>
+            <model predicate="@role='unedited'" behaviour="cell">
+                <outputRendition xml:space="preserve">
+                    background-color: #e6e6e6;
+                    text-align: center;
+                </outputRendition>
+            </model>
+            <model predicate="@rendition='stundenplan-left-bottom-hidden'" behaviour="cell" cssClass="stundenplan-left-bottom-hidden"/>
+            <model predicate="@rendition='stundenplan-left-hidden'" behaviour="cell" cssClass="stundenplan-left-hidden"/>
+            <model predicate="@rendition='stundenplan-bottom-hidden'" behaviour="cell" cssClass="stundenplan-bottom-hidden"/>
+            <model predicate="@rendition='stundenplan'" behaviour="cell" cssClass="stundenplan"/>
+            <model behaviour="cell"/>
+        </elementSpec>
             <elementSpec ident="title" mode="change">
                 <model behaviour="paragraph">
                     <outputRendition xml:space="preserve">

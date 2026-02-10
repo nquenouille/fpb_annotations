@@ -43,6 +43,55 @@ td {
     height: 100%;
 }
 
+.stundenplan-table {
+    border-collapse: collapse;
+}
+.stundenplan {
+     width: fit-content;
+     border: 1px solid;
+     border-collapse: collapse;
+     padding-right: 10px;
+     padding-left: 10px;
+     white-space: nowrap;
+}
+
+.stundenplan-left-hidden {
+     width: fit-content;
+     border: 1px solid;
+     border-collapse: collapse;
+     border-left-style: hidden;
+     padding-right: 10px;
+     padding-left: 10px;
+     white-space: nowrap;
+}
+
+.stundenplan-bottom-hidden {
+     width: fit-content;
+     border: 1px solid;
+     border-collapse: collapse;
+     border-bottom-style: hidden;
+     padding-right: 10px;
+     padding-left: 10px;
+     white-space: nowrap;
+}
+
+.stundenplan-left-bottom-hidden {
+     width: fit-content;
+     border: 1px solid;
+     border-collapse: collapse;
+     border-left-style: hidden;
+     border-bottom-style: hidden;
+     padding-right: 10px;
+     padding-left: 10px;
+     white-space: nowrap;
+}
+
+.curly-bracket {
+    padding-right: 1vw !important;
+    padding-left: 3vw !important;
+    line-height: 2em !important;
+}
+
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -122,4 +171,25 @@ td {
     border-image-slice: 0 0 100 0;
     border-image-width: 0 0 30% 0;
     padding-bottom: 1vw;
+}
+
+.tippy-box .reading-head {
+    margin: 0.2em 0 0.1em;
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+.tippy-content {
+    overflow: auto !important;
+    max-height: 70vh !important;
+}
+.pb-popover div {
+    margin: 0;
+    padding: 0;
+    line-height: 1.2em;
+    display: inline;
+}
+
+.pb-popover div .tei-lb6 {
+    display: none;
 }
