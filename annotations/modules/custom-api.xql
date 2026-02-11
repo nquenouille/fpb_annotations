@@ -346,20 +346,12 @@ declare function api:updateRegister($request as map(*)) {
             } catch * { 
                 () 
             } 
-        let $firstname := try { $json("firstname") } catch * { () }
-        let $lastname := try { $json("lastname") } catch * { () }
-        let $nobility := try { $json("title_of_nobility") } catch * { () }
+        let $name := try { $json("name") } catch * { () }
         
         let $json-fullname :=
             try {
-            if (exists($lastname) and exists($firstname)) then
-                concat($lastname, ", ", $firstname)
-            else if (not(exists($lastname)) and exists($firstname) and not(exists($nobility))) then
-                concat("NN, ", $firstname)
-            else if (exists($lastname) and not(exists($firstname))) then
-                concat($lastname, ", NN")
-            else if (not(exists($lastname)) and exists($firstname) and exists($nobility)) then
-                concat($firstname, ", ", $nobility)
+            if (exists($name)) then
+                $name
             else
                 "NN"
             } catch * { () }
