@@ -985,14 +985,14 @@
                 </elementSpec>
         <elementSpec ident="del" mode="change">
         <!-- omit if there is an anchor -->
-        <model predicate="self::del[following-sibling::*[self::anchor][concat('t', @xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')]/@xml:id]]" behaviour="omit"/>
+        <model predicate="self::del[following-sibling::*[not(self::lb][1][self::anchor][concat('t', @xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')]/@xml:id]]" behaviour="omit"/>
          <!-- Involved Scribe and direct add[correction] and del with child::unclear[@reason='unsure'] -->
-        <model predicate="child::unclear[@reason='unsure'] and following-sibling::*[1][self::add and @type='correction' and @place='inspace' and not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef)]" behaviour="inline">
+        <model predicate="child::unclear[@reason='unsure'] and following-sibling::*[not(self::lb][1][self::add and @type='correction' and @place='inspace' and not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef)]" behaviour="inline">
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="self::del/node()"/>
             <param name="alternate" value="
                 let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,
-                    $correction := following-sibling::*[1][self::add and @type='correction' and @place='inspace' and not(@hand = $refPers)],
+                    $correction := following-sibling::*[not(self::lb][1][self::add and @type='correction' and @place='inspace' and not(@hand = $refPers)],
                     $hand := $correction/@hand,
                     $node := $correction/node(),
                     $unclear := child::unclear[@reason='unsure']
@@ -1048,17 +1048,17 @@
 
 
         <!-- Main Scribe and direct add[correction] and del with child::unclear[@reason='unsure'] and lb in del-->
-        <model predicate="child::unclear[@reason='unsure'] and following-sibling::*[1][self::add and @type='correction' and @place='inspace' and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef] and self::del//lb" behaviour="inline">
+        <model predicate="child::unclear[@reason='unsure'] and following-sibling::*[not(self::lb][1][self::add and @type='correction' and @place='inspace' and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef] and self::del//lb" behaviour="inline">
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="
                 let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,
-                    $add := following-sibling::*[1][self::add and @type='correction' and @place='inspace' and @hand = $refPers]
+                    $add := following-sibling::*[not(self::lb][1][self::add and @type='correction' and @place='inspace' and @hand = $refPers]
                 return
                         concat('&#10;', $add/node())
             "/>
             <param name="alternate" value="
                 let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,
-                    $correction := following-sibling::*[1][self::add and @type='correction' and @place='inspace' and @hand = $refPers],
+                    $correction := following-sibling::*[not(self::lb][1][self::add and @type='correction' and @place='inspace' and @hand = $refPers],
                     $hand := $correction/@hand,
                     $text := $correction/string(),
                     $original := self::del/string(),
@@ -1103,17 +1103,17 @@
         </model>
         
         <!-- Main Scribe and direct add[correction] and del with child::unclear[@reason='unsure'] and lb in add-->
-        <model predicate="child::unclear[@reason='unsure'] and following-sibling::*[1][self::add and @type='correction' and @place='inspace' and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef] and not(self::del//lb)" behaviour="inline">
+        <model predicate="child::unclear[@reason='unsure'] and following-sibling::*[not(self::lb][1][self::add and @type='correction' and @place='inspace' and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef] and not(self::del//lb)" behaviour="inline">
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="
                 let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,
-                    $add := following-sibling::*[1][self::add and @type='correction' and @place='inspace' and @hand = $refPers]
+                    $add := following-sibling::*[not(self::lb][1][self::add and @type='correction' and @place='inspace' and @hand = $refPers]
                 return
                         $add/node()
             "/>
             <param name="alternate" value="
                 let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,
-                    $correction := following-sibling::*[1][self::add and @type='correction' and @place='inspace' and @hand = $refPers],
+                    $correction := following-sibling::*[not(self::lb][1][self::add and @type='correction' and @place='inspace' and @hand = $refPers],
                     $hand := $correction/@hand,
                     $text := $correction/string(),
                     $original := self::del/string(),
@@ -1160,13 +1160,13 @@
         
         <!-- Involved Scribe and direct add[correction] and del with child::unclear -->
         <model predicate="child::unclear[not(@reason='unsure')] 
-                       and following-sibling::*[1][self::add and @type='correction' and @place='inspace'] 
-                       and not(following-sibling::*[1][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef])" behaviour="inline">
+                       and following-sibling::*[not(self::lb][1][self::add and @type='correction' and @place='inspace'] 
+                       and not(following-sibling::*[not(self::lb][1][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef])" behaviour="inline">
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="'〈…〉'"/>
             <param name="alternate" value="
                 let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,
-                    $target := following-sibling::*[1][self::add and @type='correction' and @place='inspace' and not(@hand = $refPers)],
+                    $target := following-sibling::*[not(self::lb][1][self::add and @type='correction' and @place='inspace' and not(@hand = $refPers)],
                     $hand := $target/@hand,
                     $name := id($hand, doc('/db/apps/annotations/data/register.xml'))/persName/text(),
                     $text := string($target)
@@ -1197,18 +1197,18 @@
         <!-- Main Scribe and direct add[correction] and del with child::unclear and lb in del-->
         <model 
             predicate="child::unclear[not(@reason='unsure')] 
-                       and following-sibling::*[1][self::add and @type='correction' and @place='inspace' 
+                       and following-sibling::*[not(self::lb][1][self::add and @type='correction' and @place='inspace' 
                        and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef] and self::del//lb" behaviour="inline">
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="
                 let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,
-                    $add := following-sibling::*[1][self::add and @type='correction' and @place='inspace' and @hand = $refPers]
+                    $add := following-sibling::*[not(self::lb][1][self::add and @type='correction' and @place='inspace' and @hand = $refPers]
                 return 
                         concat('&#10;', $add/node())
             "/>
             <param name="alternate" value="
                 let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,
-                    $target := following-sibling::*[1][self::add and @type='correction' and @place='inspace' and @hand = $refPers],
+                    $target := following-sibling::*[not(self::lb][1][self::add and @type='correction' and @place='inspace' and @hand = $refPers],
                     $hand := $target/@hand,
                     $name := id($hand, doc('/db/apps/annotations/data/register.xml'))/persName/text()
                 return
@@ -1235,18 +1235,18 @@
         <!-- Main Scribe and direct add[correction] and del with child::unclear and lb in add-->
         <model 
             predicate="child::unclear[not(@reason='unsure')] 
-                       and following-sibling::*[1][self::add and @type='correction' and @place='inspace' 
+                       and following-sibling::*[not(self::lb][1][self::add and @type='correction' and @place='inspace' 
                        and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef] and not(self::del//lb)" behaviour="inline">
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="
                 let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,
-                    $add := following-sibling::*[1][self::add and @type='correction' and @place='inspace' and @hand = $refPers]
+                    $add := following-sibling::*[not(self::lb][1][self::add and @type='correction' and @place='inspace' and @hand = $refPers]
                 return 
                         $add/node()
             "/>
             <param name="alternate" value="
                 let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,
-                    $target := following-sibling::*[1][self::add and @type='correction' and @place='inspace' and @hand = $refPers],
+                    $target := following-sibling::*[not(self::lb][1][self::add and @type='correction' and @place='inspace' and @hand = $refPers],
                     $hand := $target/@hand,
                     $name := id($hand, doc('/db/apps/annotations/data/register.xml'))/persName/text()
                 return
@@ -1272,7 +1272,7 @@
         
         <!-- Involved Scribe and direct add[correction] -->
         <model predicate="self::del[
-                following-sibling::*[1][
+                following-sibling::*[not(self::lb][1][
                     self::add and 
                     @type='correction' and 
                     @place='inspace' and 
@@ -1283,7 +1283,7 @@
             <param name="content" value="."/>
             <param name="alternate" value="
                 let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,
-                    $add := following-sibling::*[1][self::add][
+                    $add := following-sibling::*[not(self::lb][1][self::add][
                         @type='correction' and 
                         @place='inspace' and 
                         not(@hand = $refPers)
@@ -1318,7 +1318,7 @@
         
         <!-- Main Scribe and direct add[correction] with lb in del -->
         <model predicate="self::del[
-                following-sibling::*[1][
+                following-sibling::*[not(self::lb][1][
                     self::add and 
                     @type='correction' and 
                     @place='inspace' and 
@@ -1329,7 +1329,7 @@
             <param name="content" value="
                 let 
                     $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,
-                    $add := following-sibling::*[1][self::add and @type='correction' and 
+                    $add := following-sibling::*[not(self::lb][1][self::add and @type='correction' and 
                         @place='inspace' and 
                         @hand = $refPers
                     ]
@@ -1339,7 +1339,7 @@
             <param name="alternate" value="
                 let 
                     $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,
-                    $add := following-sibling::*[1][self::add][
+                    $add := following-sibling::*[not(self::lb][1][self::add][
                         @type='correction' and 
                         @place='inspace' and 
                         @hand = $refPers
@@ -1373,7 +1373,7 @@
         
         <!-- Main Scribe and direct add[correction] with lb inside -->
         <model predicate="self::del[
-                following-sibling::*[1][
+                following-sibling::*[not(self::lb][1][
                     self::add and 
                     @type='correction' and 
                     @place='inspace' and 
@@ -1384,7 +1384,7 @@
             <param name="content" value="
                 let 
                     $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,
-                    $add := following-sibling::*[1][self::add and @type='correction' and 
+                    $add := following-sibling::*[not(self::lb][1][self::add and @type='correction' and 
                         @place='inspace' and 
                         @hand = $refPers
                     ]
@@ -1394,7 +1394,7 @@
             <param name="alternate" value="
                 let 
                     $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,
-                    $add := following-sibling::*[1][self::add][
+                    $add := following-sibling::*[not(self::lb][1][self::add][
                         @type='correction' and 
                         @place='inspace' and 
                         @hand = $refPers
@@ -1428,10 +1428,10 @@
         </model>
 
         <!-- Main Scribe and direct add[correction]  -->
-        <model predicate="following-sibling::*[1][self::add and @type='correction'][@place='inspace'][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]" behaviour="inline">
+        <model predicate="following-sibling::*[not(self::lb][1][self::add and @type='correction'][@place='inspace'][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]" behaviour="inline">
             <param name="name" value="'pb-popover'"/>
-            <param name="content" value="                 let                      $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,                     $add := following-sibling::*[1][self::add and @type='correction' and                          @place='inspace' and                          @hand = $refPers                     ]                 return                         $add/node()             "/>
-            <param name="alternate" value="                 let                      $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,                     $add := following-sibling::*[1][self::add][                         @type='correction' and                          @place='inspace' and                          @hand = $refPers                     ],                     $hand := $add/@hand,                     $name := $add/id($hand, doc('/db/apps/annotations/data/register.xml'))/persName/text(),                     $original := string(.)                 return                     if ($add) then                         if ($name) then                             concat('Korrigiert von: ', $name, '; Ursprüngliche Lesart: ', $original) else if (contains($hand, 'main')) then                          concat('Korrigiert von: ', replace($hand, 'main', 'Unbekannter Hauptschreiber '), '; Ursprüngliche Lesart:', $original)                          else                             concat('Ursprüngliche Lesart: ', $original)                     else                         ()             "/>
+            <param name="content" value="                 let                      $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,                     $add := following-sibling::*[not(self::lb][1][self::add and @type='correction' and                          @place='inspace' and                          @hand = $refPers                     ]                 return                         $add/node()             "/>
+            <param name="alternate" value="                 let                      $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,                     $add := following-sibling::*[not(self::lb][1][self::add][                         @type='correction' and                          @place='inspace' and                          @hand = $refPers                     ],                     $hand := $add/@hand,                     $name := $add/id($hand, doc('/db/apps/annotations/data/register.xml'))/persName/text(),                     $original := string(.)                 return                     if ($add) then                         if ($name) then                             concat('Korrigiert von: ', $name, '; Ursprüngliche Lesart: ', $original) else if (contains($hand, 'main')) then                          concat('Korrigiert von: ', replace($hand, 'main', 'Unbekannter Hauptschreiber '), '; Ursprüngliche Lesart:', $original)                          else                             concat('Ursprüngliche Lesart: ', $original)                     else                         ()             "/>
             <param name="placement" value="'top'"/>
             <param name="fallback-placement" value="'bottom'"/>
             <pb:template xmlns="" xml:space="preserve">
@@ -1450,7 +1450,7 @@
         <model predicate="parent::add[1] and parent::add[1]/following::anchor[1]" behaviour="omit"/>
                     
         <!-- del of Main Scribe without correction and lb within del -->
-        <model predicate="not(following-sibling::*[1][self::add and @type='correction']) and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef and self::del//lb" behaviour="inline">
+        <model predicate="not(following-sibling::*[not(self::lb][1][self::add and @type='correction']) and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef and self::del//lb" behaviour="inline">
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="
                     '&#10;〈…〉'
@@ -1479,7 +1479,7 @@
         </model>
         
         <!-- del of Main Scribe without correction and no lb within del -->
-        <model predicate="not(following-sibling::*[1][self::add and @type='correction']) and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef and not(self::del//lb)" behaviour="inline">
+        <model predicate="not(following-sibling::*[not(self::lb][1][self::add and @type='correction']) and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef and not(self::del//lb)" behaviour="inline">
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="
                     '〈…〉'
@@ -1508,7 +1508,7 @@
         </model>
 
         <!-- del of Involved Scribe without correction -->
-        <model predicate="not(following-sibling::*[1][self::add and @type='correction']) and not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef)" behaviour="inline">
+        <model predicate="not(following-sibling::*[not(self::lb][1][self::add and @type='correction']) and not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef)" behaviour="inline">
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="."/>
             <param name="alternate" value="
