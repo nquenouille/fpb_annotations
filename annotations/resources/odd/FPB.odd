@@ -40,31 +40,33 @@
         <body>
             <schemaSpec start="TEI teiCorpus" ident="FPB" source="teipublisher.odd"> 
                 <elementSpec ident="hi" mode="change">
-                <model predicate="@rend=&#34;superscript&#34;" behaviour="inline">
-                    <desc>For @rend='superscript' display the text in superscript.</desc>
-                    <outputRendition xml:space="preserve">
-                        vertical-align: super;
-                        font-size: 50%;
-                    </outputRendition>
-                </model>
-                <model predicate="@rend=&#34;underline&#34;" behaviour="inline">
-                    <desc>For @rend='underline' display the text with an underline.</desc>
-                    <outputRendition xml:space="preserve">
-                    text-decoration: underline;
-                    </outputRendition>
-                </model>
-                <model predicate="@rend='semibold'" behaviour="inline">
-                    <desc>For @rend='semibold' display the text, if possible in semi-bold, otherwise in bold.</desc>
-                    <outputRendition xml:space="preserve">
-                    font-weight: 600;
-                    </outputRendition>
-                </model>
-                <model predicate="@rend=&#34;latintype&#34; or @rend=&#34;italic&#34;" behaviour="inline" useSourceRendition="true">
-                    <desc>For @rend='latintype' or @rend='italic' put the text, which in original is written in Latinscript, in italics.</desc>
-                    <outputRendition xml:space="preserve">
-                    font-style:italic;
-                    </outputRendition>
-                </model>
+                    <modelSequence>
+                        <model predicate="@rend=&#34;superscript&#34;" behaviour="inline">
+                            <desc>For @rend='superscript' display the text in superscript.</desc>
+                            <outputRendition xml:space="preserve">
+                                vertical-align: super;
+                                font-size: 50%;
+                            </outputRendition>
+                        </model>
+                        <model predicate="@rend=&#34;underline&#34;" behaviour="inline">
+                            <desc>For @rend='underline' display the text with an underline.</desc>
+                            <outputRendition xml:space="preserve">
+                            text-decoration: underline;
+                            </outputRendition>
+                        </model>
+                        <model predicate="@rend='semibold'" behaviour="inline">
+                            <desc>For @rend='semibold' display the text, if possible in semi-bold, otherwise in bold.</desc>
+                            <outputRendition xml:space="preserve">
+                            font-weight: 600;
+                            </outputRendition>
+                        </model>
+                        <model predicate="@rend=&#34;latintype&#34; or @rend=&#34;italic&#34;" behaviour="inline" useSourceRendition="true">
+                            <desc>For @rend='latintype' or @rend='italic' put the text, which in original is written in Latinscript, in italics.</desc>
+                            <outputRendition xml:space="preserve">
+                            font-style:italic;
+                            </outputRendition>
+                        </model>
+                    </modelSequence>
             </elementSpec>
             <elementSpec ident="choice" mode="change">
                 <model predicate="sic and corr" behaviour="inline">
