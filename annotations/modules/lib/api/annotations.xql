@@ -793,7 +793,7 @@ declare %private function anno:find-offset($nodes as node()*, $offset as xs:int,
                         let $found := anno:find-offset($node/node(), $offset, $pos, ())
                         return
                             if (exists($found)) then $found else anno:find-offset(tail($nodes), $offset - anno:string-length($node), $pos, ())
-                    else ()
+                    else anno:find-offset(tail($nodes), $offset - anno:string-length($node), $pos, ())
 (:                case element(tei:postscript) return:)
 (:                    let $primary := $node/tei:p:)
 (:                    let $found := anno:find-offset($primary, $offset + anno:string-length($node), $pos, ()) (: added + anno:string-length($node) for better offset :):)
