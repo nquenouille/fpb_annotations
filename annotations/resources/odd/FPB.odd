@@ -987,9 +987,7 @@
                 </elementSpec>
         <elementSpec ident="del" mode="change">
         <!-- omit if there is an anchor -->
-        <model predicate="self::del[following-sibling::*[not(self::lb][1][self::anchor][concat('t', @xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')]/@xml:id]]" behaviour="omit"/>
-        
-        
+        <model predicate="self::del[following-sibling::*[not(self::lb)][1][self::anchor][concat('t', @xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')]/@xml:id]]" behaviour="omit"/>
         <!-- Involved Scribe in del and add -->
         <model predicate="let $refPers := root($parameters?root)//scriptNote[@scribe='involved']/@scribeRef 
                             return self::del[@hand = $refPers] and following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'][@hand = $refPers]" behaviour="inline">
@@ -1006,16 +1004,39 @@
                                 $hand := $add/@hand,
                                 $name := $add/id($hand, doc('/db/apps/annotations/data/register.xml'))/persName/text(),
                                 $original := normalize-space(
-                                                string-join(
-                                                    for $n in $del//node()
-                                                    return
-                                                        if($n/self::lb)
-                                                        then ' || '
-                                                        else if($n instance of text())
-                                                        then $n
-                                                        else ()
-                                                )
-                                            ),
+                                            string-join(
+                                                for $n in $del/node()
+                                                return
+                                                    typeswitch($n)
+                                        
+                                                        case text()
+                                                            return $n
+                                        
+                                                        case element(lb)
+                                                            return ' || '
+                                        
+                                                        case element(choice)
+                                                            return concat(
+                                                                string($n/abbr),
+                                                                ' (= ',
+                                                                string($n/expan),
+                                                                ')'
+                                                            )
+                                        
+                                                        default
+                                                            return string-join(
+                                                                for $c in $n/node()
+                                                                return
+                                                                    if($c/self::lb)
+                                                                    then ' || '
+                                                                    else if($c/self::choice)
+                                                                    then concat(string($c/abbr), ' (= ', string($c/expan), ')')
+                                                                    else if($c instance of text())
+                                                                    then $c
+                                                                    else ()
+                                                            )
+                                            )
+                                        ),
                                 $unclear := if(exists(self::del//unclear[@reason='unsure'])) then ' (unsicher)' else if(exists(self::del//unclear[@reason='illegible'])) then ' (unleserlich)' else ''
                             return 
                                 if($name) then concat('Korrigiert von: ', $name, '; Ursprüngliche Lesart: ', $original, $unclear)
@@ -1052,21 +1073,44 @@
                                 $hand := $add/@hand,
                                 $name := $add/id($hand, doc('/db/apps/annotations/data/register.xml'))/persName/text(),
                                 $original := normalize-space(
-                                                string-join(
-                                                    for $n in $del//node()
-                                                    return
-                                                        if($n/self::lb)
-                                                        then ' || '
-                                                        else if($n instance of text())
-                                                        then $n
-                                                        else ()
-                                                )
-                                            ),
+                                            string-join(
+                                                for $n in $del/node()
+                                                return
+                                                    typeswitch($n)
+                                        
+                                                        case text()
+                                                            return $n
+                                        
+                                                        case element(lb)
+                                                            return ' || '
+                                        
+                                                        case element(choice)
+                                                            return concat(
+                                                                string($n/abbr),
+                                                                ' (= ',
+                                                                string($n/expan),
+                                                                ')'
+                                                            )
+                                        
+                                                        default
+                                                            return string-join(
+                                                                for $c in $n/node()
+                                                                return
+                                                                    if($c/self::lb)
+                                                                    then ' || '
+                                                                    else if($c/self::choice)
+                                                                    then concat(string($c/abbr), ' (= ', string($c/expan), ')')
+                                                                    else if($c instance of text())
+                                                                    then $c
+                                                                    else ()
+                                                            )
+                                            )
+                                        ),
                                 $unclear := if(exists(self::del//unclear[@reason='unsure'])) then ' (unsicher)' else if(exists(self::del//unclear[@reason='illegible'])) then ' (unleserlich)' else ''
                             return 
                                 if($name) then concat('Korrigiert von: ', $name, '; Ursprüngliche Lesart: ', $original, $unclear)
                                 else if(contains($hand, 'main')) then
-                                    concat('Korrigiert von: ', replace($hand, 'main', 'Unbekannter Schreiber '), '; Ursprüngliche Lesart: ', $original, $unclear)
+                                    concat('Korrigiert von: ', replace($hand, 'main', 'Unbekannter Hauptschreiber '), '; Ursprüngliche Lesart: ', $original, $unclear)
                                 else
                                     concat('Ursprüngliche Lesart: ', $original, $unclear)
             "/>
@@ -1083,176 +1127,64 @@
             </outputRendition>
         </model>
         
-         <!-- Involved Scribe and direct add[correction] and del with child::unclear[@reason='unsure'] -->
-        <model predicate="child::unclear[@reason='unsure'] and following-sibling::*[not(self::lb)][1][self::add and @type='correction' and @place='inspace' and not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef)]" behaviour="inline">
+        <!-- Involved Scribe in del and main scribe in add -->
+        <model predicate="let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef 
+                            return self::del[not(@hand = $refPers)] and following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'][@hand = $refPers]" behaviour="inline">
             <param name="name" value="'pb-popover'"/>
-            <param name="content" value="self::del/node()"/>
-            <param name="alternate" value="                 let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,                     $correction := following-sibling::*[not(self::lb)][1][self::add and @type='correction' and @place='inspace' and not(@hand = $refPers)],                     $hand := $correction/@hand,                     $node := $correction/node(),                     $unclear := child::unclear[@reason='unsure']                 return                     if ($correction) then                         if (starts-with($hand, 'fpb-')) then                             concat(                                 'Korrigiert von: ',                                 $correction/id($hand, doc('/db/apps/annotations/data/register.xml'))/persName/text(),                                 ' zu: ',                                 $node,                                 ', ursprüngliche Lesart [',                                 $unclear,                                 '] unsicher'                             )                         else if (not($hand = '')) then                             concat(                                 'Korrigiert von: ',                                 replace($hand, 'involved', 'Unbekannter Schreiber '),                                 ' zu: ',                                 $node,                                 ', ursprüngliche Lesart [',                                 $unclear,                                 '] unsicher'                             )                         else                             concat(                                 'Korrigiert zu: ',                                 $node,                                 ' Ursprüngliche Lesart [',                                 $unclear,                                 '] unsicher'                             )                     else                         concat(                             'Korrigiert, ursprüngliche Lesart [',                             $unclear,                             '] unsicher'                         )             "/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve">
-                <pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">
-                    [[content]]
-                    <span slot="alternate">[[alternate]]</span>
-                </pb-popover>
-            </pb:template>
-            <outputRendition xml:space="preserve">
-                text-decoration: underline dotted;
-            </outputRendition>
-        </model>
-
-
-        <!-- Main Scribe and direct add[correction] and del with child::unclear[@reason='unsure'] and lb in del-->
-        <model predicate="child::unclear[@reason='unsure'] and following-sibling::*[not(self::lb)][1][self::add and @type='correction' and @place='inspace' and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef] and self::del//lb" behaviour="inline">
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="                 let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,                     $add := following-sibling::*[not(self::lb)][1][self::add and @type='correction' and @place='inspace' and @hand = $refPers]                 return                         concat('&#xA;', $add/node())             "/>
-            <param name="alternate" value="                 let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,                     $correction := following-sibling::*[not(self::lb)][1][self::add and @type='correction' and @place='inspace' and @hand = $refPers],                     $hand := $correction/@hand,                     $text := $correction/string(),                     $original := self::del/string(),                     $unclear := child::unclear[@reason='unsure']                 return                     if ($correction) then                         if (starts-with($hand, 'fpb-')) then                             concat(                                 'Korrigiert von: ',                                 $correction/id($hand, doc('/db/apps/annotations/data/register.xml'))/persName/text(),                                 '; Ursprüngliche Lesart: ',                                 $original,                                 ' ([', $unclear, '] unsicher)'                             )                         else if (contains($hand, 'main')) then                             concat(                                 'Korrigiert von: ',                                 replace($hand, 'main', 'Unbekannter Hauptschreiber '),                                 '; Ursprüngliche Lesart: ',                                 $original,                                 ' ([', $unclear, '] unsicher)'                             )                         else                             concat(                                 'Ursprüngliche Lesart: [',                                 $unclear,                                 '] unsicher'                             )                     else ()             "/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve">
-                <pb-popover style="white-space: pre-line;" placement="[[placement]]" fallback-placement="[[fallback-placement]]">
-                    [[content]]
-                    <span slot="alternate">[[alternate]]</span>
-                </pb-popover>
-            </pb:template>
-            <outputRendition xml:space="preserve">
-                text-decoration: underline dotted;
-            </outputRendition>
-        </model>
-        
-        <!-- Main Scribe and direct add[correction] and del with child::unclear[@reason='unsure'] and lb in add-->
-        <model predicate="child::unclear[@reason='unsure'] and following-sibling::*[not(self::lb)][1][self::add and @type='correction' and @place='inspace' and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef] and not(self::del//lb)" behaviour="inline">
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="                 let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,                     $add := following-sibling::*[not(self::lb)][1][self::add and @type='correction' and @place='inspace' and @hand = $refPers]                 return                         $add/node()             "/>
-            <param name="alternate" value="                 let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,                     $correction := following-sibling::*[not(self::lb)][1][self::add and @type='correction' and @place='inspace' and @hand = $refPers],                     $hand := $correction/@hand,                     $text := $correction/string(),                     $original := self::del/string(),                     $unclear := child::unclear[@reason='unsure']                 return                     if ($correction) then                         if (starts-with($hand, 'fpb-')) then                             concat(                                 'Korrigiert von: ',                                 $correction/id($hand, doc('/db/apps/annotations/data/register.xml'))/persName/text(),                                 '; Ursprüngliche Lesart: ',                                 $original,                                 ' ([', $unclear, '] unsicher)'                             )                         else if (contains($hand, 'main')) then                             concat(                                 'Korrigiert von: ',                                 replace($hand, 'main', 'Unbekannter Hauptschreiber '),                                 '; Ursprüngliche Lesart: ',                                 $original,                                 ' ([', $unclear, '] unsicher)'                             )                         else                             concat(                                 'Ursprüngliche Lesart: [',                                 $unclear,                                 '] unsicher'                             )                     else ()             "/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve">
-                <pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">
-                    [[content]]
-                    <span slot="alternate">[[alternate]]</span>
-                </pb-popover>
-            </pb:template>
-            <outputRendition xml:space="preserve">
-                text-decoration: underline dotted;
-            </outputRendition>
-        </model>
-
-        
-        <!-- Involved Scribe and direct add[correction] and del with child::unclear -->
-        <model predicate="child::unclear[not(@reason='unsure')]                         and following-sibling::*[not(self::lb)][1][self::add and @type='correction' and @place='inspace']                         and not(following-sibling::*[not(self::lb)][1][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef])" behaviour="inline">
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="'〈…〉'"/>
-            <param name="alternate" value="                 let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,                     $target := following-sibling::*[not(self::lb)][1][self::add and @type='correction' and @place='inspace' and not(@hand = $refPers)],                     $hand := $target/@hand,                     $name := id($hand, doc('/db/apps/annotations/data/register.xml'))/persName/text(),                     $text := string($target)                 return                      if ($target) then (                         if ($hand and starts-with($hand, 'fpb-')) then                             concat('Korrigiert von: ', $name, ' zu: ', $text, ', ursprüngliche Lesart unleserlich')                         else if ($hand and not($hand = '')) then                             concat('Korrigiert von: ', replace($hand, 'involved', 'Unbekannter Schreiber '), ' zu: ', $text, ', ursprüngliche Lesart unleserlich')                         else                             concat('Korrigiert zu: ', $text, ', ursprüngliche Lesart unleserlich')                     )                     else 'Korrigiert, ursprüngliche Lesart unleserlich'             "/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve">
-                <pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">
-                    [[content]]
-                    <span slot="alternate">[[alternate]]</span>
-                </pb-popover>
-            </pb:template>
-            <outputRendition xml:space="preserve">
-                color: grey;
-            </outputRendition>
-        </model>
-
-        <!-- Main Scribe and direct add[correction] and del with child::unclear and lb in del-->
-        <model predicate="child::unclear[not(@reason='unsure')]                         and following-sibling::*[not(self::lb)][1][self::add and @type='correction' and @place='inspace'                         and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef] and self::del//lb" behaviour="inline">
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="                 let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,                     $add := following-sibling::*[not(self::lb)][1][self::add and @type='correction' and @place='inspace' and @hand = $refPers]                 return                          concat('&#xA;', $add/node())             "/>
-            <param name="alternate" value="                 let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,                     $target := following-sibling::*[not(self::lb)][1][self::add and @type='correction' and @place='inspace' and @hand = $refPers],                     $hand := $target/@hand,                     $name := id($hand, doc('/db/apps/annotations/data/register.xml'))/persName/text()                 return                     if ($name) then                          concat('Korrigiert von: ', $name, '; Ursprüngliche Lesart: unleserlich')                     else if (contains($hand, 'main')) then                          concat('Korrigiert von: ', replace($hand, 'main', 'Unbekannter Hauptschreiber '), '; Ursprüngliche Lesart: unleserlich')                     else                          'Ursprüngliche Lesart: unleserlich'             "/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve">
-                <pb-popover style="white-space: pre-line;" placement="[[placement]]" fallback-placement="[[fallback-placement]]">
-                    [[content]]
-                    <span slot="alternate">[[alternate]]</span>
-                </pb-popover>
-            </pb:template>
-            <outputRendition xml:space="preserve">
-                text-decoration: underline dotted;
-            </outputRendition>
-        </model>
-        
-        <!-- Main Scribe and direct add[correction] and del with child::unclear and lb in add-->
-        <model predicate="child::unclear[not(@reason='unsure')]                         and following-sibling::*[not(self::lb)][1][self::add and @type='correction' and @place='inspace'                         and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef] and not(self::del//lb)" behaviour="inline">
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="                 let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,                     $add := following-sibling::*[not(self::lb)][1][self::add and @type='correction' and @place='inspace' and @hand = $refPers]                 return                          $add/node()             "/>
-            <param name="alternate" value="                 let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,                     $target := following-sibling::*[not(self::lb)][1][self::add and @type='correction' and @place='inspace' and @hand = $refPers],                     $hand := $target/@hand,                     $name := id($hand, doc('/db/apps/annotations/data/register.xml'))/persName/text()                 return                     if ($name) then                          concat('Korrigiert von: ', $name, '; Ursprüngliche Lesart: unleserlich')                     else if (contains($hand, 'main')) then                          concat('Korrigiert von: ', replace($hand, 'main', 'Unbekannter Hauptschreiber '), '; Ursprüngliche Lesart: unleserlich')                     else                          'Ursprüngliche Lesart: unleserlich'             "/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve">
-                <pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">
-                    [[content]]
-                    <span slot="alternate">[[alternate]]</span>
-                </pb-popover>
-            </pb:template>
-            <outputRendition xml:space="preserve">
-                text-decoration: underline dotted;
-            </outputRendition>
-        </model>
-    
-        <!-- Involved Scribe and direct add[correction] -->
-        <model predicate="self::del[                 following-sibling::*[not(self::lb)][1][                     self::add and                      @type='correction' and                      @place='inspace' and                      not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef)                 ]             ]" behaviour="inline">
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="."/>
-            <param name="alternate" value="                 let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,                     $add := following-sibling::*[not(self::lb)][1][self::add][                         @type='correction' and                          @place='inspace' and                          not(@hand = $refPers)                     ],                     $hand := $add/@hand,                     $name := $add/id($hand, doc('/db/apps/annotations/data/register.xml'))/persName/text(),                     $text := $add/string()                 return                     if ($add) then (                         if ($hand and starts-with($hand, 'fpb-')) then                             concat('Korrigiert von: ', $name, ' zu: ', $text)                         else if ($hand and not($hand = '')) then                             concat('Korrigiert von: ', replace($hand, 'involved', 'Unbekannter Schreiber '), ' zu: ', $text)                         else                             concat('Korrigiert zu: ', $add/text())                     ) else                          'Korrigiert'             "/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve">
-                <pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">
-                    [[content]]
-                    <span slot="alternate">[[alternate]]</span>
-                </pb-popover>
-            </pb:template>
-            <outputRendition xml:space="preserve">
-                text-decoration: underline dotted;
-            </outputRendition>
-        </model>
-
-        
-        <!-- Main Scribe and direct add[correction] with lb in del -->
-        <model predicate="self::del[                 following-sibling::*[not(self::lb)][1][                     self::add and                      @type='correction' and                      @place='inspace' and                      @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef                 ]             ] and self::del//lb" behaviour="inline">
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="                 let                      $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,                     $add := following-sibling::*[not(self::lb)][1][self::add and @type='correction' and                          @place='inspace' and                          @hand = $refPers                     ]                 return                         concat('&#xA;', $add/node())             "/>
-            <param name="alternate" value="                 let                      $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,                     $add := following-sibling::*[not(self::lb)][1][self::add][                         @type='correction' and                          @place='inspace' and                          @hand = $refPers                     ],                     $hand := $add/@hand,                     $name := $add/id($hand, doc('/db/apps/annotations/data/register.xml'))/persName/text(),                     $original := string(.)                 return                     if ($add) then                         if ($name) then                             concat('Korrigiert von: ', $name, '; Ursprüngliche Lesart: ', $original) else if (contains($hand, 'main')) then                          concat('Korrigiert von: ', replace($hand, 'main', 'Unbekannter Hauptschreiber '), '; Ursprüngliche Lesart:', $original)                         else                             concat('Ursprüngliche Lesart: ', $original)                     else                         ()             "/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve">
-                <pb-popover style="white-space: pre-line;" placement="[[placement]]" fallback-placement="[[fallback-placement]]">
-                    [[content]]
-                    <span slot="alternate">[[alternate]]</span>
-                </pb-popover>
-            </pb:template>
-            <outputRendition xml:space="preserve">
-                text-decoration: underline dotted;
-            </outputRendition>
-        </model>
-        
-        <!-- Main Scribe and direct add[correction] with lb inside -->
-        <model predicate="self::del[                 following-sibling::*[not(self::lb)][1][                     self::add and                      @type='correction' and                      @place='inspace' and                      @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef                 ]             ] and not(self::del//lb)" behaviour="inline">
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="                 let                      $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,                     $add := following-sibling::*[not(self::lb)][1][self::add and @type='correction' and                          @place='inspace' and                          @hand = $refPers                     ]                 return                         $add/node()             "/>
-            <param name="alternate" value="                 let                      $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,                     $add := following-sibling::*[not(self::lb)][1][self::add][                         @type='correction' and                          @place='inspace' and                          @hand = $refPers                     ],                     $hand := $add/@hand,                     $name := $add/id($hand, doc('/db/apps/annotations/data/register.xml'))/persName/text(),                     $original := string(.)                 return                     if ($add) then                         if ($name) then                             concat('Korrigiert von: ', $name, '; Ursprüngliche Lesart: ', $original) else if (contains($hand, 'main')) then                          concat('Korrigiert von: ', replace($hand, 'main', 'Unbekannter Hauptschreiber '), '; Ursprüngliche Lesart:', $original)                         else                             concat('Ursprüngliche Lesart: ', $original)                     else                         ()             "/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve">
-                <pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">
-                    [[content]]
-                    <span slot="alternate">[[alternate]]</span>
-                </pb-popover>
-            </pb:template>
-            <outputRendition xml:space="preserve">
-                text-decoration: underline dotted;
-            </outputRendition>
-        </model>
-
-        <!-- Main Scribe and direct add[correction]  -->
-        <model predicate="following-sibling::*[not(self::lb)][1][self::add and @type='correction'][@place='inspace'][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]" behaviour="inline">
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="                 let                      $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,                     $add := following-sibling::*[not(self::lb)][1][self::add and @type='correction' and                          @place='inspace' and                          @hand = $refPers                     ]                 return                         $add/node()             "/>
-            <param name="alternate" value="                 let                      $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,                     $add := following-sibling::*[not(self::lb)][1][self::add][                         @type='correction' and                          @place='inspace' and                          @hand = $refPers                     ],                     $hand := $add/@hand,                     $name := $add/id($hand, doc('/db/apps/annotations/data/register.xml'))/persName/text(),                     $original := string(.)                 return                     if ($add) then                         if ($name) then                             concat('Korrigiert von: ', $name, '; Ursprüngliche Lesart: ', $original) else if (contains($hand, 'main')) then                          concat('Korrigiert von: ', replace($hand, 'main', 'Unbekannter Hauptschreiber '), '; Ursprüngliche Lesart:', $original)                          else                             concat('Ursprüngliche Lesart: ', $original)                     else                         ()             "/>
+            <param name="content" value="let $add := following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace']
+                                        return
+                                            if(self::del//lb[1])
+                                            then (self::del//lb[1], $add/node())
+                                            else $add/node()" />
+            <param name="alternate" value="let
+                                $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,
+                                $add := following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'][@hand = $refPers],
+                                $del := self::del[not(@hand=$refPers)],
+                                $hand := $add/@hand,
+                                $name := $add/id($hand, doc('/db/apps/annotations/data/register.xml'))/persName/text(),
+                                $nameDel := if(contains(@hand, 'involved')) then replace(@hand, 'involved', 'Unbekannter Schreiber ') else self::del/id(@hand, doc('/db/apps/annotations/data/register.xml'))/persName/text(),
+                                $original := normalize-space(
+                                            string-join(
+                                                for $n in $del/node()
+                                                return
+                                                    typeswitch($n)
+                                        
+                                                        case text()
+                                                            return $n
+                                        
+                                                        case element(lb)
+                                                            return ' || '
+                                        
+                                                        case element(choice)
+                                                            return concat(
+                                                                string($n/abbr),
+                                                                ' (= ',
+                                                                string($n/expan),
+                                                                ')'
+                                                            )
+                                        
+                                                        default
+                                                            return string-join(
+                                                                for $c in $n/node()
+                                                                return
+                                                                    if($c/self::lb)
+                                                                    then ' || '
+                                                                    else if($c/self::choice)
+                                                                    then concat(string($c/abbr), ' (= ', string($c/expan), ')')
+                                                                    else if($c instance of text())
+                                                                    then $c
+                                                                    else ()
+                                                            )
+                                            )
+                                        ),
+                                $unclear := if(exists(self::del//unclear[@reason='unsure'])) then ' (unsicher)' else if(exists(self::del//unclear[@reason='illegible'])) then ' (unleserlich)' else ''
+                            return 
+                                if($name) then concat('Korrigiert von: ', $name, '; Ursprüngliche Lesart (gestrichen von: ', $nameDel, '): ', $original, $unclear)
+                                else if(contains($hand, 'main')) then
+                                    concat('Korrigiert von: ', replace($hand, 'main', 'Unbekannter Hauptschreiber '), '; Ursprüngliche Lesart (gestrichen von: ', $nameDel, '): ', $original, $unclear)
+                                else
+                                    concat('Ursprüngliche Lesart (gestrichen von: ', $nameDel, '): ',  $original, $unclear)
+            "/>
             <param name="placement" value="'top'"/>
             <param name="fallback-placement" value="'bottom'"/>
             <pb:template xmlns="" xml:space="preserve">
@@ -1266,34 +1198,128 @@
             </outputRendition>
         </model>
         
+        
+        <!-- Main Scribe in del and involved scribe in add -->
+        <model predicate="let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef 
+                            return self::del[@hand = $refPers] and following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'][not(@hand = $refPers)]" behaviour="inline">
+            <param name="name" value="'pb-popover'"/>
+            <param name="content" value="if(self::del[unclear[@reason='illegible'] and not(text()[normalize-space()])]) then '〈…〉' else self::del/node()" />
+            <param name="alternate" value="let
+                                $refPers := root($parameters?root)//scriptNote[@scribe='involved']/@scribeRef,
+                                $add := following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'][@hand = $refPers],
+                                $hand := $add/@hand,
+                                $name := $add/id($hand, doc('/db/apps/annotations/data/register.xml'))/persName/text(),
+                                $correction := normalize-space(
+                                            string-join(
+                                                for $n in $add/node()
+                                                return
+                                                    typeswitch($n)
+                                        
+                                                        case text()
+                                                            return $n
+                                        
+                                                        case element(lb)
+                                                            return ' || '
+                                        
+                                                        case element(choice)
+                                                            return concat(
+                                                                string($n/abbr),
+                                                                ' (= ',
+                                                                string($n/expan),
+                                                                ')'
+                                                            )
+                                        
+                                                        default
+                                                            return string-join(
+                                                                for $c in $n/node()
+                                                                return
+                                                                    if($c/self::lb)
+                                                                    then ' || '
+                                                                    else if($c/self::choice)
+                                                                    then concat(string($c/abbr), ' (= ', string($c/expan), ')')
+                                                                    else if($c instance of text())
+                                                                    then $c
+                                                                    else ()
+                                                            )
+                                            )
+                                        ),
+                                $unclear := if(exists($add//unclear[@reason='unsure'])) then ' (unsicher)' else if(exists($add//unclear[@reason='illegible'])) then ' (unleserlich)' else ''
+                            return 
+                                if($name) then concat('Korrigiert von: ', $name, 'zu: ', $correction, $unclear)
+                                else if(contains($hand, 'involved')) then
+                                    concat('Korrigiert von: ', replace($hand, 'involved', 'Unbekannter Schreiber '), ' zu: ', $correction, $unclear)
+                                else
+                                    concat('Korrigiert zu: ', $correction, $unclear)
+            "/>
+            <param name="placement" value="'top'"/>
+            <param name="fallback-placement" value="'bottom'"/>
+            <pb:template xmlns="" xml:space="preserve">
+                <pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">
+                    [[content]]
+                    <span slot="alternate">[[alternate]]</span>
+                </pb-popover>
+            </pb:template>
+            <outputRendition xml:space="preserve">
+                text-decoration: underline dotted;
+            </outputRendition>
+        </model>
+        
+       
         
         <!-- parent add with anchor -> omit -->
                     <model predicate="parent::add[1] and parent::add[1]/following::anchor[1]" behaviour="omit"/>
                     
-                    
-        <!-- del of Main Scribe without correction and lb within del -->
-        <model predicate="not(following-sibling::*[not(self::lb)][1][self::add and @type='correction']) and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef and self::del//lb" behaviour="inline">
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="                     '&#xA;〈…〉'             "/>
-            <param name="alternate" value="                 if (contains(child::span/text(), '-')) then                      concat('Ursprüngliche Lesart: ', replace(., '-', ''))                 else if (child::unclear[1][@reason='illegible']) then 'Ursprüngliche Lesart: unleserlich' else if (child::unclear[1][@reason='unsure']) then concat('Ursprüngliche Lesart: ', ., '(unleserlich)') else  concat('Ursprüngliche Lesart: ', .)             "/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve">
-                <pb-popover style="white-space: pre-line;" placement="[[placement]]" fallback-placement="[[fallback-placement]]">
-                    [[content]]
-                    <span slot="alternate">[[alternate]]</span>
-                </pb-popover>
-            </pb:template>
-            <outputRendition xml:space="preserve">
-                text-decoration: underline dotted;
-            </outputRendition>
-        </model>
         
-        <!-- del of Main Scribe without correction and no lb within del -->
-        <model predicate="not(following-sibling::*[not(self::lb)][1][self::add and @type='correction']) and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef and not(self::del//lb)" behaviour="inline">
+        <!-- del of Main Scribe without correction -->
+        <model predicate="not(following-sibling::*[not(self::lb)][1][self::add and @type='correction']) and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef" behaviour="inline">
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="                     '〈…〉'             "/>
-            <param name="alternate" value="                 if (contains(child::span/text(), '-')) then                      concat('Ursprüngliche Lesart: ', replace(., '-', ''))                 else if (child::unclear[1][@reason='illegible']) then 'Ursprüngliche Lesart: unleserlich' else if (child::unclear[1][@reason='unsure']) then concat('Ursprüngliche Lesart: ', ., '(unleserlich)') else  concat('Ursprüngliche Lesart: ', .)             "/>
+            <param name="alternate" value="let
+                                $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef,
+                                $del := self::del[@hand=$refPers],
+                                $hand := $del/@hand,
+                                $name := $del/id($hand, doc('/db/apps/annotations/data/register.xml'))/persName/text(),
+                                $original := normalize-space(
+                                            string-join(
+                                                for $n in $del/node()
+                                                return
+                                                    typeswitch($n)
+                                        
+                                                        case text()
+                                                            return $n
+                                        
+                                                        case element(lb)
+                                                            return ' || '
+                                        
+                                                        case element(choice)
+                                                            return concat(
+                                                                string($n/abbr),
+                                                                ' (= ',
+                                                                string($n/expan),
+                                                                ')'
+                                                            )
+                                        
+                                                        default
+                                                            return string-join(
+                                                                for $c in $n/node()
+                                                                return
+                                                                    if($c/self::lb)
+                                                                    then ' || '
+                                                                    else if($c/self::choice)
+                                                                    then concat(string($c/abbr), ' (= ', string($c/expan), ')')
+                                                                    else if($c instance of text())
+                                                                    then $c
+                                                                    else ()
+                                                            )
+                                            )
+                                        ),
+                                $unclear := if(exists($del//unclear[@reason='unsure'])) then ' (unsicher)' else if(exists($del//unclear[@reason='illegible'])) then ' (unleserlich)' else ''
+                            return 
+                                if($name) then concat('Gestrichen von: ', $name, '; Ursprüngliche Lesart: ', $original, $unclear)
+                                else if(contains($hand, 'main')) then
+                                    concat('Gestrichen von: ', replace($hand, 'main', 'Unbekannter Hauptschreiber '), '; Urpsrüngliche Lesart: ', $original, $unclear)
+                                else
+                                    concat('Gestrichen von: ', $original, $unclear)"/>
             <param name="placement" value="'top'"/>
             <param name="fallback-placement" value="'bottom'"/>
             <pb:template xmlns="" xml:space="preserve">
@@ -1311,7 +1337,17 @@
         <model predicate="not(following-sibling::*[not(self::lb)][1][self::add and @type='correction']) and not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef)" behaviour="inline">
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="."/>
-            <param name="alternate" value="                 if (not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef) and starts-with(@hand, 'fpb-')) then                      concat('Gestrichen von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text())                  else if (contains(@hand, 'involved')) then                      concat('Gestrichen von: ', replace(@hand, 'involved', 'Unbekannter Schreiber '))                  else                      'Gestrichen von: unbekannt'             "/>
+            <param name="alternate" value="let
+                                $refPers := root($parameters?root)//scriptNote[@scribe='involved']/@scribeRef,
+                                $del := self::del[@hand=$refPers],
+                                $hand := $del/@hand,
+                                $name := $del/id($hand, doc('/db/apps/annotations/data/register.xml'))/persName/text()
+                            return 
+                                if($name) then concat('Gestrichen von: ', $name)
+                                else if(contains($hand, 'involved')) then
+                                    concat('Gestrichen von: ', replace($hand, 'involved', 'Unbekannter Schreiber '))
+                                else
+                                    'Gestrichen von: Unbekannter Schreiber'"/>
             <param name="placement" value="'top'"/>
             <param name="fallback-placement" value="'bottom'"/>
             <pb:template xmlns="" xml:space="preserve">
