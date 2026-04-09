@@ -427,6 +427,31 @@ window.addEventListener("WebComponentsReady", () => {
                             .replaceAll(/<body class/g, '<div style="font-family:\'Open Sans\', \'Roboto\', \'Noto\', sans-serif; line-height:1.5em;" class');
                     
                         htmlContainer.innerHTML = cleanHtml;
+						htmlContainer.querySelectorAll('*').forEach(el => {
+							let next = el.nextSibling;
+
+							if (next && next.nodeType === Node.TEXT_NODE) {
+								let text = next.nodeValue;
+
+								if (/^\n\s+/.test(text)) {
+
+								let prevText = el.textContent || '';
+								let nextTextMatch = text.match(/[^\s]/);
+								let nextChar = nextTextMatch ? nextTextMatch[0] : '';
+
+								let prevChar = prevText.slice(-1);
+
+								if (/[a-zA-ZäöüÄÖÜß]/.test(prevChar) &&
+									/[a-zA-ZäöüÄÖÜß]/.test(nextChar)) {
+
+									next.nodeValue = text.replace(/^\n\s+/, '');
+
+								} else {
+									next.nodeValue = text.replace(/^\n\s+/, ' ');
+								}
+								}
+							}
+							});
                         
                     
                         // html2

@@ -105,7 +105,7 @@ declare function anno:save($request as map(*)) {
                 $srcDoc/(processing-instruction()|comment()),
                 $merged
             }
-            let $serialized := serialize($output, map { "indent": true() })
+            let $serialized := serialize($output, map { "indent": false() })
             let $stored :=
                 if (request:get-method() = 'PUT') then
                     xmldb:store(util:collection-name($srcDoc), util:document-name($srcDoc), $serialized)
