@@ -30,7 +30,6 @@ a, a:link {
   color: inherit;
 }
 
-
 table {
     line-height: 2em;
 }
@@ -56,34 +55,11 @@ td {
 }
 
 .stundenplan-left-hidden {
-     width: fit-content;
-     border: 1px solid;
-     border-collapse: collapse;
      border-left-style: hidden;
-     padding-right: 10px;
-     padding-left: 10px;
-     white-space: nowrap;
 }
 
 .stundenplan-bottom-hidden {
-     width: fit-content;
-     border: 1px solid;
-     border-collapse: collapse;
      border-bottom-style: hidden;
-     padding-right: 10px;
-     padding-left: 10px;
-     white-space: nowrap;
-}
-
-.stundenplan-left-bottom-hidden {
-     width: fit-content;
-     border: 1px solid;
-     border-collapse: collapse;
-     border-left-style: hidden;
-     border-bottom-style: hidden;
-     padding-right: 10px;
-     padding-left: 10px;
-     white-space: nowrap;
 }
 
 .curly-bracket {
@@ -91,7 +67,6 @@ td {
     padding-left: 3vw !important;
     line-height: 2em !important;
 }
-
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -108,7 +83,6 @@ td {
     align-items: center;
     
 }
-
 .cbr-li {
   border-left: 10px solid;
   border-image-source: url('..//resources/images/bracket_li.svg');
@@ -119,7 +93,7 @@ td {
 
 .cbr-ri {
   border-left: 10px solid;
-  border-image-source: url('..//resources/images/bracket_li.svg');
+  border-image-source: url('..//resources/images/bracket_ri.svg');
   border-image-slice: 0 100 0 0;
   border-image-width: 0 40px 0 0;
   padding: 8vw;
@@ -143,7 +117,7 @@ td {
 
 .cbr-lo {
   border-left: 10px solid;
-  border-image-source: url('..//resources/images/bracket_ri.svg');
+  border-image-source: url('..//resources/images/bracket_li.svg');
   border-image-slice: 0 0 0 100;
   border-image-width: 0 0 0 40px;
   padding-left: 2vw;
@@ -173,6 +147,21 @@ td {
     padding-bottom: 1vw;
 }
 
+.facs, .highlight-line .line {
+    cursor: pointer;
+}
+
+.highlight-line {
+    background-color: #e6ffff;
+    box-shadow: rgba(179, 179, 179, 0.15) 0.75px 1.5px 0.5px 0px;
+}
+
+.variant-highlight {
+  background-color: #ffeaa7;
+  border-radius: 3px;
+  padding: 0 2px;
+}
+
 .tippy-box .reading-head {
     margin: 0.2em 0 0.1em;
     font-size: 0.85em;
@@ -183,6 +172,12 @@ td {
     overflow: auto !important;
     max-height: 70vh !important;
 }
+
+.tippy-content pb-popover * {
+    text-decoration: none !important;
+    border-bottom: 1px dotted currentColor !important;
+}
+
 .pb-popover div {
     margin: 0;
     padding: 0;
@@ -192,4 +187,63 @@ td {
 
 .pb-popover div .tei-lb6 {
     display: none;
+}
+
+.header {
+    margin-block: 0.67em;
+    font-size: 1.5em;
+}
+.underlineDotted {
+    text-decoration: underline dotted;
+}
+
+.underlineDashed {
+    text-decoration: underline dashed;
+}
+
+.grey {
+    color: grey;
+}
+
+.red {
+    color: red;
+}
+
+.margin-right {
+    margin-right: 15%;
+}
+
+.margin-left {
+    margin-left: 15%;
+}
+
+.smaller {
+    font-size: smaller;
+}
+
+.center {
+    text-align: center;
+}
+
+.italic {
+    font-style: italic;
+}
+.semibold {
+    font-size: 600;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.indentation {
+    text-indent: 2em;
+}
+.indent {
+    margin-left: 2em; 
+} 
+
+.indent-line {
+    text-indent: 2em;
+    display: block;
 }

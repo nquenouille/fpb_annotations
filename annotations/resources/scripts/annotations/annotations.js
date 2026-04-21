@@ -456,14 +456,22 @@ window.addEventListener("WebComponentsReady", () => {
                     
                         // html2
                         const html2Container = document.getElementById("html2-container");
+                        const PLACEHOLDER = '###KEEP_LB###'
                         let cleanHtml2 = html
-                            .replaceAll(/<img[^>]*>/g, "")
-                            .replaceAll(/-\s*<br[^>]*>/g, '')
-                            .replaceAll(/<br[^>]*>/g, ' ')
-                            .replaceAll(/\s\s+/g, ' ')
-                            .replaceAll(/\s*<span[^>]*>-<\/span[^>]*>\s*/g, '')
-                            .replaceAll(/<body class/g, '<div style="font-family:\'Open Sans\', \'Roboto\', \'Noto\', sans-serif; line-height:1.5em;" class');
-                    
+                            .replace(/<img[^>]*>/g, "")
+                            // Keep Linebreak if <orig @rend='keepLB'>
+                            .replace(/<span[^>]*class=["'][^"']*\bkeepLB\b[^"']*["'][^>]*>\s*<\/span>/gi, PLACEHOLDER)
+                            // Indentation of text line if <orig @rend='indent'>
+                            .replace(/<span[^>]*class=["'][^"']*\bindent\b[^"']*["'][^>]*>\s*<\/span>/gi,'</div><div class="indent-line">')
+                            .replace(/-\s*<br[^>]*>/g, '')
+                            .replace(/<br[^>]*>/g, ' ')
+                            .replace(/\s*<span[^>]*>-<\/span[^>]*>\s*/g, '');
+                        cleanHtml2 = cleanHtml2.replace(new RegExp(PLACEHOLDER, 'g'), '<br>')
+                        // optional: body -> div fix
+                        cleanHtml2 = cleanHtml2.replace(
+                            /<body class/g,
+                            '<div style="font-family:\'Open Sans\', \'Roboto\', \'Noto\', sans-serif; line-height:1.5em;" class'
+                        );
                         html2Container.innerHTML = cleanHtml2;
                     })
 				
