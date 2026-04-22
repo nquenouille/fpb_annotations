@@ -1118,7 +1118,7 @@
                     <model predicate="following::note[@place='margin-left'] and not(following::note[@place='margin-right'])" behaviour="block" cssClass="margin-left">
                         <desc>If there are marginalia on the left after head, set margin to element head.</desc>
                     </model>
-                    <model behaviour="block" cssClass="header">
+                    <model behaviour="block" cssClass="head">
                         <desc>Default in FPB</desc>
                     </model>
                     <model behaviour="block">
