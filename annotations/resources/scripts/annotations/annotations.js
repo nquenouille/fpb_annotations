@@ -704,6 +704,19 @@ window.addEventListener("WebComponentsReady", () => {
 			type='memo';
 		});
 	});
+
+	/*FPB lookup for scribe in signed */
+	document.querySelectorAll('.form-signed [slot="prefix"]').forEach(elem => {
+		elem.addEventListener("click", () => {
+		    type="person";
+			window.pbEvents.emit("pb-authority-lookup", "transcription", {
+				type,
+				query: text,
+			});
+			authorityDialog.open();
+			type='signed';
+		});
+	});
     
     	/*FPB lookup for scribe in rdg */
     document.querySelectorAll('.form-rdg [slot="prefix"]').forEach(elem => {

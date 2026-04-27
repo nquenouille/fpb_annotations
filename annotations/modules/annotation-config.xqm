@@ -47,7 +47,7 @@ declare function anno:annotations($type as xs:string, $properties as map(*)?, $c
         case "address" return
             <address xmlns="http://www.tei-c.org/ns/1.0"><addrLine xmlns="http://www.tei-c.org/ns/1.0">{$content()}</addrLine></address>
         case "signed" return
-            <signed xmlns="http://www.tei-c.org/ns/1.0">{$content()}</signed> 
+            <signed xmlns="http://www.tei-c.org/ns/1.0" hand="{$properties?ref}{$properties?handSigned}">{$content()}</signed> 
         case "dateline" return
             <dateline xmlns="http://www.tei-c.org/ns/1.0">{$content()}</dateline>
         case "postscript" return
