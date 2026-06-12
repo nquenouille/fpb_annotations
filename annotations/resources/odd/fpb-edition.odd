@@ -61,18 +61,9 @@
             </model>
         </modelSequence>
                 </elementSpec>
-                <elementSpec ident="choice" mode="change">
-                    <model predicate="sic and corr and descendant::lb" behaviour="inline" cssClass="underlineDotted">
-            <desc>Edition / Diplomatic View: If there is a line break and the lines are wrapped in pb-facs-link (text not normalized), the popover should be doubled for mouse over to appear in both lines. In the case of an unusual spelling or similar, the correct spelling is displayed by a mouseover. The word in question is marked with a dotted line.</desc>
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="sic[1]"/>
-            <param name="alternate" value="concat('recte: ', corr[1])"/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-        </model>
-                    <model predicate="sic and corr" behaviour="inline" cssClass="underlineDotted">
-            <desc>Content without line break: In the case of an unusual spelling or similar, the correct spelling is displayed by a mouseover. The word in question is marked with a dotted line.</desc>
+        <elementSpec ident="choice" mode="change">
+            <model predicate="sic and corr" behaviour="inline" cssClass="underlineDotted">
+            <desc>In the case of an unusual spelling or similar, the correct spelling is displayed by a mouseover. The word in question is marked with a dotted line.</desc>
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="sic[1]"/>
             <param name="alternate" value="concat('recte: ', corr[1])"/>
@@ -80,35 +71,17 @@
             <param name="fallback-placement" value="'bottom'"/>
             <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
         </model>
-                    <model predicate="abbr and expan and descendant::lb" behaviour="inline" cssClass="underlineDotted">
-            <desc>Edition / Diplomatic View: If there is a line break and the lines are wrapped in pb-facs-link (text not normalized), the popover should be doubled for mouse over to appear in both lines. Normal use of abbreviation and expansion: The text will preserve the abbreviation, and the mouse-over shows the expansion. The word in question is marked with a dotted line.</desc>
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="abbr[1]"/>
-            <param name="alternate" value="expan[1]"/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-        </model>
-                    <model predicate="abbr and expan" behaviour="inline" cssClass="underlineDotted">
-            <desc>Content without line break: Normal use of abbreviation and expansion: The text will preserve the abbreviation, and the mouse-over shows the expansion. The word in question is marked with a dotted line.</desc>
+        <model predicate="abbr and expan" behaviour="inline" cssClass="underlineDotted">
+            <desc>The text will preserve the abbreviation, and the mouse-over shows the expansion. The word in question is marked with a dotted line.</desc>
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="abbr[1]"/>
             <param name="alternate" value="expan[1]"/>
             <param name="placement" value="'top'"/>
             <param name="fallback-placement" value="'bottom'"/>
             <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-        </model>
-                    <model predicate="orig and reg and descendant::lb" behaviour="inline" cssClass="underlineDotted">
-            <desc>Not in use. Edition / Diplomatic View: If there is a line break and the lines are wrapped in pb-facs-link (text not normalized), the popover should be doubled for mouse over to appear in both lines. Not in use.</desc>
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="reg[1]"/>
-            <param name="alternate" value="orig[1]"/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
         </model>
         <model predicate="orig and reg" behaviour="inline" cssClass="underlineDotted">
-            <desc>Not in use. Content without line break.</desc>
+            <desc>Not in use.</desc>
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="reg[1]"/>
             <param name="alternate" value="orig[1]"/>
@@ -121,19 +94,10 @@
                     <model behaviour="block">
             <desc>Datelines will be rendered as block.</desc>
         </model>
-                </elementSpec>
-                <elementSpec ident="date" mode="change">
-                    <model output="web" predicate="@when and descendant::lb and $parameters?mode='diplomatic'" behaviour="inline" cssClass="underlineDotted">
-            <desc>Edition / Diplomatic View: If there is a line break and the lines are wrapped in pb-facs-link (text not normalized), the popover should be doubled for mouse over to appear in both lines. Mouseover for specific dates with attribute @when. Case distinction for complete information (YYYY-MM-DD) and partial information (YYYY; YYYY-MM; YYYY-DD; MM; MM-DD; DD) and month mapping.</desc>
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="."/>
-            <param name="alternate" value=" let $date-pattern := matches(@when, '^\d{4}-\d{2}-\d{2}$') let $month-pattern := matches(@when, '^\d{4}-\d{2}$') let $month-day-pattern := matches(@when, '^--\d{2}-\d{2}$') let $year-only-pattern := matches(@when, '^\d{4}$') let $day-only-pattern := matches(@when, '^---\d{2}$') let $month-only-pattern := matches(@when, '^--\d{2}$') let $months := ('Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember') return if ($date-pattern) then let $month := substring(@when, 6, 2) let $month-index := xs:int($month) let $day := substring(@when, 9, 2) let $year := substring(@when, 1, 4) return concat($day, '. ', $months[$month-index], ' ', $year) else if ($month-pattern) then let $month := substring(@when, 6, 2) let $month-index := xs:int($month) let $year := substring(@when, 1, 4) return concat($months[$month-index], ' ', $year) else if ($month-day-pattern) then let $month := substring(@when, 3, 2) let $month-index := xs:int($month) let $day := substring(@when, 6,2) return concat($day, '. ', $months[$month-index]) else if ($day-only-pattern) then let $day := substring(@when, 4, 2) return concat($day, '. Tag eines unbekannten Monats') else if ($month-only-pattern) then let $month := substring(@when, 3, 2) let $month-index := xs:int($month) return $months[$month-index] else if ($year-only-pattern) then let $year := substring(@when, 1, 4) return $year else ()"/>
-            <param name="placement" value="'bottom'"/>
-            <param name="fallback-placement" value="'right'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-        </model>
-                    <model output="web" predicate="@when and not(descendant::lb)" behaviour="inline" cssClass="underlineDotted">
-            <desc>Content without line break: Mouseover for specific dates with attribute @when. Case distinction for complete information (YYYY-MM-DD) and partial information (YYYY; YYYY-MM; YYYY-DD; MM; MM-DD; DD) and month mapping.</desc>
+    </elementSpec>
+    <elementSpec ident="date" mode="change">
+        <model output="web" predicate="@when" behaviour="inline" cssClass="underlineDotted">
+            <desc>Mouseover for specific dates with attribute @when. Case distinction for complete information (YYYY-MM-DD) and partial information (YYYY; YYYY-MM; YYYY-DD; MM; MM-DD; DD) and month mapping.</desc>
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="."/>
             <param name="alternate" value=" let $date-pattern := matches(@when, '^\d{4}-\d{2}-\d{2}$') let $month-pattern := matches(@when, '^\d{4}-\d{2}$') let $month-day-pattern := matches(@when, '^--\d{2}-\d{2}$') let $year-only-pattern := matches(@when, '^\d{4}$') let $day-only-pattern := matches(@when, '^---\d{2}$') let $month-only-pattern := matches(@when, '^--\d{2}$') let $months := ('Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember') return if ($date-pattern) then let $month := substring(@when, 6, 2) let $month-index := xs:int($month) let $day := substring(@when, 9, 2) let $year := substring(@when, 1, 4) return concat($day, '. ', $months[$month-index], ' ', $year) else if ($month-pattern) then let $month := substring(@when, 6, 2) let $month-index := xs:int($month) let $year := substring(@when, 1, 4) return concat($months[$month-index], ' ', $year) else if ($month-day-pattern) then let $month := substring(@when, 3, 2) let $month-index := xs:int($month) let $day := substring(@when, 6,2) return concat($day, '. ', $months[$month-index]) else if ($day-only-pattern) then let $day := substring(@when, 4, 2) return concat($day, '. Tag eines unbekannten Monats') else if ($month-only-pattern) then let $month := substring(@when, 3, 2) let $month-index := xs:int($month) return $months[$month-index] else if ($year-only-pattern) then let $year := substring(@when, 1, 4) return $year else ()"/>
@@ -141,17 +105,8 @@
             <param name="fallback-placement" value="'right'"/>
             <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
         </model>
-                    <model output="web" predicate="@from and @to and descendant::lb and $parameters?mode='diplomatic'" behaviour="inline" cssClass="underlineDotted">
-            <desc>Edition / Diplomatic View: If there is a line break and the lines are wrapped in pb-facs-link (text not normalized), the popover should be doubled for mouse over to appear in both lines. Mouseover for case of attributes @from and @to.</desc>
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="."/>
-            <param name="alternate" value="concat(@from, ' bis ', @to)"/>
-            <param name="placement" value="'bottom'"/>
-            <param name="fallback-placement" value="'right'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-        </model>
-                    <model output="web" predicate="@from and @to and not(descendant::lb)" behaviour="inline" cssClass="underlineDotted">
-            <desc>Content without line break: Mouseover for case of attributes @from and @to.</desc>
+        <model output="web" predicate="@from and @to" behaviour="inline" cssClass="underlineDotted">
+            <desc>Mouseover for case of attributes @from and @to.</desc>
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="."/>
             <param name="alternate" value="concat(@from, ' bis ', @to)"/>
@@ -159,17 +114,8 @@
             <param name="fallback-placement" value="'right'"/>
             <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
         </model>
-                    <model output="web" predicate="@from and not(@to) and descendant::lb  and $parameters?mode='diplomatic'" behaviour="inline" cssClass="underlineDotted">
-            <desc>Edition / Diplomatic View: If there is a line break and the lines are wrapped in pb-facs-link (text not normalized), the popover should be doubled for mouse over to appear in both lines. Mouseover for case of attributes @from without specific ending.</desc>
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="."/>
-            <param name="alternate" value="concat('Von ', @from, ' an.')"/>
-            <param name="placement" value="'bottom'"/>
-            <param name="fallback-placement" value="'right'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-        </model>
-                    <model output="web" predicate="@from and not(@to) and not(descendant::lb)" behaviour="inline" cssClass="underlineDotted">
-            <desc>Content without line break: Mouseover for case of attributes @from without specific ending.</desc>
+        <model output="web" predicate="@from and not(@to)" behaviour="inline" cssClass="underlineDotted">
+            <desc>Mouseover for case of attributes @from without specific ending.</desc>
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="."/>
             <param name="alternate" value="concat('Von ', @from, ' an.')"/>
@@ -177,7 +123,7 @@
             <param name="fallback-placement" value="'right'"/>
             <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
         </model>
-                    <model behaviour="inline">
+        <model behaviour="inline">
             <desc>Default.</desc>
             <outputRendition xml:space="preserve">
             null
@@ -456,17 +402,8 @@
                         
             </outputRendition>
         </model>
-                    <model predicate="@type='presentation' and descendant::lb and $parameters?mode='diplomatic'" behaviour="inline" cssClass="underlineDotted grey">
-            <desc>Edition / Diplomatic View: If there is a line break and the lines are wrapped in pb-facs-link (text not normalized), the popover should be doubled for mouse over to appear in both lines. If there is a presentation note, show in mouseover, which kind of note, and who left it.</desc>
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="."/>
-            <param name="alternate" value="if(contains(@hand, 'main')) then concat('Präsentationsvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Präsentationsvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(@subtype='person' and starts-with(@hand, 'fpb-')) then concat('Präsentationsvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/tei-publisher/data/register.xml&#34;))/persName/text()) else concat('Präsentationsvermerk, ergänzt von: ', ./@hand)"/>
-            <param name="placement" value="'left'"/>
-            <param name="fallback-placement" value="'right'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover xmlns="http://www.tei-c.org/ns/1.0" placement="[[placement]]" fallback-placement="[[fallback-placement]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-        </model>
-                    <model predicate="@type='presentation' and not(descendant::lb)" behaviour="inline" cssClass="underlineDotted grey">
-            <desc>Content without line break: If there is a presentation note, show in mouseover, which kind of note, and who left it.</desc>
+        <model predicate="@type='presentation'" behaviour="inline" cssClass="underlineDotted grey">
+            <desc>If there is a presentation note, show in mouseover, which kind of note, and who left it.</desc>
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="."/>
             <param name="alternate" value="if(contains(@hand, 'main')) then concat('Präsentationsvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Präsentationsvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(@subtype='person' and starts-with(@hand, 'fpb-')) then concat('Präsentationsvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/tei-publisher/data/register.xml&#34;))/persName/text()) else concat('Präsentationsvermerk, ergänzt von: ', ./@hand)"/>
@@ -474,17 +411,8 @@
             <param name="fallback-placement" value="'right'"/>
             <pb:template xmlns="" xml:space="preserve"><pb-popover xmlns="http://www.tei-c.org/ns/1.0" placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
         </model>
-                    <model predicate="@type='received' and descendant::lb and $parameters?mode='diplomatic'" behaviour="inline" cssClass="underlineDotted grey">
-            <desc>Edition / Diplomatic View: If there is a line break and the lines are wrapped in pb-facs-link (text not normalized), the popover should be doubled for mouse over to appear in both lines. If there is a receipt note, show in mouseover, which kind of note, and who left it.</desc>
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="."/>
-            <param name="alternate" value="if(contains(@hand, 'main')) then concat('Empfangsvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Empfangsvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(@subtype='person' and starts-with(@hand, 'fpb-')) then concat('Empfangsvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/tei-publisher/data/register.xml&#34;))/persName/text()) else concat('Empfangsvermerk, ergänzt von: ', ./@hand)"/>
-            <param name="placement" value="'left'"/>
-            <param name="fallback-placement" value="'right'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-        </model>
-                    <model predicate="@type='received' and not(descendant::lb)" behaviour="inline" cssClass="underlineDotted grey">
-            <desc>Content without line break: If there is a receipt note, show in mouseover, which kind of note, and who left it.</desc>
+        <model predicate="@type='received'" behaviour="inline" cssClass="underlineDotted grey">
+            <desc>If there is a receipt note, show in mouseover, which kind of note, and who left it.</desc>
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="."/>
             <param name="alternate" value="if(contains(@hand, 'main')) then concat('Empfangsvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Empfangsvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(@subtype='person' and starts-with(@hand, 'fpb-')) then concat('Empfangsvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/tei-publisher/data/register.xml&#34;))/persName/text()) else concat('Empfangsvermerk, ergänzt von: ', ./@hand)"/>
@@ -492,33 +420,16 @@
             <param name="fallback-placement" value="'right'"/>
             <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
         </model>
-                    <model predicate="@type='possessor' and descendant::lb and $parameters?mode='diplomatic'" behaviour="inline" cssClass="underlineDotted grey">
-            <desc>Edition / Diplomatic View: If there is a line break and the lines are wrapped in pb-facs-link (text not normalized), the popover should be doubled for mouse over to appear in both lines. If there is a ownership note, show in mouseover, which kind of note, and who left it.</desc>
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="."/>
-            <param name="alternate" value="if(contains(@hand, 'main')) then concat('Besitzvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Besitzvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(@subtype='person' and starts-with(@hand, 'fpb-')) then concat('Besitzvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/tei-publisher/data/register.xml&#34;))/persName/text()) else concat('Besitzvermerk, ergänzt von: ', ./@hand)"/>
-            <param name="fallback-placement" value="'right'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-        </model>
-                    <model predicate="@type='possessor' and not(descendant::lb)" behaviour="inline" cssClass="underlineDotted grey">
-            <desc>Content without line break: If there is a ownership note, show in mouseover, which kind of note, and who left it.</desc>
+        <model predicate="@type='possessor'" behaviour="inline" cssClass="underlineDotted grey">
+            <desc>If there is a ownership note, show in mouseover, which kind of note, and who left it.</desc>
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="."/>
             <param name="alternate" value="if(contains(@hand, 'main')) then concat('Besitzvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Besitzvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(@subtype='person' and starts-with(@hand, 'fpb-')) then concat('Besitzvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/tei-publisher/data/register.xml&#34;))/persName/text()) else concat('Besitzvermerk, ergänzt von: ', ./@hand)"/>
             <param name="fallback-placement" value="'right'"/>
             <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
         </model>
-                    <model predicate="@type='address' and descendant::lb and $parameters?mode='diplomatic'" behaviour="inline" cssClass="underlineDotted grey">
-            <desc>Edition / Diplomatic View: If there is a line break and the lines are wrapped in pb-facs-link (text not normalized), the popover should be doubled for mouse over to appear in both lines. If there is an address note, show in mouseover, which kind of note, and who left it.</desc>
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="."/>
-            <param name="alternate" value="if(contains(@hand, 'main')) then concat('Adressvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Adressvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(starts-with(@hand, 'fpb-')) then concat('Adressvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/tei-publisher/data/register.xml&#34;))/persName/text()) else concat('Adressvermerk, ergänzt von: ', ./@hand)"/>
-            <param name="placement" value="'left'"/>
-            <param name="fallback-placement" value="'right'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-        </model>
-                    <model predicate="@type='address' and not(descendant::lb)" behaviour="inline" cssClass="underlineDotted grey">
-            <desc>Content without line break: If there is an address note, show in mouseover, which kind of note, and who left it.</desc>
+        <model predicate="@type='address'" behaviour="inline" cssClass="underlineDotted grey">
+            <desc>If there is an address note, show in mouseover, which kind of note, and who left it.</desc>
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="."/>
             <param name="alternate" value="if(contains(@hand, 'main')) then concat('Adressvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Adressvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(starts-with(@hand, 'fpb-')) then concat('Adressvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/tei-publisher/data/register.xml&#34;))/persName/text()) else concat('Adressvermerk, ergänzt von: ', ./@hand)"/>
@@ -526,17 +437,8 @@
             <param name="fallback-placement" value="'right'"/>
             <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
         </model>
-                    <model predicate="@type='numbering' and descendant::lb and $parameters?mode='diplomatic'" behaviour="inline" cssClass="underlineDotted grey">
-            <desc>Edition / Diplomatic View: If there is a line break and the lines are wrapped in pb-facs-link (text not normalized), the popover should be doubled for mouse over to appear in both lines. If there is a numbering note, show in mouseover, which kind of note, and who left it.</desc>
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="."/>
-            <param name="alternate" value="if(contains(@hand, 'main')) then concat('Numerierungsvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Numerierungsvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(starts-with(@hand, 'fpb-')) then concat('Numerierungsvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/tei-publisher/data/register.xml&#34;))/persName/text()) else concat('Numerierungsvermerk, ergänzt von: ', ./@hand)"/>
-            <param name="placement" value="'left'"/>
-            <param name="fallback-placement" value="'right'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-        </model>
-                    <model predicate="@type='numbering' and not(descendant::lb)" behaviour="inline" cssClass="underlineDotted grey">
-            <desc>Content without line break: If there is a numbering note, show in mouseover, which kind of note, and who left it.</desc>
+        <model predicate="@type='numbering'" behaviour="inline" cssClass="underlineDotted grey">
+            <desc>If there is a numbering note, show in mouseover, which kind of note, and who left it.</desc>
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="."/>
             <param name="alternate" value="if(contains(@hand, 'main')) then concat('Numerierungsvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Numerierungsvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(starts-with(@hand, 'fpb-')) then concat('Numerierungsvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/tei-publisher/data/register.xml&#34;))/persName/text()) else concat('Numerierungsvermerk, ergänzt von: ', ./@hand)"/>
@@ -544,17 +446,8 @@
             <param name="fallback-placement" value="'right'"/>
             <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
         </model>
-                    <model predicate="@type='postalNote' and descendant::lb and $parameters?mode='diplomatic'" behaviour="inline" cssClass="underlineDotted grey">
-            <desc>Edition / Diplomatic View: If there is a line break and the lines are wrapped in pb-facs-link (text not normalized), the popover should be doubled for mouse over to appear in both lines. If there is a postal note, show in mouseover, which kind of note, and who left it.</desc>
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="."/>
-            <param name="alternate" value="if(contains(@hand, 'main')) then concat('Postvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Postvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(starts-with(@hand, 'fpb-')) then concat('Postvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/tei-publisher/data/register.xml&#34;))/persName/text()) else concat('Postvermerk, ergänzt von: ', ./@hand)"/>
-            <param name="placement" value="'left'"/>
-            <param name="fallback-placement" value="'right'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-        </model>
-                    <model predicate="@type='postalNote' and not(descendant::lb)" behaviour="inline" cssClass="underlineDotted grey">
-            <desc>Content without line break: If there is a postal note, show in mouseover, which kind of note, and who left it.</desc>
+        <model predicate="@type='postalNote'" behaviour="inline" cssClass="underlineDotted grey">
+            <desc>If there is a postal note, show in mouseover, which kind of note, and who left it.</desc>
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="."/>
             <param name="alternate" value="if(contains(@hand, 'main')) then concat('Postvermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Postvermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(starts-with(@hand, 'fpb-')) then concat('Postvermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/tei-publisher/data/register.xml&#34;))/persName/text()) else concat('Postvermerk, ergänzt von: ', ./@hand)"/>
@@ -562,17 +455,8 @@
             <param name="fallback-placement" value="'right'"/>
             <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
         </model>
-                    <model predicate="@type='other' and descendant::lb and $parameters?mode='diplomatic'" behaviour="inline" cssClass="underlineDotted grey">
-            <desc>Edition / Diplomatic View: If there is a line break and the lines are wrapped in pb-facs-link (text not normalized), the popover should be doubled for mouse over to appear in both lines. If there is an unspecified note, show in mouseover, which kind of note, and who left it.</desc>
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="."/>
-            <param name="alternate" value="if(contains(@hand, 'main')) then concat('Sonstiger Vermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Sonstiger Vermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(starts-with(@hand, 'fpb-')) then concat('Sonstiger Vermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/tei-publisher/data/register.xml&#34;))/persName/text()) else concat('Sonstiger Vermerk, ergänzt von: ', ./@hand)"/>
-            <param name="placement" value="'left'"/>
-            <param name="fallback-placement" value="'right'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-        </model>
-                    <model predicate="@type='other' and not(descendant::lb)" behaviour="inline" cssClass="underlineDotted grey">
-            <desc>Content without line break: If there is an unspecified note, show in mouseover, which kind of note, and who left it.</desc>
+        <model predicate="@type='other'" behaviour="inline" cssClass="underlineDotted grey">
+            <desc>If there is an unspecified note, show in mouseover, which kind of note, and who left it.</desc>
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="."/>
             <param name="alternate" value="if(contains(@hand, 'main')) then concat('Sonstiger Vermerk, ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Sonstiger Vermerk, ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(starts-with(@hand, 'fpb-')) then concat('Sonstiger Vermerk, ergänzt von: ', id(@hand, doc(&#34;/db/apps/tei-publisher/data/register.xml&#34;))/persName/text()) else concat('Sonstiger Vermerk, ergänzt von: ', ./@hand)"/>
@@ -724,17 +608,8 @@
                 <param name="fallback-placement" value="'bottom'"/>
                 <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
             </model>
-            <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')]/@xml:id) and not((concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]/@xml:id)) and preceding::del[1]/descendant::lb" behaviour="inline" cssClass="underlineDotted">
-                <desc>Line break in content: add[correction] with Involved Scribe. If there is a line break and the lines are wrapped in pb-facs-link (text not normalized), the popover should be doubled for mouse over to appear in both lines.</desc>
-                <param name="name" value="'pb-popover'"/>
-                <param name="content" value="preceding::del[1]/node()"/>
-                <param name="alternate" value="let $main := id(concat('t', @xml:id), root($parameters?root)), $del := ./preceding::del[1]  return                                              string-join(                                               for $a in ($main, $main/child::add)                                               let $hand :=                                                  if($a/@hand) then                                                   if(starts-with($a/@hand, 'fpb-')) then                                                     string($a/id(@hand, doc('/db/apps/tei-publisher/data/register.xml'))/persName)                                                   else                                                     replace($a/@hand, 'involved', 'Unbekannter Schreiber ')                                                 else 'Unbekannter Schreiber'                                               let $delText := string-join($a/node()[not(self::add)], '')                                                                                            let $new := string-join($a/node()[not(self::add)], '')                                               let $status := if($del/unclear[@reason='unsure']) then ' (unsicher)' else if ($del/unclear[@reason='illegible']) then ' (unleserlich)' else ''                                               return concat('Korrigiert von: ', $hand, ' zu: ', $new, $status)                                             , '; ')"/>
-                <param name="placement" value="'top'"/>
-                <param name="fallback-placement" value="'bottom'"/>
-                <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-            </model>
-            <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')]/@xml:id) and not((concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]/@xml:id)) and not(preceding::del[1]/descendant::lb)" behaviour="inline" cssClass="underlineDotted">
-                <desc>No line break in content: add[correction] with Involved Scribe.</desc>
+            <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')]/@xml:id) and not((concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]/@xml:id))" behaviour="inline" cssClass="underlineDotted">
+                <desc>add[correction] with Involved Scribe.</desc>
                 <param name="name" value="'pb-popover'"/>
                 <param name="content" value="preceding::del[1]/node()"/>
                 <param name="alternate" value="let $main := id(concat('t', @xml:id), root($parameters?root)), $del := ./preceding::del[1]  return                                              string-join(                                               for $a in ($main, $main/child::add)                                               let $hand :=                                                  if($a/@hand) then                                                   if(starts-with($a/@hand, 'fpb-')) then                                                     string($a/id(@hand, doc('/db/apps/tei-publisher/data/register.xml'))/persName)                                                   else                                                     replace($a/@hand, 'involved', 'Unbekannter Schreiber ')                                                 else 'Unbekannter Schreiber'                                               let $delText := string-join($a/node()[not(self::add)], '')                                                                                            let $new := string-join($a/node()[not(self::add)], '')                                               let $status := if($del/unclear[@reason='unsure']) then ' (unsicher)' else if ($del/unclear[@reason='illegible']) then ' (unleserlich)' else ''                                               return concat('Korrigiert von: ', $hand, ' zu: ', $new, $status)                                             , '; ')"/>
@@ -754,15 +629,6 @@
         </modelSequence>
         </elementSpec>
         <elementSpec ident="term" mode="add">
-            <model predicate="@type='term' and descendant::lb and $parameters?mode='diplomatic'" behaviour="inline" cssClass="underlineDotted">
-                <desc>Not in use. Line break in content: If there is a line break and the lines are wrapped in pb-facs-link (text not normalized), the popover should be doubled for mouse over to appear in both lines.</desc>
-                <param name="name" value="'pb-popover'"/>
-                <param name="content" value="."/>
-                <param name="alternate" value="if(@type='term') then let $s := id(@key, doc(&#34;/db/apps/tei-publisher/data/register.xml&#34;))/def/string() return concat(id(@key, doc(&#34;/db/apps/tei-publisher/data/register.xml&#34;))/orth/term/string(), ': ', $s) else ()"/>
-                <param name="placement" value="'bottom'"/>
-                <param name="fallback-placement" value="'top'"/>
-                <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-            </model>
             <model predicate="@type='term'" behaviour="inline" cssClass="underlineDotted">
                 <desc>Not in use. If term then show meaning from glossary in register via mouseover.</desc>
                 <param name="name" value="'pb-popover'"/>
@@ -873,35 +739,17 @@
                 <desc>If the add tag refers to an anchor, omit.</desc>
             </model>
             <model predicate="@type='correction' and preceding::del[1]" behaviour="omit"/>
-            <model predicate="not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef) and @type='addition' and not(contains(@xml:id, 'ta')) and descendant::lb" behaviour="inline" cssClass="grey">
-                <desc>Line break in content: If there is a line break and the lines are wrapped in pb-facs-link (text not normalized), the popover should be doubled for mouse over to appear in both lines. Direct addition of involved scribe.</desc>
-                <param name="name" value="'pb-popover'"/>
+            <model predicate="not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef) and @type='addition' and not(contains(@xml:id, 'ta'))" behaviour="inline" cssClass="grey">
+                <desc>Direct addition of involved scribe.</desc>
                 <param name="content" value="."/>
-                <param name="alternate" value="if(starts-with(@hand, 'fpb-') and not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef)) then concat('Ergänzt von: ', id(@hand, doc(&#34;/db/apps/tei-publisher/data/register.xml&#34;))/persName/text()) else if(not(@hand='')) then concat('Ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else 'Ergänzung'"/>
-                <param name="placement" value="'top'"/>
-                <param name="fallback-placement" value="'bottom'"/>
-                <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-            </model>
-            <model predicate="not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef) and @type='addition' and not(contains(@xml:id, 'ta')) and not(descendant::lb)" behaviour="inline" cssClass="grey">
-                <desc>No line break in content: Direct addition of involved scribe.</desc>
                 <param name="name" value="'pb-popover'"/>
-                <param name="content" value="."/>
                 <param name="alternate" value="if(starts-with(@hand, 'fpb-') and not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef)) then concat('Ergänzt von: ', id(@hand, doc(&#34;/db/apps/tei-publisher/data/register.xml&#34;))/persName/text()) else if(not(@hand='')) then concat('Ergänzt von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else 'Ergänzung'"/>
                 <param name="placement" value="'top'"/>
                 <param name="fallback-placement" value="'bottom'"/>
                 <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
             </model>
-            <model predicate="(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef) and @type='addition' and not(contains(@xml:id, 'ta')) and descendant::lb" behaviour="inline" cssClass="underlineDotted">
-                <desc>Line break in content. If there is a line break and the lines are wrapped in pb-facs-link (text not normalized), the popover should be doubled for mouse over to appear in both lines. Direct addition of main scribe.</desc>
-                <param name="name" value="'pb-popover'"/>
-                <param name="content" value="."/>
-                <param name="alternate" value="if(starts-with(@hand, 'fpb-') and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef) then concat('Ergänzt von: ', id(@hand, doc(&#34;/db/apps/tei-publisher/data/register.xml&#34;))/persName/text()) else if(not(@hand='')) then concat('Ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else 'Ergänzung'"/>
-                <param name="placement" value="'top'"/>
-                <param name="fallback-placement" value="'bottom'"/>
-                <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-            </model>
-            <model predicate="(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef) and @type='addition' and not(contains(@xml:id, 'ta')) and not(descendant::lb)" behaviour="inline" cssClass="underlineDotted">
-                <desc>No line break in content. Direct addition of main scribe.</desc>
+            <model predicate="(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef) and @type='addition' and not(contains(@xml:id, 'ta'))" behaviour="inline" cssClass="underlineDotted">
+                <desc>Direct addition of main scribe.</desc>
                 <param name="name" value="'pb-popover'"/>
                 <param name="content" value="."/>
                 <param name="alternate" value="if(starts-with(@hand, 'fpb-') and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef) then concat('Ergänzt von: ', id(@hand, doc(&#34;/db/apps/tei-publisher/data/register.xml&#34;))/persName/text()) else if(not(@hand='')) then concat('Ergänzt von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else 'Ergänzung'"/>
@@ -918,16 +766,8 @@
             <model behaviour="block"/>
         </elementSpec>
         <elementSpec ident="ref" mode="change">
-            <model predicate="@target and descendant::lb" behaviour="link" cssClass="underline">
-            <desc>Line break in content. If there is a line break and the lines are wrapped in pb-facs-link (text not normalized), the popover should be doubled for mouse over to appear in both lines. Setting a link.</desc>
-            <param name="uri" value="@target"/>
-            <param name="alternate" value="@target"/>
-            <param name="name" value="'pb-popover'"/>
-            <param name="target" value="'_blank'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover uri="[[uri]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-        </model>
-        <model predicate="@target and not(descendant::lb)" behaviour="link">
-            <desc>No line break. Setting a link.</desc>
+            <model predicate="@target" behaviour="link" cssClass="underline">
+            <desc>Setting a link.</desc>
             <param name="uri" value="@target"/>
             <param name="alternate" value="@target"/>
             <param name="name" value="'pb-popover'"/>
@@ -971,10 +811,10 @@
         <model output="web" predicate="descendant::rdg[@change='#version3']" behaviour="inline" cssClass="pb-popover underlineDotted">
             <desc>Show readings in popover when version 1, 2 and 3 exist</desc>
             <param name="name" value="popover"/>
-            <param name="content" value="if(normalize-space(descendant::rdg[@change='#version1']) != '') then element div {descendant::rdg[@change='#version1']/node()} else ' ... '"/>
-            <param name="alt1" value="if(descendant::rdg[@change='#version1']) then for $n in descendant::rdg[@change='#version1']/node() return if ($n instance of element(lb)) then element div {()} else element div {$n} else ()"/>
-            <param name="alt2" value="if(descendant::rdg[@change='#version2']) then for $n in descendant::rdg[@change='#version2']/node() return if ($n instance of element(lb)) then element div {()} else element div {$n} else ()"/>
-            <param name="alt3" value="if(descendant::rdg[@change='#version3']) then for $n in descendant::rdg[@change='#version3']/node() return if ($n instance of element(lb)) then element div {()} else element div {$n} else ()"/>
+            <param name="content" value="if(normalize-space(descendant::rdg[@change='#version1']) != '') then descendant::rdg[@change='#version1']/node() else ' ... '"/>
+            <param name="alt1" value="if(descendant::rdg[@change='#version1']) then for $n in descendant::rdg[@change='#version1']/node() return if ($n instance of element(lb)) then element br {()} else element span {$n} else ()"/>
+            <param name="alt2" value="if(descendant::rdg[@change='#version2']) then for $n in descendant::rdg[@change='#version2']/node() return if ($n instance of element(lb)) then element br {()} else element span {$n} else ()"/>
+            <param name="alt3" value="if(descendant::rdg[@change='#version3']) then for $n in descendant::rdg[@change='#version3']/node() return if ($n instance of element(lb)) then element br {()} else element span {$n} else ()"/>
             <param name="placement" value="'right'"/>
             <param name="fallback-placement" value="'left'"/>
             <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate"><b>Lesart 1: </b>[[alt1]]<br/><b>Lesart 2: </b>[[alt2]]<br/><b>Lesart 3: </b>[[alt3]]</span></pb-popover>
@@ -1228,19 +1068,8 @@
         <model predicate="self::del[following-sibling::*[not(self::lb)][1][self::anchor][concat('t', @xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')]/@xml:id]]" behaviour="omit">
             <desc>Omit if there is an anchor</desc>
         </model>
-        <model predicate="let $refPers := root($parameters?root)//scriptNote[@scribe='involved']/@scribeRef return self::del[@hand = $refPers] and following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'][@hand = $refPers] and following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace']//lb" behaviour="inline" cssClass="grey triangle">
-            <desc>Line break in content. If there is a line break and the lines are wrapped in pb-facs-link (text not normalized), the popover should be doubled for mouse over to appear in both lines. No anchor. Involved Scribe in del and add</desc>
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="let $add := following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'] return if(self::del//lb[1]) then (self::del//lb[1], $add/node()) else $add/node()"/>
-            <param name="alternate" value="let $refPers := root($parameters?root)//scriptNote[@scribe='involved']/@scribeRef, $add := following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'][@hand = $refPers], $del := self::del[@hand=$refPers], $hand := $add/@hand, $name := $add/id($hand, doc('/db/apps/tei-publisher/data/register.xml'))/persName/text(), $original := normalize-space(string-join(for $n in $del/node() return typeswitch($n) case text() return $n case element(lb) return ' || ' case element(choice) return concat(string($n/abbr), ' (= ', string($n/expan), ')') default return string-join(for $c in $n/node() return if($c/self::lb) then ' || ' else if($c/self::choice) then concat(string($c/abbr), ' (= ', string($c/expan), ')') else if($c instance of text()) then $c else ()))), $unclear := if(exists(self::del//unclear[@reason='unsure'])) then '(unsicher)' else if(exists(self::del//unclear[@reason='illegible'])) then ' (unleserlich)' else '' return if($name) then concat('Korrigiert von: ', $name, '; Ursprüngliche Lesart: ', $original, $unclear) else if(contains($hand, 'involved')) then concat('Korrigiert von: ', replace($hand, 'involved', 'Unbekannter Schreiber '), '; Ursprüngliche Lesart: ', $original, $unclear) else concat('Ursprüngliche Lesart: ', $original, $unclear)"/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve">
-                <pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover>
-            </pb:template>
-        </model>
-        <model predicate="let $refPers := root($parameters?root)//scriptNote[@scribe='involved']/@scribeRef return self::del[@hand = $refPers] and following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'][@hand = $refPers] and not(following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace']//lb)" behaviour="inline" cssClass="grey triangle">
-            <desc>No line break. No anchor. Involved Scribe in del and add</desc>
+        <model predicate="let $refPers := root($parameters?root)//scriptNote[@scribe='involved']/@scribeRef return self::del[@hand = $refPers] and following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'][@hand = $refPers]" behaviour="inline" cssClass="grey triangle">
+            <desc>No anchor. Involved Scribe in del and add</desc>
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="let $add := following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'] return if(self::del//lb[1]) then (self::del//lb[1], $add/node()) else $add/node()"/>
             <param name="alternate" value="let $refPers := root($parameters?root)//scriptNote[@scribe='involved']/@scribeRef, $add := following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'][@hand = $refPers], $del := self::del[@hand=$refPers], $hand := $add/@hand, $name := $add/id($hand, doc('/db/apps/tei-publisher/data/register.xml'))/persName/text(), $original := normalize-space(string-join(for $n in $del/node() return typeswitch($n) case text() return $n case element(lb) return ' || ' case element(choice) return concat(string($n/abbr), ' (= ', string($n/expan), ')') default return string-join(for $c in $n/node() return if($c/self::lb) then ' || ' else if($c/self::choice) then concat(string($c/abbr), ' (= ', string($c/expan), ')') else if($c instance of text()) then $c else ()))), $unclear := if(exists(self::del//unclear[@reason='unsure'])) then '(unsicher)' else if(exists(self::del//unclear[@reason='illegible'])) then ' (unleserlich)' else '' return if($name) then concat('Korrigiert von: ', $name, '; Ursprüngliche Lesart: ', $original, $unclear) else if(contains($hand, 'involved')) then concat('Korrigiert von: ', replace($hand, 'involved', 'Unbekannter Schreiber '), '; Ursprüngliche Lesart: ', $original, $unclear) else concat('Ursprüngliche Lesart: ', $original, $unclear)"/>
@@ -1250,22 +1079,8 @@
                 <pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover>
             </pb:template>
         </model>
-        <model predicate="let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef return self::del[@hand = $refPers] and following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'][@hand = $refPers] and following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace']//lb" behaviour="inline" cssClass="triangle">
-            <desc>Line break in content. If there is a line break and the lines are wrapped in pb-facs-link (text not normalized), the popover should be doubled for mouse over to appear in both lines. No anchor. Main Scribe in del and add</desc>
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="let $add := following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'] return if(self::del//lb[1]) then (self::del//lb[1], $add/node()) else $add/node()"/>
-            <param name="alternate" value="let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef, $add := following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'][@hand = $refPers], $del := self::del[@hand=$refPers], $hand := $add/@hand, $name := $add/id($hand, doc('/db/apps/tei-publisher/data/register.xml'))/persName/text(), $original := normalize-space(string-join(for $n in $del/node() return typeswitch($n) case text() return $n case element(lb) return ' || ' case element(choice) return concat(string($n/abbr), ' (= ', string($n/expan), ')') default return string-join(for $c in $n/node() return if($c/self::lb) then ' || ' else if($c/self::choice) then concat(string($c/abbr), ' (= ', string($c/expan), ')') else if($c instance of text()) then $c else ()))), $unclear := if(exists(self::del//unclear[@reason='unsure'])) then ' (unsicher)' else if(exists(self::del//unclear[@reason='illegible'])) then ' (unleserlich)' else '' return if($name) then concat('Korrigiert von: ', $name, '; Ursprüngliche Lesart: ', $original, $unclear) else if(contains($hand, 'main')) then concat('Korrigiert von: ', replace($hand, 'main', 'Unbekannter Hauptschreiber '), '; Ursprüngliche Lesart: ', $original, $unclear) else concat('Ursprüngliche Lesart: ', $original, $unclear)"/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve">
-                <pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover>
-            </pb:template>
-            <outputRendition xml:space="preserve" scope="after">
-            content: '';
-            </outputRendition>
-        </model>
-        <model predicate="let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef return self::del[@hand = $refPers] and following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'][@hand = $refPers] and not(following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace']//lb)" behaviour="inline" cssClass="triangle">
-            <desc>No line break in content. No anchor. Main Scribe in del and add</desc>
+        <model predicate="let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef return self::del[@hand = $refPers] and following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'][@hand = $refPers]" behaviour="inline" cssClass="triangle">
+            <desc>No anchor. Main Scribe in del and add</desc>
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="let $add := following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'] return if(self::del//lb[1]) then (self::del//lb[1], $add/node()) else $add/node()"/>
             <param name="alternate" value="let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef, $add := following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'][@hand = $refPers], $del := self::del[@hand=$refPers], $hand := $add/@hand, $name := $add/id($hand, doc('/db/apps/tei-publisher/data/register.xml'))/persName/text(), $original := normalize-space(string-join(for $n in $del/node() return typeswitch($n) case text() return $n case element(lb) return ' || ' case element(choice) return concat(string($n/abbr), ' (= ', string($n/expan), ')') default return string-join(for $c in $n/node() return if($c/self::lb) then ' || ' else if($c/self::choice) then concat(string($c/abbr), ' (= ', string($c/expan), ')') else if($c instance of text()) then $c else ()))), $unclear := if(exists(self::del//unclear[@reason='unsure'])) then ' (unsicher)' else if(exists(self::del//unclear[@reason='illegible'])) then ' (unleserlich)' else '' return if($name) then concat('Korrigiert von: ', $name, '; Ursprüngliche Lesart: ', $original, $unclear) else if(contains($hand, 'main')) then concat('Korrigiert von: ', replace($hand, 'main', 'Unbekannter Hauptschreiber '), '; Ursprüngliche Lesart: ', $original, $unclear) else concat('Ursprüngliche Lesart: ', $original, $unclear)"/>
@@ -1278,18 +1093,8 @@
             content: '';
             </outputRendition>
         </model>
-        <model predicate="let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef return self::del[not(@hand = $refPers)] and following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'][@hand = $refPers] and following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace']//lb" behaviour="inline" cssClass="underlineDotted triangle">
-            <desc>Line break in content. If there is a line break and the lines are wrapped in pb-facs-link (text not normalized), the popover should be doubled for mouse over to appear in both lines. No anchor. Involved Scribe in del and main scribe in add</desc>
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="let $add := following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'] return if(self::del//lb[1]) then (self::del//lb[1], $add/node()) else $add/node()"/>
-            <param name="alternate" value="let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef, $add := following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'][@hand = $refPers], $del := self::del[not(@hand=$refPers)], $hand := $add/@hand, $name := $add/id($hand, doc('/db/apps/tei-publisher/data/register.xml'))/persName/text(), $nameDel := if(contains(@hand, 'involved')) then replace(@hand, 'involved', 'Unbekannter Schreiber ') else self::del/id(@hand, doc('/db/apps/tei-publisher/data/register.xml'))/persName/text(), $original := normalize-space(string-join(for $n in $del/node() return typeswitch($n) case text() return $n case element(lb) return ' || ' case element(choice) return concat(string($n/abbr), ' (= ', string($n/expan), ')') default return string-join(for $c in $n/node() return if($c/self::lb) then ' || ' else if($c/self::choice) then concat(string($c/abbr), ' (= ', string($c/expan), ')') else if($c instance of text()) then $c else ()))), $unclear := if(exists(self::del//unclear[@reason='unsure'])) then ' (unsicher)' else if(exists(self::del//unclear[@reason='illegible'])) then ' (unleserlich)' else '' return if($name) then concat('Korrigiert von: ', $name, '; Ursprüngliche Lesart (gestrichen von: ', $nameDel, '): ', $original, $unclear) else if(contains($hand, 'main')) then concat('Korrigiert von: ', replace($hand, 'main', 'Unbekannter Hauptschreiber '), '; Ursprüngliche Lesart (gestrichen von: ', $nameDel, '): ', $original, $unclear) else concat('Ursprüngliche Lesart (gestrichen von: ', $nameDel, '): ',  $original, $unclear)"/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover>
-            </pb:template>
-        </model>
-        <model predicate="let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef return self::del[not(@hand = $refPers)] and following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'][@hand = $refPers] and not(following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace']//lb)" behaviour="inline" cssClass="underlineDotted triangle">
-            <desc>No line break in content. No anchor. Involved Scribe in del and main scribe in add</desc>
+        <model predicate="let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef return self::del[not(@hand = $refPers)] and following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'][@hand = $refPers]" behaviour="inline" cssClass="underlineDotted triangle">
+            <desc>No anchor. Involved Scribe in del and main scribe in add</desc>
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="let $add := following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'] return if(self::del//lb[1]) then (self::del//lb[1], $add/node()) else $add/node()"/>
             <param name="alternate" value="let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef, $add := following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'][@hand = $refPers], $del := self::del[not(@hand=$refPers)], $hand := $add/@hand, $name := $add/id($hand, doc('/db/apps/tei-publisher/data/register.xml'))/persName/text(), $nameDel := if(contains(@hand, 'involved')) then replace(@hand, 'involved', 'Unbekannter Schreiber ') else self::del/id(@hand, doc('/db/apps/tei-publisher/data/register.xml'))/persName/text(), $original := normalize-space(string-join(for $n in $del/node() return typeswitch($n) case text() return $n case element(lb) return ' || ' case element(choice) return concat(string($n/abbr), ' (= ', string($n/expan), ')') default return string-join(for $c in $n/node() return if($c/self::lb) then ' || ' else if($c/self::choice) then concat(string($c/abbr), ' (= ', string($c/expan), ')') else if($c instance of text()) then $c else ()))), $unclear := if(exists(self::del//unclear[@reason='unsure'])) then ' (unsicher)' else if(exists(self::del//unclear[@reason='illegible'])) then ' (unleserlich)' else '' return if($name) then concat('Korrigiert von: ', $name, '; Ursprüngliche Lesart (gestrichen von: ', $nameDel, '): ', $original, $unclear) else if(contains($hand, 'main')) then concat('Korrigiert von: ', replace($hand, 'main', 'Unbekannter Hauptschreiber '), '; Ursprüngliche Lesart (gestrichen von: ', $nameDel, '): ', $original, $unclear) else concat('Ursprüngliche Lesart (gestrichen von: ', $nameDel, '): ',  $original, $unclear)"/>
@@ -1298,18 +1103,8 @@
             <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover>
             </pb:template>
         </model>
-        <model predicate="let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef return self::del[@hand = $refPers] and following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'][not(@hand = $refPers)] and self::del//lb" behaviour="inline" cssClass="underlineDotted">
-            <desc>Line break in content. If there is a line break and the lines are wrapped in pb-facs-link (text not normalized), the popover should be doubled for mouse over to appear in both lines. No anchor. Main Scribe in del and involved scribe in add</desc>
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="if(self::del[unclear[@reason='illegible'] and not(text()[normalize-space()])]) then '〈…〉' else self::del/node()"/>
-            <param name="alternate" value="let $refPers := root($parameters?root)//scriptNote[@scribe='involved']/@scribeRef, $add := following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'][@hand = $refPers], $hand := $add/@hand, $name := $add/id($hand, doc('/db/apps/tei-publisher/data/register.xml'))/persName/text(), $correction := normalize-space(string-join(for $n in $add/node() return typeswitch($n) case text() return $n case element(lb) return ' || ' case element(choice) return concat(string($n/abbr), ' (= ', string($n/expan), ')') default return string-join(for $c in $n/node() return if($c/self::lb) then ' || ' else if($c/self::choice) then concat(string($c/abbr), ' (= ', string($c/expan), ')') else if($c instance of text()) then $c else ()))), $unclear := if(exists($add//unclear[@reason='unsure'])) then ' (unsicher)' else if(exists($add//unclear[@reason='illegible'])) then ' (unleserlich)' else '' return if($name) then concat('Korrigiert von: ', $name, 'zu: ', $correction, $unclear) else if(contains($hand, 'involved')) then concat('Korrigiert von: ', replace($hand, 'involved', 'Unbekannter Schreiber '), ' zu: ', $correction, $unclear) else concat('Korrigiert zu: ', $correction, $unclear)"/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover>
-            </pb:template>
-        </model> 
-        <model predicate="let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef return self::del[@hand = $refPers] and following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'][not(@hand = $refPers)] and not(self::del//lb)" behaviour="inline" cssClass="underlineDotted">
-            <desc>No line break in content. No anchor. Main Scribe in del and involved scribe in add</desc>
+        <model predicate="let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef return self::del[@hand = $refPers] and following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'][not(@hand = $refPers)]" behaviour="inline" cssClass="underlineDotted">
+            <desc>No anchor. Main Scribe in del and involved scribe in add</desc>
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="if(self::del[unclear[@reason='illegible'] and not(text()[normalize-space()])]) then '〈…〉' else self::del/node()"/>
             <param name="alternate" value="let $refPers := root($parameters?root)//scriptNote[@scribe='involved']/@scribeRef, $add := following-sibling::*[not(self::lb)][1][self::add][@type='correction'][@place='inspace'][@hand = $refPers], $hand := $add/@hand, $name := $add/id($hand, doc('/db/apps/tei-publisher/data/register.xml'))/persName/text(), $correction := normalize-space(string-join(for $n in $add/node() return typeswitch($n) case text() return $n case element(lb) return ' || ' case element(choice) return concat(string($n/abbr), ' (= ', string($n/expan), ')') default return string-join(for $c in $n/node() return if($c/self::lb) then ' || ' else if($c/self::choice) then concat(string($c/abbr), ' (= ', string($c/expan), ')') else if($c instance of text()) then $c else ()))), $unclear := if(exists($add//unclear[@reason='unsure'])) then ' (unsicher)' else if(exists($add//unclear[@reason='illegible'])) then ' (unleserlich)' else '' return if($name) then concat('Korrigiert von: ', $name, 'zu: ', $correction, $unclear) else if(contains($hand, 'involved')) then concat('Korrigiert von: ', replace($hand, 'involved', 'Unbekannter Schreiber '), ' zu: ', $correction, $unclear) else concat('Korrigiert zu: ', $correction, $unclear)"/>
@@ -1321,18 +1116,8 @@
         <model predicate="parent::add[1] and parent::add[1]/following::anchor[1]" behaviour="omit">
             <desc>parent add with anchor -&gt; omit</desc>
         </model>
-        <model predicate="not(following-sibling::*[not(self::lb)][1][self::add and @type='correction' and contains(xml:id, 'ta')]) and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef and descendant::lb" behaviour="inline" cssClass="underlineDotted whitespace">
-            <desc>Line break in content. If there is a line break and the lines are wrapped in pb-facs-link (text not normalized), the popover should be doubled for mouse over to appear in both lines. No anchor. Del of Main Scribe without correction</desc>
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="if (exists(.//lb)) then (text{'〈…〉'}, for $n in node() return if ($n/self::lb) then ($n, text{'〈…〉'}) else ()) else (text{'〈…〉'})"/>
-            <param name="alternate" value="let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef, $del := self::del[@hand=$refPers], $hand := $del/@hand, $name := $del/id($hand, doc('/db/apps/tei-publisher/data/register.xml'))/persName/text(), $original := normalize-space(string-join(for $n in $del/node() return typeswitch($n) case text() return $n case element(lb) return ' || ' case element(choice) return concat(string($n/abbr), ' (= ', string($n/expan), ')') default return string-join(for $c in $n/node() return if($c/self::lb) then ' || ' else if($c/self::choice) then concat(string($c/abbr), ' (= ', string($c/expan), ')') else if($c instance of text()) then $c else ()))), $unclear := if(exists($del//unclear[@reason='unsure'])) then ' (unsicher)' else if(exists($del//unclear[@reason='illegible'])) then ' (unleserlich)' else '' return if($name) then concat('Gestrichen von: ', $name, '; Ursprüngliche Lesart: ', $original, $unclear) else if(contains($hand, 'main')) then concat('Gestrichen von: ', replace($hand, 'main', 'Unbekannter Hauptschreiber '), '; Urpsrüngliche Lesart: ', $original, $unclear) else concat('Gestrichen von: ', $original, $unclear)"/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover>
-            </pb:template>
-        </model>
-        <model predicate="not(following-sibling::*[not(self::lb)][1][self::add and @type='correction' and contains(xml:id, 'ta')]) and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef and not(descendant::lb)" behaviour="inline" cssClass="underlineDotted whitespace">
-            <desc>No line break in content. No anchor. Del of Main Scribe without correction</desc>
+        <model predicate="not(following-sibling::*[not(self::lb)][1][self::add and @type='correction' and contains(xml:id, 'ta')]) and @hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef" behaviour="inline" cssClass="underlineDotted whitespace">
+            <desc>No anchor. Del of Main Scribe without correction</desc>
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="'〈…〉'"/>
             <param name="alternate" value="let $refPers := root($parameters?root)//scriptNote[@scribe='main']/@scribeRef, $del := self::del[@hand=$refPers], $hand := $del/@hand, $name := $del/id($hand, doc('/db/apps/tei-publisher/data/register.xml'))/persName/text(), $original := normalize-space(string-join(for $n in $del/node() return typeswitch($n) case text() return $n case element(lb) return ' || ' case element(choice) return concat(string($n/abbr), ' (= ', string($n/expan), ')') default return string-join(for $c in $n/node() return if($c/self::lb) then ' || ' else if($c/self::choice) then concat(string($c/abbr), ' (= ', string($c/expan), ')') else if($c instance of text()) then $c else ()))), $unclear := if(exists($del//unclear[@reason='unsure'])) then ' (unsicher)' else if(exists($del//unclear[@reason='illegible'])) then ' (unleserlich)' else '' return if($name) then concat('Gestrichen von: ', $name, '; Ursprüngliche Lesart: ', $original, $unclear) else if(contains($hand, 'main')) then concat('Gestrichen von: ', replace($hand, 'main', 'Unbekannter Hauptschreiber '), '; Urpsrüngliche Lesart: ', $original, $unclear) else concat('Gestrichen von: ', $original, $unclear)"/>
@@ -1341,18 +1126,8 @@
             <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover>
             </pb:template>
         </model>
-        <model predicate="not(following-sibling::*[not(self::lb)][1][self::add and @type='correction' and contains(xml:id, 'ta')]) and not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef) and descendant::lb" behaviour="inline" cssClass="underlineDotted">
-                    <desc>Line break in content. If there is a line break and the lines are wrapped in pb-facs-link (text not normalized), the popover should be doubled for mouse over to appear in both lines. No anchor. Del of Involved Scribe without correction</desc>
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="."/>
-            <param name="alternate" value="let $refPers := root($parameters?root)//scriptNote[@scribe='involved']/@scribeRef, $del := self::del[@hand=$refPers], $hand := $del/@hand, $name := $del/id($hand, doc('/db/apps/tei-publisher/data/register.xml'))/persName/text() return if($name) then concat('Gestrichen von: ', $name) else if(contains($hand, 'involved')) then concat('Gestrichen von: ', replace($hand, 'involved', 'Unbekannter Schreiber ')) else 'Gestrichen von: Unbekannter Schreiber'"/>
-            <param name="placement" value="'top'"/>
-            <param name="fallback-placement" value="'bottom'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover>
-            </pb:template>
-        </model>
-        <model predicate="not(following-sibling::*[not(self::lb)][1][self::add and @type='correction' and contains(xml:id, 'ta')]) and not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef) and not(descendant::lb)" behaviour="inline" cssClass="underlineDotted">
-                    <desc>No line break in content. No anchor. Del of Involved Scribe without correction</desc>
+        <model predicate="not(following-sibling::*[not(self::lb)][1][self::add and @type='correction' and contains(xml:id, 'ta')]) and not(@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef)" behaviour="inline" cssClass="underlineDotted">
+                    <desc>No anchor. Del of Involved Scribe without correction</desc>
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="."/>
             <param name="alternate" value="let $refPers := root($parameters?root)//scriptNote[@scribe='involved']/@scribeRef, $del := self::del[@hand=$refPers], $hand := $del/@hand, $name := $del/id($hand, doc('/db/apps/tei-publisher/data/register.xml'))/persName/text() return if($name) then concat('Gestrichen von: ', $name) else if(contains($hand, 'involved')) then concat('Gestrichen von: ', replace($hand, 'involved', 'Unbekannter Schreiber ')) else 'Gestrichen von: Unbekannter Schreiber'"/>
@@ -1451,26 +1226,8 @@
         </model>
                 </elementSpec>
     <elementSpec ident="unclear" mode="change">
-        <model predicate="not(@reason='illegible') and not(parent::del) and child::lb" behaviour="inline" cssClass="underlineDotted">
-            <desc>Line break in content. If there is a line break and the lines are wrapped in pb-facs-link (text not normalized), the popover should be doubled for mouse over to appear in both lines. No anchor. If text unclear and not parent::del and note @type='commentary set content or if nothing set〈…〉and put popover with 'Lesart unsicher'</desc>
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="if (child::note[@type='commentary']) then replace(., child::note/text(), '') else ."/>
-            <param name="alternate" value="if (child::note) then note/text() else 'Lesart unsicher.'"/>
-            <param name="placement" value="'bottom'"/>
-            <param name="fallback-placement" value="'top'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-        </model>
-        <model predicate="@reason='illegible' and not(parent::del) and descendant::lb" behaviour="inline" cssClass="underlineDotted">
-            <desc>Line break in content. If there is a line break and the lines are wrapped in pb-facs-link (text not normalized), the popover should be doubled for mouse over to appear in both lines. No anchor. If text illegible and not parent::del set〈…〉and put popover with 'Unleserlich'</desc>
-            <param name="name" value="'pb-popover'"/>
-            <param name="content" value="if (exists(.//lb)) then (text{'〈…〉'}, for $n in node() return if ($n/self::lb) then ($n, text{'〈…〉'}) else ()) else (text{'〈…〉'})"/>
-            <param name="alternate" value="if (child::note) then note/text() else 'Unleserlich.'"/>
-            <param name="placement" value="'bottom'"/>
-            <param name="fallback-placement" value="'top'"/>
-            <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
-        </model>
         <model predicate="not(@reason='illegible') and not(parent::del)" behaviour="inline" cssClass="underlineDotted">
-            <desc>No line break in content. No anchor. If text unsure and not parent::del set〈…〉and put popover with 'Unsicher'</desc>
+            <desc>No anchor. If text unsure and not parent::del set〈…〉and put popover with 'Unsicher'</desc>
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="if (child::note[@type='commentary']) then replace(., child::note/text(), '') else ."/>
             <param name="alternate" value="if (child::note) then note/text() else 'Lesart unsicher.'"/>
@@ -1479,7 +1236,7 @@
             <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
         </model>
         <model predicate="@reason='illegible' and not(parent::del)" behaviour="inline">
-            <desc>No line break in content. No anchor. If text illegible and not parent::del set〈…〉and put popover with 'Unleserlich'</desc>
+            <desc>No anchor. If text illegible and not parent::del set〈…〉and put popover with 'Unleserlich'</desc>
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="'〈…〉'"/>
             <param name="alternate" value="if (child::note) then note/text() else 'Unleserlich.'"/>
@@ -1488,7 +1245,7 @@
             <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
         </model>
         <model predicate="@reason='illegible'" behaviour="inline" cssClass="underlineDotted">
-            <desc>No line break in content. No anchor. If text illegible set〈…〉and put popover with 'Unleserlich' </desc>
+            <desc>No anchor. If text illegible set〈…〉and put popover with 'Unleserlich' </desc>
             <param name="name" value="'pb-popover'"/>
             <param name="content" value="'〈…〉'"/>
             <param name="alternate" value="if (child::note) then note/text() else 'Unleserlich.'"/>
