@@ -70,14 +70,25 @@ declare function pmf:date(
             concat('Nicht nach ', pmf:convertDates(string($node/@notAfter)))
         else ()
 
+    let $default :=
+    if ($node/@when) then
+        <time datetime="{string($node/@when)}">
+            {$content}
+        </time>
+    else
+        $content
+        
     return
         <pb-popover placement="bottom"
                     fallback-placement="right"
                     trigger="mouseenter focus click">
             <span slot="default" class="{string-join($class, ' ')}">
-                {$content}
+                {$default}
             </span>
             <span slot="alternate">
+                {$alternate}
+            </span>
+            <span class="sr-only">
                 {$alternate}
             </span>
         </pb-popover>
