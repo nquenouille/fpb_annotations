@@ -104,41 +104,32 @@
                     </model>
                 </elementSpec>
                 <elementSpec ident="date" mode="change" cssClass="underlineDotted">
-                    <model output="web" predicate="@when" behaviour="inline">
+                    <model output="web" predicate="@when" behaviour="date" cssClass="underlineDotted">
                         <desc>Mouseover for specific dates with attribute @when. Case distinction for complete information (YYYY-MM-DD) and partial information (YYYY; YYYY-MM; YYYY-DD; MM; MM-DD; DD) and month mapping.</desc>
-                        <param name="name" value="'pb-popover'"/>
-                        <param name="content" value="."/>
-                        <param name="alternate" value="let $date-pattern := matches(@when, '^\d{4}-\d{2}-\d{2}$') let $month-pattern := matches(@when, '^\d{4}-\d{2}$') let $month-day-pattern := matches(@when, '^--\d{2}-\d{2}$') let $year-only-pattern := matches(@when, '^\d{4}$') let $day-only-pattern := matches(@when, '^---\d{2}$') let $month-only-pattern := matches(@when, '^--\d{2}$') let $months := ('Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember') return if ($date-pattern) then let $month := substring(@when, 6, 2) let $month-index := xs:int($month) let $day := substring(@when, 9, 2) let $year := substring(@when, 1, 4) return concat($day, '. ', $months[$month-index], ' ', $year) else if ($month-pattern) then let $month := substring(@when, 6, 2) let $month-index := xs:int($month) let $year := substring(@when, 1, 4) return concat($months[$month-index], ' ', $year) else if ($month-day-pattern) then let $month := substring(@when, 3, 2) let $month-index := xs:int($month) let $day := substring(@when, 6,2) return concat($day, '. ', $months[$month-index]) else if ($day-only-pattern) then let $day := substring(@when, 4, 2) return concat($day, '. Tag eines unbekannten Monats') else if ($month-only-pattern) then let $month := substring(@when, 3, 2) let $month-index := xs:int($month) return $months[$month-index] else if ($year-only-pattern) then let $year := substring(@when, 1, 4) return $year else ()"/>
-                        <param name="placement" value="'bottom'"/>
-                        <param name="fallback-placement" value="'right'"/>
-                        <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
                     </model>
-                    <model output="web" predicate="@from and @to" behaviour="inline" cssClass="underlineDotted">
+                    <model output="web" predicate="@from and @to" behaviour="date" cssClass="underlineDotted">
                         <desc>Mouseover for case of attributes @from and @to.</desc>
-                        <param name="name" value="'pb-popover'"/>
-                        <param name="content" value="."/>
-                        <param name="alternate" value="concat(@from, ' bis ', @to)"/>
-                        <param name="placement" value="'bottom'"/>
-                        <param name="fallback-placement" value="'right'"/>
-                        <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
                     </model>
-                    <model output="web" predicate="@from and not(@to)" behaviour="inline" cssClass="underlineDotted">
+                    <model output="web" predicate="@from and not(@to)" behaviour="date" cssClass="underlineDotted">
                         <desc>Mouseover for case of attributes @from without specific ending.</desc>
-                        <param name="name" value="'pb-popover'"/>
-                        <param name="content" value="."/>
-                        <param name="alternate" value="concat('Von ', @from, ' an.')"/>
-                        <param name="placement" value="'bottom'"/>
-                        <param name="fallback-placement" value="'right'"/>
-                        <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
                     </model>
-                    <model output="web" predicate="not(@from) and @to" behaviour="inline" cssClass="underlineDotted">
+                    <model output="web" predicate="not(@from) and @to" behaviour="date" cssClass="underlineDotted">
                         <desc>Mouseover for case of attributes @from without specific ending.</desc>
-                        <param name="name" value="'pb-popover'"/>
-                        <param name="content" value="."/>
-                        <param name="alternate" value="concat('Bis ', @to)"/>
-                        <param name="placement" value="'bottom'"/>
-                        <param name="fallback-placement" value="'right'"/>
-                        <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                    </model>
+                    <model output="web" predicate="@notBefore and @to" behaviour="date" cssClass="underlineDotted">
+                        <desc>Mouseover for case of attributes @from and @to.</desc>
+                    </model>
+                    <model output="web" predicate="@from and @notAfter" behaviour="date" cssClass="underlineDotted">
+                        <desc>Mouseover for case of attributes @from and @to.</desc>
+                    </model>
+                    <model output="web" predicate="@notBefore and @notAfter" behaviour="date" cssClass="underlineDotted">
+                        <desc>Mouseover for case of attributes @from and @to.</desc>
+                    </model>
+                    <model output="web" predicate="@notBefore and not(@notAfter)" behaviour="date" cssClass="underlineDotted">
+                        <desc>Mouseover for case of attributes @from and @to.</desc>
+                    </model>
+                    <model output="web" predicate="not(@notBefore) and @notAfter" behaviour="date" cssClass="underlineDotted">
+                        <desc>Mouseover for case of attributes @from and @to.</desc>
                     </model>
                     <model behaviour="inline">
                         <desc>Default.</desc>
