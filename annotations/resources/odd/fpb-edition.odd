@@ -98,30 +98,48 @@
     <elementSpec ident="date" mode="change">
         <model output="web" predicate="@when" behaviour="date" cssClass="underlineDotted">
             <desc>Mouseover for specific dates with attribute @when. Case distinction for complete information (YYYY-MM-DD) and partial information (YYYY; YYYY-MM; YYYY-DD; MM; MM-DD; DD) and month mapping.</desc>
+            <param name="content" value="."/>
+            <pb:template xmlns="" xml:space="preserve"><span slot="default">[[content]]</span></pb:template>
         </model>
         <model output="web" predicate="@from and @to" behaviour="date" cssClass="underlineDotted">
             <desc>Mouseover for case of attributes @from and @to.</desc>
+            <param name="content" value="."/>
+            <pb:template xmlns="" xml:space="preserve"><span slot="default">[[content]]</span></pb:template>
         </model>
         <model output="web" predicate="@from and not(@to)" behaviour="date" cssClass="underlineDotted">
             <desc>Mouseover for case of attributes @from without specific ending.</desc>
+            <param name="content" value="."/>
+            <pb:template xmlns="" xml:space="preserve"><span slot="default">[[content]]</span></pb:template>
         </model>
         <model output="web" predicate="not(@from) and @to" behaviour="date" cssClass="underlineDotted">
             <desc>Mouseover for case of attributes @to without specific beginning.</desc>
+            <param name="content" value="."/>
+            <pb:template xmlns="" xml:space="preserve"><span slot="default">[[content]]</span></pb:template>
         </model>
         <model output="web" predicate="@notBefore and @to" behaviour="date" cssClass="underlineDotted">
             <desc>Mouseover for case of attributes @notBefore and @to.</desc>
+            <param name="content" value="."/>
+            <pb:template xmlns="" xml:space="preserve"><span slot="default">[[content]]</span></pb:template>
         </model>
         <model output="web" predicate="@from and @notAfter" behaviour="date" cssClass="underlineDotted">
             <desc>Mouseover for case of attributes @from and @notAfter.</desc>
+            <param name="content" value="."/>
+            <pb:template xmlns="" xml:space="preserve"><span slot="default">[[content]]</span></pb:template>
         </model>
         <model output="web" predicate="@notBefore and @notAfter" behaviour="date" cssClass="underlineDotted">
             <desc>Mouseover for case of attributes @notBefore and @notAfter.</desc>
+            <param name="content" value="."/>
+            <pb:template xmlns="" xml:space="preserve"><span slot="default">[[content]]</span></pb:template>
         </model>
         <model output="web" predicate="@notBefore and not(@notAfter)" behaviour="date" cssClass="underlineDotted">
             <desc>Mouseover for case of attributes @notBefore.</desc>
+            <param name="content" value="."/>
+            <pb:template xmlns="" xml:space="preserve"><span slot="default">[[content]]</span></pb:template>
         </model>
         <model output="web" predicate="not(@notBefore) and @notAfter" behaviour="date" cssClass="underlineDotted">
             <desc>Mouseover for case of attributes @notAfter.</desc>
+            <param name="content" value="."/>
+            <pb:template xmlns="" xml:space="preserve"><span slot="default">[[content]]</span></pb:template>
         </model>
         <model behaviour="inline">
             <desc>Default.</desc>
