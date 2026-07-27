@@ -347,6 +347,7 @@
   	"numbering": "numbering",
   	"postalNote": "postalNote",
     "processed": "processed",
+  	"entry": "entry",
   	"other": "other"
   },
   "rdg": {
