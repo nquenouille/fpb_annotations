@@ -366,6 +366,15 @@
                         <param name="fallback-placement" value="'top'"/>
                         <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
                     </model>
+                    <model predicate="@type='entry'" behaviour="inline" cssClass="underlineDotted">
+                        <desc>If there is an entry, e.g. like into a calendar, show in mouseover, which kind of note, and who left it.</desc>
+                        <param name="name" value="'pb-popover'"/>
+                        <param name="content" value="."/>
+                        <param name="alternate" value="if(contains(@hand, 'main')) then concat('Eintrag von: ', replace(@hand, 'main', 'Unbekannter Hauptschreiber ')) else if(contains(@hand, 'involved')) then concat('Eintrag von: ', replace(@hand, 'involved', 'Unbekannter Schreiber ')) else if(@subtype='person' and starts-with(@hand, 'fpb-')) then concat('Eintrag von: ', id(@hand, doc(&#34;/db/apps/annotations/data/register.xml&#34;))/persName/text()) else concat('Eintrag von: ', ./@hand)"/>
+                        <param name="placement" value="'left'"/>
+                        <param name="fallback-placement" value="'top'"/>
+                        <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
+                    </model>
                     <model predicate="@type='other'" behaviour="inline" cssClass="underlineDotted grey">
                         <desc>If there is an unspecified note, show in mouseover, which kind of note, and who left it.</desc>
                         <param name="name" value="'pb-popover'"/>
