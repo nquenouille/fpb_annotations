@@ -347,6 +347,11 @@ declare %private function anno:delete($nodes as node()*, $target as node()) {
                         $node/@*,
                         anno:delete($node/node(), $target)
                     }
+                else if ($node[@type='entry'] is $target) then
+                    element exist:delete {
+                        $node/@*,
+                        anno:delete($node/node(), $target)
+                    }
                 else if ($node[@type='other'] is $target) then
                     element exist:delete {
                         $node/@*,
