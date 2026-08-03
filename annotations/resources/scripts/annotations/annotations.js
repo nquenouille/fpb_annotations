@@ -463,9 +463,10 @@ window.addEventListener("WebComponentsReady", () => {
                             .replace(/<span[^>]*class=["'][^"']*\bkeepLB\b[^"']*["'][^>]*>\s*<\/span>/gi, PLACEHOLDER)
                             // Indentation of text line if <orig @rend='indent'>
                             .replace(/<span[^>]*class=["'][^"']*\bindent\b[^"']*["'][^>]*>\s*<\/span>/gi,'</div><div class="indent-line">')
-                            .replace(/-\s*<br[^>]*>/g, '')
-                            .replace(/<br[^>]*>/g, ' ')
-                            .replace(/\s*<span[^>]*>-<\/span[^>]*>\s*/g, '');
+                            // Remove TEI line-break hyphen from tei-span1, but keep normal dashes
+                            .replace(/<span[^>]*class=["'][^"']*\btei-span1\b[^"']*["'][^>]*>\s*-\s*<\/span>\s*<br[^>]*>\s*(<span[^>]*\bline-marker\b[^>]*><\/span>)\s+(?=\S)/gi, '$1')
+                            // normalize line breaks
+                            .replace(/<br[^>]*>/g, ' ');
                         cleanHtml2 = cleanHtml2.replace(new RegExp(PLACEHOLDER, 'g'), '<br>')
                         // optional: body -> div fix
                         cleanHtml2 = cleanHtml2.replace(
