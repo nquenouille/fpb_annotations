@@ -270,6 +270,17 @@ window.addEventListener("WebComponentsReady", () => {
 		if (!autoSave) {
 			hideForm();
 		}
+		if (selected.length > 0) {
+    		selected.forEach(cb => {
+    			view.editAnnotation(
+    				cb._options.textNode.parentNode,
+    				data
+    			);
+    		});
+    
+    		view.refreshMarkers();
+    		return;
+    	}
 		if (activeSpan) {
 			window.pbEvents.emit("pb-edit-annotation", "transcription", {
 				target: activeSpan,
@@ -428,6 +439,9 @@ window.addEventListener("WebComponentsReady", () => {
                     
                         htmlContainer.innerHTML = cleanHtml;
 						htmlContainer.querySelectorAll('*').forEach(el => {
+							if (el.querySelector("pb-popover")) {
+								return;
+							}
 							let next = el.nextSibling;
 
 							if (next && next.nodeType === Node.TEXT_NODE) {
@@ -968,6 +982,9 @@ window.addEventListener("WebComponentsReady", () => {
     
     		if (wasSelectOccurrenceCalled) {
     			preview(view.annotations, true);
+    			const selection = window.getSelection();
+                selection.removeAllRanges();
+                view._currentSelection = null;
     			docSaved = false;
     			wasSelectOccurrenceCalled = false;
     		} else {
