@@ -270,6 +270,10 @@ window.addEventListener("WebComponentsReady", () => {
 		if (!autoSave) {
 			hideForm();
 		}
+		//apply changes for all occurrences
+		const selected = [
+    		...document.querySelectorAll("#occurrences li paper-checkbox[checked]")
+    	];
 		if (selected.length > 0) {
     		selected.forEach(cb => {
     			view.editAnnotation(
