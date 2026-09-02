@@ -556,7 +556,7 @@ window.addEventListener("WebComponentsReady", () => {
 			}
 			showForm(type);
 			text = selection;
-			findOther(type);
+			// findOther(type);
 			activeSpan = null;
 		}
 		disableButtons(true);
@@ -1189,7 +1189,7 @@ window.addEventListener("WebComponentsReady", () => {
           }
           
 		/** FPB addition: When editing elements, show occurrences **/
-		if (text && type) {
+		/* if (text && type) {
         	const occurrencesList = document.querySelector('#occurrences ul');
             occurrencesList.innerHTML = '';
             
@@ -1206,7 +1206,7 @@ window.addEventListener("WebComponentsReady", () => {
                 occurrencesList.appendChild(li);
               });
             }
-        }
+        } */
 	});
 
 	window.pbEvents.subscribe("pb-annotation-detail", "transcription", (ev) => {
