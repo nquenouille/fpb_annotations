@@ -369,6 +369,22 @@ declare %private function anno:delete($nodes as node()*, $target as node()) {
                         $node/@*,
                         anno:delete($node/node(), $target)
                     }
+            case element(tei:metamark) return
+                if ($target instance of element(tei:ellipsis) and $target is $node/..) then
+                    element exist:delete {
+                        $node/@*,
+                        anno:delete($node/node(), $target)
+                    }
+                else if ($node is $target) then
+                    element exist:delete {
+                        $node/@*,
+                        anno:delete($node/node(), $target)
+                    }
+                else
+                    element { node-name($node) } {
+                        $node/@*,
+                        anno:delete($node/node(), $target)
+                    }
             case element(tei:body) return
                 if ($target instance of element(tei:floatingText) and $target is $node/..) then
                     element exist:delete {
@@ -803,6 +819,14 @@ declare %private function anno:find-offset($nodes as node()*, $offset as xs:int,
                             $found
                         else
                             anno:find-offset(tail($nodes), $offset - anno:string-length($primary), $pos, ())
+                case element(tei:ellipsis) return
+                    let $primary := $node/tei:metamark
+                    let $found := anno:find-offset($primary, $offset + anno:string-length($node), $pos, ()) (: added + anno:string-length($node) for better offset :)
+                    return
+                        if (exists($found)) then
+                            $found
+                        else
+                            anno:find-offset(tail($nodes), $offset - anno:string-length($primary), $pos, ())
                 case element(tei:note) return
                     if ($node[@type='commentary']) then 
                     let $primary := anno:string-length($node)
@@ -843,10 +867,10 @@ declare %private function anno:find-offset($nodes as node()*, $offset as xs:int,
                         if ($offset <= $len) then
                             [$node, $offset]
                         (: prevents from setting a tag into a tei:abbr, tei:sic, tei:orig or tei:lem element :)
-                         else if ($offset > $len and ($node/parent::element(tei:abbr) | $node/parent::element(tei:sic) | $node/parent::element(tei:orig)) | $node/parent::element(tei:lem)) then
+                         else if ($offset > $len and ($node/parent::element(tei:abbr) | $node/parent::element(tei:sic) | $node/parent::element(tei:orig)) | $node/parent::element(tei:lem) | $node/parent::element(tei:metamark)) then
                             anno:find-offset(tail($nodes), $offset - $len, $pos, ())
                         (: if the start is at the beginning of line and begins with a <choice> tag, tagging of it and the next word is possible :)
-                        else if ($pos = "start" and $offset = $len + 1 and ($node/parent::element(tei:abbr) | $node/parent::element(tei:sic) | $node/parent::element(tei:orig)) | $node/parent::element(tei:lem)) then
+                        else if ($pos = "start" and $offset = $len + 1 and ($node/parent::element(tei:abbr) | $node/parent::element(tei:sic) | $node/parent::element(tei:orig)) | $node/parent::element(tei:lem) | $node/parent::element(tei:metamark)) then
                             [$node, $len + 2]
                         (: end is immediately after the node :)
                         else if ($pos = "end" and $offset = $len + 1) then

@@ -290,6 +290,9 @@
                         <model behaviour="inline" cssClass="annotation annotation-lb"/>
                     </modelSequence>
                 </elementSpec>
+                <elementSpec ident="ellipsis" mode="add">
+                    <model behaviour="inline" cssClass="annotation annotation-ellipsis"/>
+                </elementSpec>
             </schemaSpec>
         </body>
     </text>
