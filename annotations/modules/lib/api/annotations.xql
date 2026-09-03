@@ -105,7 +105,7 @@ declare function anno:save($request as map(*)) {
                 $srcDoc/(processing-instruction()|comment()),
                 $merged
             }
-            let $serialized := serialize($output, map { "indent": false() })
+            let $serialized := serialize($output, map { "indent": true() })
             let $stored :=
                 if (request:get-method() = 'PUT') then
                     xmldb:store(util:collection-name($srcDoc), util:document-name($srcDoc), $serialized)
@@ -714,15 +714,15 @@ declare %private function anno:modify($nodes as node()*, $target as node(), $ann
                         else
                             (xs:int($day) ge 1 and xs:int($day) le 31)  (: Alle anderen Monate haben 31 Tage :)  
                       let $date := 
-                        if ($year and $month-number and $day and $validDay and $validYear) then 
+                        if ($year and $month and $day and $validDay and $validYear) then 
                             string-join(($year, $month-number, $day), '-')
-                        else if($year and $month-number and $day and (not($validDay) or not($validYear))) then
+                        else if($year and $month and $day and (not($validDay) or not($validYear))) then
                             error($errors:UNPROCESSABLE_ENTITY)
-                        else if($year and $month-number and $validYear) then
+                        else if($year and $month and $validYear) then
                             string-join(($year, $month-number), '-')
-                        else if($year and $month-number and not($validYear)) then
+                        else if($year and $month and not($validYear)) then
                             error($errors:UNPROCESSABLE_ENTITY)
-                        else if($month-number and $day and $validDay) then
+                        else if($month and $day and $validDay) then
                             concat('--',$month-number, '-', $day)
                         else if($month-number and $day and not($validDay)) then 
                             error($errors:UNPROCESSABLE_ENTITY)
@@ -730,8 +730,8 @@ declare %private function anno:modify($nodes as node()*, $target as node(), $ann
                             $year
                         else if($year and not($validYear)) then
                             error($errors:UNPROCESSABLE_ENTITY)
-                        else if($month-number) then
-                            concat('--', $month)
+                        else if($month) then
+                            concat('--', $month-number)
                         else if($day) then
                             concat('---', $day)
                         else ()
@@ -860,7 +860,8 @@ declare %private function anno:find-offset($nodes as node()*, $offset as xs:int,
                 case element() return
                     let $found := anno:find-offset($node/node(), $offset, $pos, ())
                     return
-                        if (exists($found)) then $found else anno:find-offset(tail($nodes), $offset - anno:string-length($node), $pos, ())
+                        if (exists($found)) then 
+                            $found else anno:find-offset(tail($nodes), $offset - anno:string-length($node), $pos, ())
                 case text() return
                     let $len := string-length($node)
                     return
