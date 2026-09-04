@@ -529,7 +529,11 @@ window.addEventListener("WebComponentsReady", () => {
             })
             .catch(err => console.error(err));
     }
+
+	//Run immediately upon startup
+    document.addEventListener("pb-page-ready", () => preview(view.annotations));
     loadLegend();
+	
     /* *********END of FPB change********* */
     
 	/**
