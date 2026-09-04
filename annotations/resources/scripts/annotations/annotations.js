@@ -1263,6 +1263,7 @@ window.addEventListener("WebComponentsReady", () => {
 
 	// wire the ODD selector for the preview
 	const oddSelector = document.querySelector('pb-select-odd');
+	doc.odd = "FPB";
 	oddSelector.odd = doc.odd;
 	window.pbEvents.subscribe('pb-refresh', 'preview', (ev) => {
 		doc.odd = ev.detail.odd;

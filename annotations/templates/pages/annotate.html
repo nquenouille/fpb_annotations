@@ -811,7 +811,7 @@
                                     <paper-icon-button id="reload-preview" icon="icons:refresh" data-i18n="[title]annotations.preview"/>
                                     <paper-icon-button id="set-anchor" icon="maps:directions-boat" data-i18n="[title]annotations.anchor"/>
                                 </div>
-                                <pb-select-odd emit="preview" odd="FPB"/>
+                                <pb-select-odd emit="preview" subscribe="nil" odd="FPB"/>
                                 <paper-dropdown-menu id="ddmenu" style="padding-left: 10px;" data-i18n="[title]status.title" label="Status">
                                     <paper-listbox id="listbox" slot="dropdown-content" selected="0" onchange="choose()">
                                         <paper-item value="default" style="display:none;"/>
