@@ -93,7 +93,7 @@ window.addEventListener("WebComponentsReady", () => {
 	let wasSelectOccurrenceCalled = false;
 	let type = "";
 	let text = "";
-	let enablePreview = true;
+	// let enablePreview = true;
 
 	/**
 	 * Display the main form
@@ -533,7 +533,7 @@ window.addEventListener("WebComponentsReady", () => {
 	//Run immediately upon startup
     document.addEventListener("pb-page-ready", () => preview(view.annotations));
     loadLegend();
-	
+
     /* *********END of FPB change********* */
     
 	/**
@@ -575,7 +575,7 @@ window.addEventListener("WebComponentsReady", () => {
 		ev.preventDefault();
 		ev.stopPropagation();
 		window.pbEvents.emit("pb-start-update", "transcription", {});
-		enablePreview = false;
+		// enablePreview = false;
 		const data = form.serializeForm();
 		const checkboxes = document.querySelectorAll(
 			"#occurrences li paper-checkbox:not([checked])"
@@ -591,7 +591,7 @@ window.addEventListener("WebComponentsReady", () => {
 				console.error(e);
 			}
 			findOther(checkboxes[0]._info);
-			enablePreview = true;
+			// enablePreview = true;
 			preview(view.annotations);
 		}
 		window.pbEvents.emit("pb-end-update", "transcription", {});
@@ -1138,9 +1138,9 @@ window.addEventListener("WebComponentsReady", () => {
 		if (doc && doc.path) {
 			window.localStorage.setItem(`tei-publisher.annotations.${doc.path}`, JSON.stringify(ev.detail.ranges));
 		}
-		if (enablePreview && !ev.detail.refresh) {
+		/* if (enablePreview && !ev.detail.refresh) {
 			preview(ev.detail.ranges);
-		}
+		} */
 	});
 	window.pbEvents.subscribe('pb-annotations-history', 'transcription', (ev) => {
 		const doc = view.getDocument();
