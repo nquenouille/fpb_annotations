@@ -740,7 +740,7 @@ declare function api:setTags($request as map(*)){
 
 (:  Validation :)
 declare function api:validate($request as map(*)) {
-    let $schema-uri := doc("https://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng")
+    let $schema-uri := doc("//db/apps/annotations/resources/odd/tei_all_fpb.rng")
     let $path := xmldb:decode($request?parameters?id)
     let $doc := doc(xmldb:encode-uri($config:data-root || "/" || $path))
     let $clear := validation:clear-grammar-cache()
