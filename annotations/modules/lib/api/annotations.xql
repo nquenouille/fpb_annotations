@@ -819,14 +819,6 @@ declare %private function anno:find-offset($nodes as node()*, $offset as xs:int,
                             $found
                         else
                             anno:find-offset(tail($nodes), $offset - anno:string-length($primary), $pos, ())
-                case element(tei:ellipsis) return
-                    let $primary := $node/tei:metamark
-                    let $found := anno:find-offset($primary, $offset + anno:string-length($node), $pos, ()) (: added + anno:string-length($node) for better offset :)
-                    return
-                        if (exists($found)) then
-                            $found
-                        else
-                            anno:find-offset(tail($nodes), $offset - anno:string-length($primary), $pos, ())
                 case element(tei:note) return
                     if ($node[@type='commentary']) then 
                     let $primary := anno:string-length($node)
