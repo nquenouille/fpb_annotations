@@ -475,7 +475,36 @@ window.addEventListener("WebComponentsReady", () => {
                         // html2
                         const html2Container = document.getElementById("html2-container");
                         const PLACEHOLDER = '###KEEP_LB###'
-                        let cleanHtml2 = html
+                        
+                        // create temporary DOM
+                        const wrapper = document.createElement('div');
+                        wrapper.innerHTML = html;
+                        // classes with tei-lb where line breaks should be kept
+                        const keepLBRegex = /^tei-(salute|signed|opener|closer|address|head)\d*$/;
+                        // if lb in one of the containers then keep line break
+                        wrapper.querySelectorAll('.tei-lb5').forEach(lb => {
+                            let parent = lb.parentElement;
+                            let shouldKeep = false;
+                            while (parent && parent !== wrapper) {
+                                const hasKeepClass = [...parent.classList].some(cls =>
+                                    keepLBRegex.test(cls)
+                                );
+                                if (hasKeepClass) {
+                                    shouldKeep = true;
+                                    break;
+                                }
+                                parent = parent.parentElement;
+                            }
+                            if (shouldKeep) {
+                                lb.replaceWith(
+                                    document.createTextNode(PLACEHOLDER)
+                                );
+                            }
+                        });
+                        // output as html string again
+                        let cleanHtml2 = wrapper.innerHTML;
+                        
+                        cleanHtml2 = cleanHtml2
                             .replace(/<img[^>]*>/g, "")
                             // Keep Linebreak if <orig @rend='keepLB'>
                             .replace(/<span[^>]*class=["'][^"']*\bkeepLB\b[^"']*["'][^>]*>\s*<\/span>/gi, PLACEHOLDER)
