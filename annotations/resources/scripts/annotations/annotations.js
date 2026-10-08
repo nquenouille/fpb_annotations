@@ -290,13 +290,13 @@ window.addEventListener("WebComponentsReady", () => {
 				target: activeSpan,
 				properties: data,
 			});
-			activeSpan = null;
 		} else {
 			try {
-				view.addAnnotation({
+				const newSpan = view.addAnnotation({
 					type,
 					properties: data,
 				});
+				activeSpan = newSpan;
 			} catch (e) {
 				document.getElementById('runtime-error-dialog').show('Error', e);
 			}
