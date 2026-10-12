@@ -1,3 +1,4 @@
+
 .content {
   margin-bottom: 40px;
 }
@@ -40,6 +41,13 @@ tr {
 
 td {
     height: 100%;
+    min-width: 3em;
+    /* line-height: 3em; */
+    vertical-align: middle !important;
+}
+
+td .tei-lb4:first-child {
+    display: none;
 }
 
 .stundenplan-table {
@@ -67,84 +75,100 @@ td {
     padding-left: 3vw !important;
     line-height: 2em !important;
 }
+
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding: 0;
 }
+
 .textblock {
   text-align: left;
 }
-
 
 .tb {
     text-align: center;
     display: flex;
     align-items: center;
-    
 }
+
 .cbr-li {
-  border-left: 10px solid;
-  border-image-source: url('..//resources/images/bracket_li.svg');
-  border-image-slice: 0 0 0 100;
-  border-image-width: 0 0 0 40px;
-  padding: 8vw;
+    border-left: 10px solid;
+    border-image-source: url('..//resources/images/bracket_li.svg');
+    border-image-slice: 0 0 0 100%;
+    border-image-width: 0 0 0 2em;
+    border-image-repeat: stretch;
+    padding-left: 3em;
+    padding-right: 3em;
+    padding-block: 6vw;
 }
 
 .cbr-ri {
-  border-left: 10px solid;
-  border-image-source: url('..//resources/images/bracket_ri.svg');
-  border-image-slice: 0 100 0 0;
-  border-image-width: 0 40px 0 0;
-  padding: 8vw;
+    border-left: 10px solid;
+    border-image-source: url('..//resources/images/bracket_ri.svg');
+    border-image-slice: 0 100% 0 0;
+    border-image-width: 0 2em 0 0;
+    border-image-repeat: stretch;
+    padding-left: 3em;
+    padding-right: 3em;
 }
 
 .cbr-ti {
     border-image-source: url('..//resources/images/bracket_ti.svg');
-    border-image-slice: 100 0 0 0;
-    border-image-width: 30% 0 0 0;
-    padding-top: 1vw;
-    display: table ;
-    margin-top: 1vw;
+    border-image-slice: 100% 0 0 0;
+    border-image-width: 2em 0 0 0;
+    border-image-repeat: stretch;
+    padding-top: 3em;
+    padding-left: 3em;
+    padding-right: 3em;
 }
 
 .cbr-bi {
     border-image-source: url('..//resources/images/bracket_bi.svg');
-    border-image-slice: 0 0 100 0;
-    border-image-width: 0 0 30% 0;
-    padding-bottom: 1vw;
+    border-image-slice: 0 0 100% 0;
+    border-image-width: 0 0 2em 0;
+    border-image-repeat: stretch;
+    padding-bottom: 3em;
+    padding-left: 3em;
+    padding-right: 3em;
 }
 
 .cbr-lo {
-  border-left: 10px solid;
-  border-image-source: url('..//resources/images/bracket_li.svg');
-  border-image-slice: 0 0 0 100;
-  border-image-width: 0 0 0 40px;
-  padding-left: 2vw;
+    border-left: 10px solid;
+    border-image-source: url('..//resources/images/bracket_ri.svg');
+    border-image-slice: 0 0 0 100%;
+    border-image-width: 0 0 0 2em;
+    border-image-repeat: stretch;
+    padding-left: 3em;
+    padding-right: 3em;
 }
 
 .cbr-ro {
     border-left: 10px solid;
-    border-image-source: url('..//resources/images/bracket_ri.svg');
-    border-image-slice: 0 100 0 ;
-    border-image-width: 0 40px 0 0;
-    padding: 3vw;
+    border-image-source: url('..//resources/images/bracket_li.svg');
+    border-image-slice: 0 100% 0 ;
+    border-image-width: 0 2em 0 0;
+    border-image-repeat: stretch;
+    padding-left: 3em;
+    padding-right: 3em;
 }
 
 .cbr-to {
     border-image-source: url('..//resources/images/bracket_bi.svg');
-    border-image-slice: 100 0 0 0;
-    border-image-width: 30% 0 0 0;
-    padding-top: 1vw;
-    display: table ;
-    margin-top: 1vw;
+    border-image-slice: 100% 0 0 0;
+    border-image-width: 2em 0 0 0;
+    border-image-repeat: stretch;
+    padding-top: 3em;
 }
 
 .cbr-bo {
     border-image-source: url('..//resources/images/bracket_ti.svg');
-    border-image-slice: 0 0 100 0;
-    border-image-width: 0 0 30% 0;
-    padding-bottom: 1vw;
+    border-image-slice: 0 0 100% 0;
+    border-image-width: 0 0 2em 0;
+    border-image-repeat: stretch;
+    padding-bottom: 3em;
+    padding-left: 3em;
+    padding-right: 3em;
 }
 
 .facs, .highlight-line .line {
@@ -214,7 +238,7 @@ td {
 }
 
 .margin-left {
-    margin-left: 15%;
+    margin-left: clamp(10%, 15%, 30%);
 }
 
 .smaller {
@@ -229,11 +253,36 @@ td {
     font-style: italic;
 }
 .semibold {
-    font-size: 600;
+    font-weight: 600;
 }
 
 .underline {
     text-decoration: underline;
+    display: inline-block;
+}
+
+.link {
+    text-decoration: underline;
+    color: #007d40;
+}
+
+.whitespace {
+    white-space: pre-line;
+}
+
+.triangle {
+    text-emphasis-style: triangle;
+    text-emphasis-position: under;
+    text-emphasis-color: red;
+    white-space: nowrap;
+}
+
+.wavyBlue {
+    text-decoration: underline wavy blue;
+}
+
+.wavyGreen {
+    text-decoration: underline wavy green;
 }
 
 .indentation {
@@ -246,4 +295,16 @@ td {
 .indent-line {
     text-indent: 2em;
     display: block;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }

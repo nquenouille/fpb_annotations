@@ -778,7 +778,7 @@
                 <model behaviour="block"/>
             </elementSpec>
             <elementSpec ident="ref" mode="change">
-                <model predicate="@target" behaviour="link" cssClass="underline">
+                <model predicate="@target" behaviour="link" cssClass="link">
                     <desc>Setting a link.</desc>
                     <param name="uri" value="@target"/>
                     <param name="alternate" value="@target"/>
