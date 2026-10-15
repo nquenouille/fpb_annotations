@@ -520,7 +520,77 @@ window.addEventListener("WebComponentsReady", () => {
                             /<body class/g,
                             '<div style="font-family:\'Open Sans\', \'Roboto\', \'Noto\', sans-serif; line-height:1.5em;" class'
                         );
+                        
+                        
                         html2Container.innerHTML = cleanHtml2;
+                        
+                        html2Container.querySelectorAll('*').forEach(el => {
+                            const next = el.nextSibling;
+                            
+                            if (!next || next.nodeType !== Node.TEXT_NODE) {
+                                return;
+                            }
+                        
+                            const text = next.nodeValue;
+                            const whitespaceMatch = text.match(/^[ \t]*\r?\n[ \t]*/);
+                        
+                            if (!whitespaceMatch) {
+                                return;
+                            }
+                            const whitespace = whitespaceMatch[0];
+                            const rest = text.substring(whitespace.length);
+                            const nextTextMatch = rest.match(/[^\s]/);
+                            const nextChar = nextTextMatch ? nextTextMatch[0] : '';
+                            
+                            function getLastVisibleChar(node) {
+                                if (!node) {
+                                    return '';
+                                }
+                                
+                                if (node.nodeType === Node.TEXT_NODE) {
+                                    const matches = node.nodeValue.match(/[^\s]/g);
+                        
+                                    if (matches && matches.length) {
+                                        return matches[matches.length - 1];
+                                    }
+                                    return '';
+                                }
+                                
+                                if (node.nodeType !== Node.ELEMENT_NODE) {
+                                    return '';
+                                }
+                                
+                                if (
+                                    (node.hasAttribute('slot') && node.getAttribute('slot') === 'alternate') ||
+                                    (typeof node.classList !== 'undefined' &&
+                                        (node.classList.contains('sr-only') || node.classList.contains('sr-info')))
+                                ) {
+                                    return '';
+                                }
+                                                        
+                                for (let i = node.childNodes.length - 1; i >= 0; i--) {
+                                    const result = getLastVisibleChar(node.childNodes[i]);
+                                    if (result) {
+                                        return result;
+                                    }
+                                }
+                                return '';
+                            }
+                            
+                            const prevChar = getLastVisibleChar(el);
+                            const prevIsLetter = /[a-zA-ZäöüÄÖÜß]/.test(prevChar);
+                            const prevIsHyphen = prevChar === '-';
+                            const nextIsLetter = /[a-zA-ZäöüÄÖÜß]/.test(nextChar);
+                            
+                            if (prevIsLetter && nextIsLetter) {
+                                next.nodeValue = rest;
+                            } else if (prevIsHyphen) {
+                                // "Gast-" + "Music" → "Gast-Music", keine Lücke
+                                next.nodeValue = rest;
+                            } else {
+                                next.nodeValue = ' ' + rest;
+                            }
+                        });
                     })
 				
                 /* FPB Validation of the document */
