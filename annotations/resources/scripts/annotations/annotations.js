@@ -585,7 +585,6 @@ window.addEventListener("WebComponentsReady", () => {
                             if (prevIsLetter && nextIsLetter) {
                                 next.nodeValue = rest;
                             } else if (prevIsHyphen) {
-                                // "Gast-" + "Music" → "Gast-Music", keine Lücke
                                 next.nodeValue = rest;
                             } else {
                                 next.nodeValue = ' ' + rest;
