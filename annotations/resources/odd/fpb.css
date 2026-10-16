@@ -202,6 +202,11 @@ td .tei-lb4:first-child {
     border-bottom: 1px dotted currentColor !important;
 }
 
+pb-popover [slot="alternate"] {
+    white-space: pre-line !important;
+    line-height: 1.2 !important;
+}
+
 .pb-popover div {
     margin: 0;
     padding: 0;
