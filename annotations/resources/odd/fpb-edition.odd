@@ -604,7 +604,7 @@
                 <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = root($parameters?root)//add[@type='addition']/@xml:id) and not((concat('t', ./@xml:id) = root($parameters?root)//add[@type='addition'][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]/@xml:id))" behaviour="inline" cssClass="wavyBlue grey">
                     <desc>add[addition] with Involved Scribe</desc>
                     <param name="name" value="'pb-popover'"/>
-                    <param name="content" value="id(concat('t', @xml:id), root($parameters?root))[@type='addition']/node() ! (if(self::lb) then element lb {@*} else .)"/>
+                    <param name="content" value="id(concat('t', @xml:id), root($parameters?root))[@type='addition']/node() ! (if(self::lb) then element {node-name(self::lb)} {@*} else .)"/>
                     <param name="alternate" value="let $root := root($parameters?root), $id := concat('t', @xml:id), $add := $root//add[@type='addition'][@xml:id=$id], $hand := $add/@hand, $name := if(starts-with($hand,'fpb-')) then $add/id($hand, doc('/db/apps/annotations/data/register.xml'))/persName/text() else if($hand) then replace($hand,'involved','Unbekannter beteiligter Schreiber ') else () return concat('Ergänzt von: ',$name)"/>
                     <param name="placement" value="'top'"/>
                     <param name="fallback-placement" value="'bottom'"/>
@@ -614,7 +614,7 @@
                 <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = root($parameters?root)//add[@type='addition']/@xml:id) and (concat('t', ./@xml:id) = root($parameters?root)//add[@type='addition'][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]/@xml:id)" behaviour="inline" cssClass="wavyBlue">
                     <desc>add[addition] with Main Scribe</desc>
                     <param name="name" value="'pb-popover'"/>
-                    <param name="content" value="if (id(concat('t', @xml:id), root($parameters?root))[@type='addition'] and count(id(concat('t', @xml:id), root($parameters?root))[@type='addition']/del) = 1 and count(id(concat('t', @xml:id), root($parameters?root))[@type='addition']/node()[not(self::del) and normalize-space() != '']) = 0) then '〈…〉' else id(concat('t', @xml:id), root($parameters?root))[@type='addition']/node() ! (if(self::lb) then element lb {@*} else .)"/>
+                    <param name="content" value="if (id(concat('t', @xml:id), root($parameters?root))[@type='addition'] and count(id(concat('t', @xml:id), root($parameters?root))[@type='addition']/del) = 1 and count(id(concat('t', @xml:id), root($parameters?root))[@type='addition']/node()[not(self::del) and normalize-space() != '']) = 0) then '〈…〉' else id(concat('t', @xml:id), root($parameters?root))[@type='addition']/node() ! (if(self::lb) then element {node-name(self::lb)} {@*} else .)"/>
                     <param name="alternate" value="let $root := root($parameters?root), $id := concat('t', @xml:id), $add := $root//add[@type='addition'][@xml:id=$id], $hand := $add/@hand, $name := if(starts-with($hand,'fpb-')) then $add/id($hand, doc('/db/apps/annotations/data/register.xml'))/persName/text() else if($hand) then replace($hand,'main','Unbekannter Hauptschreiber ') else () return concat('Ergänzt von: ', $name)"/>
                     <param name="placement" value="'top'"/>
                     <param name="fallback-placement" value="'bottom'"/>
@@ -634,7 +634,7 @@
                 <model predicate="contains(@xml:id, 'a') and (concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')]/@xml:id) and (concat('t', ./@xml:id) = root($parameters?root)//add[@type='correction' and not(@place='inspace')][@hand = root($parameters?root)//scriptNote[@scribe='main']/@scribeRef]/@xml:id)" behaviour="inline" cssClass="wavyBlue">
                     <desc>Annotation / Edition normalized view: add[correction] with Main Scribe</desc>
                     <param name="name" value="'pb-popover'"/>
-                    <param name="content" value="let $root := root($parameters?root), $add := id(concat('t', @xml:id), $root), $nextAnchor := $add/following-sibling::*[1][self::anchor], $nextAdd := if($nextAnchor) then id(concat('t', $nextAnchor/@xml:id), $root) else () return if ($add//add[@type='correction']) then $add//add[@type='correction'][last()]/node() ! (if(self::lb) then element lb {@*} else .) else if($nextAdd) then $nextAdd/node() ! (if(self::lb) then element lb {@*} else .) else $add/node() ! (if(self::lb) then element lb {@*} else .)"/>
+                    <param name="content" value="let $root := root($parameters?root), $add := id(concat('t', @xml:id), $root), $nextAnchor := $add/following-sibling::*[1][self::anchor], $nextAdd := if($nextAnchor) then id(concat('t', $nextAnchor/@xml:id), $root) else () return if ($add//add[@type='correction']) then $add//add[@type='correction'][last()]/node() ! (if(self::lb) then element {node-name(self::lb)} {@*} else .) else if($nextAdd) then $nextAdd/node() ! (if(self::lb) then element {node-name(self::lb)} {@*} else .) else $add/node() ! (if(self::lb) then element {node-name(self::lb)} {@*} else .)"/>
                     <param name="alternate" value="let $root := root($parameters?root), $add := id(concat('t', @xml:id), $root), $nextAnchor := if ($add/descendant::anchor[1]) then $add/descendant::anchor[1] else $add/following-sibling::*[1][self::anchor], $nextAdd := if($nextAnchor) then id(concat('t', $nextAnchor/@xml:id), $root)[self::add][@type='correction'] else (), $chain := if ($add//add[@type='correction']) then ($add, $add//add[@type='correction']) else if($nextAdd) then ($add, $nextAdd) else ($add) return string-join(for $i in 1 to count($chain) let $a := $chain[$i] let $anchor := root($parameters?root)//anchor[concat('t', @xml:id) = $a/@xml:id][1] let $del := $anchor/preceding::del[1] let $delText := string-join(for $n in $del/node() return typeswitch($n) case element(lb) return '&#xA;' case element(span) return if ($n/@type = 'hyphen') then '' else string($n) case element(choice) return concat($n/abbr, ' (= ', $n/expan,') ') case element(unclear) return if($n/@reason = 'unsure') then concat(string($n), ' (unsicher) ') else if($n/@reason = 'illegible') then concat(string($n), ' (unleserlich) ') else () case text() return string($n) default return string($n),'')  let $hand := if ($a/@hand) then if (starts-with($a/@hand,'fpb-')) then string($a/id(@hand, doc('/db/apps/annotations/data/register.xml'))/persName) else replace($a/@hand,'main','Unbekannter Hauptschreiber ') else 'Unbekannter Hauptschreiber' return if (count($chain)=1) then normalize-space(concat( 'Korrigiert von: ', $hand, '; ', 'Ursprüngliche Lesart: ', $delText)) else normalize-space(concat('Korrigiert von: ', $hand, '; ', 'Ursprüngliche Lesart ', $i, ': ', $delText)), '; ')"/>
                     <param name="placement" value="'top'"/>
                     <param name="fallback-placement" value="'bottom'"/>
@@ -703,18 +703,6 @@
                     <outputRendition xml:space="preserve">
                         text-align: justify;
                     </outputRendition>
-                </model>
-            </elementSpec>
-            <elementSpec ident="w" mode="change">
-                <model predicate="$parameters?mode='normalized'" behaviour="inline">
-                    <desc>Edition normalized view: if words with hyphen are wrapped with w-tag, do not show gap when omitting hypen in span @type='hyphen'.</desc>
-                    <param name="content" value="(node() except (lb, span[@type='hyphen']))/normalize-space()[.] =&gt; string-join()"/>
-                </model>
-                <model behaviour="inline">
-                    <desc>Default.</desc>
-                </model>
-                <model predicate="$parameters?mode='normalized'" behaviour="inline">
-                    <param name="content" value="(node() except (lb, span[@type='hyphen'], supplied))/normalize-space()[.] =&gt; string-join()"/>
                 </model>
             </elementSpec>
             <elementSpec ident="lb" mode="change">
@@ -895,18 +883,6 @@
                         font-size: 12pt;
                         pb-highlight-color: #ffff00;
                     </outputRendition>
-                </model>
-            </elementSpec>
-            <elementSpec ident="w" mode="change">
-                <model predicate="$parameters?mode='normalized'" behaviour="inline">
-                    <desc>Edition normalized view: if words with hyphen are wrapped with w-tag, do not show gap when omitting hypen in span @type='hyphen'.</desc>
-                    <param name="content" value="(node() except (lb, span[@type='hyphen']))/normalize-space()[.] =&gt; string-join()"/>
-                </model>
-                <model behaviour="inline">
-                    <desc>Default.</desc>
-                </model>
-                <model predicate="$parameters?mode='normalized'" behaviour="inline">
-                    <param name="content" value="(node() except (lb, span[@type='hyphen'], supplied))/normalize-space()[.] =&gt; string-join()"/>
                 </model>
             </elementSpec>
             <elementSpec ident="span" mode="add">
