@@ -42,7 +42,7 @@ tr {
 td {
     height: 100%;
     min-width: 3em;
-    /* line-height: 3em; */
+    line-height: 3em;
     vertical-align: middle !important;
 }
 
@@ -53,6 +53,7 @@ td .tei-lb4:first-child {
 .stundenplan-table {
     border-collapse: collapse;
 }
+
 .stundenplan {
      width: fit-content;
      border: 1px solid;
@@ -86,10 +87,12 @@ td .tei-lb4:first-child {
   text-align: left;
 }
 
+
 .tb {
     text-align: center;
     display: flex;
     align-items: center;
+    
 }
 
 .cbr-li {
@@ -99,18 +102,17 @@ td .tei-lb4:first-child {
     border-image-width: 0 0 0 2em;
     border-image-repeat: stretch;
     padding-left: 3em;
-    padding-right: 3em;
     padding-block: 6vw;
 }
 
 .cbr-ri {
-    border-left: 10px solid;
+    border-right: 10px solid;
     border-image-source: url('..//resources/images/bracket_ri.svg');
     border-image-slice: 0 100% 0 0;
     border-image-width: 0 2em 0 0;
     border-image-repeat: stretch;
-    padding-left: 3em;
     padding-right: 3em;
+    padding-block: 6vw;
 }
 
 .cbr-ti {
@@ -202,11 +204,6 @@ td .tei-lb4:first-child {
     border-bottom: 1px dotted currentColor !important;
 }
 
-pb-popover [slot="alternate"] {
-    white-space: pre-line !important;
-    line-height: 1.2 !important;
-}
-
 .pb-popover div {
     margin: 0;
     padding: 0;
@@ -222,16 +219,16 @@ pb-popover [slot="alternate"] {
     margin-block: 0.67em;
     font-size: 1.5em;
 }
-.underlineDotted {
+.dotted {
     text-decoration: underline dotted;
 }
 
-.underlineDashed {
+.dashed {
     text-decoration: underline dashed;
 }
 
 .grey {
-    color: grey;
+    color: #767676;
 }
 
 .red {
@@ -263,12 +260,6 @@ pb-popover [slot="alternate"] {
 
 .underline {
     text-decoration: underline;
-    display: inline-block;
-}
-
-.link {
-    text-decoration: underline;
-    color: #007d40;
 }
 
 .whitespace {
