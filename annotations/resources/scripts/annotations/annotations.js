@@ -438,38 +438,75 @@ window.addEventListener("WebComponentsReady", () => {
                         const htmlContainer = document.getElementById("html-container");
                         let cleanHtml = html
                             .replaceAll(/<img[^>]*>/g, "")
+                            .replace(/(\s+)(?=(?:<\/?[^>]+>\s*)*[.,])/g, '')
                             .replaceAll(/\s*<span[^>]*>-<\/span[^>]*>\s*/g, '-')
-                            .replaceAll(/<body class/g, '<div style="font-family:\'Open Sans\', \'Roboto\', \'Noto\', sans-serif; line-height:1.5em;" class');
+                            .replaceAll(/<body class/g, '<div style="font-family:sans-serif, \'Open Sans\', \'Roboto\', \'Noto\'; line-height:1.5em;" class');
                     
                         htmlContainer.innerHTML = cleanHtml;
-						htmlContainer.querySelectorAll('*').forEach(el => {
-							if (el.querySelector("pb-popover")) {
-								return;
-							}
-							let next = el.nextSibling;
-
-							if (next && next.nodeType === Node.TEXT_NODE) {
-								let text = next.nodeValue;
-
-								if (/^\n\s+/.test(text)) {
-
-								let prevText = el.textContent || '';
-								let nextTextMatch = text.match(/[^\s]/);
-								let nextChar = nextTextMatch ? nextTextMatch[0] : '';
-
-								let prevChar = prevText.slice(-1);
-
-								if (/[a-zA-ZäöüÄÖÜß]/.test(prevChar) &&
-									/[a-zA-ZäöüÄÖÜß]/.test(nextChar)) {
-
-									next.nodeValue = text.replace(/^\n\s+/, '');
-
-								} else {
-									next.nodeValue = text.replace(/^\n\s+/, ' ');
-								}
-								}
-							}
-							});
+                        htmlContainer.querySelectorAll('*').forEach(el => {
+                            const next = el.nextSibling;
+                            
+                            if (!next || next.nodeType !== Node.TEXT_NODE) {
+                                return;
+                            }
+                            const text = next.nodeValue;
+                            const whitespaceMatch = text.match(/^[ \t]*\r?\n[ \t]*/);
+                        
+                            if (!whitespaceMatch) {
+                                return;
+                            }
+                            const whitespace = whitespaceMatch[0];
+                            const rest = text.substring(whitespace.length);
+                            const nextMatch = rest.match(/[^\s]/);
+                            const nextChar = nextMatch ? nextMatch[0] : '';
+                            
+                            function lastVisibleChar(node) {
+                                if (!node) {
+                                    return '';
+                                }
+                                
+                                if (node.nodeType === Node.TEXT_NODE) {
+                                    const matches = node.nodeValue.match(/[^\s]/g);
+                        
+                                    if (matches && matches.length) {
+                                        return matches[matches.length - 1];
+                                    }
+                                    return '';
+                                }
+                        
+                                if (node.nodeType !== Node.ELEMENT_NODE) {
+                                    return '';
+                                }
+                        
+                                if (node.hasAttribute('slot') &&
+                                    node.getAttribute('slot') === 'alternate') {
+                                    return '';
+                                }
+                        
+                                for (let i = node.childNodes.length - 1; i >= 0; i--) {
+                        
+                                    const result = lastVisibleChar(node.childNodes[i]);
+                        
+                                    if (result) {
+                                        return result;
+                                    }
+                                }
+                        
+                                return '';
+                            }
+                            
+                            const prevChar = lastVisibleChar(el);
+                            const prevIsLetter =
+                                /[a-zA-ZäöüÄÖÜß]/.test(prevChar);
+                            const nextIsLetter =
+                                /[a-zA-ZäöüÄÖÜß]/.test(nextChar);
+                        
+                            if (prevIsLetter && nextIsLetter) {
+                                next.nodeValue = rest;
+                            } else {
+                                next.nodeValue = ' ' + rest;
+                            }
+                        });
                         
                     
                         // html2
@@ -506,6 +543,8 @@ window.addEventListener("WebComponentsReady", () => {
                         
                         cleanHtml2 = cleanHtml2
                             .replace(/<img[^>]*>/g, "")
+                            // No space before a comma or a full stop
+                            .replace(/(\s+)(?=(?:<\/?[^>]+>\s*)*[.,])/g, '')
                             // Keep Linebreak if <orig @rend='keepLB'>
                             .replace(/<span[^>]*class=["'][^"']*\bkeepLB\b[^"']*["'][^>]*>\s*<\/span>/gi, PLACEHOLDER)
                             // Indentation of text line if <orig @rend='indent'>
@@ -590,8 +629,7 @@ window.addEventListener("WebComponentsReady", () => {
                                 next.nodeValue = ' ' + rest;
                             }
                         });
-                    })
-				
+                    })				
                 /* FPB Validation of the document */
                 fetch(`${endpoint}/api/validation/${doc.path}`, {
             			method: "GET",
