@@ -161,14 +161,16 @@
                 </model>
             </elementSpec>
             <elementSpec ident="persName" mode="add">
-                <model output="web" predicate="$parameters?view='persons'" behaviour="listItem">
+                <model output="web" predicate="$parameters?view='persons'" behaviour="listItem" cssClass="link">
                     <desc>Edition View: Highlight person's name in view='persons' list.</desc>
                     <param name="name" value="'pb-highlight'"/>
                     <param name="highlight-self" value="'highlight-self'"/>
                     <param name="duration" value="7500"/>
                     <param name="key" value="@ref"/>
                     <param name="content" value="."/>
-                    <pb:template xmlns="" xml:space="preserve"><pb-highlight key="[[key]]" highlight-self="[[highlight-self]]" duration="[[duration]]" tabindex="0" data-key="person-[[key]]" aria-describedby="person-[[key]]">[[content]]</pb-highlight></pb:template>
+                    <param name="target" value="let $person := id(@ref, doc('/db/apps/annotations/data/register.xml')) return $person//ptr[@type='fpb']/@target"/>
+                    <param name="uri" value="let $person := id(@ref, doc('/db/apps/annotations/data/register.xml')) return $person//ptr[@type='fpb']/@target"/>
+                    <pb:template xmlns="" xml:space="preserve"><pb-highlight key="[[key]]" highlight-self="[[highlight-self]]" duration="[[duration]]" tabindex="0" data-key="person-[[key]]" aria-describedby="person-[[key]]"><a href="[[uri]]" target="_blank">[[content]]</a></pb-highlight></pb:template>
                     <outputRendition xml:space="preserve">
                         font-size: 12pt;
                         pb-highlight-color: #ffff00;
@@ -216,17 +218,19 @@
                 </model>
             </elementSpec>
             <elementSpec ident="placeName" mode="add">
-                <model output="web" predicate="$parameters?view='places'" behaviour="listItem">
+                <model output="web" predicate="$parameters?view='places'" behaviour="listItem" cssClass="link">
                     <desc>Edition View: Highlight places in view='places' and connect to map via geolocation in diplomatic view.</desc>
                     <param name="name" value="'pb-highlight'"/>
                     <param name="highlight-self" value="'highlight-self'"/>
                     <param name="duration" value="7500"/>
                     <param name="key" value="@ref"/>
                     <param name="content" value="."/>
+                    <param name="target" value="let $place := id(@ref, doc('/db/apps/annotations/data/register.xml')) return $place//ptr[@type='fpb']/@target"/>
+                    <param name="uri" value="let $place := id(@ref, doc('/db/apps/annotations/data/register.xml')) return $place//ptr[@type='fpb']/@target"/>
                     <param name="longitude" value="let $place := id(@ref, doc('/db/apps/annotations/data/register.xml')) let $geo := $place//location/geo/text() let $lng := substring-after($geo, ' ')  return $lng"/>
                     <param name="latitude" value="let $place := id(@ref, doc('/db/apps/annotations/data/register.xml')) let $geo := $place//location/geo/text() let $lat := substring-before($geo, ' ') return $lat"/>
                     <param name="label" value="let $place := id(@ref, doc('/db/apps/annotations/data/register.xml')) let $name := $place/placeName/text() return $name"/>
-                    <pb:template xmlns="" xml:space="preserve"><pb-geolocation longitude="[[longitude]]" latitude="[[latitude]]" label="[[label]]"><pb-highlight key="[[key]]" highlight-self="[[highlight-self]]" duration="[[duration]]" aria-describedby="place-[[key]]">[[content]]</pb-highlight></pb-geolocation><span id="place-[[key]]" class="sr-only sr-info">Weitere Vorkommen dieses Ortes sind im Dokument markiert.</span></pb:template>
+                    <pb:template xmlns="" xml:space="preserve"><pb-geolocation longitude="[[longitude]]" latitude="[[latitude]]" label="[[label]]"><pb-highlight key="[[key]]" highlight-self="[[highlight-self]]" duration="[[duration]]" aria-describedby="place-[[key]]"><a href="[[uri]]" target="_blank">[[content]]</a></pb-highlight></pb-geolocation><span id="place-[[key]]" class="sr-only sr-info">Weitere Vorkommen dieses Ortes sind im Dokument markiert.</span></pb:template>
                     <outputRendition xml:space="preserve">
                         font-size: 12pt;
                         pb-highlight-color: #ffff00;
@@ -274,14 +278,16 @@
                 <model behaviour="inline"/>
             </elementSpec>
             <elementSpec ident="rs" mode="add">
-                <model output="web" predicate="@type='place' and $parameters?view='places'" behaviour="listItem">
+                <model output="web" predicate="@type='place' and $parameters?view='places'" behaviour="listItem" cssClass="link">
                     <desc>Edition view: Highlight referred place in view='places' in diplomatic text.</desc>
                     <param name="name" value="'pb-highlight'"/>
                     <param name="highlight-self" value="'highlight-self'"/>
                     <param name="duration" value="7500"/>
                     <param name="key" value="@ref"/>
                     <param name="content" value="."/>
-                    <pb:template xmlns="" xml:space="preserve"><pb-highlight key="[[key]]" highlight-self="[[highlight-self]]" duration="[[duration]]">[[content]]</pb-highlight></pb:template>
+                    <param name="target" value="let $place := id(@ref, doc('/db/apps/annotations/data/register.xml')) return $place//ptr[@type='fpb']/@target"/>
+                    <param name="uri" value="let $place := id(@ref, doc('/db/apps/annotations/data/register.xml')) return $place//ptr[@type='fpb']/@target"/>
+                    <pb:template xmlns="" xml:space="preserve"><pb-highlight key="[[key]]" highlight-self="[[highlight-self]]" duration="[[duration]]"><a href="[[uri]]" target="_blank">[[content]]</a></pb-highlight></pb:template>
                     <outputRendition xml:space="preserve">
                         font-size: 12pt;
                         pb-highlight-color: #ffff00;
@@ -302,14 +308,16 @@
                         pb-highlight-color: #ffff00;
                     </outputRendition>
                 </model>
-                <model output="web" predicate="@type='person' and $parameters?view='persons'" behaviour="listItem">
+                <model output="web" predicate="@type='person' and $parameters?view='persons'" behaviour="listItem" cssClass="link">
                     <desc>Edition view: Highlight referred persons in view='persons' in diplomatic view.</desc>
                     <param name="name" value="'pb-highlight'"/>
                     <param name="highlight-self" value="'highlight-self'"/>
                     <param name="duration" value="7500"/>
                     <param name="key" value="@ref"/>
                     <param name="content" value="."/>
-                    <pb:template xmlns="" xml:space="preserve"><pb-highlight key="[[key]]" highlight-self="[[highlight-self]]" duration="[[duration]]">[[content]]</pb-highlight></pb:template>
+                    <param name="target" value="let $person := id(@ref, doc('/db/apps/annotations/data/register.xml')) return $person//ptr[@type='fpb']/@target"/>
+                    <param name="uri" value="let $person := id(@ref, doc('/db/apps/annotations/data/register.xml')) return $person//ptr[@type='fpb']/@target"/>
+                    <pb:template xmlns="" xml:space="preserve"><pb-highlight key="[[key]]" highlight-self="[[highlight-self]]" duration="[[duration]]"><a href="[[uri]]" target="_blank">[[content]]</a></pb-highlight></pb:template>
                     <outputRendition xml:space="preserve">
                         font-size: 12pt;
                         pb-highlight-color: #ffff00;
@@ -796,7 +804,7 @@
                     <param name="type" value="'custom'"/>
                 </model>
                 <model output="web" predicate="$parameters?view='places'" behaviour="block">
-                    <param name="content" value="for $ref in distinct-values(.//placeName/@ref | .//rs[@type='place']/@ref) let $place := id($ref, doc('/db/apps/annotations/data/register.xml')) let $name := $place/placeName/text() let $geo := $place//location/geo/text() let $lat := substring-before($geo, ' ') let $lng := substring-after($geo, ' ')  return element placeName {attribute ref { $ref }, concat($name, ' (N', $lat, ', E', $lng, ')')}"/>
+                    <param name="content" value="for $ref in distinct-values(.//placeName/@ref | .//rs[@type='place']/@ref) let $place := id($ref, doc('/db/apps/annotations/data/register.xml')) let $name := $place/placeName/text() let $geo := $place//location/geo/text() let $lat := if($geo) then concat('(N', substring-before($geo, ' ')) else '' let $lng := if($geo) then concat(', E', substring-after($geo, ' '), ')') else '' return element placeName {attribute ref { $ref }, concat($name, $lat, $lng)}"/>
                     <param name="longitude" value="for $ref in distinct-values(.//placeName/@ref | .//rs[@type='place']/@ref) let $place := id($ref, doc('/db/apps/annotations/data/register.xml')) let $geo := $place//location/geo/text() let $lng := substring-after($geo, ' ')  return $lng"/>
                     <param name="latitude" value="for $ref in distinct-values(.//placeName/@ref | .//rs[@type='place']/@ref) let $place := id($ref, doc('/db/apps/annotations/data/register.xml')) let $geo := $place//location/geo/text() let $lat := substring-before($geo, ' ') return $lat"/>
                     <param name="label" value="for $ref in distinct-values(.//placeName/@ref | .//rs[@type='place']/@ref) let $place := id($ref, doc('/db/apps/annotations/data/register.xml')) let $name := $place/placeName/text() return $name"/>
