@@ -108,47 +108,47 @@
                 </model>
             </elementSpec>
             <elementSpec ident="date" mode="change">
-                <model output="web" predicate="@when" behaviour="date" cssClass="underlineDashed">
+                <model output="web" predicate="@when" behaviour="date" cssClass="dashed">
                     <desc>Mouseover for specific dates with attribute @when. Case distinction for complete information (YYYY-MM-DD) and partial information (YYYY; YYYY-MM; YYYY-DD; MM; MM-DD; DD) and month mapping.</desc>
                     <param name="content" value="."/>
                     <pb:template xmlns="" xml:space="preserve"><span slot="default">[[content]]</span></pb:template>
                 </model>
-                <model output="web" predicate="@from and @to" behaviour="date" cssClass="underlineDashed">
+                <model output="web" predicate="@from and @to" behaviour="date" cssClass="dashed">
                     <desc>Mouseover for case of attributes @from and @to.</desc>
                     <param name="content" value="."/>
                     <pb:template xmlns="" xml:space="preserve"><span slot="default">[[content]]</span></pb:template>
                 </model>
-                <model output="web" predicate="@from and not(@to)" behaviour="date" cssClass="underlineDashed">
+                <model output="web" predicate="@from and not(@to)" behaviour="date" cssClass="dashed">
                     <desc>Mouseover for case of attributes @from without specific ending.</desc>
                     <param name="content" value="."/>
                     <pb:template xmlns="" xml:space="preserve"><span slot="default">[[content]]</span></pb:template>
                 </model>
-                <model output="web" predicate="not(@from) and @to" behaviour="date" cssClass="underlineDashed">
+                <model output="web" predicate="not(@from) and @to" behaviour="date" cssClass="dashed">
                     <desc>Mouseover for case of attributes @to without specific beginning.</desc>
                     <param name="content" value="."/>
                     <pb:template xmlns="" xml:space="preserve"><span slot="default">[[content]]</span></pb:template>
                 </model>
-                <model output="web" predicate="@notBefore and @to" behaviour="date" cssClass="underlineDashed">
+                <model output="web" predicate="@notBefore and @to" behaviour="date" cssClass="dashed">
                     <desc>Mouseover for case of attributes @notBefore and @to.</desc>
                     <param name="content" value="."/>
                     <pb:template xmlns="" xml:space="preserve"><span slot="default">[[content]]</span></pb:template>
                 </model>
-                <model output="web" predicate="@from and @notAfter" behaviour="date" cssClass="underlineDashed">
+                <model output="web" predicate="@from and @notAfter" behaviour="date" cssClass="dashed">
                     <desc>Mouseover for case of attributes @from and @notAfter.</desc>
                     <param name="content" value="."/>
                     <pb:template xmlns="" xml:space="preserve"><span slot="default">[[content]]</span></pb:template>
                 </model>
-                <model output="web" predicate="@notBefore and @notAfter" behaviour="date" cssClass="underlineDashed">
+                <model output="web" predicate="@notBefore and @notAfter" behaviour="date" cssClass="dashed">
                     <desc>Mouseover for case of attributes @notBefore and @notAfter.</desc>
                     <param name="content" value="."/>
                     <pb:template xmlns="" xml:space="preserve"><span slot="default">[[content]]</span></pb:template>
                 </model>
-                <model output="web" predicate="@notBefore and not(@notAfter)" behaviour="date" cssClass="underlineDashed">
+                <model output="web" predicate="@notBefore and not(@notAfter)" behaviour="date" cssClass="dashed">
                     <desc>Mouseover for case of attributes @notBefore.</desc>
                     <param name="content" value="."/>
                     <pb:template xmlns="" xml:space="preserve"><span slot="default">[[content]]</span></pb:template>
                 </model>
-                <model output="web" predicate="not(@notBefore) and @notAfter" behaviour="date" cssClass="underlineDashed">
+                <model output="web" predicate="not(@notBefore) and @notAfter" behaviour="date" cssClass="dashed">
                     <desc>Mouseover for case of attributes @notAfter.</desc>
                     <param name="content" value="."/>
                     <pb:template xmlns="" xml:space="preserve"><span slot="default">[[content]]</span></pb:template>
@@ -177,7 +177,7 @@
                     </outputRendition>
                 </model>
                 <modelSequence>
-                <model output="web" predicate="@ref" behaviour="webcomponent" cssClass="underlineDashed">
+                <model output="web" predicate="@ref" behaviour="webcomponent" cssClass="dashed">
                     <desc>Edition View: Highlight persons in text.</desc>
                     <param name="content" value="."/>
                     <param name="name" value="'pb-highlight'"/>
@@ -236,7 +236,7 @@
                         pb-highlight-color: #ffff00;
                     </outputRendition>
                 </model>
-                <model output="web" predicate="@ref and $parameters?mode='normalized'" behaviour="webcomponent" cssClass="underlineDashed">
+                <model output="web" predicate="@ref and $parameters?mode='normalized'" behaviour="webcomponent" cssClass="dashed">
                     <desc>Edition View: Highlight places and connect to map via geolocation in normalized view.</desc>
                     <param name="content" value="."/>
                     <param name="name" value="'pb-highlight'"/>
@@ -252,7 +252,7 @@
                     </outputRendition>
                 </model>
                 <modelSequence>
-                <model output="web" predicate="@ref" behaviour="webcomponent" cssClass="underlineDashed">
+                <model output="web" predicate="@ref" behaviour="webcomponent" cssClass="dashed">
                     <desc>Edition View: Highlight places' and connect to map via geolocation.</desc>
                     <param name="content" value="."/>
                     <param name="name" value="'pb-highlight'"/>
@@ -293,7 +293,7 @@
                         pb-highlight-color: #ffff00;
                     </outputRendition>
                 </model>
-                <model output="web" predicate="@type='place' and @ref" behaviour="webcomponent" cssClass="underlineDashed">
+                <model output="web" predicate="@type='place' and @ref" behaviour="webcomponent" cssClass="dashed">
                     <desc>Edition view: Highlight referred place and connect to map via geolocation.</desc>
                     <param name="content" value="."/>
                     <param name="name" value="'pb-highlight'"/>
@@ -323,7 +323,7 @@
                         pb-highlight-color: #ffff00;
                     </outputRendition>
                 </model>
-                <model output="web" predicate="@type='person' and @ref" behaviour="webcomponent" cssClass="underlineDashed">
+                <model output="web" predicate="@type='person' and @ref" behaviour="webcomponent" cssClass="dashed">
                     <desc>Edition view: Highlight referred persons in text in diplomatic view.</desc>
                     <param name="content" value="."/>
                     <param name="name" value="'pb-highlight'"/>
@@ -336,7 +336,7 @@
                 </model>
             </elementSpec>                            
             <elementSpec ident="note" mode="change">
-                <model predicate="@type='unedited'" behaviour="inline" cssClass="underlineDotted">
+                <model predicate="@type='unedited'" behaviour="inline" cssClass="dotted">
                     <desc>If there is unedited text, show only [...] with grey background and the note text as mouseover (normally "unedited text" or similar).</desc>
                     <param name="name" value="'pb-popover'"/>
                     <param name="content" value="'[...]'"/>
@@ -395,7 +395,7 @@
                 <model predicate="(@place='top' or @place='bottom') and following::note[@place='margin-left'] and not(following::note[@place='margin-right'])" behaviour="paragraph" cssClass="margin-left smaller">
                     <desc>If there are marginalia on the left, set margin to main text.</desc>
                 </model>
-                <model output="web" predicate="@type='commented' and child::anchor[@type='anchor']" behaviour="webcomponent" cssClass="underlineDashed">
+                <model output="web" predicate="@type='commented' and child::anchor[@type='anchor']" behaviour="webcomponent" cssClass="dashed">
                     <desc>Highlight text to which a commentary belongs.</desc>
                     <param name="content" value="."/>
                     <param name="name" value="'pb-highlight'"/>
@@ -651,7 +651,7 @@
                 </modelSequence>
             </elementSpec>
             <elementSpec ident="term" mode="add">
-                <model predicate="@type='term'" behaviour="inline" cssClass="underlineDotted">
+                <model predicate="@type='term'" behaviour="inline" cssClass="dotted">
                     <desc>Not in use. If term then show meaning from glossary in register via mouseover.</desc>
                     <param name="name" value="'pb-popover'"/>
                     <param name="content" value="."/>
@@ -662,7 +662,7 @@
                 </model>
             </elementSpec>
             <elementSpec ident="gap" mode="change">
-                <model predicate="@extent" behaviour="inline" cssClass="underlineDotted">
+                <model predicate="@extent" behaviour="inline" cssClass="dotted">
                     <desc>If predicate @extent, then show it and its extend in output text.</desc>
                     <param name="content" value="@extent"/>
                     <pb:template xmlns="" xml:space="preserve"><span class="sr-only sr-info">'Lücke'</span></pb:template>
@@ -819,7 +819,7 @@
                 <model behaviour="block"/>
             </elementSpec>
             <elementSpec ident="app" mode="change">
-                <model output="web" predicate="descendant::rdg[@change='#version3']" behaviour="inline" cssClass="pb-popover underlineDotted">
+                <model output="web" predicate="descendant::rdg[@change='#version3']" behaviour="inline" cssClass="pb-popover dotted">
                     <desc>Show readings in popover when version 1, 2 and 3 exist</desc>
                     <param name="name" value="popover"/>
                     <param name="content" value="if(normalize-space(descendant::rdg[@change='#version1']) != '') then descendant::rdg[@change='#version1']/node() else ' ... '"/>
@@ -830,7 +830,7 @@
                     <param name="fallback-placement" value="'left'"/>
                     <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate"><b>Lesart 1: </b>[[alt1]]<br/><b>Lesart 2: </b>[[alt2]]<br/><b>Lesart 3: </b>[[alt3]]</span><span class="sr-only sr-info">'Verschiedene Lesungen vorhanden: Lesart 1' [[alt1]] 'Lesart 2' [[alt2]] 'Lesart 3' [[alt3]]</span></pb-popover></pb:template>
                 </model>
-                <model output="web" predicate="not(descendant::rdg[@change='#version3'])" behaviour="inline" cssClass="pb-popover underlineDotted">
+                <model output="web" predicate="not(descendant::rdg[@change='#version3'])" behaviour="inline" cssClass="pb-popover dotted">
                     <desc>Show readings in popover when version 1 and 2, but not 3 exist</desc>
                     <param name="name" value="popover"/>
                     <param name="content" value="if(normalize-space(descendant::rdg[@change='#version1']) != '') then element div {descendant::rdg[@change='#version1']/node()} else ' ... '"/>
@@ -840,7 +840,7 @@
                     <param name="fallback-placement" value="'left'"/>
                     <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]">[[content]]<span slot="alternate"><b>Lesart 1: </b>[[alt1]]<br/><b>Lesart 2: </b>[[alt2]]<br/></span><span class="sr-only sr-info">'Verschiedene Lesungen vorhanden: Lesart 1' [[alt1]] 'Lesart 2' [[alt2]]</span></pb-popover></pb:template>
                 </model>
-                <model behaviour="alternate" cssClass="underlineDotted">
+                <model behaviour="alternate" cssClass="dotted">
                     <desc>Show reading 1 in popover</desc>
                     <param name="default" value="if(normalize-space(.//rdg[@change='#version1']) != '') then .//rdg[@change='#version1']/node() else ' ... '"/>
                     <param name="alternate" value="if(.//rdg[@change='#version2'] and .//rdg[@change='#version3']) then concat('Lesart 2: ', .//rdg[@change='#version2'], '  Lesart 3: ', .//rdg[@change='#version3']) else if(.//rdg[@change='#version2']) then concat('Lesart 2: ', .//rdg[@change='#version2']) else ()"/>
@@ -900,7 +900,7 @@
                 <model predicate="$parameters?mode='normalized' and @type='hyphen'" behaviour="omit">
                     <desc>Omit hyphen in normalized view</desc>
                 </model>
-                <model predicate="child::note/lb" behaviour="inline" cssClass="underlineDashed">
+                <model predicate="child::note/lb" behaviour="inline" cssClass="dashed">
                     <desc>Deprecated. See note with type='commented'. Show commentary in popover. </desc>
                     <param name="name" value="'pb-popover'"/>
                     <param name="content" value="."/>
@@ -909,7 +909,7 @@
                     <param name="fallback-placement" value="'left'"/>
                     <pb:template xmlns="" xml:space="preserve"><pb-popover placement="[[placement]]" fallback-placement="[[fallback-placement]]"><span slot="alternate">[[alternate]]</span>[[content]]<span slot="alternate">[[alternate]]</span></pb-popover></pb:template>
                 </model>
-                <model predicate="child::note" behaviour="inline" cssClass="underlineDashed">
+                <model predicate="child::note" behaviour="inline" cssClass="dashed">
                     <desc>Deprecated. See note with type='commented'. Show commentary in popover. </desc>
                     <param name="name" value="'pb-popover'"/>
                     <param name="content" value="."/>
@@ -1261,7 +1261,7 @@
                     <model predicate="parent::figure" behaviour="block" cssClass="italic">
                         <desc>figure</desc>
                     </model>
-                    <model predicate="parent::table" behaviour="inline" cssClass="center">
+                    <model predicate="parent::table" behaviour="caption" cssClass="center">
                         <desc>head of a table</desc>
                     </model>
                     <model predicate="parent::lg" behaviour="block" cssClass="center">
@@ -1288,7 +1288,7 @@
                     <model behaviour="block"/>
                 </elementSpec>
                 <elementSpec ident="num" mode="add">
-                    <model predicate="child::note" behaviour="inline" cssClass="underlineDotted">
+                    <model predicate="child::note" behaviour="inline" cssClass="dotted">
                         <desc>Show note to a number as popover</desc>
                         <param name="name" value="'pb-popover'"/>
                         <param name="content" value="."/>
@@ -1302,7 +1302,7 @@
                     </model>
                 </elementSpec>
                 <elementSpec ident="metamark" mode="add">
-                    <model behaviour="inline" cssClass="underlineDotted">
+                    <model behaviour="inline" cssClass="dotted">
                         <desc>Missing text</desc>
                         <param name="name" value="'pb-popover'"/>
                         <param name="content" value="'......'"/>
@@ -1351,7 +1351,7 @@
                     </model>
                 </elementSpec>
                 <elementSpec ident="ab" mode="change">
-                    <model predicate="@type='hidden'" behaviour="alternate" cssClass="underlineDotted">
+                    <model predicate="@type='hidden'" behaviour="alternate" cssClass="dotted">
                     <desc>Non-edited text</desc>
                         <param name="default" value="."/>
                         <param name="alternate" value="'Non-edited text / Nicht edierter Text'"/>
@@ -1388,20 +1388,28 @@
                     <model behaviour="table" cssClass="smaller"/>
                 </elementSpec>                        
                 <elementSpec ident="cell" mode="change">
-                    <model predicate="@role='subheading' and @rendition='stundenplan'" behaviour="cell" cssClass="stundenplan center">
+                    <model predicate="@role='subheading' and @rendition='stundenplan'" behaviour="accessible-cell" cssClass="stundenplan center">
                         <desc>Subheading for time table cell</desc>
+                        <param name="type" value="'head'"/>
+                        <param name="scope" value="'col'"/>
                     </model>
-                                <model predicate="@role='subheading'" behaviour="cell" cssClass="center">
-                                <desc>Subheading for table cell</desc>
+                        <model predicate="@role='subheading'" behaviour="accessible-cell" cssClass="center">
+                        <desc>Subheading for table cell</desc>
+                        <param name="type" value="'head'"/>
+                        <param name="scope" value="'col'"/>
                     </model>
-                                <model predicate="@role='heading' and @rendition='stundenplan'" behaviour="cell" cssClass="stundenplan semibold center">
-                                    <desc>Heading for time table cell</desc>
-                                </model>
-                                <model predicate="@role='heading'" behaviour="cell" cssClass="center">
-                                <desc>Heading for cell</desc>
-                                </model>
-                                <model predicate="@role='unedited' and @rendition='stundenplan'" behaviour="cell" cssClass="stundenplan center">
-                                <desc>Unedited cells for time table</desc>
+                    <model predicate="@role='heading' and @rendition='stundenplan'" behaviour="accessible-cell" cssClass="stundenplan semibold center">
+                        <desc>Heading for time table cell</desc>
+                        <param name="type" value="'head'"/>
+                        <param name="scope" value="'col'"/>
+                    </model>
+                    <model predicate="@role='heading'" behaviour="accessible-cell" cssClass="center">
+                    <desc>Heading for cell</desc>
+                        <param name="type" value="'head'"/>
+                        <param name="scope" value="'col'"/>
+                    </model>
+                    <model predicate="@role='unedited' and @rendition='stundenplan'" behaviour="cell" cssClass="stundenplan center">
+                    <desc>Unedited cells for time table</desc>
                         <outputRendition xml:space="preserve">
                         background-color: #e6e6e6;
                         </outputRendition>

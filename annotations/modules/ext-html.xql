@@ -29,6 +29,57 @@ declare function pmf:facs-lb($config as map(*), $node as node(), $class as xs:st
     )
 };
 
+(: Information for screenreaders, if no popover. :)
+declare function pmf:sr-info(
+    $config as map(*),
+    $node as node(),
+    $class as xs:string*,
+    $content,
+    $info as xs:string?
+) {
+    let $info-id := concat("info-desc-", util:uuid())
+    return
+        <span trigger="mouseenter focus click" aria-describedby="{$info-id}" class="sr-only {string-join($class, ' ')}">
+            <span id="{$info-id}" class="sr-only">Info: {$info}</span>
+        </span>
+};
+
+(: make tables more accessible :)
+declare function pmf:caption (
+    $config as map(*), 
+    $node as node(), 
+    $class as xs:string+, 
+    $content
+) {
+    <caption>{$content}</caption>
+};
+
+declare function pmf:accessible-cell(
+    $config as map(*),
+    $node as node(),
+    $class as xs:string+,
+    $content,
+    $type,
+    $scope
+) {
+    element { if ($type = 'head') then 'th' else 'td' } {
+        attribute class { $class },
+        if ($node/@cols) then
+            attribute colspan { $node/@cols }
+        else
+            (),
+        if ($node/@rows) then
+            attribute rowspan { $node/@rows }
+        else
+            (),
+        if ($type = 'head' and $scope) then
+            attribute scope { string($scope) }
+        else
+            (),
+        html:apply-children($config, $node, $content)
+    }
+};
+
 (: Behaviour for date :)
 declare function pmf:date(
     $config as map(*),
